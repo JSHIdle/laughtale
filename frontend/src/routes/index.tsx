@@ -19,7 +19,7 @@ import Word from "../pages/mypage/word/Index";
 import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/home",
     element: <Recommend />,
