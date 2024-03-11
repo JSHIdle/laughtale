@@ -50,7 +50,7 @@ public class DefaultOAuth2UserServiceImpl extends DefaultOAuth2UserService {
     }
 
     private Member saveOrUpdate(UserInfo userInfo) {
-        Member member = memberRepository.findByEmailAndProvider(userInfo.getEmail(), userInfo.getProvider().name())
+        Member member = memberRepository.findByEmailAndProvider(userInfo.getEmail(), userInfo.getProvider())
                 .map(entity -> entity.updateNickname(userInfo.getNickname()))
                 .orElse(userInfo.toEntity());
 
