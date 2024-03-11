@@ -1,30 +1,74 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-import Home, { rootLoader } from "./routes/root";
-import Team, { teamLoader } from "./routes/team";
+
+import Genre from "../pages/main/Genre";
+import Recommend from "../pages/main/Recommend";
+import Week from "../pages/main/Week";
+import Recent from "../pages/main/Recent";
+import Popular from "../pages/main/Popular";
+
+import Mypage from "../pages/mypage/Index";
+import LevelTest from "../pages/mypage/leveltest/Index";
+import Word from "../pages/mypage/word/Index";
+
+import Cartoon from "../pages/cartoon/Index";
+import Viewer from "../pages/cartoon/Viewer";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Root />,
-    loader: rootLoader,
+    path: "/home",
+    element: <Recommend />,
     children: [
       {
-        path: "team",
-        element: <Team />,
-        loader: teamLoader,
+        path: "week",
+        element: <Week />,
+      },
+      {
+        path: "genre",
+        element: <Genre />,
+      },
+      {
+        path: "recent",
+        element: <Recent />,
+      },
+      {
+        path: "popular",
+        element: <Popular />,
       },
     ],
   },
+  {
+    path: "/mypage",
+    element: <Mypage/>,
+    children: [
+      {
+        path: "leveltest",
+        element: <LevelTest/>,
+      },
+      {
+        path: "word",
+        element: <Word/>,
+      },
+    ]
+  },
+  {
+    path: "/cartoon/:title",
+    element: <Cartoon/>,
+    children: [
+      {
+        path: "viewer/:id",
+        element: <Viewer/>,
+      },
+    ]
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root") as HTMLElement).render(
   <RouterProvider router={router} />
 );
 
-// https://reactrouter.com/en/main/routers/create-browser-router
