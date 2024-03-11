@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 
 
@@ -20,6 +21,10 @@ import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/home" replace={true} />,
+  },
   {
     path: "/home",
     element: <Recommend />,
