@@ -11,28 +11,29 @@ const settings = {
     slidesToScroll: 1 // 스크롤할 때마다 넘어갈 슬라이드 페이지 수
 };
 
-const CustomSlider = ({ slides }) => (
-    <Slider {...settings}>
-
-        {slides.map(slide => (
-        <div className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl overflow-hidden w-[700px] h-[750px]">
-            <div className="mt-6 flex flex-wrap justify-center items-center">
-                {slide.map(slideone => (
-                    <div key={slideone.id}>
-                        <div className="p-3">
-                            <div className="bg-gradient-to-r from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-                                <pre>
-                                  {slideone.content}
-                                </pre>
-                            </div>
+const CustomSlider = ({ slides }) => {
+    return (
+        <div>
+            <Slider {...settings}>
+                {slides.map(slide => (
+                    <div className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl overflow-hidden w-[700px] h-[720px]">
+                        <div className="p-6 flex flex-wrap justify-center items-center">
+                            {slide.map(slideone => (
+                                <div key={slideone.id} >
+                                    <div className="p-3">
+                                        <div className="bg-gradient-to-r from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center">
+                                          <pre>
+                                            {slideone.content}
+                                          </pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 ))}
-            </div>
+            </Slider>
         </div>
-        ))}
-
-    </Slider>
-);
-
+    );
+};
 export default CustomSlider;
