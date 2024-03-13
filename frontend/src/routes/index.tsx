@@ -1,8 +1,6 @@
-import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
-  RouterProvider,
-  Navigate,
+  Navigate, Outlet,
 } from "react-router-dom";
 
 
@@ -19,15 +17,19 @@ import Word from "../pages/mypage/word/Index";
 import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/home" replace={true} />,
   },
   {
     path: "/home",
-    element: <Recommend />,
+    element: <Outlet/>,
     children: [
+      {
+        path:'',
+        element: <Recommend />
+      },
       {
         path: "week",
         element: <Week />,
@@ -48,8 +50,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/mypage",
-    element: <Mypage/>,
+    element: <Outlet/>,
     children: [
+      {
+        path:'',
+        element: <Mypage/>,
+      },
       {
         path: "leveltest",
         element: <LevelTest/>,
@@ -61,18 +67,18 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: "/cartoon/:title",
-    element: <Cartoon/>,
-    children: [
+    path: "/cartoon",
+    element: <Outlet/>,
+    children:[
       {
-        path: "viewer/:id",
-        element: <Viewer/>,
+        path:":title", element: <Cartoon/>,
       },
+      {
+        path:":title/viewer/:id", element: <Viewer/>,
+      }
     ]
+
   },
 ]);
 
-createRoot(document.getElementById("root") as HTMLElement).render(
-  <RouterProvider router={router} />
-);
-
+export default router;
