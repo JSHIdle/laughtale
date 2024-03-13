@@ -1,7 +1,7 @@
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import MypageHeader from "../../../components/common/mypageHeader.tsx";
 const Index = () => {
-  const dummyData = Array.from({ length: 18 }, (_, index) => ({
+  const dummyData = Array.from({ length: 24 }, (_, index) => ({
     id: index,
     content: `あ-う [会う]
 동사 1.만나다
@@ -13,8 +13,8 @@ const Index = () => {
 
   // dummyData를 6개 단위로 나누어 slideData를 생성
   const slideDatas = [];
-  for (let i = 0; i < dummyData.length; i += 6) {
-    slideDatas.push(dummyData.slice(i, i + 6));
+  for (let i = 0; i < dummyData.length; i += 8) {
+    slideDatas.push(dummyData.slice(i, i + 8));
   }
 
   console.log(slideDatas[1]);
