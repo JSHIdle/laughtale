@@ -1,18 +1,18 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Slider from 'react-slick';
 
 
 // 예시 만화 데이터 배열
 const comics = [
-  { id: 1, title: '만화1',episode: '3화', imageUrl: 'src/assets/samples/e1.jpg' },
-  { id: 2, title: '만화2',episode: '3화', imageUrl: 'src/assets/samples/e2.jpg' },
-  { id: 3, title: '만화3',episode: '3화', imageUrl: 'src/assets/samples/e3.jpg' },
-  { id: 4, title: '만화4',episode: '3화', imageUrl: 'src/assets/samples/e4.jpg' },
-  { id: 5, title: '만화5',episode: '3화', imageUrl: 'src/assets/samples/e5.jpg' },
+  { id: 1, title: '만화1',episode: '3화', imageUrl: 'src/assets/samples/e2-1.jpg' },
+  { id: 2, title: '만화2',episode: '3화', imageUrl: 'src/assets/samples/e3-1.jpg' },
+  { id: 3, title: '만화3',episode: '3화', imageUrl: 'src/assets/samples/e4-2.jpg' },
+  { id: 4, title: '만화4',episode: '3화', imageUrl: 'src/assets/samples/e3-4.jpg' },
+  { id: 5, title: '만화5',episode: '3화', imageUrl: 'src/assets/samples/e1-3.jpg' },
 ];
 
 function Recent() {
@@ -29,7 +29,7 @@ function Recent() {
     slidesToShow: 4.4,
     speed: 500,
     focusOnSelect: true, // 아이템 선택 시 중앙으로 오도록 설정
-    beforeChange: (current, next) => setSelected(next),
+    beforeChange: (next) => setSelected(next),
     responsive: [
       {
         breakpoint: 1024,
@@ -41,7 +41,7 @@ function Recent() {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           centerPadding: '80px', // 중앙 아이템의 패딩을 늘려 크기를 강조
         }
       }
@@ -49,10 +49,10 @@ function Recent() {
   };
 
   return (
-    <div className="container mx-auto px-20 py-50 mt-10 pt-10 myslickclass">
-        
+    <div className="container mx-auto px-20 py-50 mt-10 pt-10 myslickclass ">
+
       <Slider  {...settings}>
-        
+
         {comics.map((comic, index) => (
           <div
           key={comic.id}
@@ -65,7 +65,7 @@ function Recent() {
             marginRight: index === comics.length - 1 ? '0px' : '-50px', // 오른쪽 슬라이드를 겹치도록 조정합니다.
           }}
         >
-        
+
           <img
             src={comic.imageUrl}
             alt={comic.title}
@@ -73,7 +73,7 @@ function Recent() {
               selected === index ? 'opacity-100' : 'opacity-50'
             }`}
           />
-            {selected === index && (
+            {selected === index && ( /*선택된 만화만 제목,회차 보이게*/
               <div className="text-center mt-2 text-white">
                 <h3 className="text-lg font-bold">{comic.title}</h3>
                 <p>{comic.episode}</p>
