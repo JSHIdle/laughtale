@@ -16,6 +16,7 @@ import Word from "../pages/mypage/word/Index";
 
 import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
+import Quiz from "../components/cartoon/Quiz.tsx";
 
 const router = createBrowserRouter([
   {
@@ -76,9 +77,13 @@ const router = createBrowserRouter([
       {
         path:":title/viewer/:id", element: <Viewer/>,
       }
-    ]
-
+    ],
   },
+    {
+      //임의로 퀴즈페이지 라우터 설정
+      path: "/quiz",
+      element: <Quiz/>,
+    },
 ]);
 
 export default router;
