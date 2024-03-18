@@ -2,7 +2,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const QuizSlider = ({slides, updateCurrentSlide}) => {
+const QuizSlider = ({slides, updateCurrentSlide, sliderRef, onNumberClick }) => {
+
     const settings = {
         dots: true, // 점으로 페이지 위치 표시
         infinite: false, // 무한 슬라이딩 비활성화
@@ -12,9 +13,11 @@ const QuizSlider = ({slides, updateCurrentSlide}) => {
         afterChange: current => updateCurrentSlide(current)
     };
 
+
+
     return(
         <div>
-            <Slider {...settings}>
+            <Slider ref={sliderRef} {...settings}>
                 {slides.map((slide,index) => (
                     <div key={index} className="w-[1000px] h-[720px]">
                         <div className="text-white p-6 flex justify-center items-center">
@@ -36,32 +39,42 @@ const QuizSlider = ({slides, updateCurrentSlide}) => {
 
                             <div className="p-6">
                                 <button
-                                    className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼1
+                                    className="text-black font-bold bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼1
                                 </button>
                             </div>
                             <div className="p-6">
                                 <button
-                                    className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼2
+                                    className="text-black font-bold bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼2
                                 </button>
                             </div>
                             <div className="p-6">
                                 <button
-                                    className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼3
+                                    className="text-black font-bold bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼3
                                 </button>
                             </div>
                             <div className="p-6">
                                 <button
-                                    className="bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼4
+                                    className="text-black font-bold bg-gradient-to-b from-[#46AEB8] to-[#688AC1] rounded-xl w-[200px] h-[50px]">버튼4
                                 </button>
                             </div>
                         </div>
+                            <div>
+                                {index === slides.length - 1 && (
+                                    <div className="flex justify-center items-center mt-4">
+                                        <button className="mt-3 text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[200px]">
+                                            제출하기
+                                        </button>
+                                    </div>
+                               )}
+                            </div>
                         </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
-        </div>
-    );
-};
 
-export default QuizSlider;
+                        </div>
+                        ))}
+                    </Slider>
+                    </div>
+                    );
+                };
+
+                export default QuizSlider;
