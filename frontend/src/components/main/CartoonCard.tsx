@@ -1,5 +1,4 @@
 import React from 'react';
-
 interface CartoonCardProps {
     imageUrl: string;
     title: string;
@@ -10,7 +9,7 @@ interface CartoonCardProps {
 
 const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rating, link }) => {
     return (
-        <li className="item" style={{ width: '225px' }} >
+        <li className="item mb-5" style={{ width: '225px' }} >
             <a href={link} className="block overflow-hidden rounded-lg shadow-lg">
                 <div className="relative overflow-hidden">
                     <img
@@ -36,8 +35,10 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rat
                             className="text-yellow-500 mr-1"
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
+                            viewBox="0 0 426.667 426.667"
                         >
-                            {/* SVG 내용은 실제 사용할 별 모양의 SVG로 대체해야 합니다. */}
+                            <polygon style={{fill: '#FAC917'}} points="213.333,10.441 279.249,144.017 426.667,165.436 320,269.41 345.173,416.226 213.333,346.91
+      81.485,416.226 106.667,269.41 0,165.436 147.409,144.017 "/>
                         </svg>
                         <span className="text-sm">{rating.toFixed(2)}</span>
                     </div>

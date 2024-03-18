@@ -15,37 +15,33 @@ interface CartoonGridProps {
     level:number;
 }
 
-const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
-
-    const allCartoonsLink = `/cartoons/level/${level}`;
-
+const LevelCartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
+        console.log(cartoons)
     return (
 
-        <div className="comonent_wrap mx-auto" style={{maxWidth: '950px'}}>
+        <div className="comonent_wrap mx-auto" style={{ maxWidth: '950px' }}>
             <div className="ComponentHead flex justify-between items-center mb-4">
                 <div className="ComponentHead_title font-bold text-2xl">Level {level}</div>
-                <a href={allCartoonsLink} className="text-lg text-white hover:text-white-800">
-                    Level {level} 만화 더보기
-                </a>
+
             </div>
             <div className="p-2 mb-8">
                 <div className="mx-auto" style={{maxWidth: '950px'}}>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {cartoons.slice(0, 4).map((webtoon, index) => ( // 배열에서 처음 4개의 요소만 렌더링
+                        {cartoons.map((webtoon, index) => (
                             <CartoonCard
                                 key={index}
-                                imageUrl={webtoon.imageUrl}
-                                title={webtoon.title}
-                                authors={webtoon.authors}
-                                rating={webtoon.rating}
-                                link={webtoon.link}
-                            />
-                        ))}
+                            imageUrl={webtoon.imageUrl}
+                            title={webtoon.title}
+                            authors={webtoon.authors}
+                            rating={webtoon.rating}
+                            link={webtoon.link}
+                        />
+                    ))}
                     </ul>
-                </div>
+             </div>
             </div>
         </div>
     );
 };
 
-export default CartoonGrid;
+export default LevelCartoonGrid;
