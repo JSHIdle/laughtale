@@ -27,7 +27,7 @@ const Quiz = () => {
                 </div>
             </div>
             <div className="text-white max-w-[1000px] m-auto">
-                <QuizSlider slides={dummyData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef} onNumberClick={handleNumberClick} />
+                <QuizSlider slides={dummyData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef}  />
             </div>
         </div>
     )
