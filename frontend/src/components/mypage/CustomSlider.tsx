@@ -21,7 +21,7 @@ const CustomSlider = ({ slides }) => {
                             {slide.map(slideone => (
                                 <div key={slideone.id} >
                                     <div className="p-3">
-                                        <div className="bg-gradient-to-r from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center">
+                                        <div className="hover-effect bg-gradient-to-r from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center">
                                           <pre>
                                             {slideone.content}
                                           </pre>
