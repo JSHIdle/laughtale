@@ -1,42 +1,37 @@
-import MypageHeader from '../../../components/common/mypageHeader.tsx';
-const Index = () => {return<div className="bg-[#212529] min-h-screen">
-  <div className="max-w-[700px] m-auto">
-    <div>
-      <MypageHeader/>
-    </div>
+import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
+import MypageHeader from "../../../components/common/mypageHeader.tsx";
+const Index = () => {
+  const dummyData = Array.from({ length: 24 }, (_, index) => ({
+    id: index,
+    content: `あ-う [会う]
+동사 1.만나다
+2.대면하다;면회하다
+3.우연히 만나다;조우하다`,
+    text: `항목 ${index + 1}`
 
-    <div className="flex justify-center items-center min-h-screen w-full">
-      <div
-          className="bg-gradient-to-b text-white from-[#46AEB8] to-[#688AC1] font-semibold rounded-xl overflow-hidden w-[700px] h-[700px] flex flex-wrap justify-center items-center">
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 1
-        </div>
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 2
-        </div>
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 3
-        </div>
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 4
-        </div>
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 5
-        </div>
-        <div
-            className="bg-gradient-to-r text-white from-[#aad6de] to-[#78becd] font-semibold rounded-xl overflow-hidden w-[300px] h-[200px] flex justify-center items-center">
-          단어 6
-        </div>
+  }));
+
+  // dummyData를 6개 단위로 나누어 slideData를 생성
+  const slideDatas = [];
+  for (let i = 0; i < dummyData.length; i += 8) {
+    slideDatas.push(dummyData.slice(i, i + 8));
+  }
+
+  console.log(slideDatas[1]);
+
+  // CustomSlider 컴포넌트에 slideData를 slides props로 전달
+  return(
+  <div className="bg-[#212529] min-h-screen">
+    <div className="max-w-[700px] m-auto">
+
+      <div><MypageHeader/></div>
+      <div className="mt-6">
+          <CustomSlider slides={slideDatas}/>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>
-}
+  );
+};
 
 export default Index;
