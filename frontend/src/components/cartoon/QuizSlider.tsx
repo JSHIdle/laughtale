@@ -1,9 +1,14 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useNavigate } from 'react-router-dom';
+// import Result from '../../components/cartoon/Result.tsx';
 
-const QuizSlider = ({slides, updateCurrentSlide, sliderRef, onNumberClick }) => {
-
+const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
+    let navigate = useNavigate();
+    function handleClick() {
+        navigate('result');
+    }
     const settings = {
         dots: true, // 점으로 페이지 위치 표시
         infinite: false, // 무한 슬라이딩 비활성화
@@ -12,8 +17,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef, onNumberClick }) => 
         slidesToScroll: 1, // 스크롤할 때마다 넘어갈 슬라이드 페이지 수
         afterChange: current => updateCurrentSlide(current)
     };
-
-
 
     return(
         <div>
@@ -61,7 +64,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef, onNumberClick }) => 
                             <div>
                                 {index === slides.length - 1 && (
                                     <div className="flex justify-center items-center mt-4">
-                                        <button className="mt-3 text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[200px]">
+                                        <button onClick={handleClick} className="mt-3 text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[200px]">
                                             제출하기
                                         </button>
                                     </div>
@@ -75,6 +78,5 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef, onNumberClick }) => 
                     </Slider>
                     </div>
                     );
-                };
-
-                export default QuizSlider;
+    };
+    export default QuizSlider;
