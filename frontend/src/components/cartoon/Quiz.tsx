@@ -1,18 +1,27 @@
+import { useState } from 'react';
 import QuizSlider from "./QuizSlider.tsx";
+import Progressbar from "./Progressbar.tsx";
 
 const Quiz = () => {
-    const dummyData = Array.from({ length: 3 }, (_, index) => ({
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const dummyData = Array.from({ length: 5 }, (_, index) => ({
     id: index,
     text: `Q${index + 1}. 다음 문제를 풀어보세요 `
 }));
-    console.log(dummyData[2]);
+
+    const updateCurrentSlide = (index) => {
+        setCurrentSlide(index);
+    };
 
     return (
         <div className="bg-[#212529] min-h-screen">
-            <div className="text-white max-w-[1000px] m-auto">
+            <div className="max-w-[450px] m-auto">
                 <div className="flex justify-center pt-24">
-                여기 프로그래스 바가 들어가야할듯</div>
-                <QuizSlider slides={dummyData}/>
+                    <Progressbar value={currentSlide} max={dummyData.length}/>
+                </div>
+            </div>
+            <div className="text-white max-w-[1000px] m-auto">
+                <QuizSlider slides={dummyData} updateCurrentSlide={updateCurrentSlide} />
             </div>
         </div>
     )
