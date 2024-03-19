@@ -1,5 +1,6 @@
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
-import MypageHeader from "../../../components/common/mypageHeader.tsx";
+import Header from "../../../components/common/Header.tsx";
+
 const Index = () => {
   const dummyData = Array.from({ length: 24 }, (_, index) => ({
     id: index,
@@ -21,10 +22,10 @@ const Index = () => {
 
   // CustomSlider 컴포넌트에 slideData를 slides props로 전달
   return(
-  <div className="bg-[#212529] min-h-screen">
+  <div className="bg-[#1D1D21] min-h-screen">
     <div className="max-w-[700px] m-auto">
 
-      <div><MypageHeader/></div>
+      <div><Header/></div>
       <div className="mt-6">
           <CustomSlider slides={slideDatas}/>
       </div>

@@ -1,7 +1,7 @@
 import myImage from '../../assets/badge/badge1.png';
 import myImage2 from '../../assets/badge/badge2.png';
 import myImage3 from '../../assets/badge/badge3.png';
-import MypageHeader from '../../components/common/mypageHeader';
+import Header from '../../components/common/Header';
 import DoughnutChart from "../../components/mypage/DoughnutChart.tsx";
 import { Progress } from "@material-tailwind/react";
 
@@ -15,10 +15,10 @@ export function Bar() {
 
 const Index = () => {
 
-  return <div className="bg-[#212529] min-h-screen">
+  return <div className="bg-[#1D1D21] min-h-screen">
     <div className="max-w-[700px] m-auto">
     <div>
-      <MypageHeader/>
+      <Header/>
     </div>
       <div className="mt-12 text-white font-semibold">
         경험치

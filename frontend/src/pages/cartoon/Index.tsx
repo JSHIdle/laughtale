@@ -1,5 +1,5 @@
 const Index = () => {
-  return <div className="bg-[#212529]">
+  return <div className="bg-[#1D1D21]">
     <div className="max-w-[700px] m-auto">
 
       <div className="flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#FFECEE] from-5%   to-[#EA7E9E] to-100%">
