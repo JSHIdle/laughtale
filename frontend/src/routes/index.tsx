@@ -1,4 +1,3 @@
-import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   Navigate, Outlet,
@@ -12,7 +11,6 @@ import Recent from "../pages/main/Recent";
 import Popular from "../pages/main/Popular";
 
 import Mypage from "../pages/mypage/Index";
-import LevelTest from "../pages/mypage/leveltest/Index";
 import Word from "../pages/mypage/word/Index";
 
 import Cartoon from "../pages/cartoon/Index";
@@ -56,10 +54,6 @@ const router = createBrowserRouter([
       {
         path:'',
         element: <Mypage/>,
-      },
-      {
-        path: "leveltest",
-        element: <LevelTest/>,
       },
       {
         path: "word",
