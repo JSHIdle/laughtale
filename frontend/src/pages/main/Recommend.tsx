@@ -6,6 +6,7 @@ import cartoons2 from "../../components/main/sampleData/Cartoons2.ts";
 import cartoons3 from "../../components/main/sampleData/Cartoons3.ts";
 import cartoons4 from "../../components/main/sampleData/Cartoons4.ts";
 
+
 const Recommend = () => {
     return (
         <div className="bg-[#212529] min-h-screen text-white">
