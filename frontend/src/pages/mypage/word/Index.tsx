@@ -1,5 +1,6 @@
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import Header from "../../../components/common/Header.tsx";
+import myImage from '../../../assets/badge/badge1.png';
 
 const Index = () => {
   const dummyData = Array.from({ length: 24 }, (_, index) => ({
@@ -14,8 +15,8 @@ const Index = () => {
 
   // dummyData를 6개 단위로 나누어 slideData를 생성
   const slideDatas = [];
-  for (let i = 0; i < dummyData.length; i += 8) {
-    slideDatas.push(dummyData.slice(i, i + 8));
+  for (let i = 0; i < dummyData.length; i += 9) {
+    slideDatas.push(dummyData.slice(i, i + 9));
   }
 
   console.log(slideDatas[1]);
@@ -23,11 +24,19 @@ const Index = () => {
   // CustomSlider 컴포넌트에 slideData를 slides props로 전달
   return(
   <div className="bg-[#1D1D21] min-h-screen">
-    <div className="max-w-[700px] m-auto">
+    <div className="max-w-[1100px] m-auto">
 
       <div><Header/></div>
-      <div className="mt-6">
-          <CustomSlider slides={slideDatas}/>
+
+      <div className="flex justify-center items-center">
+        <div className="w-[900px] h-[50px] text-white font-bold flex">
+          <img src={myImage} width="50" height="50"/>
+          <div className="flex items-center ml-3">LV1</div>
+        </div>
+      </div>
+
+      <div>
+        <CustomSlider slides={slideDatas}/>
       </div>
 
     </div>
