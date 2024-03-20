@@ -1,6 +1,6 @@
 package com.jshi.laughtale.choice.domain;
 
-import com.jshi.laughtale.myquiz.domain.Quiz;
+import com.jshi.laughtale.quiz.domain.Quiz;
 import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;

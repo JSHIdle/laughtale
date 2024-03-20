@@ -1,4 +1,4 @@
-package com.jshi.laughtale.myquiz.domain;
+package com.jshi.laughtale.quiz.domain;
 
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.wordlist.domain.WordList;
