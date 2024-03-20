@@ -28,7 +28,9 @@ function Modal({ isOpen, onClose, handleIconClick }) {
             <div className="bg-[#1D1D21] p-4 rounded-lg w-[400px] h-[300px]">
                 <h2 className="text-xl text-white font-bold">Modal Title</h2>
                 <h2 className="text-xl text-white font-bold">{dummyData.text}</h2>
-                <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1} color="white" onClick={handleIconClick}/>
+                <span onClick={handleIconClick}>
+                    <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1} color="white" />
+                </span>
                 <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
                         onClick={onClose}>Close
                 </button>
