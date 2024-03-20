@@ -62,8 +62,6 @@ async function playTTS(text) {
     }
 }
 
-
-
 const CustomSlider = ({slides}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
