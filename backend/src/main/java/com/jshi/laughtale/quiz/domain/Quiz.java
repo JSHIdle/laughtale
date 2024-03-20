@@ -22,20 +22,32 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 public class Quiz {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column
-	private Integer problemNo;
+    @Column
+    private Integer problemNo;
+    @Column
+    private Integer answerNo;
+    @Column
+    private String optionA;
+    @Column
+    private String optionB;
+    @Column
+    private String optionC;
+    @Column
+    private String optionD;
 
-	@ManyToOne
-	@JoinColumn(name = "member_id")
-	private Member member;
 
-	@ManyToOne
-	@JoinColumn(name = "word_list_id")
-	private WordList wordList;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    //정답에 해당하는 단어
+    @ManyToOne
+    @JoinColumn(name = "word_list_id")
+    private WordList wordList;
 
 
 }

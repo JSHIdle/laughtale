@@ -1,13 +1,11 @@
 package com.jshi.laughtale.wordhistory.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import com.jshi.laughtale.wordhistory.repository.WordHistoryRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +17,6 @@ public class WordHistoryService {
 	}
 
 	public List<WordHistory> findByWordIdIn(List<Long> list) {
-		return wordHistoryRepository.findByWordIdIn(list);
+		return wordHistoryRepository.findByWordDataIn(list);
 	}
 }

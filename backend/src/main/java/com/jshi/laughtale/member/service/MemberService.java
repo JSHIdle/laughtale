@@ -12,15 +12,13 @@ import com.jshi.laughtale.member.repository.MemberRepository;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 import com.jshi.laughtale.security.jwt.JwtProcessor;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
-
-import java.util.List;
-import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -73,6 +71,10 @@ public class MemberService {
 			sum += wordLevel * ebbinghausUtil.calculateMemory(wordHistory.getStudyDate(), wordHistory.getStudyCnt());
 		}
 		return (int)Math.round(sum / wordHistoryList.size());
+	}
+
+	public Member findById(Long id){
+		return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
 	}
 
 }
