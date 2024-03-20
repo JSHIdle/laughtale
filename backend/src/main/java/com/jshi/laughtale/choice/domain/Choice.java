@@ -1,8 +1,6 @@
-package com.jshi.laughtale.myquiz.domain;
+package com.jshi.laughtale.choice.domain;
 
-import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.member.domain.Member;
-import com.jshi.laughtale.worddata.domain.WordData;
+import com.jshi.laughtale.myquiz.domain.Quiz;
 import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;
@@ -23,21 +21,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Getter
-public class MyQuiz {
+public class Choice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
-	private Integer problemNo;
+	private Integer optionNo;
 
 	@ManyToOne
-	@JoinColumn(name = "member_id")
-	private Member member;
+	@JoinColumn(name = "quiz_id")
+	private Quiz myQuiz;
 
 	@ManyToOne
 	@JoinColumn(name = "word_list_id")
 	private WordList wordList;
-
 
 }
