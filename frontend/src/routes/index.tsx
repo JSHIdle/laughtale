@@ -4,19 +4,19 @@ import {
 } from "react-router-dom";
 
 
-import Genre from "../pages/main/Genre";
 import Recommend from "../pages/main/Recommend";
-import Week from "../pages/main/Week";
 import Recent from "../pages/main/Recent";
-import Popular from "../pages/main/Popular";
+import LevelCartoons from '../pages/main/LevelCartoons';
 
 import Mypage from "../pages/mypage/Index";
 import Word from "../pages/mypage/word/Index";
 
 import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
-import Quiz from "../components/cartoon/Quiz.tsx";
+
 import Result from "../components/cartoon/Result.tsx";
+import Quiz from "../components/cartoon/Quiz.tsx";
+
 
 
 const router = createBrowserRouter([
@@ -33,22 +33,14 @@ const router = createBrowserRouter([
         element: <Recommend />
       },
       {
-        path: "week",
-        element: <Week />,
-      },
-      {
-        path: "genre",
-        element: <Genre />,
-      },
-      {
         path: "recent",
         element: <Recent />,
       },
-      {
-        path: "popular",
-        element: <Popular />,
-      },
     ],
+  },
+  {
+    path: "/cartoons/level/:level",
+    element: <LevelCartoons />,
   },
   {
     path: "/mypage",
