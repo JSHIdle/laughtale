@@ -1,9 +1,9 @@
-package com.jshi.laughtale.cut.domain;
-
-import org.hibernate.annotations.CollectionId;
+package com.jshi.laughtale.myquiz.domain;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.manga.domain.Manga;
+import com.jshi.laughtale.member.domain.Member;
+import com.jshi.laughtale.worddata.domain.WordData;
+import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,15 +23,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Getter
-public class Cut {
+public class MyQuiz {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column
-	private Integer cutNo;
-	@Column(length = 3000)
-	private String imageUrl;
+	private Integer problemNo;
+
 	@ManyToOne
-	@JoinColumn(name = "chapter_id")
-	private Chapter chapter;
+	@JoinColumn(name = "member_id")
+	private Member member;
+
+	@ManyToOne
+	@JoinColumn(name = "word_list_id")
+	private WordList wordList;
+
+
 }

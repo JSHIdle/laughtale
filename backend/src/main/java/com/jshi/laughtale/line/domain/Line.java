@@ -28,14 +28,14 @@ public class Line {
 	private Long id;
 
 	@Column
-	Integer sentenceNo;
+	private Integer sentenceNo;
 
 	@ManyToOne
 	@JoinColumn(name = "speech_id")
-	Speech speech;
+	private Speech speech;
 
 	@OneToOne
-	@JoinColumn(name ="position_id")
-	Position position;
+	@JoinColumn(name = "position_id")
+	private Position position;
 
 }

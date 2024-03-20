@@ -21,13 +21,13 @@ public class Manga {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true)
-	String title;
+	private String title;
 	@Column
-	String author;
+	private String author;
 	@Column(length = 1000)
-	String description;
+	private String description;
 	@Column
-	Integer chapterCnt;
+	private Integer chapterCnt;
 	@Column
-	String category;
+	private String category;
 }

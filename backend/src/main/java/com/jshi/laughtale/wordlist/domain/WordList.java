@@ -26,9 +26,9 @@ public class WordList {
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "speech_id")
-	Speech speech;
+	private Speech speech;
 
 	@ManyToOne
 	@JoinColumn(name = "word_id")
-	WordData wordData;
+	private WordData wordData;
 }

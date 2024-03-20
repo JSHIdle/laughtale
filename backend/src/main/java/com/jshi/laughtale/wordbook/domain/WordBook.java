@@ -29,11 +29,9 @@ public class WordBook {
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "member_id")
-	Member member;
+	private Member member;
 	@ManyToOne
 	@JoinColumn(name = "word_id")
-	WordData wordData;
-	@ManyToOne
-	@JoinColumn(name = "speech_id")
-	Speech speech;
+	private WordData wordData;
+
 }
