@@ -1,7 +1,6 @@
-package com.jshi.laughtale.quiz.domain;
+package com.jshi.laughtale.myquiz.domain;
 
-import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.myquiz.domain.MyQuiz;
+import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;
@@ -28,14 +27,15 @@ public class Quiz {
 	private Long id;
 
 	@Column
-	private Integer optionNo;
+	private Integer problemNo;
 
 	@ManyToOne
-	@JoinColumn(name = "my_quiz_id")
-	private MyQuiz myQuiz;
+	@JoinColumn(name = "member_id")
+	private Member member;
 
 	@ManyToOne
 	@JoinColumn(name = "word_list_id")
 	private WordList wordList;
+
 
 }
