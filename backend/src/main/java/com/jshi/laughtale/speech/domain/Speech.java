@@ -29,17 +29,17 @@ public class Speech {
 	private Long id;
 
 	@Column
-	String sentence;
+	private String sentence;
 
 	@Column
-	Integer speechNo;
+	private Integer speechNo;
 
 	@ManyToOne
-	@JoinColumn(name="cut_id")
-	Cut cut;
+	@JoinColumn(name = "cut_id")
+	private Cut cut;
 
 	@OneToOne
 	@JoinColumn(name = "position_id")
-	Position position;
+	private Position position;
 
 }

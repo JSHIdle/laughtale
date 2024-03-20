@@ -21,14 +21,14 @@ public class WordData {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	String word;
+	private String word;
 	@Column
-	Integer level;
+	private Integer level;
 	@Column
-	String partOfSpeech;
+	private String partOfSpeech;
 	@Column
-	Integer frequency;
+	private Integer frequency;
 	@Column
-	String definition;
+	private String definition;
 
 }

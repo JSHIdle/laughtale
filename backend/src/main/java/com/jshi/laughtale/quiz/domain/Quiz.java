@@ -1,6 +1,7 @@
 package com.jshi.laughtale.quiz.domain;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.myquiz.domain.MyQuiz;
 import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;
@@ -25,27 +26,16 @@ public class Quiz {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column
-	Integer problemNo;
-	@Column
-	String problem;
-	@Column
-	String optionA;
-	@Column
-	String optionB;
-	@Column
-	String optionC;
-	@Column
-	String optionD;
-	@Column
-	Integer correctAnswer;
+	private Integer optionNo;
 
 	@ManyToOne
-	@JoinColumn(name = "chapter_id")
-	Chapter chapter;
+	@JoinColumn(name = "my_quiz_id")
+	private MyQuiz myQuiz;
 
 	@ManyToOne
 	@JoinColumn(name = "word_list_id")
-	WordList wordList;
+	private WordList wordList;
 
 }

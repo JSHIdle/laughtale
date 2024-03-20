@@ -22,22 +22,22 @@ public class Position {
 	private Long id;
 
 	@Column
-	Integer leftTopX;
+	private Integer leftTopX;
 	@Column
-	Integer leftTopY;
+	private Integer leftTopY;
 
 	@Column
-	Integer rightTopX;
+	private Integer rightTopX;
 	@Column
-	Integer rightTopY;
+	private Integer rightTopY;
 
 	@Column
-	Integer leftBottomX;
+	private Integer leftBottomX;
 	@Column
-	Integer leftBottomY;
+	private Integer leftBottomY;
 
 	@Column
-	Integer rightBottomX;
+	private Integer rightBottomX;
 	@Column
-	Integer rightBottomY;
+	private Integer rightBottomY;
 }

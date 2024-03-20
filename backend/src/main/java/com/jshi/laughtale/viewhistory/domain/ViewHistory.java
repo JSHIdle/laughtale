@@ -1,9 +1,11 @@
 package com.jshi.laughtale.viewhistory.domain;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.member.domain.Member;
-import com.jshi.laughtale.wordlist.domain.WordList;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,14 +29,18 @@ public class ViewHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime viewDate;
+
 	@ManyToOne
 	@JoinColumn(name = "member_id")
-	Member member;
+	private Member member;
 	@ManyToOne
 	@JoinColumn(name = "chapter_id")
-	Chapter chapter;
+	private Chapter chapter;
 	@ManyToOne
 	@JoinColumn(name = "manga_id")
-	Manga manga;
+	private Manga manga;
 
 }

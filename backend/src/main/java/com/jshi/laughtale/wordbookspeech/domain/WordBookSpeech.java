@@ -1,11 +1,12 @@
-package com.jshi.laughtale.cut.domain;
+package com.jshi.laughtale.wordbookspeech.domain;
 
-import org.hibernate.annotations.CollectionId;
+import java.awt.*;
 
-import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.manga.domain.Manga;
+import com.jshi.laughtale.member.domain.Member;
+import com.jshi.laughtale.speech.domain.Speech;
+import com.jshi.laughtale.wordbook.domain.WordBook;
+import com.jshi.laughtale.worddata.domain.WordData;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,15 +24,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Getter
-public class Cut {
+public class WordBookSpeech {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
-	private Integer cutNo;
-	@Column(length = 3000)
-	private String imageUrl;
 	@ManyToOne
-	@JoinColumn(name = "chapter_id")
-	private Chapter chapter;
+	@JoinColumn(name = "word_book_id")
+	private WordBook wordBook;
+
+	@ManyToOne
+	@JoinColumn(name = "speech_id")
+	private Speech speech;
+
 }

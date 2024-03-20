@@ -26,12 +26,12 @@ public class Chapter {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	Integer chapterNo;
+	private Integer chapterNo;
 	@Column
-	Integer pageCnt;
+	private Integer pageCnt;
 
 	@ManyToOne
 	@JoinColumn(name = "manga_id")
-	Manga manga;
+	private Manga manga;
 
 }
