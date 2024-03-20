@@ -26,7 +26,7 @@ const Index = () => {
       <div className="flex space-x-12">
         <div className="bg-gradient-to-r text-white from-[#4EDBDE] from-5% to-[#8675DA] to-100% font-semibold flex rounded-xl overflow-hidden mr-5 w-60 h-60 flex justify-center items-center">
           <div className="flex justify-items-center items-center">
-            <img src={myImage} width="100" height="100"></img>
+            <img src={myImage} width="100" height="100" ></img>
             만화좋아
           </div>
         </div>
