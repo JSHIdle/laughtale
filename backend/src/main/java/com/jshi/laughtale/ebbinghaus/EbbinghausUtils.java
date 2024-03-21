@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 에빙하우스 망각 곡선 계산
 */
 @Service
-public class EbbinghausUtil {
+public class EbbinghausUtils {
 
 	//현재 단어를 기억할 확률을 반환한다
 	public double calculateMemory(LocalDateTime lastStudyTime, int studyCnt) {
