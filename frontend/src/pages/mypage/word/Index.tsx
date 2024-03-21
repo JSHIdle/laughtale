@@ -1,6 +1,6 @@
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import Header from "../../../components/common/Header.tsx";
-import myImage from '../../../assets/badge/badge1.png';
+// import myImage from '../../../assets/badge/badge1.png';
 
 const Index = () => {
   const dummyData = Array.from({ length: 24 }, (_, index) => ({
@@ -29,9 +29,9 @@ const Index = () => {
       <div><Header/></div>
 
       <div className="flex justify-center items-center">
-        <div className="w-[900px] h-[50px] text-white font-bold flex">
-          <img src={myImage} width="50" height="50"/>
-          <div className="flex items-center ml-3">LV1</div>
+        <div className="mt-3 w-[46px] text-white font-bold flex justify-center">
+          {/*<img src={myImage} width="50" height="50"/>*/}
+          LV1
         </div>
       </div>
 
