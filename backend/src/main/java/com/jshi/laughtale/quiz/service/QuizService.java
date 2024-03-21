@@ -1,7 +1,7 @@
 package com.jshi.laughtale.quiz.service;
 
 import com.jshi.laughtale.cut.domain.Cut;
-import com.jshi.laughtale.ebbinghaus.EbbinghausUtil;
+import com.jshi.laughtale.ebbinghaus.EbbinghausUtils;
 import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.position.domain.Position;
 import com.jshi.laughtale.quiz.domain.Quiz;
@@ -9,7 +9,6 @@ import com.jshi.laughtale.quiz.dto.QuizWord;
 import com.jshi.laughtale.quiz.repository.QuizRepository;
 import com.jshi.laughtale.speech.domain.Speech;
 import com.jshi.laughtale.speech.service.SpeechService;
-import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.worddata.service.WordDataService;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import com.jshi.laughtale.wordhistory.service.WordHistoryService;
@@ -28,7 +27,7 @@ public class QuizService {
 	private final WordHistoryService wordHistoryService;
 	private final MemberService memberService;
 	private final WordListService wordListService;
-	private final EbbinghausUtil ebbinghausUtil;
+	private final EbbinghausUtils ebbinghausUtil;
 	private final SpeechService speechService;
 	private final WordDataService wordDataService;
 

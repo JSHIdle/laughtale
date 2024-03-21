@@ -1,4 +1,4 @@
-package com.jshi.laughtale.Dictionary.domain;
+package com.jshi.laughtale.dictionary.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
