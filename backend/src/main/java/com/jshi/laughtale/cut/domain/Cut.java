@@ -1,22 +1,14 @@
 package com.jshi.laughtale.cut.domain;
 
-import org.hibernate.annotations.CollectionId;
-
 import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.manga.domain.Manga;
+import com.jshi.laughtale.speech.domain.Speech;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.CascadeType.PERSIST;
 
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,14 +16,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 public class Cut {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column
-	private Integer cutNo;
-	@Column(length = 3000)
-	private String imageUrl;
-	@ManyToOne
-	@JoinColumn(name = "chapter_id")
-	private Chapter chapter;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private Integer cutNo;
+    @Column(length = 3000)
+    private String imageUrl;
+    @Column
+    private Integer width;
+    @Column
+    private Integer height;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chapter_id")
+    private Chapter chapter;
+    @OneToMany(mappedBy = "cut", cascade = {PERSIST}, orphanRemoval = true)
+    private List<Speech> speeches = new ArrayList<>();
 }
