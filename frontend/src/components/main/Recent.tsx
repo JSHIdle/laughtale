@@ -8,37 +8,37 @@ const comics = [
     id: 1,
     title: "만화1",
     episode: "3화",
-    imageUrl: "src/assets/samples/e2-1.jpg",
+    imageUrl: "/src/assets/samples/e2-1.jpg",
   },
   {
     id: 2,
     title: "만화2",
     episode: "3화",
-    imageUrl: "src/assets/samples/e3-1.jpg",
+    imageUrl: "/src/assets/samples/e3-1.jpg",
   },
   {
     id: 3,
     title: "만화3",
     episode: "3화",
-    imageUrl: "src/assets/samples/e4-2.jpg",
+    imageUrl: "/src/assets/samples/e4-2.jpg",
   },
   {
     id: 4,
     title: "만화4",
     episode: "3화",
-    imageUrl: "src/assets/samples/e3-4.jpg",
+    imageUrl: "/src/assets/samples/e3-4.jpg",
   },
   {
     id: 5,
     title: "만화5",
     episode: "3화",
-    imageUrl: "src/assets/samples/e1-3.jpg",
+    imageUrl: "/src/assets/samples/e1-3.jpg",
   },
   {
     id: 5,
     title: "만화6",
     episode: "7화",
-    imageUrl: "src/assets/samples/e3-3.jpg",
+    imageUrl: "/src/assets/samples/e3-3.jpg",
   },
 ];
 
