@@ -1,15 +1,14 @@
 package com.jshi.laughtale.worddata.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.jshi.laughtale.wordlist.domain.WordList;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,4 +30,7 @@ public class WordData {
 	@Column
 	private String definition;
 
+	public void updateFrequency() {
+		this.frequency++;
+	}
 }
