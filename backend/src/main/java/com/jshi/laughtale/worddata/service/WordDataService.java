@@ -14,6 +14,6 @@ import lombok.RequiredArgsConstructor;
 public class WordDataService {
 private final WordDataRepository wordDataRepository;
 	public String findDefinitionByWord(String word){
-		return wordDataRepository.findByWord(word).get(0).getDefinition();
+		return wordDataRepository.findByWord(word).orElseThrow().getDefinition();
 	}
 }
