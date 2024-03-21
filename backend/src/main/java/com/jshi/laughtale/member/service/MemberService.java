@@ -1,6 +1,6 @@
 package com.jshi.laughtale.member.service;
 
-import com.jshi.laughtale.ebbinghaus.EbbinghausUtil;
+import com.jshi.laughtale.ebbinghaus.EbbinghausUtils;
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.dto.MemberLogin;
 import com.jshi.laughtale.member.dto.MemberSignup;
@@ -28,7 +28,7 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtProcessor jwtProcessor;
-	private final EbbinghausUtil ebbinghausUtil;
+	private final EbbinghausUtils ebbinghausUtil;
 
 	@Transactional(readOnly = true)
 	public MemberLogin.Response login(MemberLogin.Request login) {
