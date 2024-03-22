@@ -21,7 +21,7 @@ public class ChapterMapper {
     public static ChapterListDto.Response chapterToChapterListDto(Chapter chapter) {
         return ChapterListDto.Response.builder()
             .chapterNo(chapter.getChapterNo())
-            .id(chapter.getId())
+            .chapterId(chapter.getId())
             .build();
     }
 
