@@ -1,11 +1,14 @@
 package com.jshi.laughtale.wordlist.repository;
 
+import com.jshi.laughtale.worddata.domain.WordData;
+import com.jshi.laughtale.worddata.dto.WordDataDetail;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.quiz.dto.QuizWord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface WordListRepository extends JpaRepository<WordList, Long> {
@@ -25,7 +28,6 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
              + "    and d.word_id = e.id "
              + "    and e.level = :level;", nativeQuery = true)
 	 	Optional<QuizWord>findWordListsWithLevel(@Param("level")int level);
-
-
+	List<WordList> findAllByWordData(WordData wordData);
     WordList findByWordDataIdAndSpeechId(Long wordId, Long speechId);
 }

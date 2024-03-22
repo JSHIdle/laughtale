@@ -1,11 +1,25 @@
 package com.jshi.laughtale.position.mapper;
 
 import com.jshi.laughtale.position.domain.Position;
+import com.jshi.laughtale.position.dto.PositionBasic;
 import com.jshi.laughtale.position.exception.PositionInsufficientQuantityException;
 
 import java.util.List;
 
 public class PositionMapper {
+
+    public static PositionBasic.Response toBasicResponse(Position position) {
+        return PositionBasic.Response.builder()
+                .leftTopY(position.getLeftTopY())
+                .leftTopX(position.getRightTopX())
+                .rightTopY(position.getRightTopY())
+                .rightTopX(position.getRightTopX())
+                .leftBottomY(position.getLeftBottomY())
+                .leftBottomX(position.getLeftBottomX())
+                .rightBottomY(position.getRightBottomY())
+                .rightBottomX(position.getRightBottomX())
+                .build();
+    }
 
     public static Position listToPosition(List<Integer> positions) {
         if (positions.size() == 4) {

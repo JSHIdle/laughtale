@@ -28,12 +28,13 @@ public class MangaMapper {
 
     public static Manga analyzeToEntity(MangaAnalyze.Request request) {
         return Manga.builder()
-                        .title(request.getTitle())
-                        .chapterCnt(1)
-                        .author(request.getAuthor())
-                        .category(request.getCategory())
-                        .description(request.getDescription())
-                        .chapter(new ArrayList<>())
-                        .build();
+                .title(request.getTitle())
+                .chapterCnt(1)
+                .author(request.getAuthor())
+                .category(request.getCategory())
+                .description(request.getDescription())
+                .level(0)
+                .chapter(new ArrayList<>())
+                .build();
     }
 }

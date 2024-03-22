@@ -15,4 +15,8 @@ public class ChapterMapper {
                 .cuts(new ArrayList<>())
                 .build();
     }
+
+    public static Integer toChapterNo(Chapter chapter) {
+        return chapter.getChapterNo();
+    }
 }
