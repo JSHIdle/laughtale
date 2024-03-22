@@ -1,5 +1,6 @@
 package com.jshi.laughtale.wordlist.service;
 
+import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.quiz.dto.QuizWord;
 import com.jshi.laughtale.wordlist.repository.WordListRepository;
@@ -19,5 +20,9 @@ public class WordListService {
 
 	public WordList findByWordDataIdAndSpeechId(Long wordId, Long speechId){
 		return wordListRepository.findByWordDataIdAndSpeechId(wordId,speechId);
+	}
+
+	public List<WordList> loadWordData(WordData wordData) {
+		return wordListRepository.findAllByWordData(wordData);
 	}
 }

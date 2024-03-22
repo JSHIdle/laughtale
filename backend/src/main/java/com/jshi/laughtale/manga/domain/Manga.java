@@ -42,4 +42,7 @@ public class Manga {
     public void update() {
         chapterCnt = chapter.size();
     }
+    public void updateThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }
