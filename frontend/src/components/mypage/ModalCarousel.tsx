@@ -37,13 +37,13 @@ const ModalCarousel = () => {
         },
     ];
 
-    return (<div>
+    return (<div className="flex justify-center">
         <div className="w-[300px]">
             <Slider {...settings}>
                 {comics.map(book => (
                     <div className="flex justify-center items-center">
                     <div key={book.id} className="p-3">
-                        <img src={book.imageUrl} style={{ width: "100%", height: "auto" }} alt={book.title}/>
+                        <img src={book.imageUrl} style={{ width: "80%", height: "auto" }} alt={book.title}/>
                     </div>
                     </div>
                 ))}
