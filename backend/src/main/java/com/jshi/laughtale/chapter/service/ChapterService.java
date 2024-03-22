@@ -19,9 +19,9 @@ public class ChapterService {
 
 	private final ChapterRepository chapterRepository;
 	private final MangaService mangaService;
-	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo) {
+	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
 		Manga manga = mangaService.findById(mangaId);
-		Pageable pageable = PageRequest.of(pageNo, 20);
+		Pageable pageable = PageRequest.of(pageNo, size);
 		return chapterRepository.findAllByMangaOrderByChapterNoAsc(manga, pageable).map(ChapterMapper::chapterToChapterListDto);
 	}
 
