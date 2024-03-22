@@ -1,22 +1,9 @@
 package com.jshi.laughtale.wordbook.domain;
 
-import java.awt.*;
-
 import com.jshi.laughtale.member.domain.Member;
-import com.jshi.laughtale.speech.domain.Speech;
 import com.jshi.laughtale.worddata.domain.WordData;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,5 +20,4 @@ public class WordBook {
 	@ManyToOne
 	@JoinColumn(name = "word_id")
 	private WordData wordData;
-
 }

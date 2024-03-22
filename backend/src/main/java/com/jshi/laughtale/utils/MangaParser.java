@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -32,7 +33,9 @@ public class MangaParser {
         Map attr = (Map) attributes.get(manga.getTitle());
 
         List<Chapter> chapterList = manga.getChapter();
+        String thumbnail = (String) attr.get("thumbnail");
         List<List<Object>> chapter = (List<List<Object>>) attr.get("chapter");
+        manga.updateThumbnail(thumbnail);
 
         for (int i = 0; i < chapter.size(); i++) {
             int pageCnt = chapter.get(i).size();
@@ -48,7 +51,7 @@ public class MangaParser {
             Map info = (Map) cut.get(i);
             String imageUrl = (String) info.get("src");
             int idx = (Integer) info.get("page");
-            List<Integer> size = (List<Integer>) info.get("size");
+            List<Integer> size = Optional.of((List<Integer>) info.get("size")).orElse(List.of(-1, -1));
             Cut cutEntity = CutMapper.toEntity(chapterEntity, idx, imageUrl, size);
             cutList.add(cutEntity);
             parseCut(cutEntity, (List<Object>) info.get("speech"));

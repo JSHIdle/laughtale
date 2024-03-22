@@ -10,11 +10,9 @@ import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
 import com.jshi.laughtale.utils.MangaParser;
-
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -48,13 +45,13 @@ public class MangaService {
 		MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
 		Map result = DataRequest.analyze(analyzeRequest);
 
-		Manga m = mangaRepository.findByTitle(manga.getTitle())
-			.orElse(MangaMapper.analyzeToEntity(analyzeRequest));
-		mangaRepository.save(m);
+        Manga m = mangaRepository.findByTitle(manga.getTitle())
+                .orElse(MangaMapper.analyzeToEntity(analyzeRequest));
 
-		mangaParser.parser(m, result, last);
-		m.update();
-	}
+        mangaParser.parser(m, result, last);
+        m.update();
+        mangaRepository.save(m);
+    }
 
 	public List<RecentManga.Response> getRecentManga(Long memberId) {
 		return mangaRepository.findRecentManga(memberId);
