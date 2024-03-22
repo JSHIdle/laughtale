@@ -1,11 +1,14 @@
 package com.jshi.laughtale.manga.controller;
 
+import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
+import com.jshi.laughtale.manga.dto.MangaInfo;
 import com.jshi.laughtale.manga.dto.MangaUpload;
 import com.jshi.laughtale.manga.dto.RecentManga;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -51,6 +54,36 @@ public class MangaController {
 			mangaList.add(mangaListByLevel);
 		}
 		return ResponseEntity.ok(mangaList);
+	}
+
+	@GetMapping("/level/{level}/{page}")
+	public ResponseEntity<List<LevelManga.Response>> getMangaByLevel(
+		@PathVariable Integer level,
+		@PathVariable Integer page) {
+		return ResponseEntity.ok(mangaService.getLevelManga(level, page, page + 10));
+	}
+
+	@GetMapping("/chapters/{mangaId}/{page}")
+	public ResponseEntity<Void> getAllChapters(
+		@PathVariable Integer page,
+		@PathVariable Long mangaId) {
+		//TODO : PAGENATION
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/info/{id}")
+	public ResponseEntity<MangaInfo.Response> getMangaInfo(
+		@PathVariable Long id) {
+		Manga manga = mangaService.getMangaInfo(id);
+		return ResponseEntity.ok(MangaInfo.Response.builder()
+			.id(manga.getId())
+			.title(manga.getTitle())
+			.category(manga.getCategory())
+			.author(manga.getAuthor())
+			.summary(manga.getDescription())
+			.thumbnail(manga.getThumbnail())
+			.level(manga.getLevel())
+			.build());
 	}
 
 }

@@ -15,13 +15,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,5 +62,9 @@ public class MangaService {
 
 	public List<LevelManga.Response> getLevelManga(int level, int start, int end) {
 		return mangaRepository.findLevelManga(level, start, end).orElseThrow();
+	}
+
+	public Manga getMangaInfo(Long id) {
+		return mangaRepository.findById(id).orElseThrow();
 	}
 }
