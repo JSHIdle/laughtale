@@ -1,6 +1,7 @@
 package com.jshi.laughtale.chapter.mapper;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.manga.domain.Manga;
 
 import java.util.ArrayList;
@@ -14,6 +15,14 @@ public class ChapterMapper {
                 .manga(manga)
                 .cuts(new ArrayList<>())
                 .build();
+    }
+
+
+    public static ChapterListDto.Response chapterToChapterListDto(Chapter chapter) {
+        return ChapterListDto.Response.builder()
+            .chapterNo(chapter.getChapterNo())
+            .id(chapter.getId())
+            .build();
     }
 
     public static Integer toChapterNo(Chapter chapter) {
