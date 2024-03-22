@@ -23,14 +23,14 @@ public class Manga {
     private String title;
     @Column
     private String author;
-    @Column(length = 1000)
+    @Column(length = 10000)
     private String description;
     @Column
     private Integer chapterCnt;
     @Column
     private String category;
 
-    @Column
+    @Column(length = 1000)
     private String thumbnail;
 
     @Column
