@@ -1,6 +1,6 @@
-import myImage from '../../assets/badge/badge1.png';
-import myImage2 from '../../assets/badge/badge2.png';
-import myImage3 from '../../assets/badge/badge3.png';
+import myImage from '/assets/badge/badge1.png';
+import myImage2 from '/assets/badge/badge2.png';
+import myImage3 from '../../../public/assets/badge/badge3.png';
 import Header from '../../components/common/Header';
 import DoughnutChart from "../../components/mypage/DoughnutChart.tsx";
 // import { Progress } from "@material-tailwind/react";
