@@ -78,6 +78,8 @@ function Recent() {
   // 만화 객체가 하나도 없을 경우 아무것도 렌더링하지 않음
   if (comics.length === 0) return null;
 
+
+
   return (
       <div className="container mx-auto px-20 py-50 mt-10 pt-10 myslickclass">
         <Slider {...settings}>
