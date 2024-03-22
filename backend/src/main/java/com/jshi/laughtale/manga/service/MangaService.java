@@ -64,4 +64,8 @@ public class MangaService {
 	public Manga getMangaInfo(Long id) {
 		return mangaRepository.findById(id).orElseThrow();
 	}
+
+	public Manga findById(Long mangaId) {
+		return mangaRepository.findById(mangaId).orElseThrow();
+	}
 }
