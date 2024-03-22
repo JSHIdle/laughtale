@@ -1,8 +1,10 @@
 package com.jshi.laughtale.manga.service;
 
 import com.jshi.laughtale.manga.domain.Manga;
+import com.jshi.laughtale.manga.dto.LevelManga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
 import com.jshi.laughtale.manga.dto.MangaUpload;
+import com.jshi.laughtale.manga.dto.RecentManga;
 import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
@@ -11,18 +13,13 @@ import com.jshi.laughtale.utils.MangaParser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
