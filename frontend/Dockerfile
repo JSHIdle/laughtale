@@ -7,9 +7,11 @@ RUN mkdir /app
 # work dir 고정
 WORKDIR /app
 
-# host pc의 현재 경로의 dist 폴더를 work dir의 /usr/share/nginx/html 폴더로 복사
-# dist 폴더가 프론트엔드 빌드 결과물을 포함하고 있다고 가정
-ADD ./dist /usr/share/nginx/html
+# work dir에 build 폴더 생성
+RUN mkdir ./dist
+
+# host pc의 현재 경로의 build 폴더를 work dir의 build 폴더로 복사
+ADD ./dist ./dist
 
 # nginx의 default.conf 삭제
 RUN rm /etc/nginx/conf.d/default.conf
@@ -17,8 +19,8 @@ RUN rm /etc/nginx/conf.d/default.conf
 # host pc의 nginx.conf를 아래 경로에 복사
 COPY ./nginx.conf /etc/nginx/conf.d
 
-# 80 포트 개방
-EXPOSE 80
+# 5173 포트 개방
+EXPOSE 5173
 
 # container 실행 시 자동으로 실행할 command. nginx 시작함
 CMD ["nginx", "-g", "daemon off;"]
