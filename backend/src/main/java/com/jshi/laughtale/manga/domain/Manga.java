@@ -29,6 +29,13 @@ public class Manga {
     private Integer chapterCnt;
     @Column
     private String category;
+
+    @Column
+    private String thumbnail;
+
+    @Column
+    private Integer level;
+
     @OneToMany(cascade = {PERSIST}, orphanRemoval = true, mappedBy = "manga")
     private List<Chapter> chapter = new ArrayList<>();
 
