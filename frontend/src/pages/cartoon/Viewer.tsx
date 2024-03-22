@@ -1,4 +1,4 @@
-import image from '../../assets/test.jpg';
+import image from '/assets/test.jpg';
 import {useCallback,  useState} from "react";
 import "./hoverBox.css"
 export type Position = {

@@ -28,7 +28,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
                                   <pre className="font-semibold p-3" >
                                     {slide.text}
                                   </pre>
-                                <img className="rounded-xl" src="../../../src/assets/cartoon.PNG"/>
+                                <img className="rounded-xl" src="../../../public/assets/cartoon.PNG"/>
                             </div>
                         </div>
 
