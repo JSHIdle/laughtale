@@ -16,6 +16,7 @@ import Viewer from "../pages/cartoon/Viewer";
 
 import Result from "../components/cartoon/Result.tsx";
 import Quiz from "../components/cartoon/Quiz.tsx";
+import AuthRoute from "./AuthRoute.tsx";
 
 
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/home" replace={true} />,
+  },
+  {
+    path: "login",
+    element: <div>login page</div>,
   },
   {
     path: "/home",
@@ -64,7 +69,13 @@ const router = createBrowserRouter([
         path:":title", element: <Cartoon/>,
       },
       {
-        path:":title/viewer/:id", element: <Viewer/>,
+        path:":title/viewer",
+        element: <AuthRoute/>,
+        children:[
+          {
+            path:':id', element:<Viewer/>
+          }
+        ]
       }
     ],
   },
