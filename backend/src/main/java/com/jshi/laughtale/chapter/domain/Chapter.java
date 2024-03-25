@@ -24,7 +24,8 @@ public class Chapter {
     private Integer chapterNo;
     @Column
     private Integer pageCnt;
-
+    @Column
+    private Integer level;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manga_id")
     private Manga manga;
