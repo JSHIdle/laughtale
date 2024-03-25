@@ -1,6 +1,6 @@
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import Header from "../../../components/common/Header.tsx";
-import myImage from '/src/assets/badge/badge1.png';
+import myImage from '../../../assets/badge/badge1.png';
 
 const Index = () => {
   const dummyData = Array.from({ length: 24 }, (_, index) => ({
