@@ -3,14 +3,12 @@ package com.jshi.laughtale.wordbook.mapper;
 import com.jshi.laughtale.wordbook.domain.WordBook;
 import com.jshi.laughtale.wordbook.dto.WordBookBasic;
 import com.jshi.laughtale.worddata.domain.WordData;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public class WordBookMapper {
 
-    public static List<WordBookBasic.Response> listToBasicResponse(List<WordBook> wordBookList) {
-        return wordBookList.stream().map(WordBookMapper::toBasicResponse).toList();
-    }
 
     public static WordBookBasic.Response toBasicResponse(WordBook wordBook) {
         WordData wordData = wordBook.getWordData();
