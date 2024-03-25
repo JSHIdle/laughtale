@@ -9,13 +9,13 @@ interface CartoonCardProps {
 
 const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rating, link }) => {
     return (
-        <li className="item mb-5" style={{ width: '225px' }} >
+        <li className="mb-5 item sm:w-46 md:w-50">
             <a href={link} className="block overflow-hidden rounded-lg shadow-lg">
                 <div className="relative overflow-hidden">
                     <img
                         src={imageUrl}
                         alt={title}
-                        className="object-cover w-full h-60 lg:h-80 transition-transform duration-300 hover:scale-105"
+                        className="object-cover w-full transition-transform duration-300 h-60 lg:h-80 hover:scale-105"
                     />
                 </div>
             </a>
@@ -23,7 +23,7 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rat
                 <a href={link} className="block">
                     <span className="block text-lg font-bold truncate">{title}</span>
                 </a>
-                <div className="flex justify-between items-center mt-1">
+                <div className="flex items-center justify-between mt-1">
                     <a href="/webtoon" className="text-sm text-gray-700">
                         {authors.join(' / ')}
                     </a>
@@ -32,7 +32,7 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rat
                             width="12"
                             height="12"
                             fill="none"
-                            className="text-yellow-500 mr-1"
+                            className="mr-1 text-yellow-500"
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
                             viewBox="0 0 426.667 426.667"

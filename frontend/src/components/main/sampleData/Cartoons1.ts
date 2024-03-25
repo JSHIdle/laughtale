@@ -1,7 +1,7 @@
 const cartoons1 = [
     {
         imageUrl: '/src/assets/samples/e1-1.jpg',
-        title: 'LV1 만화 1',
+        title: 'LV1 만화 1111111111111111111111111',
         authors: ['First Author'],
         rating: 9.4,
         link: 'cartoon/2',
