@@ -10,9 +10,14 @@ import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
 import com.jshi.laughtale.utils.MangaParser;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,20 +50,21 @@ public class MangaService {
 		MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
 		Map result = DataRequest.analyze(analyzeRequest);
 
-        Manga m = mangaRepository.findByTitle(manga.getTitle())
-                .orElse(MangaMapper.analyzeToEntity(analyzeRequest));
+		Manga m = mangaRepository.findByTitle(manga.getTitle())
+			.orElse(MangaMapper.analyzeToEntity(analyzeRequest));
 
-        mangaParser.parser(m, result, last);
-        m.update();
-        mangaRepository.save(m);
-    }
+		mangaParser.parser(m, result, last);
+		m.update();
+		mangaRepository.save(m);
+	}
 
 	public List<RecentManga.Response> getRecentManga(Long memberId) {
 		return mangaRepository.findRecentManga(memberId);
 	}
 
-	public List<LevelManga.Response> getLevelManga(int level, int start, int end) {
-		return mangaRepository.findLevelManga(level, start, end).orElseThrow();
+	public Page<LevelManga.Response> getLevelManga(int level, int start, int end) {
+		Pageable pageable = PageRequest.of(0, 4);
+		return mangaRepository.findByLevel(level,pageable);
 	}
 
 	public Manga getMangaInfo(Long id) {

@@ -11,6 +11,7 @@ import com.jshi.laughtale.security.details.CustomUserDetails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -47,17 +48,17 @@ public class MangaController {
 	}
 
 	@GetMapping("/level")
-	public ResponseEntity<List<List<LevelManga.Response>>> getLevelManga() {
-		List<List<LevelManga.Response>> mangaList = new ArrayList<>();
+	public ResponseEntity<List<Page<LevelManga.Response>>> getLevelManga() {
+		List<Page<LevelManga.Response>> mangaList = new ArrayList<>();
 		for (int i = 1; i <= 5; i++) {
-			List<LevelManga.Response> mangaListByLevel = mangaService.getLevelManga(i, 1, 4);
+			Page<LevelManga.Response> mangaListByLevel = mangaService.getLevelManga(i, 1, 4);
 			mangaList.add(mangaListByLevel);
 		}
 		return ResponseEntity.ok(mangaList);
 	}
 
 	@GetMapping("/level/{level}/{page}")
-	public ResponseEntity<List<LevelManga.Response>> getMangaByLevel(
+	public ResponseEntity<Page<LevelManga.Response>> getMangaByLevel(
 		@PathVariable Integer level,
 		@PathVariable Integer page) {
 		return ResponseEntity.ok(mangaService.getLevelManga(level, page, page + 10));
