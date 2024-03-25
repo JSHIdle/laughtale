@@ -13,6 +13,10 @@ import com.jshi.laughtale.utils.MangaParser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,8 +61,9 @@ public class MangaService {
 		return mangaRepository.findRecentManga(memberId);
 	}
 
-	public List<LevelManga.Response> getLevelManga(int level, int start, int end) {
-		return mangaRepository.findLevelManga(level, start, end).orElseThrow();
+	public Page<LevelManga.Response> getLevelManga(int level, int start, int end) {
+		Pageable pageable = PageRequest.of(0, 4);
+		return mangaRepository.findByLevel(level,pageable);
 	}
 
 	public Manga getMangaInfo(Long id) {
