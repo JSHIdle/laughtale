@@ -15,17 +15,18 @@ export type User = {
 export type Cartoon = {
     id: number;
     title:string;
-  thumbnail:string;
-  author:string;
-  summary:string;
-  level:number;
+    thumbnail:string;
+    author:string;
+    summary:string;
+    category:string;
+    level:number;
 }
 
 export type Chapter = {
     id: number;
     chapterNo: number;
     level: number;
-    image: string;
+    thumbnail: string;
 }
 
 export type ChapterList = Array<Chapter>
