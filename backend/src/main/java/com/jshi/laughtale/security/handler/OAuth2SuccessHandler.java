@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 // todo : 성공 후 사용자 정보 반환 시 프론트 url 수정 필
-    private final String BASE_URL = "http://localhost:5173";
+    private final String BASE_URL = "http://localhost:5173/login";
     private final String ACCESS_HEADER = "accessToken";
 
     private final JwtProcessor jwtProcessor;
