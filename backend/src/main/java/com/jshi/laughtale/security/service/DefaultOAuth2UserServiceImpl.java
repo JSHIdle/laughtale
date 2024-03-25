@@ -33,8 +33,6 @@ public class DefaultOAuth2UserServiceImpl extends DefaultOAuth2UserService {
         String nameAttributeKey = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
                 .getUserNameAttributeName();
 
-        log.info("registrationId : {}", registrationId);
-
         Map<String, Object> attributes = oAuth2User.getAttributes();
         UserInfo userInfo = OAuth2Attributes.extract(registrationId, attributes);
         userInfo.setProvider(Provider.valueOf(registrationId.toUpperCase()));
