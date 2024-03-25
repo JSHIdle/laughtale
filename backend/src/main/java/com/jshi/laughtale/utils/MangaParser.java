@@ -51,7 +51,7 @@ public class MangaParser {
             Map info = (Map) cut.get(i);
             String imageUrl = (String) info.get("src");
             int idx = (Integer) info.get("page");
-            List<Integer> size = Optional.of((List<Integer>) info.get("size")).orElse(List.of(-1, -1));
+            List<Integer> size = Optional.ofNullable((List<Integer>) info.get("size")).orElse(List.of(-1, -1));
             Cut cutEntity = CutMapper.toEntity(chapterEntity, idx, imageUrl, size);
             cutList.add(cutEntity);
             parseCut(cutEntity, (List<Object>) info.get("speech"));
