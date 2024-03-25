@@ -10,6 +10,8 @@ import java.util.List;
 
 import static jakarta.persistence.CascadeType.PERSIST;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -27,9 +29,11 @@ public class Cut {
     private Integer width;
     @Column
     private Integer height;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
+
     @OneToMany(mappedBy = "cut", cascade = {PERSIST}, orphanRemoval = true)
     private List<Speech> speeches = new ArrayList<>();
 }

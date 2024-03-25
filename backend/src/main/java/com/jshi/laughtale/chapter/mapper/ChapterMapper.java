@@ -24,6 +24,7 @@ public class ChapterMapper {
             .chapterNo(chapter.getChapterNo())
             .chapterId(chapter.getId())
             .thumbnail(thumbnailUrl)
+            .level(chapter.getLevel())
             .build();
     }
 
