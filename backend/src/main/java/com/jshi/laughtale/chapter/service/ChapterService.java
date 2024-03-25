@@ -15,9 +15,11 @@ import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.service.MangaService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ChapterService {
 
 
@@ -25,7 +27,9 @@ public class ChapterService {
 	private final MangaService mangaService;
 	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
 		Manga manga = mangaService.findById(mangaId);
+		log.info(manga.getTitle());
 		Pageable pageable = PageRequest.of(pageNo, size);
+		log.info(pageable.toString());
 		return chapterRepository.findAllByMangaOrderByChapterNoAsc(manga, pageable).map(ChapterMapper::chapterToChapterListDto);
 	}
 

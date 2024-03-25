@@ -22,7 +22,7 @@ public class ChapterController {
 	public ResponseEntity<Page<ChapterListDto.Response>> getMangaChapters(
 		@RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "20") int size,
-		@RequestParam("mangaid") Long mangaId) {
-		return ResponseEntity.ok(chapterService.getChaptersFromManga(mangaId, page, size));
+		@RequestParam("mangaid") int mangaid) {
+		return ResponseEntity.ok(chapterService.getChaptersFromManga((long)mangaid, page, size));
 	}
 }
