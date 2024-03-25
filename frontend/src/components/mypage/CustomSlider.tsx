@@ -1,12 +1,24 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
+import ModalCarousel from "./ModalCarousel.tsx";
 
 const dummyData = {
     text: 'こんにちは、世界！私の名前はAIです。', // 예시 일본어 텍스트
+    translate : '안녕?단어 뜻이 들어간다 ',
+    sentence : [{"idx" : 1, "japan" : "こんにちは、世界！私の名前はAIです", "korean" : "문장 뜻입니다."},
+        {
+            "idx": 2,
+            "japan": "こんにちは、世界！私の名前はAIです",
+            "korean": "문장 뜻입니다."
+        },
+        {
+            "idx": 3,
+            "japan": "こんにちは、世界！私の名前はAIです",
+            "korean": "문장 뜻입니다."
+        },
+        ]
 };
 
 const settings = {
@@ -20,20 +32,43 @@ const settings = {
 const handleIconClick = () => {
     playTTS(dummyData.text);
 };
-function Modal({ isOpen, onClose, handleIconClick }) {
+function Modal({ isOpen, onClose, handleIconClick  }) {
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-[#1D1D21] p-4 rounded-lg w-[400px] h-[300px]">
-                <h2 className="text-xl text-white font-bold">Modal Title</h2>
-                <h2 className="text-xl text-white font-bold">{dummyData.text}</h2>
-                <span onClick={handleIconClick}>
-                    <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1} color="white"/>
-                </span>
-                <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-                        onClick={onClose}>Close
-                </button>
+            <div className="bg-[#1D1D21] p-4 rounded-lg w-[900px] ">
+                <div className="flex justify-end">
+                    <button
+                        onClick={onClose}
+                        className="text-white rounded-full bg-grey-500 hover:bg-grey-700"
+                    >
+                        X
+                    </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4 p-3">
+                    <div className="flex flex-col justify-between">
+                        <ModalCarousel/>
+                    </div>
+
+                    <div className="flex flex-col justify-between ">
+                        <div className="flex flex-col justify-center  h-full">
+                            <div className="flex justify-center items-center">
+                                <div className="bg-[#2D2D32] mb-2">
+                                    <h2 className="text-xl text-white font-bold">{dummyData.text}</h2>
+                                    <h2 className="text-xl text-white font-bold">{dummyData.translate}</h2>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-start">
+                                <span onClick={handleIconClick}>
+                                  <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
+                                        color="white"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -56,7 +91,7 @@ async function playTTS(text) {
             responseType: 'arraybuffer' // 바이너리 데이터를 위한 설정
         });
 
-        const audioUrl = URL.createObjectURL(new Blob([response.data], { type: 'audio/mp3' }));
+        const audioUrl = URL.createObjectURL(new Blob([response.data], {type: 'audio/mp3'}));
         const audio = new Audio(audioUrl);
         audio.play();
     } catch (error) {
@@ -67,7 +102,6 @@ async function playTTS(text) {
 const CustomSlider = ({slides}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
@@ -75,14 +109,14 @@ const CustomSlider = ({slides}) => {
         <div>
             <Slider {...settings}>
                 {slides.map(slide => (
-                    <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[720px]">
+                    <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">
                         <div className="flex flex-wrap justify-center items-center">
                             {slide.map(slideone => (
                                 <div key={slideone.id}>
 
                                         <div className="p-3">
-                                            <div className="bg-gradient-to-r from-[#64BEE2] to-[#8395E8] font-semibold rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center shadow-sm
-                                                brightness-75 hover:brightness-100" onClick={openModal}>
+                                            <div className="bg-[#282834] font-semibold text-white rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center shadow-sm
+                                                brightness-100 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] hover:text-black" onClick={openModal}>
                                               <pre>
                                                 {slideone.content}
                                               </pre>
@@ -94,7 +128,6 @@ const CustomSlider = ({slides}) => {
                         </div>
                     </div>
                 ))}
-
             </Slider>
             <Modal isOpen={isModalOpen} onClose={closeModal} handleIconClick={handleIconClick} />
         </div>
