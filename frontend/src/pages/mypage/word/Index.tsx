@@ -29,9 +29,9 @@ const Index = () => {
       <div><Header/></div>
 
       <div className="flex justify-center items-center">
-        <div className="w-[900px] h-[50px] text-white font-bold flex">
-          <img src={myImage} width="50" height="50"/>
-          <div className="flex items-center ml-3">LV1</div>
+        <div className="mt-3 w-[46px] text-white font-bold flex justify-center">
+          {/*<img src={myImage} width="50" height="50"/>*/}
+          LV1
         </div>
       </div>
 
