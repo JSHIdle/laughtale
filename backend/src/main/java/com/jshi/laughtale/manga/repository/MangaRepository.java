@@ -4,6 +4,8 @@ import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
 import com.jshi.laughtale.manga.dto.RecentManga;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -31,20 +33,7 @@ public interface MangaRepository extends JpaRepository<Manga, Long> {
 	+ " order by MAX(v.view_date) ", nativeQuery = true)
 	List<RecentManga.Response> findRecentManga(Long memberId);
 
+Page<LevelManga.Response> findByLevel(int level, Pageable pageable);
 
-@Query(value = "SELECT title, thumbnail, level, author "
-	+ "FROM (\n"
-	+ "    SELECT m.title, m.thumbnail, m.level, m.author,"
-	+ "           (@row_number := CASE "
-	+ "                            WHEN @current_level = m.level THEN @row_number + 1 "
-	+ "                            ELSE 1 "
-	+ "                          END) AS row_num, "
-	+ "           (@current_level := m.level) AS current_level "
-	+ "    FROM manga m "
-	+ "    CROSS JOIN (SELECT @row_number := 0, @current_level := NULL) AS vars "
-	+ "    ORDER BY m.level DESC "
-	+ ") AS ranked_manga "
-	+ "WHERE row_num <= :end and row_num >= :start and level = :level "
-	+ "ORDER BY level DESC", nativeQuery = true)
-	Optional<List<LevelManga.Response>> findLevelManga(int level, int start, int end);
+
 }
