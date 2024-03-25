@@ -63,13 +63,6 @@ public class MangaController {
 		return ResponseEntity.ok(mangaService.getLevelManga(level, page, page + 10));
 	}
 
-	@GetMapping("/chapters/{mangaId}/{page}")
-	public ResponseEntity<Void> getAllChapters(
-		@PathVariable Integer page,
-		@PathVariable Long mangaId) {
-		//TODO : PAGENATION
-		return ResponseEntity.ok().build();
-	}
 
 	@GetMapping("/info/{id}")
 	public ResponseEntity<MangaInfo.Response> getMangaInfo(
