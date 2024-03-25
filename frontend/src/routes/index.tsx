@@ -14,20 +14,20 @@ import Word from "../pages/mypage/word/Index";
 import Cartoon from "../pages/cartoon/Index";
 import Viewer from "../pages/cartoon/Viewer";
 
-import Result from "../components/cartoon/Result.tsx";
-import Quiz from "../components/cartoon/Quiz.tsx";
-import AuthRoute from "./AuthRoute.tsx";
-
-
+import Result from "../components/cartoon/Result";
+import Quiz from "../components/cartoon/Quiz";
+import AuthRoute from "./AuthRoute";
+import Login from "../pages/login/Index.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/home" replace={true} />,
+    // element: <Navigate to="/home" replace={true} />,
+    element:<div>test</div>
   },
   {
     path: "login",
-    element: <div>login page</div>,
+    element: <Login/>,
   },
   {
     path: "/home",
