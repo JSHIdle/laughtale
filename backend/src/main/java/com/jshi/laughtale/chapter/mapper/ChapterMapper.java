@@ -19,9 +19,11 @@ public class ChapterMapper {
 
 
     public static ChapterListDto.Response chapterToChapterListDto(Chapter chapter) {
+        String thumbnailUrl = chapter.getCuts().isEmpty() ? "" : chapter.getCuts().get(0).getImageUrl();
         return ChapterListDto.Response.builder()
             .chapterNo(chapter.getChapterNo())
             .chapterId(chapter.getId())
+            .thumbnail(thumbnailUrl)
             .build();
     }
 
