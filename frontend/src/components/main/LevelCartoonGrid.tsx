@@ -19,14 +19,14 @@ const LevelCartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
         console.log(cartoons)
     return (
 
-        <div className="comonent_wrap mx-auto" style={{ maxWidth: '950px' }}>
-            <div className="ComponentHead flex justify-between items-center mb-4">
-                <div className="ComponentHead_title font-bold text-2xl">Level {level}</div>
+        <div className="mx-auto comonent_wrap" style={{ maxWidth: '600px' }}>
+            <div className="flex items-center justify-between mb-4 ComponentHead">
+                <div className="text-2xl font-bold ComponentHead_title">Level {level}</div>
 
             </div>
             <div className="p-2 mb-8">
-                <div className="mx-auto" style={{maxWidth: '950px'}}>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="mx-auto" style={{maxWidth: '600px'}}>
+                    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {cartoons.map((webtoon, index) => (
                             <CartoonCard
                                 key={index}

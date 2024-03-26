@@ -18,6 +18,9 @@ import Result from "../components/cartoon/Result";
 import Quiz from "../components/cartoon/Quiz";
 import AuthRoute from "./AuthRoute";
 import Login from "../pages/login/Index.tsx";
+import Admin from "../pages/admin/Index";
+
+
 
 const router = createBrowserRouter([
   {
@@ -87,6 +90,20 @@ const router = createBrowserRouter([
       {
         path:'',
         element: <Quiz/>,
+      },
+      {
+        path:"result", element: <Result/>,
+      },
+    ],
+  },
+
+  {
+    path: "/admin",
+    element: <Outlet/>,
+    children:[
+      {
+        path:'',
+        element: <Admin/>,
       },
       {
         path:"result", element: <Result/>,
