@@ -50,6 +50,8 @@ public class QuizWord {
     private Long wordListId;
     //단어의 난이도
     private Integer level;
+    //단어가 등장한 말풍선의 문장
+    private String sentence;
     //이미지 URL
     private String imageUrl;
     //정답 번호

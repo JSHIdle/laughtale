@@ -29,6 +29,8 @@ public class WordListService {
 				.level(tuple.get("level", Integer.class))
 				.wordListId(tuple.get("word_list_id", Long.class))
 				.speechId(tuple.get("speech_id", Long.class))
+				.sentence(tuple.get("sentence", String.class))
+				.definition(tuple.get("definition", String.class))
 				.build());
 		}
 		return quizList;
