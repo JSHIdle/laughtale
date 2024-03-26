@@ -15,6 +15,7 @@ import com.jshi.laughtale.wordhistory.service.WordHistoryService;
 import com.jshi.laughtale.wordlist.service.WordListService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class QuizService {
 	private final QuizRepository quizRepository;
 	private final WordHistoryService wordHistoryService;
@@ -65,9 +67,11 @@ public class QuizService {
 		//사용자 실력을 받아온다
 		int memberLevel = memberService.getMemberLevel(
 			wordHistoryService.getMemberWordHistory(memberId));
-
+		memberLevel  =5;
+		log.info("memberLevel : " + memberLevel);
 		//사용자 실력에 해당하는 단어목록을 가져온다
-		List<QuizWord> quizWordList = wordListService.findWordListsWithLevel(memberLevel);
+		List<QuizWord> quizWordList = wordListService.findWordListsWithLevel(memberLevel, chapterId);
+		log.info(quizWordList.size() + "");
 		//TODO : 단어가 모자랄 경우의 로직을 추가해야함
 		// 일단은 단어가 충분하다고 가정하고 진행한다
 
@@ -81,9 +85,10 @@ public class QuizService {
 
 		//사용자가 학습한 단어 목록을 wordHistoryMap에 저장한다
 		Map<String, WordHistory> wordHistoryMap = new HashMap<>();
-		for (WordHistory wordHistory : userWordHistory)
-			wordHistoryMap.put(wordHistory.getWordData().getWord(), wordHistory);
-
+		if(userWordHistory!=null) {
+			for (WordHistory wordHistory : userWordHistory)
+				wordHistoryMap.put(wordHistory.getWordData().getWord(), wordHistory);
+		}
 		//각 단어를 사용자의 가중치에서 찾는다
 		int sum = 0;
 		for (QuizWord quizWord : quizWordList) {
@@ -107,8 +112,13 @@ public class QuizService {
 			int nextWordIndex = (int)(Math.random() * sum) + 1;
 			int idx = 0;
 			int sumWeight = 0;
-			while (idx < quizWordList.size() && quizWordList.get(idx).getWeight() + sumWeight < nextWordIndex)
+			log.info("{}", nextWordIndex);
+
+			while (idx < quizWordList.size() && (quizWordList.get(idx).getWeight() + sumWeight) < nextWordIndex) {
+				log.info(idx + " " + quizWordList.get(idx).getWeight());
+				sumWeight += quizWordList.get(idx).getWeight();
 				idx++;
+			}
 			QuizWord selectedQuizWord = quizWordList.get(idx);
 			quizWordList.remove(idx);
 			sum -= selectedQuizWord.getWeight();
