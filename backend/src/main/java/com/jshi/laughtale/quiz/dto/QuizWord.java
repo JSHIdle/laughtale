@@ -2,9 +2,13 @@ package com.jshi.laughtale.quiz.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jshi.laughtale.position.domain.Position;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -24,6 +28,9 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class QuizWord {
     //정답이 등장하는 말풍선 좌표
     @JsonIgnore
@@ -43,6 +50,8 @@ public class QuizWord {
     private Long wordListId;
     //단어의 난이도
     private Integer level;
+    //단어가 등장한 말풍선의 문장
+    private String sentence;
     //이미지 URL
     private String imageUrl;
     //정답 번호
@@ -63,7 +72,14 @@ public class QuizWord {
 
     private Integer rightBottomX;
     private Integer rightBottomY;
-
+    public QuizWord(Long speechId, Long wordDataId, String answerWord, Integer level, Long wordListId) {
+        super();
+        this.speechId = speechId;
+        this.wordDataId = wordDataId;
+        this.answerWord = answerWord;
+        this.level = level;
+        this.wordListId = wordListId;
+    }
     public void addPositionToQuizWord(Position position) {
         this.setLeftTopX(position.getLeftTopX());
         this.setLeftTopY(position.getLeftTopY());
@@ -78,4 +94,7 @@ public class QuizWord {
         this.setRightBottomY(position.getRightBottomY());
 
     }
+
+
+
 }

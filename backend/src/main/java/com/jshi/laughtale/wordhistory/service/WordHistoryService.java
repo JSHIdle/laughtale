@@ -6,6 +6,7 @@ import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import com.jshi.laughtale.wordhistory.repository.WordHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
@@ -15,16 +16,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class WordHistoryService {
 	private final WordHistoryRepository wordHistoryRepository;
 	private final MemberService memberService;
 
 	public List<WordHistory> getMemberWordHistory(Long memberId) {
-		return wordHistoryRepository.findByMemberId(memberId);
+
+		return wordHistoryRepository.findByMemberId(memberId).orElse(null);
 	}
 
 	public List<WordHistory> findByWordIdIn(List<Long> list) {
-		return wordHistoryRepository.findByWordDataIn(list);
+		log.info(list.toString());
+		return wordHistoryRepository.findAllByWordDataIdIn(list);
 	}
 
 	public void addWordHistory(Long memberId, WordData wordData, int point) {
