@@ -9,12 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+
+    @GetMapping("/{memberId}")
+    public ResponseEntity<Map<String, String>> login(@PathVariable Long memberId) {
+        return ResponseEntity.ok(memberService.login(memberId));
+    }
 
     @PatchMapping("/modify")
     public ResponseEntity<Void> update(

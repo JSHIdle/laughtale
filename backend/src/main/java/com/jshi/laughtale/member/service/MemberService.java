@@ -6,12 +6,14 @@ import com.jshi.laughtale.member.dto.MemberUpdate;
 import com.jshi.laughtale.member.exception.MemberNotFoundException;
 import com.jshi.laughtale.member.repository.MemberRepository;
 import com.jshi.laughtale.security.details.CustomUserDetails;
+import com.jshi.laughtale.security.jwt.JwtProcessor;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -21,6 +23,13 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final EbbinghausUtils ebbinghausUtil;
+    private final JwtProcessor jwtProcessor;
+
+    public Map<String, String> login(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        String jwtToken = jwtProcessor.createJwtToken(member.getEmail(), member.getRole().value());
+        return Map.of("accessToken", jwtToken);
+    }
 
     public void update(CustomUserDetails customUserDetails, MemberUpdate.Request update) {
         Member member = memberRepository.findByEmail(customUserDetails.getEmail())
