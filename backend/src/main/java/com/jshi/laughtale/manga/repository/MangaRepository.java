@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.persistence.Tuple;
+
 public interface MangaRepository extends JpaRepository<Manga, Long> {
 
     @Query(value = "SELECT C.chapterNo " +
@@ -25,13 +27,12 @@ public interface MangaRepository extends JpaRepository<Manga, Long> {
 
 
 
-@Query(value = "select m.title , m.thumbnail "
-	+ " from view_history v, manga m "
-	+ " where m.id = v.manga_id "
-	+ " and v.member_id = :memberId "
-	+ " group by m.id "
-	+ " order by MAX(v.view_date) ", nativeQuery = true)
-	List<RecentManga.Response> findRecentManga(Long memberId);
+@Query(value = "SELECT m.title, m.thumbnail, m.id \n"
+	+ "FROM view_history v, manga m ,chapter c\n"
+	+ "WHERE v.member_id = :memberId and v.chapter_id = c.id and c.manga_id = m.id\n"
+	+ "GROUP BY m.id\n"
+	+ "ORDER BY MAX(v.view_date) LIMIT 10", nativeQuery = true)
+	List<Tuple> findRecentManga(Long memberId);
 
 Page<LevelManga.Response> findByLevel(int level, Pageable pageable);
 
