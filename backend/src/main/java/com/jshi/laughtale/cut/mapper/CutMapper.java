@@ -2,6 +2,7 @@ package com.jshi.laughtale.cut.mapper;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.cut.domain.Cut;
+import com.jshi.laughtale.cut.dto.CutAnalyze;
 import com.jshi.laughtale.cut.dto.CutBasic;
 import com.jshi.laughtale.cut.dto.View;
 import com.jshi.laughtale.speech.domain.Speech;
@@ -20,6 +21,12 @@ public class CutMapper {
 			.height(size.get(1))
 			.speeches(new ArrayList<>())
 			.build();
+	}
+
+	public static CutAnalyze.Response toAnalyzeResponse(Cut cut) {
+		return CutAnalyze.Response.builder()
+				.imageUrl(cut.getImageUrl())
+				.build();
 	}
 
 	public static CutBasic.Response toBasicResponse(Cut cut) {

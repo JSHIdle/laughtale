@@ -1,5 +1,6 @@
 package com.jshi.laughtale.manga.mapper;
 
+import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
 import com.jshi.laughtale.manga.dto.MangaUpload;
@@ -23,6 +24,15 @@ public class MangaMapper {
                 .category(upload.getGenres())
                 .description(upload.getDescription())
                 .filenames(filenames)
+                .build();
+    }
+
+    public static MangaAnalyze.Response toAnalyzeResponse(Manga manga) {
+        return MangaAnalyze.Response.builder()
+                .title(manga.getTitle())
+                .description(manga.getDescription())
+                .author(manga.getAuthor())
+                .category(manga.getCategory())
                 .build();
     }
 

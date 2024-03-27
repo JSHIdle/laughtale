@@ -9,7 +9,6 @@ import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
-import com.jshi.laughtale.utils.MangaParser;
 
 import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
@@ -36,17 +35,17 @@ public class MangaService {
 	private final MangaRepository mangaRepository;
 	private final MangaParser mangaParser;
 
-	public void upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files) throws
+	public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files) throws
 		IOException {
-		String thumbnailPath = FileUtils.save(thumbnail);
+		String thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), "thumbnail");
+		int last = mangaRepository.findLastChapterByManga(manga.getTitle()).orElse(0) + 1;
 
 		List<String> names = new ArrayList<>();
 		for (MultipartFile file : files) {
-			String filename = FileUtils.save(file);
+			String filename = FileUtils.save(file, manga.getTitle(), String.valueOf(last));
 			names.add(filename);
 		}
 
-		int last = mangaRepository.findLastChapterByManga(manga.getTitle()).orElse(0) + 1;
 
 		MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
 		Map result = DataRequest.analyze(analyzeRequest);
@@ -54,9 +53,10 @@ public class MangaService {
 		Manga m = mangaRepository.findByTitle(manga.getTitle())
 			.orElse(MangaMapper.analyzeToEntity(analyzeRequest));
 
-		mangaParser.parser(m, result, last);
+		MangaAnalyze.Response response = mangaParser.parser(m, result, last);
 		m.update();
 		mangaRepository.save(m);
+		return response;
 	}
 
 	public List<RecentManga.Response> getRecentManga(Long memberId) {

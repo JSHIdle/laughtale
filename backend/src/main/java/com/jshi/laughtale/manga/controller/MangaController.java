@@ -1,10 +1,7 @@
 package com.jshi.laughtale.manga.controller;
 
 import com.jshi.laughtale.manga.domain.Manga;
-import com.jshi.laughtale.manga.dto.LevelManga;
-import com.jshi.laughtale.manga.dto.MangaInfo;
-import com.jshi.laughtale.manga.dto.MangaUpload;
-import com.jshi.laughtale.manga.dto.RecentManga;
+import com.jshi.laughtale.manga.dto.*;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 
@@ -30,13 +27,12 @@ public class MangaController {
 	private final MangaService mangaService;
 
 	@PostMapping("/upload")
-	public ResponseEntity<Void> upload(
+	public ResponseEntity<MangaAnalyze.Response> upload(
 		@RequestPart MultipartFile thumbnail,
 		@RequestPart MangaUpload.Request manga,
 		@RequestPart List<MultipartFile> files
 	) throws IOException {
-		mangaService.upload(thumbnail, manga, files);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(mangaService.upload(thumbnail, manga, files));
 	}
 
 	@GetMapping("/recent")
