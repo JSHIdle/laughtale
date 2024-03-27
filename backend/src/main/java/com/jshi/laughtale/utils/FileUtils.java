@@ -15,7 +15,7 @@ public class FileUtils {
     private static final String SAVE_PATH = System.getenv("SAVE_PATH");
 
     public static String save(MultipartFile file, String... variable) throws IOException {
-        log.info("SAVE_PATH: {}", SAVE_PATH);
+        log.info("SAVE_PATH = {}", SAVE_PATH);
         String originalFilename = file.getOriginalFilename();
         variable = Arrays.copyOf(variable, variable.length + 1);
         variable[variable.length - 1] = originalFilename;
