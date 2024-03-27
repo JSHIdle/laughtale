@@ -2,7 +2,7 @@ import React from 'react';
 interface CartoonCardProps {
     imageUrl: string;
     title: string;
-    authors: string[];
+    authors: string;
     rating: number;
     link: string;
 }
@@ -25,7 +25,7 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, authors, rat
                 </a>
                 <div className="flex items-center justify-between mt-1">
                     <a href="/webtoon" className="text-sm text-gray-700">
-                        {authors.join(' / ')}
+                        {authors}
                     </a>
                     <div className="flex items-center">
                         <svg
