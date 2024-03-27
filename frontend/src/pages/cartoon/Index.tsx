@@ -75,22 +75,23 @@ const Index = () => {
           </div>
         </div>
         <div className="mb-3">
-          { !data ? <div>...loading..</div> :
+
+          {!data ? <div>...loading..</div> :
             <>
               {
                 data.pages.map((pages) => <>
                   <ChapterList content={pages.content} title={mangaInfo.title}/>
-                  <div ref={ref}></div>
-                </>)}
 
+                </>)}
             </>
           }
+          <div ref={ref} className="h-1"></div>
           {
-            isFetchingNextPage ?? <div className="text-white"> fetching...</div>
+            isFetchingNextPage && <div className="text-white"> fetching...</div>
           }
         </div>
       </div>
-    </div>
+  </div>
 }
 
 export default Index;
