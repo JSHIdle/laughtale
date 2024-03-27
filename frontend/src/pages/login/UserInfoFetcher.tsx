@@ -1,19 +1,15 @@
 import {useQuery, useSuspenseQuery} from "@tanstack/react-query";
 import {getMyInfo} from "../../apis/auth.ts";
-import {Navigate, Outlet} from "react-router-dom";
-import Spinner from "../../components/common/Spinner.tsx";
+import {Navigate} from "react-router-dom";
 import {useAuth} from "../../stores/useAuth.ts";
-import useAuthLocalStroage from "../../stores/useAuthLocalStroage.ts";
-import useLocalStorage from "../../stores/useLocalStorage.ts";
+import {Role} from "../../constants/Role.ts";
 type Props = {
-  accessToken?: string;
+  accessToken: string;
 }
+
 const UserInfoFetcher = (props : Props) => {
-  const {user} = useAuth();
+  const { setUser, setToken} = useAuth();
   const {accessToken} = props;
-  const local = useLocalStorage("accessToken");
-  const authLocalStroage = useAuthLocalStroage();
-  authLocalStroage.set( {accessToken})
   const {data} = useSuspenseQuery({
     queryKey: ["auth"],
     queryFn:() => getMyInfo(),
@@ -21,8 +17,8 @@ const UserInfoFetcher = (props : Props) => {
   });
 
   if(data){
-    console.log(data);
-    localStorage.setItem("accessToken",JSON.stringify({accessToken}));
+    setToken({accessToken});
+    setUser({id:1, nickname:'test', profile:'test', role: Role.USER});
     return <Navigate to="/home"/>
   }else {
     return <Navigate to="/error"/>
