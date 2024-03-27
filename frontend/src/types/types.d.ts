@@ -37,3 +37,5 @@ export type ChapterItem = {
 export type ChapterList = Array<ChapterItem>
 
 
+export type ChapterListResponse = Response<ChapterList>
+
