@@ -21,16 +21,16 @@ const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
 
     return (
 
-        <div className="comonent_wrap mx-auto" style={{maxWidth: '950px'}}>
-            <div className="ComponentHead flex justify-between items-center mb-4">
-                <div className="ComponentHead_title font-bold text-2xl">Level {level}</div>
+        <div className="mx-auto comonent_wrap" style={{maxWidth: '600px'}}>
+            <div className="flex items-center justify-between mb-4 ComponentHead">
+                <div className="text-2xl font-bold ComponentHead_title">Level {level}</div>
                 <a href={allCartoonsLink} className="text-lg text-white hover:text-white-800">
                     Level {level} 만화 더보기
                 </a>
             </div>
             <div className="p-2 mb-8">
                 <div className="mx-auto" style={{maxWidth: '950px'}}>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {cartoons.slice(0, 4).map((webtoon, index) => ( // 배열에서 처음 4개의 요소만 렌더링
                             <CartoonCard
                                 key={index}
