@@ -7,9 +7,9 @@ type AuthState  ={
 }
 
 type AuthAction  = {
-    setUser: (user: User) => void;
+    setUser: (user: User | null) => void;
     setToken: (token: Token) => void;
-
+    clear: () => void;
 }
 
 type AuthStore = AuthState & AuthAction;
@@ -20,7 +20,10 @@ export const useAuth = create<AuthStore>((set) => {
     return {
         user: null,
         token: authLocalStorage.get(),
-        setUser: (user) => set(() => ({user})),
+        setUser: (user = null ) => set(() => ({user})),
         setToken: (token: Token) => authLocalStorage.set({...token}),
+        clear: () => {
+            authLocalStorage.clear();
+        }
     }
 })
