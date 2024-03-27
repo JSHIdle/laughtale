@@ -61,7 +61,7 @@ public class MangaController {
 	public ResponseEntity<Page<LevelManga.Response>> getMangaByLevel(
 		@PathVariable Integer level,
 		@PathVariable Integer page) {
-		return ResponseEntity.ok(mangaService.getLevelManga(level, page, page + 10));
+		return ResponseEntity.ok(mangaService.getLevelManga(level, page, 12));
 	}
 
 
