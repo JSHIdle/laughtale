@@ -70,6 +70,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/health").permitAll()  // 토큰 체크 필터 과정을 거치지 않는 경로 설정
 //                        .anyRequest().authenticated())
                         .requestMatchers("/api/health").permitAll()  // 토큰 체크 필터 과정을 거치지 않는 경로 설정
+                        .requestMatchers("/api/member/test").authenticated()
                         .anyRequest().permitAll())
                         // .anyRequest().authenticated())
                 .oauth2Login(oauth ->

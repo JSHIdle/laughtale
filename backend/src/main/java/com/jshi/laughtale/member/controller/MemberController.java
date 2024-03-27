@@ -17,6 +17,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("ok");
+    }
 
     @GetMapping("/{memberId}")
     public ResponseEntity<Map<String, String>> login(@PathVariable Long memberId) {
