@@ -25,8 +25,7 @@ import Admin from "../pages/admin/Index";
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <Navigate to="/home" replace={true} />,
-    element:<div>test</div>
+    element: <Navigate to="/home" replace={true} />,
   },
   {
     path: "login",
