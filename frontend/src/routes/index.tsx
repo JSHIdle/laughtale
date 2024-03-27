@@ -20,7 +20,7 @@ import AuthRoute from "./AuthRoute";
 import Login from "../pages/login/Index.tsx";
 import Admin from "../pages/admin/Index";
 import Error from "../components/common/Error.tsx";
-
+import Logout from '../pages/logout/Index.tsx';
 
 
 const router = createBrowserRouter([
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login/>,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
   {
     path: "/home",
