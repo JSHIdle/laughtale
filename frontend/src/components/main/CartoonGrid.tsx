@@ -5,7 +5,7 @@ import CartoonCard from './CartoonCard'; // 경로는 실제 구조에 맞게 �
 interface Cartoon {
     imageUrl: string;
     title: string;
-    authors: string[];
+    authors: string;
     rating: number;
     link: string;
 }
