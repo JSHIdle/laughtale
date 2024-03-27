@@ -3,6 +3,7 @@ package com.jshi.laughtale.manga.domain;
 import com.jshi.laughtale.chapter.domain.Chapter;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,8 @@ public class Manga {
     }
     public void updateThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+    public void updateAuthor(String author) {
+        this.author = author;
     }
 }
