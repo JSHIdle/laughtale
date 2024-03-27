@@ -1,16 +1,20 @@
-import {useRef, useState} from 'react';
+import { useRef, useState} from 'react';
 import QuizSlider from "./QuizSlider.tsx";
 import Progressbar from "./Progressbar.tsx";
 import Header from "../common/Header.tsx";
 
+import { useQuery } from '@tanstack/react-query';
+import getQuizInfo from './getQuizInfo.tsx';
 
 const Quiz = () => {
     const sliderRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const dummyData = Array.from({ length: 5 }, (_, index) => ({
-    id: index,
-    text: `Q${index + 1}. 다음 문제를 풀어보세요 `
-}));
+
+    const quizId = 7;
+    const { data: quizData, isLoading, error } = useQuery({
+        queryKey: ['quiz', quizId],
+        queryFn: () => getQuizInfo(quizId)
+    });
 
     const updateCurrentSlide = (index) => {
         setCurrentSlide(index);
@@ -20,16 +24,18 @@ const Quiz = () => {
         sliderRef.current.slickGoTo(index);
     };
 
+    console.log(quizData);
+
     return (
         <div className="bg-[#1D1D21] min-h-screen">
             <Header/>
             <div className="max-w-[450px] m-auto">
                 <div className="flex justify-center pt-6">
-                    <Progressbar value={currentSlide} max={dummyData.length} onNumberClick={handleNumberClick} />
+                    {quizData && <Progressbar value={currentSlide} max={quizData.length} onNumberClick={handleNumberClick}/>}
                 </div>
             </div>
             <div className="text-white max-w-[1200px] m-auto">
-                <QuizSlider slides={dummyData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef}  />
+                {quizData && <QuizSlider slides={quizData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef}/>}
             </div>
         </div>
     )
