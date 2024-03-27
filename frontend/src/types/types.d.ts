@@ -4,6 +4,7 @@ export type Token = {
 }
 
 export type Role = "USER" | "ANONYMOUS" | "ADMIN";
+export type Page = number;
 
 export type User = {
     id:number;
@@ -20,15 +21,19 @@ export type Cartoon = {
     summary:string;
     category:string;
     level:number;
+    genre: string;
 }
 
-export type Chapter = {
-    id: number;
+
+
+export type ChapterItem = {
+    chapterId: number;
     chapterNo: number;
-    level: number;
     thumbnail: string;
+    level:null | number;
 }
 
-export type ChapterList = Array<Chapter>
+
+export type ChapterList = Array<ChapterItem>
 
 

@@ -2,9 +2,9 @@
 //   size: number;
 //   page: number;
 // }
-
+export type Page = number;
 export type Pageable={
-  pageNumber : number;
+  pageNumber: Page;
   pageSize : number;
   sort : {
     empty : boolean;
@@ -16,8 +16,8 @@ export type Pageable={
   unsorted : boolean;
 }
 
-export type Template<T> = {
-  contents : Array<T>;
+export type Response<T> = {
+  contents : T;
   pageable:Pageable;
   last : boolean;
   totalPage : number;
