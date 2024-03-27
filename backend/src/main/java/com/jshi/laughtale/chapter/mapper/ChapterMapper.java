@@ -1,6 +1,7 @@
 package com.jshi.laughtale.chapter.mapper;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.manga.domain.Manga;
 
@@ -24,6 +25,14 @@ public class ChapterMapper {
             .chapterNo(chapter.getChapterNo())
             .chapterId(chapter.getId())
             .thumbnail(thumbnailUrl)
+            .level(chapter.getLevel())
+            .build();
+    }
+
+    public static ChapterLevelDto.Response chapterToChapterLevelDto(Chapter chapter){
+        return ChapterLevelDto.Response.builder()
+            .chapterNo(chapter.getChapterNo())
+            .chapterId(chapter.getId())
             .level(chapter.getLevel())
             .build();
     }
