@@ -75,8 +75,8 @@ function Modal({ isOpen, onClose, handleIconClick  }) {
                                         <span onClick={handleIconClick}>
                                       <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
                                             color="white"/>
-                                    </span>
-                                    </div>
+                                        </span>
+                                        </div>
                                 </div>
 
                                 <div
