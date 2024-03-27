@@ -175,6 +175,7 @@ public class QuizService {
 				.optionB(quizWord.getOption()[1])
 				.optionC(quizWord.getOption()[2])
 				.optionD(quizWord.getOption()[3])
+					.answerNo(quizWord.getAnswerNo())
 				.build());
 		}
 	}

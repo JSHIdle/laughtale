@@ -14,17 +14,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
 @Getter
+@Setter
 public class ViewHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +45,10 @@ public class ViewHistory {
 	@ManyToOne
 	@JoinColumn(name = "manga_id")
 	private Manga manga;
-
+	@PrePersist
+	public void prePersist() {
+		if (this.viewDate == null) {
+			this.viewDate = LocalDateTime.now();
+		}
+	}
 }
