@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
-	Page<Chapter> findAllByMangaOrderByChapterNoAsc(Manga manga, Pageable pageable);
+	Page<Chapter> findAllByMangaOrderByChapterNoDesc(Manga manga, Pageable pageable);
 	// @Query("SELECT Chapter FROM Chapter as c WHERE c.manga.title = :title AND c.chapterNo = :chapterNo")
 	// Optional<Chapter> findChapterByMangaTitleAndChapterNo(String title, Integer chapterNo);
 

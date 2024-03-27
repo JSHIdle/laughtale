@@ -26,7 +26,7 @@ public class ChapterService {
     public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
         Manga manga = mangaService.findById(mangaId);
         Pageable pageable = PageRequest.of(pageNo, size);
-        return chapterRepository.findAllByMangaOrderByChapterNoAsc(manga, pageable).map(ChapterMapper::chapterToChapterListDto);
+        return chapterRepository.findAllByMangaOrderByChapterNoDesc(manga, pageable).map(ChapterMapper::chapterToChapterListDto);
     }
 
     public Chapter loadByTitleAndChapterNo(String title, Integer chapterNo) {
