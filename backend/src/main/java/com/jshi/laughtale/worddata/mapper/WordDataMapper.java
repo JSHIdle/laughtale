@@ -28,6 +28,7 @@ public class WordDataMapper {
                 .partOfSpeech(wordData.getPartOfSpeech())
                 .definition(wordData.getDefinition())
                 .speeches(speechList)
+                .level(wordData.getLevel())
                 .build();
     }
 }

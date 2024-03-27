@@ -3,7 +3,7 @@ package com.jshi.laughtale;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.repository.MangaRepository;
-import com.jshi.laughtale.utils.MangaParser;
+import com.jshi.laughtale.manga.service.MangaParser;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
