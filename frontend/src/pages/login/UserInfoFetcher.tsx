@@ -27,6 +27,5 @@ const UserInfoFetcher = (props : Props) => {
   }else {
     return <Navigate to="/error"/>
   }
-
 }
 export default UserInfoFetcher;
