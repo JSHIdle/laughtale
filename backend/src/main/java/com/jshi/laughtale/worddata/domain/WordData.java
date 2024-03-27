@@ -2,11 +2,7 @@ package com.jshi.laughtale.worddata.domain;
 
 import com.jshi.laughtale.wordlist.domain.WordList;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -28,6 +24,7 @@ public class WordData {
 	@Column
 	private Integer frequency;
 	@Column
+	@Setter
 	private String definition;
 
 	public void updateFrequency() {

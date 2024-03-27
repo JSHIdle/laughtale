@@ -1,6 +1,7 @@
 package com.jshi.laughtale.chapter.mapper;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.manga.domain.Manga;
@@ -15,6 +16,13 @@ public class ChapterMapper {
                 .pageCnt(pageCnt)
                 .manga(manga)
                 .cuts(new ArrayList<>())
+                .build();
+    }
+
+    public static ChapterAnalyze.Response toAnalyzeResponse(Chapter chapter) {
+        return ChapterAnalyze.Response.builder()
+                .chapterNo(chapter.getChapterNo())
+                .level(chapter.getLevel())
                 .build();
     }
 
