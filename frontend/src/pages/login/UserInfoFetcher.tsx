@@ -9,7 +9,7 @@ type Props = {
   accessToken?: string;
 }
 const UserInfoFetcher = (props : Props) => {
-  const [user,] = useAuth();
+  const {user} = useAuth();
   const {accessToken} = props;
   const local = useLocalStorage("accessToken");
   const authLocalStroage = useAuthLocalStroage();
