@@ -44,7 +44,7 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
 	// 	+ "    word_data_id", nativeQuery = true)
 	// List<Tuple> findWordListsWithLevel(int level, int chapterId);
 
-	@Query(value = "SELECT x.*, z.id AS speech_id, z.sentence AS sentence , w.definition AS definition FROM (\n"
+	@Query(value = "SELECT x.*, z.id AS speech_id, z.sentence AS sentence , w.definition AS definition, v.width AS width, v.height AS height  FROM (\n"
 		+ "SELECT "
 		+ "    e.id AS word_data_id, "
 		+ "    e.word AS answer_word,"
@@ -67,7 +67,8 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
 		+ "    answer_word, "
 		+ "    level "
 		+ "ORDER BY "
-		+ "    word_data_id) x , word_list y, speech z, word_data w where x.word_list_id = y.id and y.speech_id = z.id and x.word_data_id = w.id", nativeQuery = true)
+		+ "    word_data_id) x , word_list y, speech z, word_data w, cut v "
+		+ "where x.word_list_id = y.id and y.speech_id = z.id and x.word_data_id = w.id and z.cut_id = v.id ", nativeQuery = true)
 	List<Tuple> findWordListsWithLevel(int level, int chapterId);
 
 
