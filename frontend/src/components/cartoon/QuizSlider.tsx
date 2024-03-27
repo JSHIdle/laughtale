@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useNavigate } from 'react-router-dom';
 import './QuizSlider.css';
+import Quiz from "./Quiz.tsx";
 
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
     let navigate = useNavigate();
@@ -18,6 +19,10 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
         afterChange: current => updateCurrentSlide(current)
     };
 
+    // console.log(data);
+    // console.log('data : ' ,data[0]);
+    // console.log('data : ' ,data[0].option[0]);
+
     return(
         <div>
             <Slider ref={sliderRef} {...settings}>
@@ -25,34 +30,34 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
 
                     <div key={index} className="w-[1300px]"
                     >
-                        <div className="text-white p-6 flex justify-center items-center">
+                        <div className="text-white p-3 flex justify-center items-center">
                             <div key={slide.id}>
                                   <pre className="font-semibold p-3">
                                     {slide.text}
                                   </pre>
-                                <img className="rounded-xl" src="../../../src/assets/cartoon.png"/>
+                                <img className="rounded-xl" src={slide.imageUrl}/>
                             </div>
                         </div>
 
                         <div className="font-semibold text-white p-6 flex justify-center items-center">
-                            Q. 크기가 9척이나 되는 붉은 옥으로 만든 곡옥은??
+                            Q{index+1} 다음 말풍선에 들어갈 단어를 고르세요.
                         </div>
 
 
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center p-3">
                             <div className="w-[450px]">
                                 <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
                                     <button
-                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">버튼1
+                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[0]}
                                     </button>
                                     <button
-                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">버튼2
+                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[1]}
                                     </button>
                                     <button
-                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">버튼3
+                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[2]}
                                     </button>
                                     <button
-                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">버튼4
+                                        className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[3]}
                                     </button>
                                 </div>
 
@@ -72,4 +77,5 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
         </div>
     );
 };
+
 export default QuizSlider;
