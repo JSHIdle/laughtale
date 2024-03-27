@@ -9,7 +9,7 @@ type Props = {
   accessToken?: string;
 }
 const UserInfoFetcher = (props : Props) => {
-  const {user} = useAuth();
+  const [user,] = useAuth();
   const {accessToken} = props;
   const local = useLocalStorage("accessToken");
   const authLocalStroage = useAuthLocalStroage();
@@ -24,8 +24,6 @@ const UserInfoFetcher = (props : Props) => {
     console.log(data);
     localStorage.setItem("accessToken",JSON.stringify({accessToken}));
     return <Navigate to="/home"/>
-  }else {
-    return <Navigate to="/error"/>
   }
 }
 export default UserInfoFetcher;
