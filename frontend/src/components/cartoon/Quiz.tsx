@@ -9,29 +9,12 @@ import getQuizInfo from './getQuizInfo.tsx';
 const Quiz = () => {
     const sliderRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
-//     const dummyData = Array.from({ length: 5 }, (_, index) => ({
-//     id: index,
-//     text: `Q${index + 1}. 다음 문제를 풀어보세요 `
-// }));
-
-    // const [data, setData] = useState(null);
-    // // api 연결
-    // useEffect(() => {
-    //     client.get(`/quiz/${id}`
-    //     ).then((response) => {
-    //         setData(response.data);
-    //     })
-    //         .catch((error) => {
-    //             console.error("There was an error!", error);
-    //         });
-    // }); // 빈 배열로 컴포넌트가 마운트될때만 실행되도록.
 
     const quizId = 7;
     const { data: quizData, isLoading, error } = useQuery({
         queryKey: ['quiz', quizId],
         queryFn: () => getQuizInfo(quizId)
     });
-
 
     const updateCurrentSlide = (index) => {
         setCurrentSlide(index);
