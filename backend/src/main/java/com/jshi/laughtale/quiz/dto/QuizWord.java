@@ -58,6 +58,11 @@ public class QuizWord {
     private Integer answerNo;
     //정답 단어의 뜻
     private String definition;
+
+    //이미지의 크기
+    private Integer width;
+    private Integer height;
+
     // 1번보기 ~ 4번보기에 해당하는 String값(X)
     private String[] option;
     //정답에 해당하는 단어가 나오는 말풍선의 좌표
