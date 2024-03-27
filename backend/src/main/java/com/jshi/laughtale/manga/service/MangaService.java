@@ -11,6 +11,7 @@ import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
 import com.jshi.laughtale.utils.MangaParser;
 
+import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,12 +60,21 @@ public class MangaService {
 	}
 
 	public List<RecentManga.Response> getRecentManga(Long memberId) {
-		return mangaRepository.findRecentManga(memberId);
+		List<Tuple> tupleList = mangaRepository.findRecentManga(memberId);
+		List<RecentManga.Response> response = new ArrayList<>();
+		for (Tuple tuple : tupleList) {
+			response.add(RecentManga.Response.builder()
+				.id(tuple.get("id", Long.class))
+				.thumbnail(tuple.get("thumbnail", String.class))
+				.title(tuple.get("title", String.class))
+				.build());
+		}
+		return response;
 	}
 
 	public Page<LevelManga.Response> getLevelManga(int level, int start, int end) {
 		Pageable pageable = PageRequest.of(0, 4);
-		return mangaRepository.findByLevel(level,pageable);
+		return mangaRepository.findByLevel(level, pageable);
 	}
 
 	public Manga getMangaInfo(Long id) {
