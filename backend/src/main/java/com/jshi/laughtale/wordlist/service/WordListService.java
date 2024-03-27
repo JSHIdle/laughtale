@@ -31,6 +31,8 @@ public class WordListService {
 				.speechId(tuple.get("speech_id", Long.class))
 				.sentence(tuple.get("sentence", String.class))
 				.definition(tuple.get("definition", String.class))
+				.height(tuple.get("height", Integer.class))
+				.width(tuple.get("width", Integer.class))
 				.build());
 		}
 		return quizList;
