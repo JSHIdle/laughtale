@@ -8,6 +8,7 @@ import org.springframework.security.core.parameters.P;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.PERSIST;
 
 @AllArgsConstructor
@@ -37,7 +38,7 @@ public class Manga {
     @Column
     private Integer level;
 
-    @OneToMany(cascade = {PERSIST}, orphanRemoval = true, mappedBy = "manga")
+    @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "manga")
     private List<Chapter> chapter = new ArrayList<>();
 
     public void update() {
