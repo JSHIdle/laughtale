@@ -41,15 +41,16 @@ const Index = () => {
 
   // CustomSlider 컴포넌트에 slideData를 slides props로 전달
   return (
-      <div className="bg-[#1D1D21] min-h-screen">
+      <div className="bg-[#1D1D21] h-min-screen">
 
         {/*<div>*/}
         {/*  {data ? <div>{JSON.stringify(data)}</div> : <div>Loading...</div>}*/}
         {/*</div>*/}
 
         <div><Header/></div>
+`
         <div className="flex justify-center items-center">
-          <div className="max-w-[1100px] w-full">
+          <div className="max-w-[1000px]">
             <div className="flex justify-center items-center">
               <div className="mt-3 w-[900px] text-white font-bold flex justify-start">
                 {/*<img src={myImage} width="50" height="50"/>*/}

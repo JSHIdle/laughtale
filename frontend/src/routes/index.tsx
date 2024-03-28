@@ -89,7 +89,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/quiz",
+    path: "/quiz/new",
     element: <Outlet/>,
     children:[
       {
