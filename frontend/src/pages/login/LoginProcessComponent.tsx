@@ -7,9 +7,10 @@ type Props ={
   accessToken:string;
 }
 const LoginPostProcessComponent = ({accessToken} : Props) => {
-  console.log("login post process Components")
   return (
-    <ErrorBoundary fallbackRender={() => <ErrorPage/>}>
+    <ErrorBoundary fallbackRender={(error) => {
+      return <ErrorPage/>
+    }}>
       <LoginFetchingSuspense>
         <UserInfoFetcher accessToken={accessToken}/>
       </LoginFetchingSuspense>
