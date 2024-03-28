@@ -23,7 +23,7 @@ import java.util.List;
 public class QuizController {
 	private final QuizService quizService;
 
-	@GetMapping("/{chapterId}")
+	@GetMapping("/new/{chapterId}")
 	public ResponseEntity<List<QuizWord>> makeNewQuiz(@AuthenticationPrincipal CustomUserDetails customUserDetails,
 		@PathVariable int chapterId) {
 		//회원 아이디 조회
