@@ -37,7 +37,7 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
     List<Tuple> findWordListsWithLevel(int level, int chapterId);
 
 
-    @Query("SELECT WordList FROM WordList wl WHERE WordList.speech.id = :speechId")
+    @Query(value = "SELECT wl FROM WordList wl WHERE wl.speech.id = :speechId")
     List<WordList> findAllBySpeechId(Long speechId);
     List<WordList> findAllByWordData(WordData wordData);
 
