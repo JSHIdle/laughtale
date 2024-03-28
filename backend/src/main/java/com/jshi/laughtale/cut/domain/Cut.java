@@ -8,6 +8,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.PERSIST;
 
 import net.minidev.json.annotate.JsonIgnore;
@@ -34,6 +35,6 @@ public class Cut {
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
-    @OneToMany(mappedBy = "cut", cascade = {PERSIST}, orphanRemoval = true)
+    @OneToMany(mappedBy = "cut", cascade = ALL, orphanRemoval = true)
     private List<Speech> speeches = new ArrayList<>();
 }
