@@ -1,30 +1,29 @@
 import Header from "../../../src/components/common/Header.tsx";
-import {useInfiniteQuery, useQueries, useQuery} from "@tanstack/react-query";
-import {useParams, useSearchParams} from "react-router-dom";
-import {getMangaInfo, getChapterList, ChapterListRequest, getMangaHistory} from "../../apis/cartoon.ts";
-import CartoonHeader from "../../components/cartoon/CartoonHeader.tsx";
+import {useInfiniteQuery, useQuery} from "@tanstack/react-query";
+import {useParams} from "react-router-dom";
+import { getChapterList, getMangaHistory} from "../../apis/cartoon.ts";
 import ChapterList from "../../components/cartoon/ChapterList.tsx";
 import {ChapterListResponse} from "../../types/types";
 import {useEffect} from "react";
 import {useInView} from "react-intersection-observer";
-import MangaErrorBoundary from "./MangaErrorBoundary.tsx";
-import MangaInfoFetcher from "./MangaInfoFetcher.tsx";
-import MangaInfoFetchingSuspense from "./MangaInfoFetchingSuspense.tsx";
-import FirstEpisode from "./FirstEpisode.tsx";
+
+import FirstEpisode from "./manga/FirstEpisode.tsx";
+import MagaInfo from "./manga/MangaInfo.tsx";
+import TotalEpisode from "./manga/TotalEpisode.tsx";
+import {ErrorBoundary} from "react-error-boundary";
+import MangaErrorBoundary from "./manga/MangaErrorBoundary.tsx";
 
 const Index = () => {
   const params = useParams()
   const mangaId = + params.title;
 
-  const {data: mangaInfo, isLoading: mangaInfoLoading} = useQuery({
-    queryKey: ["manga", mangaId],
-    queryFn: () => getMangaInfo(+ mangaId),
-  });
-  const {data: history, isLoading: historyLoading} = useQuery({
-    queryKey: ['history', mangaId],
-    queryFn: () => getMangaHistory(+ mangaId), staleTime: Infinity }
-  );
-
+  // const {data: history, isLoading: historyLoading} = useQuery({
+  //   queryKey: ['history', mangaId],
+  //   queryFn: () => getMangaHistory(+ mangaId), staleTime: Infinity }
+  // );
+  // if(history) {
+  //   console.log(history);
+  // }
   const {
     data,
     error,
@@ -56,23 +55,18 @@ const Index = () => {
   })
 
   useEffect(() => {
-      if(inView){
+      if(inView  ){
         fetchNextPage();
       }
-
   }, [inView]);
 
-  return <div className="bg-[#1D1D21] min-h-screen">
-    <div>
+  return <MangaErrorBoundary>
+    <div className="bg-[#1D1D21] min-h-screen">
       <Header/>
-    </div>
       <div className="max-w-[700px] m-auto">
-        {/*{ mangaInfoLoading ? <div>laoding...</div> : <CartoonHeader {...mangaInfo}/>}*/}
-
-
-        <div className="mt-3 mb-3">
-          <span className="text-white font-semibold text-xl">총 115화</span>
-        </div>
+        <MagaInfo mangaId={mangaId}/>
+        <FirstEpisode mangaId={mangaId}/>
+        <TotalEpisode total={100}/>
 
         <div className="mb-3">
 
@@ -80,8 +74,7 @@ const Index = () => {
             <>
               {
                 data.pages.map((pages) => <>
-                  <ChapterList content={pages.content} title={mangaInfo.title}/>
-
+                  <ChapterList content={pages.content} title={"TEST"}/>
                 </>)}
             </>
           }
@@ -91,7 +84,8 @@ const Index = () => {
           }
         </div>
       </div>
-  </div>
+    </div>
+  </MangaErrorBoundary>
 }
 
 export default Index;
