@@ -17,9 +17,7 @@ export default function CartoonHeader(p: Props) {
   const {mangaId} = p;
   const queryClient = useQueryClient();
   const props = queryClient.getQueryData<Cartoon>(["mangaInfo", mangaId]);
-  // useEffect(() => {
-  //   console.log(props)
-  // }, [props]);
+
   return <div
     className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
     <div className="">

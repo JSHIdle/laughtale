@@ -1,31 +1,68 @@
 import image from '/src/assets/test.jpg';
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 import "./hoverBox.css"
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {ChapterListResponse} from "../../types/types";
+import {getChapterList} from "../../apis/cartoon.ts";
+import {useInView} from "react-intersection-observer";
+import {getImageByChapterId} from "../../apis/viewer.ts";
+import {useParams} from "react-router-dom";
 
 
+
+const defaultSize = 5;
 
 const Viewer = () => {
+    console.log("viewr page")
+    const params = useParams()
+    const mangaId = + params.title;
+    const chapterId = + params.id;
+    const {
+        data,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage,
+        status,
+    } = useInfiniteQuery<ChapterListResponse>({
+        queryKey: ['chapter', mangaId,],
+        queryFn: ({pageParam = 0}) => {
+            // console.log("page param " + pageParam);
+            return getImageByChapterId({
+                page: + pageParam,
+                chapterId,
+                size:defaultSize,
+            })
+        },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+            if(typeof lastPageParam !== 'number') {
+                return 0;
+            }
+            return lastPageParam + 1
+        },
+    });
+    const {ref, inView} = useInView({
+        threshold: 0,
+        triggerOnce: false
+    })
 
-    const imageRef = useCallback((node: HTMLElement) =>{
-        if(node !== null){
-            //위치 얻기 위함.....
+    useEffect(() => {
+        if(inView  ){
+            fetchNextPage();
         }
-    },[]);
+    }, [inView]);
+
+    // const imageRef = useCallback((node: HTMLElement) =>{
+    //     if(node !== null){
+    //         //위치 얻기 위함.....
+    //     }
+    // },[]);
     return (
-            <div className="bg-gray-600">
-                {/*<div className="text-center">*/}
-                {/*    <div className="inline-block relative">*/}
-                {/*        {*/}
-                {/*            list[0].word.map((d) => {*/}
-                {/*                const {x1,y1,x2,y2} = d;*/}
-                {/*                const r = getPosition(list[0].width,list[0].height, x1,y1,x2,y2);*/}
-                {/*                return <div style={{left:`${r.x1}%`, top:`${r.y1}%`,right:`${r.x2}%`, bottom:`${r.y2}%`}} className="hover:border hover:border-gray-500 hover:border-4 absolute"> </div>*/}
-                {/*            })*/}
-                {/*        }*/}
-                {/*        <img ref={imageRef} src={image} onClick={onClick}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-            </div>
+        <div className="bg-gray-600">
+
+        </div>
     );
 }
 export default Viewer;

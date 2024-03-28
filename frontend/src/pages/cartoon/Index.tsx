@@ -10,7 +10,6 @@ import {useInView} from "react-intersection-observer";
 import FirstEpisode from "./manga/FirstEpisode.tsx";
 import MagaInfo from "./manga/MangaInfo.tsx";
 import TotalEpisode from "./manga/TotalEpisode.tsx";
-import {ErrorBoundary} from "react-error-boundary";
 import MangaErrorBoundary from "./manga/MangaErrorBoundary.tsx";
 
 const Index = () => {
@@ -74,7 +73,7 @@ const Index = () => {
             <>
               {
                 data.pages.map((pages) => <>
-                  <ChapterList content={pages.content} title={"TEST"}/>
+                  <ChapterList content={pages.content}/>
                 </>)}
             </>
           }
