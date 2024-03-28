@@ -13,7 +13,6 @@ import com.jshi.laughtale.security.details.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -44,7 +43,7 @@ public class QuizController {
 		Long memberId = customUserDetails.getId();
 		// TODO : 퀴즈 결과가 왔는데 퀴즈가 없던경우(예외처리)
 		//퀴즈 결과를 받아온다
-		List<Integer> result = quizService.saveQuizResult(memberId, request.getResult());
+		List<Integer> result = quizService.saveQuizResult(memberId, request.getAnswer());
 
 		//저장된 퀴즈를 삭제한다
 		quizService.deleteMemberQuiz(memberId);

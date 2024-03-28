@@ -34,7 +34,7 @@ public class QuizService {
 	private final WordDataService wordDataService;
 
 	public List<Quiz> findQuizByMemberId(Long memberId) {
-		return quizRepository.findByMemberIdOrderByProblemNoAsc(memberId);
+		return quizRepository.findAllByMemberIdOrderByProblemNoAsc(memberId);
 	}
 
 	//회원과 연관된 퀴즈가 있으면 삭제한다
@@ -46,7 +46,8 @@ public class QuizService {
 
 	public List<Integer> saveQuizResult(Long memberId, List<Integer> result) {
 		List<Integer> score = new ArrayList<>();
-		List<Quiz> memberQuizList = quizRepository.findByMemberIdOrderByProblemNoAsc(memberId);
+		log.info("{}", memberId);
+		List<Quiz> memberQuizList = quizRepository.findAllByMemberIdOrderByProblemNoAsc(memberId);
 		for (int i = 0; i < 5; i++) {
 			Quiz quiz = memberQuizList.get(i);
 			//획득한 점수
