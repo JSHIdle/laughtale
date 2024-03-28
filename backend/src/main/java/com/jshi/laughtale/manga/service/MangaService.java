@@ -57,9 +57,9 @@ public class MangaService {
 		Manga m = mangaRepository.findByTitle(manga.getTitle())
 			.orElse(MangaMapper.analyzeToEntity(analyzeRequest));
 
+		mangaRepository.save(m);
 		MangaAnalyze.Response response = mangaParser.parser(m, result, last);
 		m.update();
-		mangaRepository.save(m);
 		log.info("파싱 완료");
 		return response;
 	}

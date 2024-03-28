@@ -1,6 +1,5 @@
 package com.jshi.laughtale.manga.mapper;
 
-import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
 import com.jshi.laughtale.manga.dto.MangaUpload;
