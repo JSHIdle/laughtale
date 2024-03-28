@@ -12,7 +12,10 @@ export const get = async<T> (url: string): Promise<T> => {
 client.interceptors.request.use(
   (config) => {
     const authStore = useAuthLocalStroage();
-    const {accessToken} = authStore.get();
+    const token = authStore.get();
+    const accessToken = token?.accessToken ?? null;
+    console.log(token);
+
     config.headers.Authorization = `${accessToken}`;
     return config;
   },

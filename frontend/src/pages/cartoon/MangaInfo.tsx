@@ -8,6 +8,7 @@ type Props = {
   magaId:number;
 }
 export default function MagaInfo(props: Props){
+
   return (<MangaErrorBoundary>
     <MangaInfoFetchingSuspense>
       <MangaInfoFetcher mangaId={mangaId}>
