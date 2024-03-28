@@ -37,7 +37,7 @@ public class Speech {
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @OneToMany(mappedBy = "speech", orphanRemoval = true, cascade = ALL)
+    @OneToMany(mappedBy = "speech", orphanRemoval = true, cascade = PERSIST)
     private List<WordList> wordLists = new ArrayList<>();
 
 }
