@@ -31,4 +31,13 @@ public class WordDataMapper {
                 .level(wordData.getLevel())
                 .build();
     }
+
+    public static WordDataDetail.Response toDetailResponse(WordData wordData) {
+        return WordDataDetail.Response.builder()
+                .id(wordData.getId())
+                .level(wordData.getLevel())
+                .word(wordData.getWord())
+                .definition(wordData.getDefinition())
+                .build();
+    }
 }
