@@ -10,6 +10,7 @@ import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.PERSIST;
 
 @AllArgsConstructor
@@ -36,7 +37,7 @@ public class Speech {
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @OneToMany(mappedBy = "speech", orphanRemoval = true, cascade = {PERSIST})
+    @OneToMany(mappedBy = "speech", orphanRemoval = true, cascade = ALL)
     private List<WordList> wordLists = new ArrayList<>();
 
 }

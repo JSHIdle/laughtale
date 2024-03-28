@@ -8,6 +8,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.PERSIST;
 
 @AllArgsConstructor
@@ -30,6 +31,6 @@ public class Chapter {
     @JoinColumn(name = "manga_id")
     private Manga manga;
 
-    @OneToMany(mappedBy = "chapter", cascade = {PERSIST}, orphanRemoval = true)
+    @OneToMany(mappedBy = "chapter", cascade = ALL, orphanRemoval = true)
     private List<Cut> cuts = new ArrayList<>();
 }
