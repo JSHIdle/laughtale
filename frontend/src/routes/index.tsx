@@ -77,7 +77,8 @@ const router = createBrowserRouter([
       },
       {
         path:":title/viewer",
-        element: <AuthRoute/>,
+        // element: <AuthRoute/>,
+        element: <Outlet/>,
         children:[
           {
             path:':id', element:<Viewer/>
