@@ -38,7 +38,7 @@ public class Manga {
     @Column
     private Integer level;
 
-    @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "manga")
+    @OneToMany(cascade = {PERSIST}, orphanRemoval = true, mappedBy = "manga")
     private List<Chapter> chapter = new ArrayList<>();
 
     public void update() {

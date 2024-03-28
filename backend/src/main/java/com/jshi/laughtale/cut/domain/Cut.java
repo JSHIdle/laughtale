@@ -35,6 +35,6 @@ public class Cut {
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
-    @OneToMany(mappedBy = "cut", cascade = ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cut", cascade = PERSIST, orphanRemoval = true)
     private List<Speech> speeches = new ArrayList<>();
 }

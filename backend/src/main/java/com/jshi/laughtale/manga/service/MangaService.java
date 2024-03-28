@@ -38,17 +38,21 @@ public class MangaService {
 	public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files) throws
 		IOException {
 		String thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), "thumbnail");
+		log.info("썸네일 저장 완료");
 		int last = mangaRepository.findLastChapterByManga(manga.getTitle()).orElse(0) + 1;
+		log.info("챕터 번호 불러오기 성공");
 
 		List<String> names = new ArrayList<>();
 		for (MultipartFile file : files) {
 			String filename = FileUtils.save(file, manga.getTitle(), String.valueOf(last));
 			names.add(filename);
 		}
+		log.info("컷 이미지 저장 성공");
 
 
 		MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
 		Map result = DataRequest.analyze(analyzeRequest);
+		log.info("분석 완료");
 
 		Manga m = mangaRepository.findByTitle(manga.getTitle())
 			.orElse(MangaMapper.analyzeToEntity(analyzeRequest));
@@ -56,6 +60,7 @@ public class MangaService {
 		MangaAnalyze.Response response = mangaParser.parser(m, result, last);
 		m.update();
 		mangaRepository.save(m);
+		log.info("파싱 완료");
 		return response;
 	}
 
