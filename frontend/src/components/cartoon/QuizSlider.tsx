@@ -19,10 +19,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
         afterChange: current => updateCurrentSlide(current)
     };
 
-    // console.log(data);
-    // console.log('data : ' ,data[0]);
-    // console.log('data : ' ,data[0].option[0]);
-
     return(
         <div>
             <Slider ref={sliderRef} {...settings}>
@@ -30,7 +26,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
 
                     <div key={index} className="w-[1300px]"
                     >
-                        <div className="text-white p-3 flex justify-center items-center">
+                        <div className="text-white p-3 flex justify-center items-center ">
                             <div key={slide.id}>
                                   <pre className="font-semibold p-3">
                                     {slide.text}
