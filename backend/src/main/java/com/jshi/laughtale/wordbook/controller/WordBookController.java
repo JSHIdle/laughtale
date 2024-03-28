@@ -19,7 +19,13 @@ public class WordBookController {
 
     private final WordBookService wordBookService;
 
-    @GetMapping("{level}")
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> addWord(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        wordBookService.addWord(id, customUserDetails.getId());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{level}")
     public ResponseEntity<Page<WordBookBasic.Response>> getWordBook(
             @PathVariable int level,
             @AuthenticationPrincipal CustomUserDetails customUserDetails,
