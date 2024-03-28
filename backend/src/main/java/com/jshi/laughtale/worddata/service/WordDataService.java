@@ -10,10 +10,12 @@ import com.jshi.laughtale.worddata.repository.WordDataRepository;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.service.WordListService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WordDataService {
@@ -37,8 +39,12 @@ public class WordDataService {
         return WordDataMapper.toDetailResponse(wordData, speechBasicList);
     }
 
-    public WordDataDetail.Response loadWordDataDetailWithoutSpeech(Long id) {
-        WordData wordData = wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
-        return WordDataMapper.toDetailResponse(wordData);
+    public List<WordDataDetail.Response> loadWordDataDetailWithoutSpeech(Long speechId) {
+        List<WordList> wordList = wordListService.loadWordListBySpeechId(speechId);
+        List<WordData> wordDataList = wordList.stream().map(w -> wordDataRepository
+                        .findById(w.getWordData().getId()).orElseThrow(NotExistWordDataException::new))
+                .toList();
+        log.info("speechId: {}, wordList : {}, wordData : {}", speechId, wordList, wordDataList);
+        return wordDataList.stream().map(WordDataMapper::toDetailResponse).toList();
     }
 }

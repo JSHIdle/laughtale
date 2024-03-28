@@ -45,8 +45,7 @@ public class WordListService {
         return wordListRepository.findAllByWordData(wordData);
     }
 
-    public List<WordDataDetail.Response> loadWordListBySpeechId(Long speechId) {
-        List<WordList> wordList = wordListRepository.findAllBySpeechId(speechId);
-        return null;
+    public List<WordList> loadWordListBySpeechId(Long speechId) {
+        return wordListRepository.findAllBySpeechId(speechId);
     }
 }
