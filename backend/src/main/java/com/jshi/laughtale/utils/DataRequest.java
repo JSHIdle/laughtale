@@ -13,7 +13,7 @@ public class DataRequest {
     private static final String TO_LANG = "to_lang";
     private static final String FROM = "ja";
     private static final String TO = "ko";
-    private static final String BASE_URL = "http://localhost:8000";
+    private static final String BASE_URL = "http://manga-python:8000";
     private static final WebClient webClient = WebClient.create(BASE_URL);
 
     public static Map analyze(MangaAnalyze.Request manga) {
