@@ -26,6 +26,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
+        log.info("in success handler");
         OAuth2UserPrincipal principal = (OAuth2UserPrincipal) authentication.getPrincipal();
 
         UserInfo userInfo = principal.getUserInfo();
@@ -33,7 +34,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String token = jwtProcessor.createJwtToken(userInfo.getEmail(), userInfo.getRole().value());
 
         String url = createUrl(token);
-        log.info("redirect url : {}", url);
         response.sendRedirect(url);
     }
 
