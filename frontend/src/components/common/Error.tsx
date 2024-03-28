@@ -11,6 +11,7 @@ type Props = {
     statusCode?:string
 }
 export default function Error (props : Props){
+  console.log(props)
     // const props = {
     //     message : `존재하지 않는 주소를 입력하셨거나, \n요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.`,
     //     statusCode : "400",
@@ -21,7 +22,7 @@ export default function Error (props : Props){
               <Header/>
               <div className="flex justify-center items-center">
                   <div>
-                      <div className="text-8xl p-3 mt-40">{props.statusCode ?? props.statusCode }</div>
+                      <div className="text-8xl p-3 mt-40">{props?.statusCode ?? props.statusCode }</div>
                       <div className="text-lg whitespace-pre-wrap flex flex-col items-center justify-center p-6">{props.message ? props.message : "Error"}</div>
                       <div className="flex justify-center">
                           <Link to={"/home"} replace
