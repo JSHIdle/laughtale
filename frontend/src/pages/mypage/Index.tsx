@@ -19,11 +19,12 @@ const Index = () => {
     const navigate = useNavigate();
     const goToTarget = () => navigate('word');
 
-      return <div className="bg-[#1D1D21] min-h-screen">
+      return <div className="bg-[#121212] min-h-screen">
+          <div>
+              <Header/>
+          </div>
           <div className="max-w-[700px] m-auto">
-              <div>
-                  <Header/>
-              </div>
+
               <div className="mt-12 text-white font-semibold">
                   경험치
               </div>
@@ -50,7 +51,7 @@ const Index = () => {
                       <div className="flex justify-center items-center">
                           <div className="p-6">
                               <div onClick={goToTarget}
-                                  className="bg-gradient-to-b from-[#5BC9E0] from-5% to-[#8E87EA] to-100% text-white font-semibold rounded-xl overflow-hidden w-36 h-48 flex justify-center items-center">
+                                   className="bg-gradient-to-b from-[#5BC9E0] from-5% to-[#8E87EA] to-100% text-white font-semibold rounded-xl overflow-hidden w-36 h-48 flex justify-center items-center">
                                   <div>
                                       <img src={myImage} width="60" height="60" alt="이미지 설명"/>
                                       <p className="text-center">LV1</p>
@@ -82,9 +83,9 @@ const Index = () => {
 
               <div className="flex justify-center items-center">
                   <div className="bg-[#2D2D32] w-[700px] h-[300px] rounded-xl mb-12 flex justify-center items-center">
-                          <div>
-                              <DoughnutChart/>
-                          </div>
+                      <div>
+                          <DoughnutChart/>
+                      </div>
                   </div>
               </div>
 
