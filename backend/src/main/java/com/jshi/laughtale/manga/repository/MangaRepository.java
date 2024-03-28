@@ -31,7 +31,7 @@ public interface MangaRepository extends JpaRepository<Manga, Long> {
 	+ "FROM view_history v, manga m ,chapter c\n"
 	+ "WHERE v.member_id = :memberId and v.chapter_id = c.id and c.manga_id = m.id\n"
 	+ "GROUP BY m.id\n"
-	+ "ORDER BY MAX(v.view_date) LIMIT 10", nativeQuery = true)
+	+ "ORDER BY MAX(v.view_date) desc LIMIT 10", nativeQuery = true)
 	List<Tuple> findRecentManga(Long memberId);
 
 Page<LevelManga.Response> findByLevel(int level, Pageable pageable);
