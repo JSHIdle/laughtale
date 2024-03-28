@@ -3,9 +3,11 @@ package com.jshi.laughtale.manga.service;
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
 import com.jshi.laughtale.chapter.mapper.ChapterMapper;
+import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.cut.domain.Cut;
 import com.jshi.laughtale.cut.dto.CutAnalyze;
 import com.jshi.laughtale.cut.mapper.CutMapper;
+import com.jshi.laughtale.cut.repository.CutRepository;
 import com.jshi.laughtale.jako.service.JaKoService;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
@@ -14,6 +16,7 @@ import com.jshi.laughtale.position.domain.Position;
 import com.jshi.laughtale.position.mapper.PositionMapper;
 import com.jshi.laughtale.speech.domain.Speech;
 import com.jshi.laughtale.speech.mapper.SpeechMapper;
+import com.jshi.laughtale.speech.repository.SpeechRepository;
 import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.worddata.dto.WordDataDetail;
 import com.jshi.laughtale.worddata.mapper.WordDataMapper;
@@ -35,6 +38,9 @@ import java.util.Optional;
 public class MangaParser {
 
     private final String PREFIX = "https://j10a705.p.ssafy.io/";
+    private final ChapterRepository chapterRepository;
+    private final CutRepository cutRepository;
+    private final SpeechRepository speechRepository;
     private final WordDataRepository wordDataRepository;
     private final JaKoService jaKoService;
 
@@ -51,6 +57,7 @@ public class MangaParser {
         for (int i = 0; i < chapter.size(); i++) {
             int pageCnt = chapter.get(i).size();
             Chapter chapterEntity = ChapterMapper.toEntity(manga, last + i, pageCnt);
+            chapterRepository.save(chapterEntity);
             chapterList.add(chapterEntity);
             analyzeResponse.getChapter().add(parseChapter(chapterEntity, chapter.get(i)));
         }
@@ -68,6 +75,7 @@ public class MangaParser {
             int idx = (Integer) info.get("page");
             List<Integer> size = Optional.ofNullable((List<Integer>) info.get("size")).orElse(List.of(-1, -1));
             Cut cutEntity = CutMapper.toEntity(chapterEntity, idx, imageUrl, size);
+            cutRepository.save(cutEntity);
             cutList.add(cutEntity);
             cuts.add(parseCut(cutEntity, (List<Object>) info.get("speech")));
         }
@@ -90,6 +98,7 @@ public class MangaParser {
             List<Map> wordList = (List<Map>) s.get("word_list");
 
             Speech speechEntity = SpeechMapper.toEntity(cutEntity, sentence, speechNo, positionEntity);
+            speechRepository.save(speechEntity);
             speeches.add(speechEntity);
             sentences.add(sentence);
             words.addAll(parseWords(speechEntity, wordList));
