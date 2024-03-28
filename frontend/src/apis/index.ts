@@ -2,6 +2,8 @@ import axios from "axios";
 import useAuthLocalStroage from "../stores/useAuthLocalStorage.ts";
 
 const baseURL = "https://j10a705.p.ssafy.io/api";
+// const baseURL = "http://localhost:4000";
+
 const client = axios.create({
   baseURL
 });

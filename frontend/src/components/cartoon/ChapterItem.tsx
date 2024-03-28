@@ -1,3 +1,4 @@
+import {Link, useParams} from "react-router-dom";
 
 
 type Props = {
@@ -7,15 +8,18 @@ type Props = {
   chapterId: number;
 }
 export default function ChapterItem(props : Props){
-
+  const params = useParams()
+  const mangaId = + params.title;
   return (
-    <div
-      className="bg-gradient-to-r from-[#747982] to-[#879099] text-white font-semibold text-xl flex p-5 items-center rounded-2xl mb-5">
-      <div className="w-[64px] rounded-xl overflow-hidden mr-5">
-        <img
-          src={props.thumbnail}/>
+    <Link to={`/cartoon/${mangaId}/viewer/${props.chapterNo}`}>
+      <div
+        className="bg-gradient-to-r from-[#747982] to-[#879099] text-white font-semibold text-xl flex p-5 items-center rounded-2xl mb-5">
+        <div className="w-[64px] rounded-xl overflow-hidden mr-5">
+          <img
+            src={props.thumbnail}/>
+        </div>
+        <div>{props.title} {props.chapterNo + 1}화</div>
       </div>
-      <div>{props.title} {props.chapterNo + 1}화</div>
-    </div>
+    </Link>
   )
 }
