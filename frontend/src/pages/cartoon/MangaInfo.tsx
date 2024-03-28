@@ -5,14 +5,14 @@ import CartoonHeader from "../../components/cartoon/CartoonHeader.tsx";
 import FirstEpisode from "./FirstEpisode.tsx";
 
 type Props = {
-  magaId:number;
+  mangaId:number;
 }
 export default function MagaInfo(props: Props){
-
+  const {mangaId} = props;
   return (<MangaErrorBoundary>
     <MangaInfoFetchingSuspense>
       <MangaInfoFetcher mangaId={mangaId}>
-        <CartoonHeader/>
+        <CartoonHeader mangaId={mangaId}/>
       </MangaInfoFetcher>
     </MangaInfoFetchingSuspense>
   </MangaErrorBoundary>)
