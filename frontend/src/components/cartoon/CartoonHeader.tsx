@@ -1,4 +1,5 @@
 import {useQueryClient} from "@tanstack/react-query";
+import {useEffect} from "react";
 
 
 // type Props = {
@@ -11,11 +12,14 @@ import {useQueryClient} from "@tanstack/react-query";
 type Props = {
   mangaId:number;
 }
-export default function CartoonHeader(props: Props) {
-  const {mangaId} = props;
+export default function CartoonHeader(p: Props) {
+  const {mangaId} = p;
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["mangaInfo", mangaId]);
-  console.log("queryData", data);
+  const props = queryClient.getQueryData(["mangaInfo", mangaId]);
+  console.log("queryData", props);
+  useEffect(() => {
+    console.log(props)
+  }, [props]);
   return <div
     className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
     {/*<div className="w-5/12">*/}
