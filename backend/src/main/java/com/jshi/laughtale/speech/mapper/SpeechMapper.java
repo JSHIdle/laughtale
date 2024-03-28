@@ -26,7 +26,6 @@ public class SpeechMapper {
         return SpeechBasic.Response.builder()
                 .id(speech.getId())
                 .sentence(speech.getSentence())
-                .translate("")
                 .build();
     }
 
