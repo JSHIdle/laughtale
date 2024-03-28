@@ -31,6 +31,6 @@ public class Chapter {
     @JoinColumn(name = "manga_id")
     private Manga manga;
 
-    @OneToMany(mappedBy = "chapter", cascade = ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "chapter", cascade = PERSIST, orphanRemoval = true)
     private List<Cut> cuts = new ArrayList<>();
 }
