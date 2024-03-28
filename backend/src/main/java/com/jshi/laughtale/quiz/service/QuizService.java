@@ -68,9 +68,9 @@ public class QuizService {
 		//사용자 실력을 받아온다
 		int memberLevel = memberService.getMemberLevel(
 			wordHistoryService.getMemberWordHistory(memberId));
-		memberLevel = Math.max(1,memberLevel);
+		// log.info("memberLevel : " + memberLevel);
+		memberLevel = Math.max(1, memberLevel);
 		log.info(memberId + "번 회원의 추정 레벨은 : " + memberLevel + "입니다");
-		log.info("memberLevel : " + memberLevel);
 		//사용자 실력에 해당하는 단어목록을 가져온다
 		List<QuizWord> quizWordList = wordListService.findWordListsWithLevel(memberLevel, chapterId);
 		log.info(quizWordList.size() + "");
@@ -87,7 +87,7 @@ public class QuizService {
 
 		//사용자가 학습한 단어 목록을 wordHistoryMap에 저장한다
 		Map<String, WordHistory> wordHistoryMap = new HashMap<>();
-		if(userWordHistory!=null) {
+		if (userWordHistory != null) {
 			for (WordHistory wordHistory : userWordHistory)
 				wordHistoryMap.put(wordHistory.getWordData().getWord(), wordHistory);
 		}
@@ -96,11 +96,19 @@ public class QuizService {
 		for (QuizWord quizWord : quizWordList) {
 			if (wordHistoryMap.containsKey(quizWord.getAnswerWord())) {
 				WordHistory word = wordHistoryMap.get(quizWord.getAnswerWord());
-				int weight = (int)(100 * ebbinghausUtil.calculateMemory(word.getStudyDate(), word.getStudyCnt()));
-				quizWord.setWeight(100 - weight);
+				int weight = 100;
+				int offset = word.getOffset();
+				if (word.getStudyCnt() > 0) {
+					weight = (int)(ebbinghausUtil.calculateMemory(word.getStudyDate(), word.getStudyCnt()));
+					weight = 100 - weight;
+				}
+				weight += offset;
+				quizWord.setWeight(weight);
+				// System.out.println(quizWord.getWeight());
 				sum += 100 - weight;
 			} else {
 				quizWord.setWeight(100);
+				// System.out.println(quizWord.getWeight());
 				sum += 100;
 			}
 		}
@@ -120,6 +128,7 @@ public class QuizService {
 				// log.info(idx + " " + quizWordList.get(idx).getWeight());
 				sumWeight += quizWordList.get(idx).getWeight();
 				idx++;
+				// System.out.println(idx + " " + sumWeight);
 			}
 			QuizWord selectedQuizWord = quizWordList.get(idx);
 			quizWordList.remove(idx);
@@ -177,7 +186,7 @@ public class QuizService {
 				.optionB(quizWord.getOption()[1])
 				.optionC(quizWord.getOption()[2])
 				.optionD(quizWord.getOption()[3])
-					.answerNo(quizWord.getAnswerNo())
+				.answerNo(quizWord.getAnswerNo())
 				.build());
 		}
 	}

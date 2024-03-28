@@ -9,6 +9,8 @@ import com.jshi.laughtale.security.details.CustomUserDetails;
 import com.jshi.laughtale.security.jwt.JwtProcessor;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -55,8 +58,10 @@ public class MemberService {
         for (WordHistory wordHistory : wordHistoryList) {
             int wordLevel = wordHistory.getWordData().getLevel();
             sum += wordLevel * ebbinghausUtil.calculateMemory(wordHistory.getStudyDate(), wordHistory.getStudyCnt());
+            // log.info("sum : " + sum);
         }
-        return (int) Math.round(sum / wordHistoryList.size());
+        // log.info("계산된 회원 실력 : " +  sum / wordHistoryList.size());
+        return (int) Math.round((sum / wordHistoryList.size())/100);
     }
 
     public Member findById(Long id) {
