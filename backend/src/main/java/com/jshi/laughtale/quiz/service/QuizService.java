@@ -68,6 +68,7 @@ public class QuizService {
 		int memberLevel = memberService.getMemberLevel(
 			wordHistoryService.getMemberWordHistory(memberId));
 		memberLevel = Math.max(1,memberLevel);
+		log.info(memberId + "번 회원의 추정 레벨은 : " + memberLevel + "입니다");
 		log.info("memberLevel : " + memberLevel);
 		//사용자 실력에 해당하는 단어목록을 가져온다
 		List<QuizWord> quizWordList = wordListService.findWordListsWithLevel(memberLevel, chapterId);
@@ -112,10 +113,10 @@ public class QuizService {
 			int nextWordIndex = (int)(Math.random() * sum) + 1;
 			int idx = 0;
 			int sumWeight = 0;
-			log.info("{}", nextWordIndex);
+			// log.info("{}", nextWordIndex);
 
 			while (idx < quizWordList.size() && (quizWordList.get(idx).getWeight() + sumWeight) < nextWordIndex) {
-				log.info(idx + " " + quizWordList.get(idx).getWeight());
+				// log.info(idx + " " + quizWordList.get(idx).getWeight());
 				sumWeight += quizWordList.get(idx).getWeight();
 				idx++;
 			}

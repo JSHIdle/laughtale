@@ -39,7 +39,7 @@ public class WordListService {
 	}
 
 	public WordList findByWordDataIdAndSpeechId(Long wordId, Long speechId) {
-		return wordListRepository.findByWordDataIdAndSpeechId(wordId, speechId);
+		return wordListRepository.findByWordDataIdAndSpeechId(wordId, speechId).get(0);
 	}
 
 	public List<WordList> loadWordData(WordData wordData) {

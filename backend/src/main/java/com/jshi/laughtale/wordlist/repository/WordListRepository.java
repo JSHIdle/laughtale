@@ -75,5 +75,5 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
 
 	List<WordList> findAllByWordData(WordData wordData);
 
-	WordList findByWordDataIdAndSpeechId(Long wordId, Long speechId);
+	List<WordList> findByWordDataIdAndSpeechId(Long wordId, Long speechId);
 }
