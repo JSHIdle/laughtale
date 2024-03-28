@@ -8,15 +8,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
-// todo : 성공 후 사용자 정보 반환 시 프론트 url 수정 필
     private final String BASE_URL = "http://localhost:5173/login";
     private final String ACCESS_HEADER = "accessToken";
 
@@ -31,7 +32,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         String token = jwtProcessor.createJwtToken(userInfo.getEmail(), userInfo.getRole().value());
 
-        response.sendRedirect(createUrl(token));
+        String url = createUrl(token);
+        log.info("redirect url : {}", url);
+        response.sendRedirect(url);
     }
 
     private String createUrl(String accessToken) {
