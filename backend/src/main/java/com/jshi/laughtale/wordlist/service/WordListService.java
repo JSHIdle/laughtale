@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class WordListService {
     private final WordListRepository wordListRepository;
-    private final WordDataService wordDataService;
 
     public List<QuizWord> findWordListsWithLevel(int level, int chapterId) {
         List<Tuple> tempList = wordListRepository.findWordListsWithLevel(level, chapterId);
@@ -48,6 +47,6 @@ public class WordListService {
 
     public List<WordDataDetail.Response> loadWordListBySpeechId(Long speechId) {
         List<WordList> wordList = wordListRepository.findAllBySpeechId(speechId);
-        return wordList.stream().map(w -> wordDataService.loadWordDataDetailWithoutSpeech(w.getId())).toList();
+        return null;
     }
 }
