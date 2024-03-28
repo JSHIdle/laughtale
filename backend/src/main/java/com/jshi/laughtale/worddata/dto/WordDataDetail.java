@@ -14,6 +14,7 @@ public class WordDataDetail {
     @Getter
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Response {
+        private Long id;
         private String word;
         private String definition;
         private String partOfSpeech;

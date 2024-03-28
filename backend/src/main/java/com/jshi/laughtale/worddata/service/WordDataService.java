@@ -26,10 +26,19 @@ public class WordDataService {
         return wordDataRepository.findByWord(word).orElseThrow().getDefinition();
     }
 
+    public WordData loadWoadDataById(Long id) {
+        return wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
+    }
+
     public WordDataDetail.Response loadWordDataDetail(Long id) {
         WordData wordData = wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
-        List<WordList> wordList = wordListService.loadWordData(wordData);
+        List<WordList> wordList = wordListService.loadWordListByWordData(wordData);
         List<SpeechBasic.Response> speechBasicList = wordList.stream().map(speechService::loadByWordList).toList();
         return WordDataMapper.toDetailResponse(wordData, speechBasicList);
+    }
+
+    public WordDataDetail.Response loadWordDataDetailWithoutSpeech(Long id) {
+        WordData wordData = wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
+        return WordDataMapper.toDetailResponse(wordData);
     }
 }
