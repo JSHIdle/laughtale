@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 
 type Props = {
     message?: string,
-    statusCode:string
+    statusCode?:string
 }
 export default function Error (props : Props){
     // const props = {
@@ -21,7 +21,7 @@ export default function Error (props : Props){
               <Header/>
               <div className="flex justify-center items-center">
                   <div>
-                      <div className="text-8xl p-3 mt-40">{props.statusCode}</div>
+                      <div className="text-8xl p-3 mt-40">{props.statusCode ?? props.statusCode }</div>
                       <div className="text-lg whitespace-pre-wrap flex flex-col items-center justify-center p-6">{props.message ? props.message : "Error"}</div>
                       <div className="flex justify-center">
                           <Link to={"/home"} replace

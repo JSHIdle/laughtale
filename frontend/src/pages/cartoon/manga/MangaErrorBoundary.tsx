@@ -17,5 +17,8 @@ export default function MangaErrorBoundary ({children}){
 }
 
 function fallbackRender({ error, resetErrorBoundary }) {
-  return <Navigate to="/error"/>
+  return <Navigate to="/error" state={{
+    error:error?.message,
+    statusCode: error.response.statusCode
+  }}/>
 }
