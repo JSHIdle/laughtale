@@ -34,6 +34,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MangaParser {
 
+    private final String PREFIX = "https://j10a705.p.ssafy.io/";
     private final WordDataRepository wordDataRepository;
     private final JaKoService jaKoService;
 
@@ -43,7 +44,7 @@ public class MangaParser {
         List<Chapter> chapterList = manga.getChapter();
         String thumbnail = (String) attr.get("thumbnail");
         List<List<Object>> chapter = (List<List<Object>>) attr.get("chapter");
-        manga.updateThumbnail(thumbnail);
+        manga.updateThumbnail(attachPrefix(thumbnail));
 
         MangaAnalyze.Response analyzeResponse = MangaMapper.toAnalyzeResponse(manga);
 
@@ -63,7 +64,7 @@ public class MangaParser {
         ChapterAnalyze.Response analyzeResponse = ChapterMapper.toAnalyzeResponse(chapterEntity);
         for (int i = 0; i < cut.size(); i++) {
             Map info = (Map) cut.get(i);
-            String imageUrl = (String) info.get("src");
+            String imageUrl = attachPrefix((String) info.get("src"));
             int idx = (Integer) info.get("page");
             List<Integer> size = Optional.ofNullable((List<Integer>) info.get("size")).orElse(List.of(-1, -1));
             Cut cutEntity = CutMapper.toEntity(chapterEntity, idx, imageUrl, size);
@@ -115,6 +116,10 @@ public class MangaParser {
             words.add(WordDataMapper.toDetailResponse(wordData, null));
         }
         return words;
+    }
+
+    private String attachPrefix(String src) {
+        return PREFIX + src;
     }
 
 }
