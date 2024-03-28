@@ -33,6 +33,11 @@ export type ChapterItem = {
     level:null | number;
 }
 
+export type MangaHistory = {
+    memberId: number;
+    mangaId: number;
+    chapterViewed: number[];
+}
 
 export type ChapterList = Array<ChapterItem>
 
