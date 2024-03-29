@@ -27,14 +27,14 @@ const Quiz = () => {
     console.log(quizData);
 
     return (
-        <div className="bg-[#121212] min-h-screen">
+        <div className="bg-[#121212]" style={{ height: 'calc(100vh * 1.1111)' }}>
             <Header/>
             <div className="max-w-[450px] m-auto">
                 <div className="flex justify-center pt-6">
                     {quizData && <Progressbar value={currentSlide} max={quizData.length} onNumberClick={handleNumberClick}/>}
                 </div>
             </div>
-            <div className="text-white max-w-[1200px] m-auto">
+            <div className="text-white max-w-[1200px] m-auto p-6">
                 {quizData && <QuizSlider slides={quizData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef}/>}
             </div>
         </div>

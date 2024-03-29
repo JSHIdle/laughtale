@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
-function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.7 }) {
+
+
+function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.5}) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -25,27 +27,27 @@ function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.7 })
             context.drawImage(image, 0, 0, scaledWidth, scaledHeight);
 
             // 조정된 크기와 위치로 하얀색 사각형 그리기
-            context.fillStyle = 'white';
-            context.fillRect(scaledX, scaledY, scaledBoxWidth, scaledBoxHeight);
+            context.fillStyle = '#79a5e7';
+            context.fillRect(scaledX, scaledY, scaledBoxWidth+1, scaledBoxHeight+1);
+
+            // 문장에서 입력받은 단어 지우기
+            // const modifiedSentence = sentence.replace(new RegExp(replaceWord, 'gi'), '___');
 
             // 텍스트 추가
-            const text = sentence; // 추가할 텍스트
-            context.fillStyle = 'black'; // 텍스트 색상 설정
-            context.font = '20px Arial'; // 텍스트 스타일 설정
+            // context.fillStyle = 'green'; // 텍스트 색상 설정
+            // context.font = `bold ${20 * scaleFactor}px Arial`;
 
-            // 텍스트 정렬 설정
+            // 조정된 박스의 중앙 좌표 계산
+            // const centerX = scaledX + scaledBoxWidth / 2;
+            // const centerY = scaledY + scaledBoxHeight / 2;
+
+            // 조정된 크기와 위치로 텍스트 그리기
             context.textAlign = "center";
             context.textBaseline = "middle";
-
-            // 박스의 중앙 좌표 계산
-            var centerX = boxCoordinates.x + boxCoordinates.width / 2;
-            var centerY = boxCoordinates.y + boxCoordinates.height / 2;
-
-            context.fillText(text, centerX, centerY); // 텍스트 그리기
+            // context.fillText(modifiedSentence, centerX, centerY);
         };
 
-        image.src = src; // 이미지 URL을 할당해서 이미지 로드를 시작한다.
-        // 이 로드가 완료되면 위 코드의 image.onload를 실행한다.
+        image.src = src;
     }, [src, boxCoordinates, sentence, scaleFactor]);
 
     return <canvas ref={canvasRef} />;
