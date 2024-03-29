@@ -60,8 +60,8 @@ public class MemberService {
             sum += wordLevel * ebbinghausUtil.calculateMemory(wordHistory.getStudyDate(), wordHistory.getStudyCnt());
             // log.info("sum : " + sum);
         }
-        // log.info("계산된 회원 실력 : " +  sum / wordHistoryList.size());
-        return (int) Math.round((sum / wordHistoryList.size())/100);
+        log.info("계산된 회원 실력 : " +  (((sum / wordHistoryList.size())/100) + 1));
+        return (int) Math.round(((sum / wordHistoryList.size())/100) + 1);
     }
 
     public Member findById(Long id) {
