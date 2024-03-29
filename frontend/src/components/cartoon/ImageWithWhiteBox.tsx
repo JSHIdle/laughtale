@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.5}) {
+function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -46,7 +46,7 @@ function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.5}) 
         };
 
         image.src = src;
-    }, [src, boxCoordinates, sentence, scaleFactor]);
+    }, [src, boxCoordinates, scaleFactor]);
 
     return <canvas ref={canvasRef} />;
 }
