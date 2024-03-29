@@ -4,6 +4,7 @@ import com.jshi.laughtale.cut.domain.Cut;
 import com.jshi.laughtale.cut.dto.CutBasic;
 import com.jshi.laughtale.position.domain.Position;
 import com.jshi.laughtale.position.dto.PositionBasic;
+import com.jshi.laughtale.position.mapper.PositionMapper;
 import com.jshi.laughtale.speech.domain.Speech;
 import com.jshi.laughtale.speech.dto.SpeechBasic;
 import com.jshi.laughtale.speech.dto.SpeechDetail;
@@ -37,6 +38,13 @@ public class SpeechMapper {
                 .title(title)
                 .chapterNo(chapterNo)
                 .cut(cut)
+                .build();
+    }
+
+    public static SpeechDetail.Response toAnalyzeResponse(Speech speech) {
+        return SpeechDetail.Response.builder()
+                .sentence(speech.getSentence())
+                .positionBasic(PositionMapper.toBasicResponse(speech.getPosition()))
                 .build();
     }
 }

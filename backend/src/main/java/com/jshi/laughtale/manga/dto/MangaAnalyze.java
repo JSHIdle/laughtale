@@ -29,14 +29,16 @@ public class MangaAnalyze {
         private String author;
         private String category;
         private String description;
+        private String thumbnail;
         private List<ChapterAnalyze.Response> chapter = new ArrayList<>();
 
         @Builder
-        public Response(String title, String author, String category, String description) {
+        public Response(String title, String author, String thumbnail, String category, String description) {
             this.title = title;
             this.author = author;
             this.category = category;
             this.description = description;
+            this.thumbnail = thumbnail;
         }
     }
 }

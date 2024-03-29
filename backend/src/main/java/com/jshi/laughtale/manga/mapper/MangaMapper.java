@@ -33,6 +33,7 @@ public class MangaMapper {
                 .description(manga.getDescription())
                 .author(manga.getAuthor())
                 .category(manga.getCategory())
+                .thumbnail(manga.getThumbnail())
                 .build();
     }
 
