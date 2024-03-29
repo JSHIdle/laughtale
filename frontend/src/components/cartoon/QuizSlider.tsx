@@ -3,10 +3,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useNavigate } from 'react-router-dom';
 import './QuizSlider.css';
-import Quiz from "./Quiz.tsx";
+import ImageWithWhiteBox from './ImageWithWhiteBox';
 
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
     let navigate = useNavigate();
+
     function handleClick() {
         navigate('result');
     }
@@ -31,7 +32,13 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef }) => {
                                   <pre className="font-semibold p-3">
                                     {slide.text}
                                   </pre>
-                                <img className="rounded-xl" src={slide.imageUrl}/>
+                                <ImageWithWhiteBox key={index} src={slide.imageUrl}  boxCoordinates={{
+                                    x: slide.leftBottomX,
+                                    y: slide.leftBottomY,
+                                    width: slide.rightTopX - slide.leftBottomX,
+                                    height: slide.rightTopY - slide.leftBottomY
+                                }}
+                                sentence = {slide.sentence}/>
                             </div>
                         </div>
 
