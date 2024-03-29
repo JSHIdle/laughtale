@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-function ImageWithWhiteBox({ src, boxCoordinates, sentence }) {
+function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -8,37 +8,45 @@ function ImageWithWhiteBox({ src, boxCoordinates, sentence }) {
         const context = canvas.getContext('2d');
         const image = new Image();
 
-        // 이미지가 로드되면 캔버스에 그리고 사각형 영역을 채움
         image.onload = () => {
-            canvas.width = image.width;
-            canvas.height = image.height;
-            //캔버스의 높이와 넓이를 입력으로 들어온 이미지의 높이와 넓이와 맞춘다
-            context.drawImage(image, 0, 0);
-            // 이미지의 0,0 위치에서 그린다.
-            // 하얀색 사각형 그리기
-            context.fillStyle = 'white';
-            // boxCoordinates는 [x, y, width, height] 형태로 가정
-            context.fillRect(boxCoordinates.x, boxCoordinates.y, boxCoordinates.width, boxCoordinates.height);
+            // 이미지와 박스, 텍스트의 크기를 scaleFactor로 조정
+            const scaledWidth = image.width * scaleFactor;
+            const scaledHeight = image.height * scaleFactor;
+            const scaledX = boxCoordinates.x * scaleFactor;
+            const scaledY = boxCoordinates.y * scaleFactor;
+            const scaledBoxWidth = boxCoordinates.width * scaleFactor;
+            const scaledBoxHeight = boxCoordinates.height * scaleFactor;
+
+            // 캔버스의 크기를 조정된 이미지의 크기로 설정
+            canvas.width = scaledWidth;
+            canvas.height = scaledHeight;
+
+            // 조정된 크기로 이미지 그리기
+            context.drawImage(image, 0, 0, scaledWidth, scaledHeight);
+
+            // 조정된 크기와 위치로 하얀색 사각형 그리기
+            context.fillStyle = '#79a5e7';
+            context.fillRect(scaledX, scaledY, scaledBoxWidth+1, scaledBoxHeight+1);
+
+            // 문장에서 입력받은 단어 지우기
+            // const modifiedSentence = sentence.replace(new RegExp(replaceWord, 'gi'), '___');
 
             // 텍스트 추가
-            const text = sentence; // 추가할 텍스트
-            context.fillStyle = 'black'; // 텍스트 색상 설정
-            context.font = '20px Arial'; // 텍스트 스타일 설정
+            // context.fillStyle = 'green'; // 텍스트 색상 설정
+            // context.font = `bold ${20 * scaleFactor}px Arial`;
 
-            // 텍스트 정렬 설정
+            // 조정된 박스의 중앙 좌표 계산
+            // const centerX = scaledX + scaledBoxWidth / 2;
+            // const centerY = scaledY + scaledBoxHeight / 2;
+
+            // 조정된 크기와 위치로 텍스트 그리기
             context.textAlign = "center";
             context.textBaseline = "middle";
-
-            // 박스의 중앙 좌표 계산
-            var centerX = boxCoordinates.x + boxCoordinates.width / 2;
-            var centerY = boxCoordinates.y + boxCoordinates.height / 2;
-
-            context.fillText(text, centerX, centerY); // 텍스트 그리기
+            // context.fillText(modifiedSentence, centerX, centerY);
         };
 
-        image.src = src; // 이미지 URL을 할당해서 이미지 로드를 시작한다.
-        // 이 로드가 완료되면 위 코드의 image.onload를 실행한다.
-    }, [src, boxCoordinates]);
+        image.src = src;
+    }, [src, boxCoordinates, scaleFactor]);
 
     return <canvas ref={canvasRef} />;
 }

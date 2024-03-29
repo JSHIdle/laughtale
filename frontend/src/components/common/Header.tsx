@@ -20,6 +20,7 @@ const Header = () => {
 
     return (
         <div className={`bg-[#121212] flex justify-between items-center px-10 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
+            <Link to={`/admin`} className="text-lg text-white hover:text-gray-800">관리자페이지</Link>
             <div className="flex justify-center flex-grow">
                 <Link to="/home">
                     <img src={Logo} alt="Logo" height="200" width="170"></img>
