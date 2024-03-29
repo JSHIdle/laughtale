@@ -38,6 +38,7 @@ function Modal({ isOpen, onClose, handleIconClick  }) {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-[#1D1D21] p-4 rounded-lg w-[900px] ">
+
                 <div className="flex justify-end">
                     <button
                         onClick={onClose}

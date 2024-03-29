@@ -21,7 +21,7 @@ function RecentSlider(){
   const slidesData = [
     {
         id: 1,
-        title: "마아아아아아아아아아안화아ㅏㅏ아아아아아아아아아아아가나다라마바사",
+        title: "용사들",
         episode: "3화",
         imageUrl: "/src/assets/samples/e2-1.jpg",
       },
@@ -59,7 +59,7 @@ function RecentSlider(){
 
     return (
         <div className="container" style={{maxWidth:'700px'}} >
-        <h1 className="heading">최근 본 만화목록</h1>
+        <h1 className="flex justify-center text-3xl font-bold mb-6">최신 업데이트</h1>
         <Swiper
           effect={'coverflow'}
           grabCursor={true}
@@ -108,22 +108,11 @@ function RecentSlider(){
                 <SwiperSlide>
                     <img src={slide_image_6} alt="slide_image"/>
                 </SwiperSlide>
-      
-
-                {/* <div className="slider-controler">
-                    <div className="swiper-button-prev slider-arrow">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                    </div>
-                    <div className="swiper-button-next slider-arrow">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </div>
-                    <div className="swiper-pagination"></div>
-                </div> */}
 
             </Swiper>
             <div className="slide-info">
-                <div className='truncate '>{slideInfo.title}</div>
-                <div>{slideInfo.episode}</div>
+                {/*<div className='truncate '>{slideInfo.title}</div>*/}
+                {/*<div>{slideInfo.episode}</div>*/}
             </div>
            
         </div>
