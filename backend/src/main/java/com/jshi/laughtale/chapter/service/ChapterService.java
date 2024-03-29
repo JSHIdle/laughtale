@@ -8,7 +8,9 @@ import com.jshi.laughtale.chapter.mapper.ChapterMapper;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.service.MangaService;
+import com.jshi.laughtale.wordlist.service.WordListService;
 
+import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -25,6 +27,7 @@ public class ChapterService {
 
 	private final ChapterRepository chapterRepository;
 	private final MangaService mangaService;
+	private final WordListService wordListService;
 
 	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
 		Manga manga = mangaService.findById(mangaId);
@@ -51,6 +54,34 @@ public class ChapterService {
 
 		return chapterRepository.findAllByMangaId(mangaId).stream().map(ChapterMapper::chapterToChapterLevelDto)
 			.toList();
+
+	}
+
+
+	public int calculateChapterLevel(long chapterId) {
+		List<Tuple> tupleList = wordListService.findCalculatedChapterLevel(chapterId);
+		long totalSum = 0;
+		long totalCnt = 0;
+		for (Tuple tuple : tupleList) {
+			int level = tuple.get("level", Integer.class);
+			long cnt = tuple.get("levelcnt", Long.class);
+			totalSum += level * cnt;
+			totalCnt += cnt;
+		}
+		double avg = (double)totalSum / totalCnt;
+		return averageToLevel(avg);
+	}
+
+	public int averageToLevel(double avg) {
+		if (avg <= 1.67)
+			return 1;
+		if (avg <= 1.73)
+			return 2;
+		if (avg <= 1.8)
+			return 3;
+		if (avg <= 1.9)
+			return 4;
+		return 5;
 
 	}
 }
