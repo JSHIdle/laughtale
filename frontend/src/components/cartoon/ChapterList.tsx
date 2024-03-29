@@ -14,7 +14,6 @@ type Props = {
     thumbnail: string;
     level:null | number;
   }>
-  title: string;
 }
 export default function ChapterList(props: Props){
   const queryClient = useQueryClient();

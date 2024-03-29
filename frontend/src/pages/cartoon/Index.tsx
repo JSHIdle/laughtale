@@ -4,14 +4,16 @@ import {useParams} from "react-router-dom";
 import { getChapterList, getMangaHistory} from "../../apis/cartoon.ts";
 import ChapterList from "../../components/cartoon/ChapterList.tsx";
 import {ChapterListResponse} from "../../types/types";
-import {useEffect} from "react";
+import {Suspense, useEffect} from "react";
 import {useInView} from "react-intersection-observer";
 
 import FirstEpisode from "./manga/FirstEpisode.tsx";
 import MagaInfo from "./manga/MangaInfo.tsx";
 import TotalEpisode from "./manga/TotalEpisode.tsx";
-import {ErrorBoundary} from "react-error-boundary";
 import MangaErrorBoundary from "./manga/MangaErrorBoundary.tsx";
+import CartoonHeader from "../../components/cartoon/CartoonHeader.tsx";
+import {ErrorBoundary} from "react-error-boundary";
+import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
 
 const Index = () => {
   const params = useParams()
@@ -60,21 +62,24 @@ const Index = () => {
       }
   }, [inView]);
 
-  return <MangaErrorBoundary>
+  return<>
     <div className="bg-[#1D1D21] min-h-screen">
       <Header/>
       <div className="max-w-[700px] m-auto">
-        <MagaInfo mangaId={mangaId}/>
-        <FirstEpisode mangaId={mangaId}/>
-        <TotalEpisode total={100}/>
-
+        {/*<MagaInfo mangaId={mangaId}/>*/}
+        <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
+          <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
+            <CartoonHeader mangaId={mangaId}/>
+            <TotalEpisode total={100}/>
+            <FirstEpisode mangaId={mangaId}/>
+          </Suspense>
+        </ErrorBoundary>
         <div className="mb-3">
-
           {!data ? <div>...loading..</div> :
             <>
               {
                 data.pages.map((pages) => <>
-                  <ChapterList content={pages.content} title={"TEST"}/>
+                  <ChapterList content={pages.content}/>
                 </>)}
             </>
           }
@@ -85,7 +90,8 @@ const Index = () => {
         </div>
       </div>
     </div>
-  </MangaErrorBoundary>
+  </>
+
 }
 
 export default Index;
