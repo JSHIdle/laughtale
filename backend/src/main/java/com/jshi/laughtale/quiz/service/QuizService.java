@@ -113,7 +113,6 @@ public class QuizService {
 			}
 		}
 
-		// TODO : offset계산해야한다
 
 		//문제에 출제할 단어를 고른다
 		List<QuizWord> selectedQuizWords = new ArrayList<>();
