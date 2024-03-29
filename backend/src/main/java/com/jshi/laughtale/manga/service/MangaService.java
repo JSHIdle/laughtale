@@ -78,8 +78,8 @@ public class MangaService {
 	}
 
 	public Page<LevelManga.Response> getLevelManga(int level, int page, int size) {
-		Pageable pageable = PageRequest.of(page, 12);
-		return mangaRepository.findByLevel(level, pageable);
+		Pageable pageable = PageRequest.of(page, size);
+		return mangaRepository.findAllByLevel(level, pageable);
 	}
 
 	public Manga getMangaInfo(Long id) {
