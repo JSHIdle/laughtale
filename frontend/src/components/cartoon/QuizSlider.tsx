@@ -92,7 +92,8 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
                                             className="ml-6 font-bold text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
-                                            onClick={() => openModal(slide.definition)}>힌트</button>
+                                            // onClick={() => openModal(slide.definition)}
+                                        >힌트</button>
 
                                     </div>
                                     <div className="flex justify-center items-center font-bold">{modifiedSentence}</div>
