@@ -22,7 +22,7 @@ public class EbbinghausUtils {
 	private Double calculateMinutesPassed(LocalDateTime lastStudyTime) {
 		LocalDateTime currentTime = LocalDateTime.now();
 		Duration duration = Duration.between(lastStudyTime, currentTime);
-		log.info("minutes passed : " + (double)duration.toMinutes());
+		// log.info("minutes passed : " + (double)duration.toMinutes());
 		return (double)duration.toMinutes();
 	}
 
