@@ -26,6 +26,8 @@ public class CutMapper {
 	public static CutAnalyze.Response toAnalyzeResponse(Cut cut) {
 		return CutAnalyze.Response.builder()
 				.imageUrl(cut.getImageUrl())
+				.width(cut.getWidth())
+				.height(cut.getHeight())
 				.build();
 	}
 
