@@ -1,9 +1,9 @@
 import Header from "../../../src/components/common/Header.tsx";
-import {useInfiniteQuery, useQuery} from "@tanstack/react-query";
+import {useInfiniteQuery, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useParams} from "react-router-dom";
 import { getChapterList, getMangaHistory} from "../../apis/cartoon.ts";
 import ChapterList from "../../components/cartoon/ChapterList.tsx";
-import {ChapterListResponse} from "../../types/types";
+import {Cartoon, ChapterListResponse} from "../../types/types";
 import {Suspense, useEffect} from "react";
 import {useInView} from "react-intersection-observer";
 
@@ -18,14 +18,6 @@ import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
 const Index = () => {
   const params = useParams()
   const mangaId = + params.title;
-
-  // const {data: history, isLoading: historyLoading} = useQuery({
-  //   queryKey: ['history', mangaId],
-  //   queryFn: () => getMangaHistory(+ mangaId), staleTime: Infinity }
-  // );
-  // if(history) {
-  //   console.log(history);
-  // }
   const {
     data,
     error,
@@ -55,9 +47,11 @@ const Index = () => {
     threshold: 0,
     triggerOnce: false
   })
-
+  const queryClient = useQueryClient();
+  const getData = queryClient.getQueryData<Cartoon>(["mangaInfo", mangaId])
+  // console.log("getdata", getData);
   useEffect(() => {
-      if(inView  ){
+      if(inView ){
         fetchNextPage();
       }
   }, [inView]);
@@ -79,7 +73,7 @@ const Index = () => {
             <>
               {
                 data.pages.map((pages) => <>
-                  <ChapterList content={pages.content}/>
+                  <ChapterList content={pages.content} title={getData.title} mangaId={mangaId}/>
                 </>)}
             </>
           }
