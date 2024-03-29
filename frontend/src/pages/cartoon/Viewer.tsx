@@ -1,14 +1,19 @@
+import image from '/src/assets/test.jpg';
 import {useCallback, useEffect, useState} from "react";
+
 import "./hoverBox.css"
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {ChapterListResponse} from "../../types/types";
 import {getChapterList} from "../../apis/cartoon.ts";
 import {useInView} from "react-intersection-observer";
 import {getImageByChapterId} from "../../apis/viewer.ts";
+
 import {Link, useParams} from "react-router-dom";
-import client from "../../apis";
+import client, {get} from "../../apis";
 import img from '../../assets/test.jpg';
 import ChapterList from "../../components/cartoon/ChapterList.tsx";
+import absoluteToPercent from "../../utils/position.ts";
+import {Position} from "../../../types";
 
 // const test = {
 //     content:[
@@ -39,35 +44,65 @@ const defaultSize = 5;
 
 
 const Viewer = () => {
+
     const params = useParams()
     const mangaId = + params.title;
     const chapterId = + params.id;
-    const [data, setData] = useState();
-    const [page, setPage] = useState();
+    const [data, setData] = useState(null);
+    const [page, setPage] = useState(0);
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
     })
 
     useEffect(() => {
-        if(inView) {
-            //chapterId: number, page: number, size: number}
-            setData({...data, getImageByChapterId({chapterId, page, size:5}})
-        }
+        getImageByChapterId({chapterId, page, size:5}).then(res => setData({...res}));
     }, []);
 
-    const imageRef = useCallback((node: HTMLElement) =>{
-        if(node !== null){
-            //위치 얻기 위함.....
-        }
+    useEffect(() => {
+        console.log(data);
+    }, [data,setData]);
+    // const imageRef = useCallback((node: HTMLElement) =>{
+    //     if(node !== null){
+    //         //위치 얻기 위함.....
+    //     }
+    // },[]);
+    const onClick = useCallback(async (id) => {
+        const wordData = await get(`/word-data/speech/${id}`);
+        console.log(wordData);
     },[]);
     return (
         <div className="bg-gray-600">
+            <div ref={ref}>
+                {
+                    data != null ? data.content.map(d => {
+                        const {width, height} = d;
+                        return <div className = "relative w-[800px]">
+                            {
 
-
-
-            <div ref={ref}></div>
-            <Link to={`/quiz/new/${chapterId}`}>test</Link>
+                                d.speeches.map(speech => {
+                                    // const {leftTopY,leftBottomY,leftBottomX,leftTopX,rightBottomY,rightBottomX,rightTopY,rightTopX} : Position= speeche;
+                                    const position: Position = speech.position;
+                                    const pos = absoluteToPercent({position:{ ...position}, size:{ width, height } });
+                                    return <div className="hoverBox" onClick={() => onClick(speech.id)} style={{
+                                        // background:"#fff",
+                                        // border:"1px solid #000",
+                                        position:"absolute",
+                                        left:`${pos.leftTop.x}%`,
+                                        top:`${pos.leftTop.y}%`,
+                                        right:`${pos.rightBottom.x}%`,
+                                        bottom:`${pos.rightBottom.y}%`
+                                    }}></div>
+                                })
+                            }
+                            < img
+                              src = {d.imageUrl}
+                            />
+                    </div>
+                    }) : <></>
+                }
+            </div>
+            <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>
         </div>
     );
 }
