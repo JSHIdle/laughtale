@@ -4,6 +4,7 @@ import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
 import client from "../../apis";
+import Spinner from "../../components/common/Spinner.tsx";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
@@ -12,6 +13,7 @@ const Index = () => {
         genres: '',
         description: ''
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = useCallback((e) => {
         setCartoonInfo({
@@ -27,7 +29,9 @@ const Index = () => {
         const formData = new FormData();
 
         // 1. 만화 정보를 JSON 형식으로 추가
-        formData.append("manga", JSON.stringify(cartoonInfo));
+        formData.append("manga", new Blob([JSON.stringify(cartoonInfo)], {
+            type: "application/json"
+        }));
 
         // 2. 썸네일 이미지 파일 추가
         if (thumbnailInputRef.current?.files[0]) {
@@ -51,12 +55,14 @@ const Index = () => {
             // const response = await client.post('http://j10a705.p.ssafy.io/api/manga/upload', {
             //      formData,{header}
             // });
+            setLoading(true);
             await client.post(`/manga/upload`, formData, {
                 headers:{
                     "Content-Type":"multipart/form-data"
-                }
-            });
+                },
 
+            });
+            setLoading(false);
 
             // if (response.ok) {
             //     console.log('Upload successful');
@@ -64,12 +70,19 @@ const Index = () => {
             //     console.error('Upload failed');
             // }
         } catch (error) {
+            setLoading(false);
+
             console.error('Error:', error);
         }
     };
 
 
-    return <div className="bg-[#1D1D21] min-h-screen">
+    return <div className="bg-[#1D1D21] min-h-screen relative">
+        {
+            loading ?
+                <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
+                </div> : <></>
+        }
         <div className="max-w-[700px] m-auto">
             <div>
                 <Header/>
