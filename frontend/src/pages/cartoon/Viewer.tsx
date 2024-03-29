@@ -54,6 +54,7 @@ const Viewer = () => {
         threshold: 0,
         triggerOnce: false
     })
+    const [word, setWord] = useState(null);
 
     useEffect(() => {
         getImageByChapterId({chapterId, page, size:5}).then(res => setData({...res}));
@@ -69,41 +70,60 @@ const Viewer = () => {
     // },[]);
     const onClick = useCallback(async (id) => {
         const wordData = await get(`/word-data/speech/${id}`);
-        console.log(wordData);
+        alert(wordData.map(d => d.definition));
+        console.log(wordData)
+        setWord(wordData);
     },[]);
     return (
-        <div className="bg-gray-600">
-            <div ref={ref}>
-                {
-                    data != null ? data.content.map(d => {
-                        const {width, height} = d;
-                        return <div className = "relative w-[800px]">
-                            {
+      <>
+      <div className="bg-gray-600 flex w-[100%]">
 
-                                d.speeches.map(speech => {
-                                    // const {leftTopY,leftBottomY,leftBottomX,leftTopX,rightBottomY,rightBottomX,rightTopY,rightTopX} : Position= speeche;
-                                    const position: Position = speech.position;
-                                    const pos = absoluteToPercent({position:{ ...position}, size:{ width, height } });
-                                    return <div className="hoverBox" onClick={() => onClick(speech.id)} style={{
-                                        // background:"#fff",
-                                        // border:"1px solid #000",
-                                        position:"absolute",
-                                        left:`${pos.leftTop.x}%`,
-                                        top:`${pos.leftTop.y}%`,
-                                        right:`${pos.rightBottom.x}%`,
-                                        bottom:`${pos.rightBottom.y}%`
-                                    }}></div>
-                                })
-                            }
-                            < img
-                              src = {d.imageUrl}
-                            />
-                    </div>
-                    }) : <></>
-                }
-            </div>
-            <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>
-        </div>
-    );
+          <div className=" w-[800px]">
+              {
+                  data != null ? data.content.map(d => {
+                      const {width, height} = d;
+                      return <div className="relative">
+                          {
+
+                              d.speeches.map(speech => {
+                                  // const {leftTopY,leftBottomY,leftBottomX,leftTopX,rightBottomY,rightBottomX,rightTopY,rightTopX} : Position= speeche;
+                                  const position: Position = speech.position;
+                                  const pos = absoluteToPercent({position: {...position}, size: {width, height}});
+                                  return <div className="hoverBox" onClick={() => onClick(speech.id)} style={{
+                                      // background:"#fff",
+                                      // border:"1px solid #000",
+                                      position: "absolute",
+                                      left: `${pos.leftTop.x}%`,
+                                      top: `${pos.leftTop.y}%`,
+                                      right: `${pos.rightBottom.x}%`,
+                                      bottom: `${pos.rightBottom.y}%`
+                                  }}></div>
+                              })
+                          }
+                          < img
+                            src={d.imageUrl}
+                          />
+                      </div>
+                  }) : <></>
+              }
+          </div>
+          <div className="bg-amber-50 flex-1 relative">
+              {
+                  // word != null ? <div className="sticky" style={{top:"50%", left: "50%", bottom:"50%", right:"50%", transform: "translate(50%, 50%)"}}>
+                  //     {
+                  //         word.map(w => <div>{w.definition} </div>)
+                  //     }
+                  // </div> : <></>
+              }
+          </div>
+          {/*<div></div>*/}
+          {/*<div ref={ref}>*/}
+
+          {/*</div>*/}
+      </div>
+    <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>
+</>
+)
+    ;
 }
 export default Viewer;
