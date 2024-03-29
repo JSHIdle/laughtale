@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
@@ -12,39 +12,26 @@ function RecentSlider(){
     // 슬라이드 정보를 저장하는 상태
   const [slideInfo, setSlideInfo] = useState({ title: ''});
 
-  // 각 슬라이드에 대한 정보를 담고 있는 배열
-  const slidesData = [
-    {
-        id: 1,
-        title: "마아아아아아아아아아안화아ㅏㅏ아아아아아아아아아아아가나다라마바사",
-        imageUrl: "/src/assets/samples/e2-1.jpg",
-      },
-      {
-        id: 2,
-        title: "만화2",
-        imageUrl: "/src/assets/samples/e3-1.jpg",
-      },
-      {
-        id: 3,
-        title: "만화3",
-        imageUrl: "/src/assets/samples/e4-2.jpg",
-      },
-      {
-        id: 4,
-        title: "만화4",
-        imageUrl: "/src/assets/samples/e3-4.jpg",
-      },
-      {
-        id: 5,
-        title: "만화5",
-        imageUrl: "/src/assets/samples/e1-3.jpg",
-      },
-      {
-        id: 6,
-        title: "만화6",
-        imageUrl: "/src/assets/samples/e3-3.jpg",
-      },
-  ];
+    const [slidesData, setSlidesData] = useState([]);
+
+    useEffect(() => {
+        const fetchSlidesData = async () => {
+            try {
+                const response = await fetch('http://j10a705.p.ssafy.io/api/manga/recent'); // API 엔드포인트로 변경하세요.
+                const data = await response.json();
+                const slides = data.map(item => ({
+                    id: item.mangaId,
+                    title: item.title,
+                    imageUrl: item.thumbnail,
+                }));
+                setSlidesData(slides);
+            } catch (error) {
+                console.error("Failed to fetch slides data", error);
+            }
+        };
+        fetchSlidesData();
+    }, []);
+
 
     // 슬라이드 클릭 핸들러 함수
     const handleSlideClick = (index) => {
@@ -66,7 +53,7 @@ function RecentSlider(){
 
     return (
         <div className="container" style={{maxWidth:'700px'}} >
-        <h1 className="flex justify-center text-3xl font-bold mb-6">최신 업데이트</h1>
+        <h1 className="heading">최근 본 만화목록</h1>
         <Swiper
           effect={'coverflow'}
           grabCursor={true}

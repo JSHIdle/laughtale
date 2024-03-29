@@ -32,9 +32,7 @@ const LevelCartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
                                 key={index}
                             imageUrl={webtoon.imageUrl}
                             title={webtoon.title}
-                            authors={webtoon.authors}
-                            rating={webtoon.rating}
-                            link={webtoon.link}
+                                mangaId={+webtoon.link}
                         />
                     ))}
                     </ul>
