@@ -51,6 +51,7 @@ const Index = () => {
                 LV1
               </div>
             </div>
+
             <div>
               <CustomSlider slides={slideDatas}/>
             </div>
