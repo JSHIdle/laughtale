@@ -6,8 +6,7 @@ interface Cartoon {
     imageUrl: string;
     title: string;
     authors: string;
-    rating: number;
-    link: string;
+    mangaId: string;
 }
 
 interface CartoonGridProps {
@@ -32,7 +31,7 @@ const LevelCartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
                                 key={index}
                             imageUrl={webtoon.imageUrl}
                             title={webtoon.title}
-                                mangaId={+webtoon.link}
+                                mangaId={+webtoon.mangaId}
                         />
                     ))}
                     </ul>
