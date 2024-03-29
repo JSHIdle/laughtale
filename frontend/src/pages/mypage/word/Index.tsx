@@ -2,44 +2,39 @@ import React, { useState, useEffect } from 'react';
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import Header from "../../../components/common/Header.tsx";
 import myImage from '../../../assets/badge/badge1.png';
-import client from "../../../apis";
+import {useQuery} from "@tanstack/react-query";
+import getWordInfo from "../../../components/mypage/getWordInfo.tsx";
 
 const Index = () => {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+  ///api/word-book/{level}?page={value}&size={value}
 
-  // const id = 7;
+  const level = 1;
+  const page = 0;
+  const size = 100;
 
-  // useEffect(() => {
-  // client.get(`/quiz/${id}`
-  // ).then((response) => {
-  //   setData(response.data);
-  // })
-  // .catch((error) => {
-  //   console.error("There was an error!", error);
-  // });
-  // }, []); // 빈 배열로 컴포넌트가 마운트될때만 실행되도록.
+  const { data: wordData, isLoading, error } = useQuery({
+    queryKey: ['wordBook', level, page, size],
+    queryFn: () => getWordInfo(level, page, size)
+  });
 
+  const [slideDatas, setSlideDatas] = useState([]);
 
-  const dummyData = Array.from({ length: 24 }, (_, index) => ({
-    id: index,
-    content: `あ-う [会う] 
-동사 1.만나다
-2.대면하다;면회하다
-3.우연히 만나다;조우하다`,
-    text: `항목 ${index + 1}`
+  useEffect(() => {
+    // wordData가 로딩되었을 때 slideDatas를 생성.
+    console.log('Raw wordData:', wordData);
+    if (wordData && !isLoading) {
+      const newSlideDatas = [];
+      for (let i = 0; i < wordData.length; i += 9) {
+        newSlideDatas.push(wordData.slice(i, i + 9));
+      }
+      console.log('Processed slideDatas:', newSlideDatas);
+      setSlideDatas(newSlideDatas);
+    }
+  }, [wordData, isLoading]);
 
-  }));
+  console.log(slideDatas);
 
-
-  // dummyData를 6개 단위로 나누어 slideData를 생성
-  const slideDatas = [];
-  for (let i = 0; i < dummyData.length; i += 9) {
-    slideDatas.push(dummyData.slice(i, i + 9));
-  }
-
-  console.log(data);
-
-  // CustomSlider 컴포넌트에 slideData를 slides props로 전달
   return (
       <div className="flex flex-col bg-[#121212]" style={{ height: 'calc(100vh * 1.1111)' }}>
         <div><Header/></div>
@@ -53,7 +48,7 @@ const Index = () => {
             </div>
 
             <div>
-              <CustomSlider slides={slideDatas}/>
+              {slideDatas && <CustomSlider slides={slideDatas}/>}
             </div>
           </div>
         </div>
