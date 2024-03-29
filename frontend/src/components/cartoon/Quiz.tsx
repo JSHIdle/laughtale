@@ -27,7 +27,7 @@ const Quiz = () => {
     console.log(quizData);
 
     return (
-        <div className="bg-[#1D1D21] min-h-screen">
+        <div className="bg-[#121212] min-h-screen">
             <Header/>
             <div className="max-w-[450px] m-auto">
                 <div className="flex justify-center pt-6">
