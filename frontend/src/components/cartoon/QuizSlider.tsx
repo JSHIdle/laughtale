@@ -24,14 +24,14 @@ function Modal({ isOpen, onClose ,  modalData}) {
 
                     <div className="flex flex-col justify-between ">
                         <div className="flex flex-col justify-center items-center h-full text-white p-6">
-                            <div className="rounded-xl  mb-12 w-[100px]">
+                            <div className="rounded-xl  mb-6 w-[100px]">
                                 <div>
-                                    <h2 className="flex justify-center text-xl text-white font-bold">단어 힌트</h2>
+                                    <h2 className="flex justify-center text-3xl text-white font-bold">단어 힌트</h2>
                                 </div>
                             </div>
                             <div className="rounded-xl bg-[#2D2D32] mb-6 p-12">
                                 <div>
-                                    <h2 className="text-xl text-white font-bold"
+                                    <h2 className="text-2xl text-white font-bold"
                                         dangerouslySetInnerHTML={{__html: modalData}}></h2>
                                 </div>
                             </div>
@@ -65,9 +65,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const closeModal = () => setIsModalOpen(false);
 
 
-    // const replaceWord = slide.option[slide.answerNo - 1];
-    // const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '___');
-
     return (
         <div>
             <Slider ref={sliderRef} {...settings}>
@@ -92,23 +89,39 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
                                             className="ml-6 font-bold text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
-                                            // onClick={() => openModal(slide.definition)}
-                                        >힌트</button>
-
+                                            onClick={() => {
+                                                openModal();
+                                                setModalData(slide.definition);
+                                            }}>힌트</button>
                                     </div>
-                                    <div className="flex justify-center items-center font-bold">{modifiedSentence}</div>
+
+                                    <div className="flex justify-center items-center p-3 mb-3">
+                                        <div
+                                            className="flex justify-center items-center bg-[#2D2D32] rounded-3xl p-3 max-w-[450px]">
+                                            <div
+                                                className="flex justify-center items-center font-bold p-6 mr-12 ml-12 text-wrap overflow-wrap"
+                                                style={{whiteSpace: 'normal', wordWrap: 'break-word'}}>
+                                                {modifiedSentence}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div className="flex justify-center items-center p-3">
                                         <div className="w-[450px]">
                                             <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
                                                 {slide.option.map((option, idx) => (
-                                                    <button key={idx} className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
+                                                    <button key={idx}
+                                                            className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
                                                 ))}
                                             </div>
                                         </div>
                                     </div>
                                     {index === slides.length - 1 && (
                                         <div className="flex justify-center items-center mt-4 p-12">
-                                            <button onClick={handleClick} className="text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기</button>
+                                            <button onClick={handleClick}
+                                                    className="text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
+                                            </button>
                                         </div>
                                     )}
                                 </div>
