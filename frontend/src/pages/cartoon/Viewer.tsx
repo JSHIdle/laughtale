@@ -1,10 +1,60 @@
-import image from '/src/assets/test.jpg';
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import "./hoverBox.css"
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {ChapterListResponse} from "../../types/types";
+import {getChapterList} from "../../apis/cartoon.ts";
+import {useInView} from "react-intersection-observer";
+import {getImageByChapterId} from "../../apis/viewer.ts";
+import {Link, useParams} from "react-router-dom";
+import client from "../../apis";
+import img from '../../assets/test.jpg';
+import ChapterList from "../../components/cartoon/ChapterList.tsx";
 
+// const test = {
+//     content:[
+//         {
+//             imageUrl:"test",
+//             width:800,
+//             height:1137,
+//             speeches:[{
+//                 id:516,
+//                 sentence: "abcd",
+//                 position: {
+//                     id: 516,
+//                     leftTopX: 384,
+//                     leftTopY: 207,
+//                     rightTopX: 450,
+//                     rightTopY: 207,
+//                     leftBottomX: 384,
+//                     leftBottomY: 292,
+//                     rightBottomX: 450,
+//                     rightBottomY: 292
+//                 }
+//          }]
+//         }
+//     ]
+// }
+
+const defaultSize = 5;
 
 
 const Viewer = () => {
+    const params = useParams()
+    const mangaId = + params.title;
+    const chapterId = + params.id;
+    const [data, setData] = useState();
+    const [page, setPage] = useState();
+    const {ref, inView} = useInView({
+        threshold: 0,
+        triggerOnce: false
+    })
+
+    useEffect(() => {
+        if(inView) {
+            //chapterId: number, page: number, size: number}
+            setData({...data, getImageByChapterId({chapterId, page, size:5}})
+        }
+    }, []);
 
     const imageRef = useCallback((node: HTMLElement) =>{
         if(node !== null){
@@ -12,20 +62,13 @@ const Viewer = () => {
         }
     },[]);
     return (
-            <div className="bg-gray-600">
-                {/*<div className="text-center">*/}
-                {/*    <div className="inline-block relative">*/}
-                {/*        {*/}
-                {/*            list[0].word.map((d) => {*/}
-                {/*                const {x1,y1,x2,y2} = d;*/}
-                {/*                const r = getPosition(list[0].width,list[0].height, x1,y1,x2,y2);*/}
-                {/*                return <div style={{left:`${r.x1}%`, top:`${r.y1}%`,right:`${r.x2}%`, bottom:`${r.y2}%`}} className="hover:border hover:border-gray-500 hover:border-4 absolute"> </div>*/}
-                {/*            })*/}
-                {/*        }*/}
-                {/*        <img ref={imageRef} src={image} onClick={onClick}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-            </div>
+        <div className="bg-gray-600">
+
+
+
+            <div ref={ref}></div>
+            <Link to={`/quiz/new/${chapterId}`}>test</Link>
+        </div>
     );
 }
 export default Viewer;
