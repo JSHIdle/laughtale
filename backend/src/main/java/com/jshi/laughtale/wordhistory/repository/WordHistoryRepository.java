@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WordHistoryRepository extends JpaRepository<WordHistory, Long> {
-	Optional<List<WordHistory>> findByMemberId(Long memberId);
+	List<WordHistory> findByMemberId(Long memberId);
 
 	List<WordHistory> findAllByWordDataIdIn(List<Long> list);
 
 	Optional<WordHistory> findByMemberIdAndWordDataId(Long memberId, Long wordDataId);
+
+	List<WordHistory> findByMemberIdAndStudyCntGreaterThan(Long memberId, int num);
 }

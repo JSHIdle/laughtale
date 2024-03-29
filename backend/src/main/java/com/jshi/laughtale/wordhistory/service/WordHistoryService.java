@@ -3,6 +3,8 @@ package com.jshi.laughtale.wordhistory.service;
 import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
+import com.jshi.laughtale.wordhistory.dto.WordHistoryDto;
+import com.jshi.laughtale.wordhistory.mapper.WordHistoryMapper;
 import com.jshi.laughtale.wordhistory.repository.WordHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,9 +23,21 @@ public class WordHistoryService {
 	private final WordHistoryRepository wordHistoryRepository;
 	private final MemberService memberService;
 
+	public WordHistoryDto.Response getMemberWordHistoryData(Long memberId) {
+		return WordHistoryDto.Response.builder()
+			.memberId(memberId)
+			.historyList(getMemberWordHistoryWhereStudyCntGreaterThanZero(memberId).stream().map(WordHistoryMapper::toMemberWordData).toList())
+			.build();
+	}
+	public List<WordHistory> getMemberWordHistoryWhereStudyCntGreaterThanZero(Long memberId){
+		return wordHistoryRepository.findByMemberIdAndStudyCntGreaterThan(memberId,0);
+
+	}
+
+
 	public List<WordHistory> getMemberWordHistory(Long memberId) {
 
-		return wordHistoryRepository.findByMemberId(memberId).orElse(null);
+		return wordHistoryRepository.findByMemberId(memberId);
 	}
 
 	public List<WordHistory> findByWordIdIn(List<Long> list) {
