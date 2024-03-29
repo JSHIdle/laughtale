@@ -14,12 +14,11 @@ type Props = {
     thumbnail: string;
     level:null | number;
   }>
+  mangaId: number;
+  title: string;
 }
 export default function ChapterList(props: Props){
-  const queryClient = useQueryClient();
-  const query: Cartoon = queryClient.getQueryData(['mangaInfo', 10]);
-
-  return props.content.map((item) => <ChapterItem {...item} title={query?.title} />)
+  return props.content.map((item) => <ChapterItem {...item} mangaId={props.mangaId} title={props.title} />)
 }
 
 
