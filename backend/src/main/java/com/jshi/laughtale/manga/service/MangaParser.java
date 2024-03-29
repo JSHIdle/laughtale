@@ -15,6 +15,8 @@ import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.position.domain.Position;
 import com.jshi.laughtale.position.mapper.PositionMapper;
 import com.jshi.laughtale.speech.domain.Speech;
+import com.jshi.laughtale.speech.dto.SpeechBasic;
+import com.jshi.laughtale.speech.dto.SpeechDetail;
 import com.jshi.laughtale.speech.mapper.SpeechMapper;
 import com.jshi.laughtale.speech.repository.SpeechRepository;
 import com.jshi.laughtale.worddata.domain.WordData;
@@ -85,7 +87,7 @@ public class MangaParser {
 
     private CutAnalyze.Response parseCut(Cut cutEntity, List<Object> speech) {
         List<Speech> speeches = cutEntity.getSpeeches();
-        List<String> sentences = new ArrayList<>();
+        List<SpeechDetail.Response> sentences = new ArrayList<>();
         List<WordDataDetail.Response> words = new ArrayList<>();
         CutAnalyze.Response analyzeResponse = CutMapper.toAnalyzeResponse(cutEntity);
 
@@ -100,7 +102,7 @@ public class MangaParser {
             Speech speechEntity = SpeechMapper.toEntity(cutEntity, sentence, speechNo, positionEntity);
             speechRepository.save(speechEntity);
             speeches.add(speechEntity);
-            sentences.add(sentence);
+            sentences.add(SpeechMapper.toAnalyzeResponse(speechEntity));
             words.addAll(parseWords(speechEntity, wordList));
         }
         analyzeResponse.setWords(words);
