@@ -61,7 +61,7 @@ const Index = () => {
                     "Content-Type":"multipart/form-data"
                 },
 
-            });
+            }).then((response) => console.log(response.data));
             setLoading(false);
 
             // if (response.ok) {
