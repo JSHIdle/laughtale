@@ -12,15 +12,19 @@ public class CutAnalyze {
 
     @Getter
     public static class Response {
-        String imageUrl;
+        private String imageUrl;
+        private Integer width;
+        private Integer height;
         @Setter
-        List<String> sentence = new ArrayList<>();
+        private List<String> sentence = new ArrayList<>();
         @Setter
-        List<WordDataDetail.Response> words = new ArrayList<>();
+        private List<WordDataDetail.Response> words = new ArrayList<>();
 
         @Builder
-        public Response(String imageUrl) {
+        public Response(String imageUrl, Integer width, Integer height) {
             this.imageUrl = imageUrl;
+            this.width = width;
+            this.height = height;
         }
     }
 }
