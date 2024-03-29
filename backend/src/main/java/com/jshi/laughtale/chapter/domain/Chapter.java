@@ -16,6 +16,7 @@ import static jakarta.persistence.CascadeType.PERSIST;
 @Builder
 @Entity
 @Getter
+@Setter
 public class Chapter {
 
     @Id

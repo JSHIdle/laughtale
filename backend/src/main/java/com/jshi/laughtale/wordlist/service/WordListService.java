@@ -19,7 +19,7 @@ public class WordListService {
     private final WordListRepository wordListRepository;
 
     @Transactional(readOnly = true)
-    public List<QuizWord> findWordListsWithLevel(int level, int chapterId) {
+    public List<QuizWord> findWordListsWithLevel(int level, long chapterId) {
         List<Tuple> tempList = wordListRepository.findWordListsWithLevel(level, chapterId);
         List<QuizWord> quizList = new ArrayList<>();
         for (Tuple tuple : tempList) {
@@ -52,4 +52,9 @@ public class WordListService {
     public List<WordList> loadWordListBySpeechId(Long speechId) {
         return wordListRepository.findAllBySpeechId(speechId);
     }
+
+    public List<Tuple> findCalculatedChapterLevel(Long chapterId){
+        return wordListRepository.findCalculatedChapterLevel(chapterId);
+    }
+
 }
