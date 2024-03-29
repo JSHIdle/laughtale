@@ -24,15 +24,21 @@ export default function CartoonHeader(p: Props) {
   });
   if(props){
     console.log("TEST")
+    console.log(props)
   }
   return <>
       <div
         className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
-        <div className="">
-          <img
-            src={props.thumbnail} className="w-[300px]"/>
-        </div>
-        <div className="p-10">
+        {
+          props.thumbnail ? <div style={{
+            backgroundImage: `url(${props.thumbnail})`,
+            objectFit: "cover",
+            flexShrink: 0,
+            width: "300px",
+            height: "400px"
+          }}></div> : null
+        }
+        <div className="p-10 flex-grow">
           <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
           {/*<div className="font-bold text-xl text-white">작가 : {props.author}</div>*/}
           {/*<div className="font-bold text-xl text-white">장르 : {props.genre}</div>*/}
