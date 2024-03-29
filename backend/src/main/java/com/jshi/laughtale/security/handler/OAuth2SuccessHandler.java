@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 @RequiredArgsConstructor
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
-    private final String BASE_URL = "http://localhost:5173/login";
+    private final String BASE_URL = "https://j10a705.p.ssafy.io/login";
     private final String ACCESS_HEADER = "accessToken";
 
     private final JwtProcessor jwtProcessor;
