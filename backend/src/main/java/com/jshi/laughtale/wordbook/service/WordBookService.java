@@ -4,18 +4,21 @@ import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.wordbook.domain.WordBook;
 import com.jshi.laughtale.wordbook.dto.WordBookBasic;
+import com.jshi.laughtale.wordbook.exception.AlreadyExistWordBook;
 import com.jshi.laughtale.wordbook.mapper.WordBookMapper;
 import com.jshi.laughtale.wordbook.repository.WordBookRepository;
 import com.jshi.laughtale.worddata.domain.WordData;
-import com.jshi.laughtale.worddata.repository.WordDataRepository;
 import com.jshi.laughtale.worddata.service.WordDataService;
+import com.jshi.laughtale.wordlist.exception.NotExistWordListException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class WordBookService {
 
@@ -26,9 +29,15 @@ public class WordBookService {
     public void addWord(Long wordId, Long memberId) {
         WordData wordData = wordDataService.loadWoadDataById(wordId);
         Member member = memberService.findById(memberId);
-        wordBookRepository.save(WordBookMapper.toEntity(wordData, member));
+        WordBook wordBook = wordBookRepository.findByMemberAndWordData(member, wordData).orElse(null);
+        if (wordBook == null) {
+            wordBookRepository.save(WordBookMapper.toEntity(wordData, member));
+        } else {
+            throw new AlreadyExistWordBook();
+        }
     }
 
+    @Transactional(readOnly = true)
     public Page<WordBookBasic.Response> loadWordBook(int level, long memberId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<WordBook> wordBookList = wordBookRepository.findAllByMemberIdWithLevel(level, memberId, pageable);
@@ -36,6 +45,7 @@ public class WordBookService {
     }
 
     public void deleteWordBook(Long id) {
+        wordBookRepository.findById(id).orElseThrow(NotExistWordListException::new);
         wordBookRepository.deleteById(id);
     }
 }
