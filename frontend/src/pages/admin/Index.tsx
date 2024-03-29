@@ -3,8 +3,10 @@ import Header from '../../components/common/Header';
 import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.tsx";
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
+import mangaData from "../../../data.tsx"
 import client from "../../apis";
 import Spinner from "../../components/common/Spinner.tsx";
+import UploadResult from "../../components/admin/UploadResultComponent.tsx";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
@@ -76,38 +78,39 @@ const Index = () => {
         }
     };
 
-
-    return <div className="bg-[#1D1D21] min-h-screen relative">
-        {
-            loading ?
-                <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
-                </div> : <></>
-        }
-        <div className="max-w-[700px] m-auto">
-            <div>
-                <Header/>
-            </div>
-            <div className="text-white font-bold pt-10 pb-3">신규만화 등록</div>
-            <div>
-                <CartoonInfoComponent
-                    title={cartoonInfo.title}
-                    author={cartoonInfo.author}
-                    genres={cartoonInfo.genres}
-                    description={cartoonInfo.description}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <FileUploadComponent
-                    thumbnailInputRef={thumbnailInputRef}
-                    filesInputRef={filesInputRef}
-                />
-            </div>
-            <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
-                등록하기
-            </button>
-        </div>
-    </div>
+    const data = mangaData;
+    return (<UploadResult {...data}></UploadResult>)
+    // return <div className="bg-[#1D1D21] min-h-screen relative">
+    //     {
+    //         loading ?
+    //             <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
+    //             </div> : <></>
+    //     }
+    //     <div className="max-w-[700px] m-auto">
+    //         <div>
+    //             <Header/>
+    //         </div>
+    //         <div className="text-white font-bold pt-10 pb-3">신규만화 등록</div>
+    //         <div>
+    //             <CartoonInfoComponent
+    //                 title={cartoonInfo.title}
+    //                 author={cartoonInfo.author}
+    //                 genres={cartoonInfo.genres}
+    //                 description={cartoonInfo.description}
+    //                 onChange={handleChange}
+    //             />
+    //         </div>
+    //         <div>
+    //             <FileUploadComponent
+    //                 thumbnailInputRef={thumbnailInputRef}
+    //                 filesInputRef={filesInputRef}
+    //             />
+    //         </div>
+    //         <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
+    //             등록하기
+    //         </button>
+    //     </div>
+    // </div>
 }
 
 export default Index;

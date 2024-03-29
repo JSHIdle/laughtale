@@ -43,4 +43,33 @@ export type Size = {
     width:number;
     height: number;
 }
+
+export type MangaAnalyze = {
+    title: string,
+    author: string,
+    category: string,
+    description: string,
+    chapter: Array<ChapterAnalyze>
+}
+
+export type ChapterAnalyze = {
+    chapterNo: number,
+    level: number,
+    cuts: Array<CutAnalyze>
+}
+
+export type CutAnalyze = {
+    imageUrl: string,
+    width: number,
+    height: number,
+    sentence: Array<string>,
+    words: Array<WordAnalyze>
+}
+
+export type WordAnalyze = {
+    word: string,
+    definition: string,
+    partOfSpeech: string,
+    level: number
+}
 export type MangaImageResponse = Response<MangaImgInfo>;
