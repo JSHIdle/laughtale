@@ -5,6 +5,7 @@ import com.jshi.laughtale.manga.dto.*;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/manga")
@@ -28,6 +30,8 @@ public class MangaController {
             @RequestPart MangaUpload.Request manga,
             @RequestPart List<MultipartFile> files
     ) throws IOException {
+        log.info("manga : {}", manga.toString());
+        log.info("thumbnail: {}", thumbnail.getOriginalFilename());
         return ResponseEntity.ok(mangaService.upload(thumbnail, manga, files));
     }
 
