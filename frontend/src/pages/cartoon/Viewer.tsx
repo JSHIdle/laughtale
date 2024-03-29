@@ -49,12 +49,12 @@ const Viewer = () => {
     const mangaId = + params.title;
     const chapterId = + params.id;
     const [data, setData] = useState(null);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState();
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
     })
-    const [word, setWord] = useState(null);
+    const [word, setWord] = useState([]);
 
     useEffect(() => {
         getImageByChapterId({chapterId, page, size:5}).then(res => setData({...res}));
@@ -69,8 +69,10 @@ const Viewer = () => {
     //     }
     // },[]);
     const onClick = useCallback(async (id) => {
-        const wordData = await get(`/word-data/speech/${id}`);
-        alert(wordData.map(d => d.definition));
+        const wordData = await get(`/word-data/speech/${id}`) as Array<any>;
+        if(wordData) {
+            alert(wordData.map((d) => d.definition));
+        }
         console.log(wordData)
         setWord(wordData);
     },[]);
