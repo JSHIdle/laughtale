@@ -1,5 +1,6 @@
 package com.jshi.laughtale.cut.dto;
 
+import com.jshi.laughtale.speech.dto.SpeechDetail;
 import com.jshi.laughtale.worddata.dto.WordDataDetail;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class CutAnalyze {
         private Integer width;
         private Integer height;
         @Setter
-        private List<String> sentence = new ArrayList<>();
+        private List<SpeechDetail.Response> sentence = new ArrayList<>();
         @Setter
         private List<WordDataDetail.Response> words = new ArrayList<>();
 

@@ -34,4 +34,8 @@ public class Chapter {
 
     @OneToMany(mappedBy = "chapter", cascade = PERSIST, orphanRemoval = true)
     private List<Cut> cuts = new ArrayList<>();
+
+    public void updateLevel(int level) {
+        this.level = level;
+    }
 }
