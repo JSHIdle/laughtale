@@ -18,7 +18,7 @@ function ImageWithWhiteBox({ src, boxCoordinates, sentence }) {
             // 하얀색 사각형 그리기
             context.fillStyle = 'white';
             // boxCoordinates는 [x, y, width, height] 형태로 가정
-            context.fillRect(...boxCoordinates);
+            context.fillRect(boxCoordinates.x, boxCoordinates.y, boxCoordinates.width, boxCoordinates.height);
 
             // 텍스트 추가
             const text = sentence; // 추가할 텍스트
