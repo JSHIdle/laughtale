@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 
-
-
 function ImageWithWhiteBox({ src, boxCoordinates, sentence, scaleFactor = 0.5}) {
     const canvasRef = useRef(null);
 

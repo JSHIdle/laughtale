@@ -64,72 +64,57 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    return(
+
+    // const replaceWord = slide.option[slide.answerNo - 1];
+    // const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '___');
+
+    return (
         <div>
             <Slider ref={sliderRef} {...settings}>
-                {slides.map((slide,index) => (
-                    // const replaceWord = slide.option[slide.answerNo - 1];
-                    // const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '___');
+                {slides.map((slide, index) => {
+                    const replaceWord = slide.option[slide.answerNo - 1];
+                    const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '  __?__  ');
 
-                    <div key={index} className="w-[1300px] ">
-                        <div className="text-white p-12 flex justify-center items-center grid grid-cols-2">
-                            <div key={slide.id} className="flex justify-end items-center">
-                                  <pre className="font-semibold p-3">
-                                    {slide.text}
-                                  </pre>
-                                <ImageWithWhiteBox key={index} src={slide.imageUrl}  boxCoordinates={{
-                                    x: slide.leftBottomX,
-                                    y: slide.leftBottomY,
-                                    width: slide.rightTopX - slide.leftBottomX,
-                                    height: slide.rightTopY - slide.leftBottomY
-                                }}
-                                />
-                            </div>
-                            <div>
-                                <div className="font-semibold text-white p-6 flex justify-center items-center">
-                                    Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
-                                    <button
-                                        className="ml-6 font-bold text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
-                                        onClick={() => {
-                                            openModal();
-                                            setModalData(slide.definition);
-                                        }}>힌트</button>
+                    return (
+                        <div key={index} className="w-[1300px] ">
+                            <div className="text-white p-12 flex justify-center items-center grid grid-cols-2">
+                                <div className="flex justify-end items-center">
+                                    <pre className="font-semibold p-3"></pre>
+                                    <ImageWithWhiteBox src={slide.imageUrl} boxCoordinates={{
+                                        x: slide.leftBottomX,
+                                        y: slide.leftBottomY,
+                                        width: slide.rightTopX - slide.leftBottomX,
+                                        height: slide.rightTopY - slide.leftBottomY
+                                    }}/>
                                 </div>
-                                <div key={index} className="flex justify-center items-center p-6">
-                                    {/*{modifiedSentence}*/}
-                                </div>
+                                <div>
+                                    <div className="font-semibold text-white p-6 flex justify-center items-center">
+                                        Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
+                                        <button
+                                            className="ml-6 font-bold text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
+                                            onClick={() => openModal(slide.definition)}>힌트</button>
 
-                                <div className="flex justify-center items-center p-3">
-                                    <div className="w-[450px]">
-                                        <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
-                                            <button
-                                                className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[0]}
-                                            </button>
-                                            <button
-                                                className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[1]}
-                                            </button>
-                                            <button
-                                                className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[2]}
-                                            </button>
-                                            <button
-                                                className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{slide.option[3]}
-                                            </button>
-                                        </div>
-
-                                        {index === slides.length - 1 && (
-                                            <div className="flex justify-center items-center mt-4 p-12">
-                                                <button onClick={handleClick}
-                                                        className="text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
-                                                </button>
-                                            </div>
-                                        )}
                                     </div>
+                                    <div className="flex justify-center items-center font-bold">{modifiedSentence}</div>
+                                    <div className="flex justify-center items-center p-3">
+                                        <div className="w-[450px]">
+                                            <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
+                                                {slide.option.map((option, idx) => (
+                                                    <button key={idx} className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {index === slides.length - 1 && (
+                                        <div className="flex justify-center items-center mt-4 p-12">
+                                            <button onClick={handleClick} className="text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기</button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                ))}
+                    );
+                })}
             </Slider>
             <Modal isOpen={isModalOpen} onClose={closeModal} modalData={modalData}/>
         </div>
