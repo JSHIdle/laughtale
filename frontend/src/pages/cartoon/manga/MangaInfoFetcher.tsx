@@ -1,8 +1,9 @@
 import {useQuery, useSuspenseQuery} from "@tanstack/react-query";
 import {getMangaInfo} from "../../../apis/cartoon.ts";
 import {ThemeProvider} from "@material-tailwind/react";
-import {ReactNode} from "react";
+import {ReactNode, Suspense, useEffect} from "react";
 import {Cartoon} from "../../../types/types";
+import CartoonHeader from "../../../components/cartoon/CartoonHeader.tsx";
 
 type Props = {
   mangaId: number
@@ -16,8 +17,8 @@ export default function MangaInfoFetcher (props: Props){
     queryFn: () => getMangaInfo(+ mangaId),
     retry:0
   });
-  return <>
-    {children}
-  </>
-
+  useEffect(() => {
+    console.log("fetcher");
+  }, []);
+  return <>{children}</>
 }

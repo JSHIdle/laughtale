@@ -15,23 +15,26 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  height :100%;
+  margin: 0;
+  padding:0;
 }
 
 @media (min-width: 1440px) {
   html {
-    zoom: 1.5;
+    zoom: 0.9;
   }
 }
 
 @media (min-width: 2560px) {
   html {
-    zoom: 1.7;
+    zoom: 0.9;
   }
 }
 
 @media (min-width: 3860px) {
   html {
-    zoom: 2.5;
+    zoom: 0.9;
   }
 }
 
@@ -187,4 +190,3 @@ body {
 .swiper-pagination .swiper-pagination-bullet-active {
   background: var(--primary);
 }
-

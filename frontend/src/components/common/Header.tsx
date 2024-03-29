@@ -1,17 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/logo.png';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthButton from "./AuthButton.tsx";
 
 const Header = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <div className="bg-[rgba(23,23,26,0.40)] flex justify-between items-center px-10 ml-40">
+        <div className={`bg-[#121212] flex justify-between items-center px-10 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
             <div className="flex justify-center flex-grow">
-                <Link to="/home"> {/* 로고 이미지를 클릭하면 '/home'으로 이동 */}
+                <Link to="/home">
                     <img src={Logo} alt="Logo" height="200" width="170"></img>
                 </Link>
             </div>
             <AuthButton/>
-            {/*<Link to={`/mypage`} className="text-lg text-white hover:text-gray-800">마이페이지</Link>*/}
         </div>
     )
 }
