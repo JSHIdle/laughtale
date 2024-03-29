@@ -12,11 +12,13 @@ import com.jshi.laughtale.wordlist.service.WordListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class WordDataService {
 
@@ -24,14 +26,17 @@ public class WordDataService {
     private final SpeechService speechService;
     private final WordDataRepository wordDataRepository;
 
+    @Transactional(readOnly = true)
     public String findDefinitionByWord(String word) {
         return wordDataRepository.findByWord(word).orElseThrow().getDefinition();
     }
 
+    @Transactional(readOnly = true)
     public WordData loadWoadDataById(Long id) {
         return wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
     }
 
+    @Transactional(readOnly = true)
     public WordDataDetail.Response loadWordDataDetail(Long id) {
         WordData wordData = wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
         List<WordList> wordList = wordListService.loadWordListByWordData(wordData);
@@ -39,6 +44,7 @@ public class WordDataService {
         return WordDataMapper.toDetailResponse(wordData, speechBasicList);
     }
 
+    @Transactional(readOnly = true)
     public List<WordDataDetail.Response> loadWordDataDetailWithoutSpeech(Long speechId) {
         List<WordList> wordList = wordListService.loadWordListBySpeechId(speechId);
         List<WordData> wordDataList = wordList.stream().map(w -> wordDataRepository
