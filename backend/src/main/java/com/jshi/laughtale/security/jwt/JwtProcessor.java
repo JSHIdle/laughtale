@@ -47,7 +47,7 @@ public class JwtProcessor implements BeanPostProcessor {
         Claims claims = Jwts.claims()
                 .setSubject(email)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + Duration.ofDays(60).toNanos()));
+                .setExpiration(new Date(now.getTime() + Duration.ofHours(1).toNanos()));
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setClaims(claims)
