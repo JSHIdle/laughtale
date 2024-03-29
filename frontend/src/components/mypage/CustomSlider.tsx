@@ -28,7 +28,6 @@ const settings = {
     slidesToShow: 1, // 한 번에 보여질 슬라이드 페이지 수
     slidesToScroll: 1 // 스크롤할 때마다 넘어갈 슬라이드 페이지 수
 };
-
 const handleIconClick = () => {
     playTTS(dummyData.text);
 };
