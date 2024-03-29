@@ -19,6 +19,7 @@ client.interceptors.request.use(
     console.log(token);
 
     config.headers.Authorization = `${accessToken}`;
+
     return config;
   },
 (error) => {
