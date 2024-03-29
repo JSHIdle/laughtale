@@ -2,22 +2,23 @@ package com.jshi.laughtale.wordlist.service;
 
 import com.jshi.laughtale.quiz.dto.QuizWord;
 import com.jshi.laughtale.worddata.domain.WordData;
-import com.jshi.laughtale.worddata.dto.WordDataDetail;
-import com.jshi.laughtale.worddata.service.WordDataService;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.repository.WordListRepository;
 import jakarta.persistence.Tuple;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class WordListService {
     private final WordListRepository wordListRepository;
 
+    @Transactional(readOnly = true)
     public List<QuizWord> findWordListsWithLevel(int level, int chapterId) {
         List<Tuple> tempList = wordListRepository.findWordListsWithLevel(level, chapterId);
         List<QuizWord> quizList = new ArrayList<>();
@@ -37,14 +38,17 @@ public class WordListService {
         return quizList;
     }
 
+    @Transactional(readOnly = true)
     public WordList findByWordDataIdAndSpeechId(Long wordId, Long speechId) {
         return wordListRepository.findByWordDataIdAndSpeechId(wordId, speechId).get(0);
     }
 
+    @Transactional(readOnly = true)
     public List<WordList> loadWordListByWordData(WordData wordData) {
         return wordListRepository.findAllByWordData(wordData);
     }
 
+    @Transactional(readOnly = true)
     public List<WordList> loadWordListBySpeechId(Long speechId) {
         return wordListRepository.findAllBySpeechId(speechId);
     }
