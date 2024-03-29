@@ -5,9 +5,8 @@ import CartoonCard from './CartoonCard'; // 경로는 실제 구조에 맞게 �
 interface Cartoon {
     imageUrl: string;
     title: string;
-    authors: string[];
-    rating: number;
-    link: string;
+    authors: string;
+    mangaId: string;
 }
 
 interface CartoonGridProps {
@@ -32,9 +31,7 @@ const LevelCartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
                                 key={index}
                             imageUrl={webtoon.imageUrl}
                             title={webtoon.title}
-                            authors={webtoon.authors}
-                            rating={webtoon.rating}
-                            link={webtoon.link}
+                                mangaId={+webtoon.mangaId}
                         />
                     ))}
                     </ul>

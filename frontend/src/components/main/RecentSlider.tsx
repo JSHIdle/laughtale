@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
@@ -6,65 +6,59 @@ import '../../../node_modules/swiper/swiper.min.css'
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
-import slide_image_1 from "/src/assets/samples/e2-1.jpg";
-import slide_image_2 from "/src/assets/samples/e3-1.jpg";
-import slide_image_3 from "/src/assets/samples/e4-1.jpg";
-import slide_image_4 from "/src/assets/samples/e4-2.jpg";
-import slide_image_5 from "/src/assets/samples/e2-2.jpg";
-import slide_image_6 from "/src/assets/samples/e2-4.jpg";
-
 function RecentSlider(){
-    // 슬라이드 정보를 저장하는 상태
-  const [slideInfo, setSlideInfo] = useState({ title: '', episode: '' });
 
-  // 각 슬라이드에 대한 정보를 담고 있는 배열
-  const slidesData = [
-    {
-        id: 1,
-        title: "용사들",
-        episode: "3화",
-        imageUrl: "/src/assets/samples/e2-1.jpg",
-      },
-      {
-        id: 2,
-        title: "만화2",
-        episode: "3화",
-        imageUrl: "/src/assets/samples/e3-1.jpg",
-      },
-      {
-        id: 3,
-        title: "만화3",
-        episode: "3화",
-        imageUrl: "/src/assets/samples/e4-2.jpg",
-      },
-      {
-        id: 4,
-        title: "만화4",
-        episode: "3화",
-        imageUrl: "/src/assets/samples/e3-4.jpg",
-      },
-      {
-        id: 5,
-        title: "만화5",
-        episode: "3화",
-        imageUrl: "/src/assets/samples/e1-3.jpg",
-      },
-      {
-        id: 5,
-        title: "만화6",
-        episode: "7화",
-        imageUrl: "/src/assets/samples/e3-3.jpg",
-      },
-  ];
+  const [swiperRef, setSwiperRef] = useState(null); // 여기에서 swiperRef 상태를 정의합니다.
+    // 슬라이드 정보를 저장하는 상태
+  const [slideInfo, setSlideInfo] = useState({ title: ''});
+
+    const [slidesData, setSlidesData] = useState([]);
+
+    useEffect(() => {
+        const fetchSlidesData = async () => {
+            try {
+                const response = await fetch('http://j10a705.p.ssafy.io/api/manga/recent'); // API 엔드포인트로 변경하세요.
+                const data = await response.json();
+                const slides = data.map(item => ({
+                    id: item.mangaId,
+                    title: item.title,
+                    imageUrl: item.thumbnail,
+                }));
+                setSlidesData(slides);
+            } catch (error) {
+                console.error("Failed to fetch slides data", error);
+            }
+        };
+        fetchSlidesData();
+    }, []);
+
+
+    // 슬라이드 클릭 핸들러 함수
+    const handleSlideClick = (index) => {
+        // 클릭한 슬라이드가 중앙에 위치하지 않았을 경우, 해당 슬라이드로 이동
+        if (swiperRef && swiperRef.realIndex !== index) {
+            swiperRef.slideTo(index);
+        } else {
+            // 여기에 중앙 슬라이드를 클릭했을 때의 페이지 이동 로직을 추가합니다.
+            console.log(`Navigating to: /comic/${slidesData[index].id}`);
+            // 예: window.location.href = `/comic/${slidesData[index].id}`;
+        }
+    };
+
+    // slidesData가 비어 있으면 아무것도 렌더링하지 않음
+    if (slidesData.length === 0) {
+        return null;
+    }
+
 
     return (
         <div className="container" style={{maxWidth:'700px'}} >
-        <h1 className="flex justify-center text-3xl font-bold mb-6">최신 업데이트</h1>
+        <h1 className="heading">최근 본 만화목록</h1>
         <Swiper
           effect={'coverflow'}
           grabCursor={true}
           centeredSlides={true}
-          loop={true}
+          loop={false}
           slidesPerView={'auto'}
           coverflowEffect={{
             rotate: 5,
@@ -77,10 +71,11 @@ function RecentSlider(){
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           }}
+          onSwiper={setSwiperRef} // Swiper 인스턴스 설정
           onSlideChange={(swiper) => {
             // 현재 중앙 슬라이드의 정보를 업데이트합니다.
             const currentSlideData = slidesData[swiper.realIndex];
-            setSlideInfo(currentSlideData);
+              setSlideInfo(currentSlideData);
           }}
           onInit={(swiper) => {
             // Swiper 초기화 시, 첫 번째 슬라이드 정보를 설정합니다.
@@ -89,30 +84,14 @@ function RecentSlider(){
           }}
           className="swiper_container"
         >
-            
-                <SwiperSlide>
-                    <img src={slide_image_1} alt="slide_image"/>
+            {slidesData.map((slide, index) => (
+                <SwiperSlide key={slide.id} onClick={() => handleSlideClick(index)}>
+                    <img src={slide.imageUrl} alt={`slide_image_${index}`} />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slide_image_2} alt="slide_image"/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slide_image_3} alt="slide_image"/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slide_image_4} alt="slide_image"/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slide_image_5} alt="slide_image"/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slide_image_6} alt="slide_image"/>
-                </SwiperSlide>
-
+            ))}
             </Swiper>
             <div className="slide-info">
-                {/*<div className='truncate '>{slideInfo.title}</div>*/}
-                {/*<div>{slideInfo.episode}</div>*/}
+                <div className='truncate '>{slideInfo.title}</div>
             </div>
            
         </div>
