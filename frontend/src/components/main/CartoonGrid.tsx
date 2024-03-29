@@ -1,6 +1,7 @@
 // CartoonGrid.tsx
 import React from 'react';
-import CartoonCard from './CartoonCard'; // 경로는 실제 구조에 맞게 조정해야 합니다.
+import CartoonCard from './CartoonCard';
+import {Link} from "react-router-dom"; // 경로는 실제 구조에 맞게 조정해야 합니다.
 
 interface Cartoon {
     thumbnail: string;
@@ -21,9 +22,9 @@ const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
         <div className="mx-auto comonent_wrap" style={{maxWidth: '600px'}}>
             <div className="flex items-center justify-between mb-4 ComponentHead">
                 <div className="text-2xl font-bold ComponentHead_title">Level {level}</div>
-                <a href={allCartoonsLink} className="text-lg text-white hover:text-white-800">
+                <Link to={allCartoonsLink} className="text-lg text-white hover:text-white-800">
                     Level {level} 만화 더보기
-                </a>
+                </Link>
             </div>
             <div className="p-2 mb-8">
                 <div className="mx-auto" style={{maxWidth: '950px'}}>
