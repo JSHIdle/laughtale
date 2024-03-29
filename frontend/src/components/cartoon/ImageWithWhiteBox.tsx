@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
+function ImageWithDottedBoxAndQuestionMark({ src, boxCoordinates, scaleFactor = 0.5 }) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -9,7 +9,6 @@ function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
         const image = new Image();
 
         image.onload = () => {
-            // 이미지와 박스, 텍스트의 크기를 scaleFactor로 조정
             const scaledWidth = image.width * scaleFactor;
             const scaledHeight = image.height * scaleFactor;
             const scaledX = boxCoordinates.x * scaleFactor;
@@ -17,32 +16,26 @@ function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
             const scaledBoxWidth = boxCoordinates.width * scaleFactor;
             const scaledBoxHeight = boxCoordinates.height * scaleFactor;
 
-            // 캔버스의 크기를 조정된 이미지의 크기로 설정
             canvas.width = scaledWidth;
             canvas.height = scaledHeight;
-
-            // 조정된 크기로 이미지 그리기
             context.drawImage(image, 0, 0, scaledWidth, scaledHeight);
 
-            // 조정된 크기와 위치로 하얀색 사각형 그리기
-            context.fillStyle = '#79a5e7';
-            context.fillRect(scaledX, scaledY, scaledBoxWidth+1, scaledBoxHeight+1);
+            // 사각형 채우기
+            context.fillStyle = 'white';
+            context.fillRect(scaledX, scaledY, scaledBoxWidth, scaledBoxHeight);
 
-            // 문장에서 입력받은 단어 지우기
-            // const modifiedSentence = sentence.replace(new RegExp(replaceWord, 'gi'), '___');
+            // 사각형 테두리 그리기
+            context.strokeStyle = 'blue';
+            context.setLineDash([5, 3]); // 점선 패턴 설정
+            context.lineWidth = 4; // 선의 두께를 더 두껍게 설정
+            context.strokeRect(scaledX, scaledY, scaledBoxWidth, scaledBoxHeight);
 
-            // 텍스트 추가
-            // context.fillStyle = 'green'; // 텍스트 색상 설정
-            // context.font = `bold ${20 * scaleFactor}px Arial`;
-
-            // 조정된 박스의 중앙 좌표 계산
-            // const centerX = scaledX + scaledBoxWidth / 2;
-            // const centerY = scaledY + scaledBoxHeight / 2;
-
-            // 조정된 크기와 위치로 텍스트 그리기
+            // '?' 문자 그리기
+            context.fillStyle = '#000';
+            context.font = `bold ${40 * scaleFactor}px Arial`;
             context.textAlign = "center";
             context.textBaseline = "middle";
-            // context.fillText(modifiedSentence, centerX, centerY);
+            context.fillText('?', scaledX + scaledBoxWidth / 2, scaledY + scaledBoxHeight / 2);
         };
 
         image.src = src;
@@ -51,4 +44,4 @@ function ImageWithWhiteBox({ src, boxCoordinates, scaleFactor = 0.5}) {
     return <canvas ref={canvasRef} />;
 }
 
-export default ImageWithWhiteBox;
+export default ImageWithDottedBoxAndQuestionMark;
