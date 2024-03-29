@@ -9,12 +9,12 @@ const MAX_SUMMARY_LENGTH = 400;
 interface CartoonInfoProps {
     title: string;
     author: string;
-    genre: string;
-    summary: string;
+    genres: string;
+    description: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-export const CartoonInfoComponent: React.FC<CartoonInfoProps> = ({ title, author, genre, summary, onChange }) => {
+export const CartoonInfoComponent: React.FC<CartoonInfoProps> = ({ title, author, genres, description, onChange }) => {
 
     return(
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
@@ -36,16 +36,16 @@ export const CartoonInfoComponent: React.FC<CartoonInfoProps> = ({ title, author
         />
         <TextInput
             label="장르"
-            name="genre"
-            value={genre}
+            name="genres"
+            value={genres}
             maxLength={MAX_GENRE_LENGTH}
             onChange={onChange}
             placeholder="  만화의 장르를 입력해 주세요"
         />
         <TextArea
             label="줄거리"
-            name="summary"
-            value={summary}
+            name="description"
+            value={description}
             maxLength={MAX_SUMMARY_LENGTH}
             onChange={onChange}
             placeholder="  작품의 줄거리를 작성해 주세요"

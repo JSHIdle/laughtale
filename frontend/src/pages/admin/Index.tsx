@@ -3,13 +3,14 @@ import Header from '../../components/common/Header';
 import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.tsx";
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
+import client from "../../apis";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
         title: '',
         author: '',
-        genre: '',
-        summary: ''
+        genres: '',
+        description: ''
     });
 
     const handleChange = useCallback((e) => {
@@ -42,25 +43,29 @@ const Index = () => {
 
         // FormData 내용을 콘솔에 출력하기 위한 로직 추가
         for (const [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
+            console.log(key, value);
         }
 
         // FormData를 사용하여 백엔드로 데이터 전송
-        // try {
-        //     const response = await fetch('YOUR_BACKEND_ENDPOINT', {
-        //         method: 'POST',
-        //         body: formData,
-        //         // multipart/form-data 타입은 fetch가 자동으로 설정함
-        //     });
-        //
-        //     if (response.ok) {
-        //         console.log('Upload successful');
-        //     } else {
-        //         console.error('Upload failed');
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // }
+        try {
+            // const response = await client.post('http://j10a705.p.ssafy.io/api/manga/upload', {
+            //      formData,{header}
+            // });
+            await client.post(`/manga/upload`, formData, {
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            });
+
+
+            // if (response.ok) {
+            //     console.log('Upload successful');
+            // } else {
+            //     console.error('Upload failed');
+            // }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
 
@@ -74,8 +79,8 @@ const Index = () => {
                 <CartoonInfoComponent
                     title={cartoonInfo.title}
                     author={cartoonInfo.author}
-                    genre={cartoonInfo.genre}
-                    summary={cartoonInfo.summary}
+                    genres={cartoonInfo.genres}
+                    description={cartoonInfo.description}
                     onChange={handleChange}
                 />
             </div>

@@ -37,7 +37,7 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
             <div className="w-1/3 bg-gray-800 p-6 rounded-lg mt-4 flex flex-col">
                 <div className="mb-2 font-bold text-gray-300">썸네일 등록</div>
                 <label
-                    className="w-full h-60 bg-gray-500 bg-no-repeat bg-center bg-cover rounded border-2 border-blue-400 flex items-center justify-center cursor-pointer">
+                    className="w-56 h-80 bg-gray-500 bg-no-repeat bg-center bg-cover rounded border-2 border-blue-400 flex items-center justify-center cursor-pointer">
                     {thumbnailPreview ? (
                         <img src={thumbnailPreview} alt="Thumbnail preview" className="rounded cursor-pointer"/>
                     ) : (
@@ -58,7 +58,7 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
             </div>
 
             {/* Comic Files Upload */}
-            <div className="w-1/3 bg-gray-800 p-6 rounded-lg mt-4 flex flex-col">
+            <div className="w-1/2 bg-gray-800 p-6 rounded-lg mt-4 flex flex-col">
                 <div className="mb-2 font-bold text-gray-300">만화 파일 등록</div>
                 <div className="overflow-auto h-56 border-2 border-gray-500 rounded-lg p-2">
                     {comicFiles.map((file, index) => (
