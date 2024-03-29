@@ -69,7 +69,7 @@ public class QuizService {
 		int memberLevel = memberService.getMemberLevel(
 			wordHistoryService.getMemberWordHistory(memberId));
 		// log.info("memberLevel : " + memberLevel);
-		memberLevel = Math.max(1, memberLevel);
+		memberLevel = Math.min(5, Math.max(1, memberLevel));
 		log.info(memberId + "번 회원의 추정 레벨은 : " + memberLevel + "입니다");
 		//사용자 실력에 해당하는 단어목록을 가져온다
 		List<QuizWord> quizWordList = wordListService.findWordListsWithLevel(memberLevel, chapterId);
@@ -112,7 +112,6 @@ public class QuizService {
 				sum += 100;
 			}
 		}
-
 
 		//문제에 출제할 단어를 고른다
 		List<QuizWord> selectedQuizWords = new ArrayList<>();
