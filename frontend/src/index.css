@@ -190,3 +190,11 @@ body {
 .swiper-pagination .swiper-pagination-bullet-active {
   background: var(--primary);
 }
+
+.hoverIcon {
+  color: white; /* 기본 색상 */
+}
+.hoverIcon:hover {
+  color: #2563eb; /* 호버 시 색상 - Tailwind의 blue-500에 해당하는 색상 코드 */
+  filter: brightness(200%);
+}

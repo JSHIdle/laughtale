@@ -1,25 +1,8 @@
 import Slider from "react-slick";
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
-
-const dummyData = {
-    text: 'こんにちは、世界！私の名前はAIです。', // 예시 일본어 텍스트
-    translate : '안녕? 뜻이 들어간다 ',
-    sentence : [{"idx" : 1, "japan" : "こんにちは、世界！私の名前はAIです", "korean" : "문장 뜻입니다."},
-        {
-            "idx": 2,
-            "japan": "こんにちは、世界！私の名前はAIです",
-            "korean": "문장 뜻입니다."
-        },
-        {
-            "idx": 3,
-            "japan": "こんにちは、世界！私の名前はAIです",
-            "korean": "문장 뜻입니다."
-        },
-        ]
-};
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -28,16 +11,45 @@ const settings = {
     slidesToShow: 1, // 한 번에 보여질 슬라이드 페이지 수
     slidesToScroll: 1 // 스크롤할 때마다 넘어갈 슬라이드 페이지 수
 };
-const handleIconClick = () => {
-    playTTS(dummyData.text);
-};
-function Modal({ isOpen, onClose, handleIconClick  }) {
+
+function DefinitionModal({ isOpen, onClose, definition  }) {
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-[#1D1D21] p-4 rounded-lg w-[900px] ">
+            <div className="bg-[#1D1D21] p-4 rounded-lg">
+                <div className="flex justify-between items-center w-full p-3">
+                    <div className="text-white flex-1 text-center">
+                        단어 해석
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="text-white rounded-full bg-grey-500 hover:bg-grey-700">
+                        X
+                    </button>
+                </div>
+                <div className="flex justify-items-center">
+                    {/*단어의 뜻이 클 수 있으므로 오른쪽 영역을 차지하도록 한다*/}
+                    <div className="flex justify-center text-white p-12">
+                        <div className="rounded-xl bg-[#2D2D32] p-12">
+                            <div>
+                                <h2 className="text-2xl text-white font-bold"
+                                    dangerouslySetInnerHTML={{__html: definition}}></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
+function ExampleModal({isOpen, onClose, Example  }) {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-[#1D1D21] p-4 rounded-lg w-[1000px]">
                 <div className="flex justify-end">
                     <button
                         onClick={onClose}
@@ -47,95 +59,68 @@ function Modal({ isOpen, onClose, handleIconClick  }) {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 p-3">
-                    <div className="flex flex-col justify-between">
+                <div className="grid grid-cols-3 gap-4 p-3 mb-[15px]">
+                    {/*만화의 장면과 예문이 함께 넘어간다*/}
+                    <div className="flex col-span-1 justify-end">
                         <ModalCarousel/>
                     </div>
 
-                    <div className="flex flex-col justify-between ">
-                        <div className="flex flex-col justify-center  h-full text-white">
-
-                            <div className="rounded-xl bg-[#2D2D32] mb-6 p-6">
-                                <div>
-                                    <h2 className="text-xl text-white font-bold">{dummyData.text}</h2>
-                                </div>
-                                <div>
-                                    <h2 className="text-xl text-white font-bold">{dummyData.translate}</h2>
-                                </div>
-                            </div>
-
-                            <div className="overflow-y-scroll h-60 scrollbar-hide">
+                    {/*예문 나열*/}
+                    <div className="flex flex-col col-span-2 justify-between ">
+                        <div className="flex flex-col justify-center  h-full text-white p-12">
+                            <div className="overflow-y-scroll h-[350px] scrollbar-hide">
                                 <div
                                     className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
                                     <div className="flex items-center justify-start">
                                         <div className="mr-3">
                                             <h2>여기에 예문이 온다. (1) </h2>
                                         </div>
-                                        <span onClick={handleIconClick}>
-                                      <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
-                                            color="white"/>
-                                    </span>
                                     </div>
                                 </div>
-
                                 <div
                                     className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
                                     <div className="flex items-center justify-start ">
                                         <div className="mr-3 ">
                                             <h2>여기에 예문이 온다. (2) </h2>
                                         </div>
-                                        <span onClick={handleIconClick}>
-                                      <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
-                                            color="white"/>
-                                    </span>
                                     </div>
                                 </div>
-
                                 <div
                                     className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
                                     <div className="flex items-center justify-start">
                                         <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (3) </h2>
+                                            <h2>여기에 예문이 온다. (1) </h2>
                                         </div>
-                                        <span onClick={handleIconClick}>
-                                      <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
-                                            color="white"/>
-                                    </span>
                                     </div>
                                 </div>
-
+                                <div
+                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
+                                    <div className="flex items-center justify-start ">
+                                        <div className="mr-3 ">
+                                            <h2>여기에 예문이 온다. (2) </h2>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div
                                     className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
                                     <div className="flex items-center justify-start">
                                         <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (3) </h2>
+                                            <h2>여기에 예문이 온다. (1) </h2>
                                         </div>
-                                        <span onClick={handleIconClick}>
-                                      <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
-                                            color="white"/>
-                                    </span>
                                     </div>
                                 </div>
-
                                 <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
-                                    <div className="flex items-center justify-start">
-                                        <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (3) </h2>
+                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
+                                    <div className="flex items-center justify-start ">
+                                        <div className="mr-3 ">
+                                            <h2>여기에 예문이 온다. (2) </h2>
                                         </div>
-                                        <span onClick={handleIconClick}>
-                                      <Icon className="brightness-75 hover:brightness-100" path={mdiVolumeHigh} size={1}
-                                            color="white"/>
-                                    </span>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     );
@@ -147,7 +132,6 @@ import axios from 'axios';
 async function playTTS(text) {
     const clientId = 'slivj7sa6g'; // 클라이언트 ID
     const clientSecret = 'tJF92nSeETcCmlFMeMwXRJ0HKote1gKECwGVjGX2'; // 클라이언트 시크릿
-
     try {
         const response = await axios.post('https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts', `speaker=shinji&volume=0&speed=0&pitch=0&format=mp3&text=${text}`, {
             headers: {
@@ -157,7 +141,6 @@ async function playTTS(text) {
             },
             responseType: 'arraybuffer' // 바이너리 데이터를 위한 설정
         });
-
         const audioUrl = URL.createObjectURL(new Blob([response.data], {type: 'audio/mp3'}));
         const audio = new Audio(audioUrl);
         audio.play();
@@ -167,38 +150,84 @@ async function playTTS(text) {
 }
 
 const CustomSlider = ({slides}) => {
+    const [isModalOpenW, setIsModalOpenW] = useState(false);
+    const closeModalW = () => setIsModalOpenW(false);
+    // 단어 해석 보기
+    const [definition, setDefinition] = useState('');
+    const openModalWithDefinition = (slideone) => {
+        setDefinition(slideone.definition);
+        setIsModalOpenW(true);
+    };
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+
+    const [Example, setExample] = useState('');
+    const [isModalOpenE, setIsModalOpenE] = useState(false);
+    const closeModalE = () => setIsModalOpenE(false);
+    const openModalWithExample = (slideone) => {
+        setExample(slideone.definition);
+        setIsModalOpenE(true);
+    };
+
+    // tts 실행함수
+    const handleIconClick = (word) => {
+        playTTS(word);
+    };
 
     return (
-        <div>
-            <Slider {...settings}>
-                {slides.map(slide => (
-                    <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">
-                        <div className="flex flex-wrap justify-center items-center">
-                            {slide.map(slideone => (
-                                <div key={slideone.id}>
-
-                                    <div className="p-3">
-                                        <div className="bg-[#282834] font-semibold text-white rounded-xl overflow-hidden w-[300px] h-[140px] flex justify-center items-center shadow-sm
-                                                brightness-100 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] hover:text-black"
-                                             onClick={openModal}>
-                                              <pre>
-                                                {slideone.content}
-                                              </pre>
+                <div className="w-[1060px] text-white font-bold flex flex-wrap text-4xl">
+                    {/*<Slider {...settings}>*/}
+                    {/*    {slides.map(slide => (*/}
+                    {/*        <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">*/}
+                    {/*            <div className="flex flex-wrap justify-center items-center">*/}
+                    {slides.content.map(slideone => (
+                        <div key={slideone.id}>
+                            <div className="p-3 flex justify-center items-center">
+                                <div className="bg-[#282834] text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm"
+                                    // onClick={openModal}
+                                >
+                                    <div>
+                                        <div
+                                            className="flex justify-items-center space-x-2 p-3"> {/* space-x-2는 아이콘과 단어 사이의 공간을 추가 */}
+                                            <div className="text-white font-semibold">
+                                                {slideone.word}
+                                            </div>
+                                            <div onClick={() => handleIconClick(slideone.word)}>
+                                                <Icon className="hoverIcon" path={mdiVolumeHigh}
+                                                      size={1.5}/>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-items-center">
+                                            <button className="text-emerald-300 flex justify-items-center p-3 text-2xl brightness-100 hover:brightness-200"
+                                                    onClick={() => openModalWithDefinition(slideone)}>
+                                                단어해석
+                                            </button>
+                                            <button className="text-amber-200 flex justify-items-center p-3 text-2xl brightness-100 hover:brightness-200"
+                                                    onClick={() => openModalWithExample(slideone)}>
+                                                예문보기
+                                            </button>
                                         </div>
                                     </div>
-
                                 </div>
-                            ))}
+
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
-            <Modal isOpen={isModalOpen} onClose={closeModal} handleIconClick={handleIconClick} />
-        </div>
+                    ))}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*))}*/}
+                    {/*</Slider>*/}
+                    {/*<Modal isOpen={isModalOpen} onClose={closeModal} handleIconClick={handleIconClick}/>*/}
+                    <DefinitionModal
+                        isOpen={isModalOpenW}
+                        onClose={closeModalW}
+                        definition={definition} 
+                    />
+                    <ExampleModal
+                        isOpen={isModalOpenE}
+                        onClose={closeModalE}
+                        definition={Example}
+                    />
+                </div>
     );
 };
 
