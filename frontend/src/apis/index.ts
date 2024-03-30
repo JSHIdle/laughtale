@@ -11,6 +11,7 @@ export const get = async<T> (url: string): Promise<T> => {
   const {data} = await client.get<T>(url);
   return data;
 }
+
 client.interceptors.request.use(
   (config) => {
     const authStore = useAuthLocalStroage();
