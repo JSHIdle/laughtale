@@ -1,5 +1,3 @@
-import {Position} from "postcss";
-
 export type Token = {
     accessToken: string;
     refreshToken?: string;
@@ -43,9 +41,10 @@ export type Size = {
     width:number;
     height: number;
 }
-
+//response.data => chapter => cut => words > definition
 export type MangaAnalyze = {
     title: string,
+    thumbnail: string,
     author: string,
     category: string,
     description: string,
@@ -62,13 +61,18 @@ export type CutAnalyze = {
     imageUrl: string,
     width: number,
     height: number,
-    sentence: Array<string>,
+    sentence: Array<SpeechAnalyze>,
     words: Array<WordAnalyze>
+}
+
+export type SpeechAnalyze = {
+    sentence: string,
+    positionBasic: Position
 }
 
 export type WordAnalyze = {
     word: string,
-    definition: string,
+    definition?: string,
     partOfSpeech: string,
     level: number
 }
