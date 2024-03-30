@@ -1,5 +1,10 @@
 package com.jshi.laughtale.common;
 
+import com.nimbusds.jwt.JWT;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,6 +51,11 @@ public class ExceptionAdvice {
         log.error("ServletException : {}", e.getMessage());
         e.printStackTrace();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({UnsupportedJwtException.class, MalformedJwtException.class, SignatureException.class, ExpiredJwtException.class})
+    public ResponseEntity<String> jwtExceptionHandler(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT expired");
     }
 
     @ExceptionHandler(Exception.class)
