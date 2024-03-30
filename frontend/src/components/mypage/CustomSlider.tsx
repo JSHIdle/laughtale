@@ -44,7 +44,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
     );
 };
 
-function ExampleModal({isOpen, onClose, Example  }) {
+function ExampleModal({isOpen, onClose, Example}) {
     if (!isOpen) return null;
 
     return (
@@ -225,7 +225,7 @@ const CustomSlider = ({slides}) => {
                     <ExampleModal
                         isOpen={isModalOpenE}
                         onClose={closeModalE}
-                        definition={Example}
+                        Example={Example}
                     />
                 </div>
     );

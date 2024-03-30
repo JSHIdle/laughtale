@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         element: <Mypage/>,
       },
       {
-        path: "word",
+        path: "word/:level",
         element: <Word/>,
       },
     ]
