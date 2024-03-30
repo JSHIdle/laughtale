@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
 import Header from "../../../components/common/Header.tsx";
-import myImage from '../../../assets/badge/badge1.png';
 import {useQuery} from "@tanstack/react-query";
 import getWordInfo from "../../../components/mypage/getWordInfo.tsx";
+import { useParams } from 'react-router-dom';
 
 const Index = () => {
   // const [data, setData] = useState(null);
   ///api/word-book/{level}?page={value}&size={value}
 
-  const level = 1;
+  const { level } = useParams();
   const page = 0;
   const size = 100;
 
