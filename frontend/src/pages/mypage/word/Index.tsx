@@ -37,7 +37,7 @@ const Index = () => {
       <div className="flex flex-col bg-[#121212]" style={{ height: 'calc(100vh * 1.1111)' }}>
         <div><Header/></div>
         <div className="flex justify-center items-center">
-          <div className="max-w-[1100px] mt-12">
+          <div className="max-w-[1180px] mt-12">
             {/*<div className="flex justify-center items-center">*/}
             {/*  <div className="w-[500px] text-white font-bold flex justify-center mt-12 p-12 text-4xl">*/}
             {/*    /!*<img src={myImage} width="50" height="50"/>*!/*/}

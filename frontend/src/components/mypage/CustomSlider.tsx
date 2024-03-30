@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
+import client from "../../apis";
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -168,48 +169,64 @@ const CustomSlider = ({slides}) => {
         setIsModalOpenE(true);
     };
 
+    async function handleRemoveClick (id){
+        await client.delete(`/word-book/${id}`
+        ).then(()=>{
+            console.log("단어 삭제완료");
+        })
+        .catch((error) => {
+            console.error("There was an error!", error);
+        });
+    };
+
     // tts 실행함수
     const handleIconClick = (word) => {
         playTTS(word);
     };
 
     return (
-                <div className="w-[1060px] text-white font-bold flex flex-wrap text-4xl">
+                <div className="w-[1120px] text-white font-bold flex flex-wrap text-4xl">
                     {/*<Slider {...settings}>*/}
                     {/*    {slides.map(slide => (*/}
                     {/*        <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">*/}
                     {/*            <div className="flex flex-wrap justify-center items-center">*/}
                     {slides.content.map(slideone => (
                         <div key={slideone.id}>
-                            <div className="p-3 flex justify-center items-center">
-                                <div className="bg-[#282834] text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm"
-                                    // onClick={openModal}
+                            <div
+                                className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
+                                <div
+                                    className="absolute top-0 right-0 transform translate-y-10 -translate-x-12 text-red-600 w-6 h-6 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
+                                    onClick={()=>handleRemoveClick(slideone.id)}>
+                                    &ndash;
+                                </div>
+                                <div
+                                    className="text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm border-2 border-[#90F880] group-hover:bg-gradient-to-b from-[#83E893] to-[#059C54] hover:border-transparent hover:text-black transition-all duration-300"
                                 >
                                     <div>
-                                        <div
-                                            className="flex justify-items-center space-x-2 p-3"> {/* space-x-2는 아이콘과 단어 사이의 공간을 추가 */}
-                                            <div className="text-white font-semibold">
+                                        <div className="flex justify-items-center space-x-2 p-3">
+                                            <div className="text-white font-semibold hover:text-black">
                                                 {slideone.word}
                                             </div>
                                             <div onClick={() => handleIconClick(slideone.word)}>
-                                                <Icon className="hoverIcon" path={mdiVolumeHigh}
-                                                      size={1.5}/>
+                                                <Icon className="hoverIcon" path={mdiVolumeHigh} size={1.5}/>
                                             </div>
                                         </div>
                                         <div className="flex justify-items-center">
-                                            <button className="text-emerald-300 flex justify-items-center p-3 text-2xl brightness-100 hover:brightness-200"
-                                                    onClick={() => openModalWithDefinition(slideone)}>
+                                            <button
+                                                className="text-emerald-300 p-3 text-2xl hover:text-black"
+                                                onClick={() => openModalWithDefinition(slideone)}>
                                                 단어해석
                                             </button>
-                                            <button className="text-amber-200 flex justify-items-center p-3 text-2xl brightness-100 hover:brightness-200"
-                                                    onClick={() => openModalWithExample(slideone)}>
+                                            <button
+                                                className="text-amber-200 p-3 text-2xl hover:text-black"
+                                                onClick={() => openModalWithExample(slideone)}>
                                                 예문보기
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
                     ))}
                     {/*</div>*/}
@@ -220,7 +237,7 @@ const CustomSlider = ({slides}) => {
                     <DefinitionModal
                         isOpen={isModalOpenW}
                         onClose={closeModalW}
-                        definition={definition} 
+                        definition={definition}
                     />
                     <ExampleModal
                         isOpen={isModalOpenE}
