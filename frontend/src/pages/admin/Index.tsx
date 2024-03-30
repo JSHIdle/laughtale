@@ -1,10 +1,10 @@
-
 import Header from '../../components/common/Header';
 import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.tsx";
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
 import client from "../../apis";
 import Spinner from "../../components/common/Spinner.tsx";
+import ResultModal from "../../components/admin/ResultModal.tsx";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
@@ -14,6 +14,7 @@ const Index = () => {
         description: ''
     });
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
 
     const handleChange = useCallback((e) => {
         setCartoonInfo({
@@ -52,17 +53,16 @@ const Index = () => {
 
         // FormData를 사용하여 백엔드로 데이터 전송
         try {
-            // const response = await client.post('http://j10a705.p.ssafy.io/api/manga/upload', {
-            //      formData,{header}
-            // });
             setLoading(true);
             await client.post(`/manga/upload`, formData, {
-                headers:{
-                    "Content-Type":"multipart/form-data"
+                headers: {
+                    "Content-Type": "multipart/form-data"
                 },
 
-            }).then((response) => console.log(response.data));
-            setLoading(false);
+            }).then((response) => {
+                response.data.chapter.map(ch => ch.cuts.map(c => c.words = c.words.filter(word => word !== undefined)))
+                setData(response.data);
+            });
 
             // if (response.ok) {
             //     console.log('Upload successful');
@@ -76,38 +76,46 @@ const Index = () => {
         }
     };
 
-
-    return <div className="bg-[#1D1D21] min-h-screen relative">
-        {
-            loading ?
-                <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
-                </div> : <></>
-        }
-        <div className="max-w-[700px] m-auto">
-            <div>
-                <Header/>
+    // const data = mangaData;
+    // <UploadResult {...data}></UploadResult>
+    // return (
+    //     <div>
+    //     </div>
+    // )
+    return <>
+        <div className="bg-[#1D1D21] min-h-screen relative">
+            {
+                loading ?
+                    <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
+                    </div> : <></>
+            }
+            <div className="max-w-[700px] m-auto">
+                <div>
+                    <Header/>
+                </div>
+                <div className="text-white font-bold pt-10 pb-3">신규만화 등록</div>
+                <div>
+                    <CartoonInfoComponent
+                        title={cartoonInfo.title}
+                        author={cartoonInfo.author}
+                        genres={cartoonInfo.genres}
+                        description={cartoonInfo.description}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <FileUploadComponent
+                        thumbnailInputRef={thumbnailInputRef}
+                        filesInputRef={filesInputRef}
+                    />
+                </div>
+                <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
+                    등록하기
+                </button>
             </div>
-            <div className="text-white font-bold pt-10 pb-3">신규만화 등록</div>
-            <div>
-                <CartoonInfoComponent
-                    title={cartoonInfo.title}
-                    author={cartoonInfo.author}
-                    genres={cartoonInfo.genres}
-                    description={cartoonInfo.description}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <FileUploadComponent
-                    thumbnailInputRef={thumbnailInputRef}
-                    filesInputRef={filesInputRef}
-                />
-            </div>
-            <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
-                등록하기
-            </button>
         </div>
-    </div>
+        {data && <ResultModal {...data}/>}
+    </>
 }
 
 export default Index;
