@@ -22,10 +22,7 @@ export default function CartoonHeader(p: Props) {
     queryFn: () => getMangaInfo(+ mangaId),
     retry:0
   });
-  if(props){
-    console.log("TEST")
-    console.log(props)
-  }
+
   return <>
       <div
         className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
@@ -40,8 +37,10 @@ export default function CartoonHeader(p: Props) {
         }
         <div className="p-10 flex-grow">
           <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
-          {/*<div className="font-bold text-xl text-white">작가 : {props.author}</div>*/}
-          {/*<div className="font-bold text-xl text-white">장르 : {props.genre}</div>*/}
+          <div className="font-bold text-xl text-white">작가 : {props.author}</div>
+          <div className="font-bold text-xl text-white">카테고리 : {props.category}</div>
+          <div className="font-bold text-xl text-white">레벨 : {props.level}</div>
+
           <div className="mb-10"></div>
           <div className="font-bold text-xl text-white">줄거리</div>
           {/*<div className="mb-10"></div>*/}
