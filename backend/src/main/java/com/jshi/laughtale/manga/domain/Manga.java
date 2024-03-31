@@ -36,6 +36,7 @@ public class Manga {
     private String thumbnail;
 
     @Column
+    @Setter
     private Integer level;
 
     @OneToMany(cascade = {PERSIST}, orphanRemoval = true, mappedBy = "manga")
