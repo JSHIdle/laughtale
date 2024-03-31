@@ -33,8 +33,10 @@ public class Cut {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chapter_id")
+    @Setter
     private Chapter chapter;
 
     @OneToMany(mappedBy = "cut", cascade = PERSIST, orphanRemoval = true)
+    @Setter
     private List<Speech> speeches = new ArrayList<>();
 }

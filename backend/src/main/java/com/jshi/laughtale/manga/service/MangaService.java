@@ -4,6 +4,8 @@ import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.mapper.ChapterMapper;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
+import com.jshi.laughtale.manga.component.MangaAnalyzer;
+import com.jshi.laughtale.manga.component.MangaSaver;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
@@ -11,6 +13,9 @@ import com.jshi.laughtale.manga.dto.MangaUpload;
 import com.jshi.laughtale.manga.dto.RecentManga;
 import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.manga.repository.MangaRepository;
+import com.jshi.laughtale.parser.Attribute;
+import com.jshi.laughtale.parser.context.MangaContext;
+import com.jshi.laughtale.parser.service.ParseService;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
 import jakarta.persistence.Tuple;
@@ -34,36 +39,39 @@ import org.springframework.web.multipart.MultipartFile;
 public class MangaService {
 
     private final MangaRepository mangaRepository;
-    private final MangaParser mangaParser;
     private final ChapterRepository chapterRepository;
+    private final ParseService parseService;
+    private final MangaAnalyzer mangaAnalyzer;
+    private final MangaSaver mangaSaver;
 
-    public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga,
-        List<MultipartFile> files) throws
-        IOException {
-        String thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), "thumbnail");
-        log.info("썸네일 저장 완료");
+    /**
+     * 파일 저장, 사진 분석 요청, 파싱
+     */
+    public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files)
+            throws
+            IOException {
+        log.info("파일 저장...");
+        String thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), Attribute.THUMBNAIL.toString());
         int last = mangaRepository.findLastChapterByManga(manga.getTitle()).orElse(0) + 1;
-        log.info("챕터 번호 불러오기 성공");
 
         List<String> names = new ArrayList<>();
         for (MultipartFile file : files) {
             String filename = FileUtils.save(file, manga.getTitle(), String.valueOf(last));
             names.add(filename);
         }
-        log.info("컷 이미지 저장 성공");
 
-        MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last,
-            names);
+        MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
         Map result = DataRequest.analyze(analyzeRequest);
-        log.info("분석 완료");
 
-        Manga m = mangaRepository.findByTitle(manga.getTitle())
-            .orElse(MangaMapper.analyzeToEntity(analyzeRequest));
+        log.info("파싱...");
+        MangaContext mangaContext = parseService.parse(result);
 
-        mangaRepository.save(m);
-        MangaAnalyze.Response response = mangaParser.parser(m, result, last);
-        m.update();
-        log.info("파싱 완료");
+        log.info("분석...");
+        MangaAnalyze.Response response = mangaAnalyzer.analyze(mangaContext, last);
+
+        log.info("DB 저장...");
+        mangaSaver.save(mangaContext);
+
         return response;
     }
 

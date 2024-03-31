@@ -17,9 +17,7 @@ public class CutAnalyze {
         private Integer width;
         private Integer height;
         @Setter
-        private List<SpeechDetail.Response> sentence = new ArrayList<>();
-        @Setter
-        private List<WordDataDetail.Response> words = new ArrayList<>();
+        private List<SpeechDetail.Response> sentence;
 
         @Builder
         public Response(String imageUrl, Integer width, Integer height) {
