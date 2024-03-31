@@ -26,6 +26,8 @@ public class SpeechMapper {
     public static SpeechBasic.Response toBasicResponse(Speech speech) {
         return SpeechBasic.Response.builder()
                 .id(speech.getId())
+                .imageUrl(speech.getCut().getImageUrl())
+                .position(PositionMapper.toBasicResponse(speech.getPosition()))
                 .sentence(speech.getSentence())
                 .build();
     }
