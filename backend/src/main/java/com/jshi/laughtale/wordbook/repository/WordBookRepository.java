@@ -16,5 +16,8 @@ public interface WordBookRepository extends JpaRepository<WordBook, Long> {
     @Query("SELECT w FROM WordBook as w JOIN WordData as d ON w.wordData = d WHERE w.member.id = :memberId AND d.level = :level")
     Page<WordBook> findAllByMemberIdWithLevel(int level, long memberId, Pageable pageable);
 
+    @Query("SELECT w FROM WordBook as w WHERE w.wordData.id = :wordDataId")
+    Optional<WordBook> findByWordDataId(Long wordDataId);
+
     Optional<WordBook> findByMemberAndWordData(Member member, WordData wordData);
 }

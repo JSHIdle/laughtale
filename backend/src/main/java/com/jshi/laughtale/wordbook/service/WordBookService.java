@@ -5,6 +5,7 @@ import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.wordbook.domain.WordBook;
 import com.jshi.laughtale.wordbook.dto.WordBookBasic;
 import com.jshi.laughtale.wordbook.exception.AlreadyExistWordBook;
+import com.jshi.laughtale.wordbook.exception.NotExistWordBookException;
 import com.jshi.laughtale.wordbook.mapper.WordBookMapper;
 import com.jshi.laughtale.wordbook.repository.WordBookRepository;
 import com.jshi.laughtale.worddata.domain.WordData;
@@ -45,7 +46,7 @@ public class WordBookService {
     }
 
     public void deleteWordBook(Long id) {
-        wordBookRepository.findById(id).orElseThrow(NotExistWordListException::new);
-        wordBookRepository.deleteById(id);
+        WordBook wordBook = wordBookRepository.findByWordDataId(id).orElseThrow(NotExistWordBookException::new);
+        wordBookRepository.delete(wordBook);
     }
 }
