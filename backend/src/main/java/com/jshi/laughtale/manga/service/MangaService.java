@@ -10,6 +10,7 @@ import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
 import java.io.IOException;
@@ -96,7 +97,11 @@ public class MangaService {
         int totalCnt = manga.getChapter().size();
 
         for (Chapter chapter : manga.getChapter()) {
-            totalSum += chapter.getLevel();
+            if (chapter.getLevel() != null)
+                totalSum += chapter.getLevel();
+            else {
+                System.out.println("chapter.getId() = " + chapter.getId());
+            }
         }
 
         return averageToLevel(totalSum, totalCnt);
@@ -105,18 +110,28 @@ public class MangaService {
     public int averageToLevel(int totalSum, int totalCnt) {
         double avg = (double) totalSum / totalCnt;
 
-        if (avg <= 1.67) {
+        if (avg < 1.485) {
             return 1;
         }
-        if (avg <= 1.73) {
+        else if (avg < 2.727) {
             return 2;
         }
-        if (avg <= 1.8) {
+        else if (avg < 3.676) {
             return 3;
         }
-        if (avg <= 1.9) {
+        else if (avg < 4.333) {
             return 4;
         }
-        return 5;
+        else
+            return 5;
+    }
+
+//    @PostConstruct
+    public void initSetLevel() {    // 기존 DB에 있지만, level이 부여 안된 manga들 level update
+        for(Manga manga: mangaRepository.findAll()){
+            int mangaLevel = calculateMangaLevel(manga.getId());
+            manga.setLevel(mangaLevel);
+            mangaRepository.save(manga);
+        }
     }
 }
