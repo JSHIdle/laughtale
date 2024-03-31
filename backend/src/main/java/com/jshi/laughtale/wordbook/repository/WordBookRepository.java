@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface WordBookRepository extends JpaRepository<WordBook, Long> {
 
-    @Query("SELECT w FROM WordBook as w JOIN WordData as d ON d.level = :level WHERE w.member.id = :memberId")
+    @Query("SELECT w FROM WordBook as w JOIN WordData as d ON w.wordData = d WHERE w.member.id = :memberId AND d.level = :level")
     Page<WordBook> findAllByMemberIdWithLevel(int level, long memberId, Pageable pageable);
 
     Optional<WordBook> findByMemberAndWordData(Member member, WordData wordData);
