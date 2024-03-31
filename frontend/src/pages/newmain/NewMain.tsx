@@ -70,11 +70,11 @@ export default function NewMain() {
                     <div className="flex flex-row pb-10  animate-sliderA bg-[#121212]">
                         {[Manga1, Manga2, Manga3, Manga4, Manga5, Manga6, Manga7].map((image, index) => (
                             <img src={image} key={index}
-                                 className="w-[300px] h-[400px] px-7  object-cover  bg-[#121212] "/>
+                                 className="w-[210px] h-[280px] px-7  object-cover  bg-[#121212] "/>
                         ))}
                         {[Manga1, Manga2, Manga3, Manga4, Manga5, Manga6, Manga7].map((image, index) => (
                             <img src={image} key={index}
-                                 className="w-[300px] h-[400px] px-7 object-cover  bg-[#121212] "/>
+                                 className="w-[210px] h-[280px] px-7 object-cover  bg-[#121212] "/>
                         ))}
                     </div>
                 </div>
@@ -83,11 +83,11 @@ export default function NewMain() {
                     <div className="flex flex-row pb-10  animate-sliderB bg-[#121212]">
                         {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (
                             <img src={image} key={index}
-                                 className="w-[300px] h-[400px] px-7  object-cover  bg-[#121212] "/>
+                                 className="w-[210px] h-[280px] px-7  object-cover  bg-[#121212] "/>
                         ))}
                         {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (
                             <img src={image} key={index}
-                                 className="w-[300px] h-[400px] px-7 object-cover  bg-[#121212] "/>
+                                 className="w-[210px] h-[280px] px-7 object-cover  bg-[#121212] "/>
                         ))}
                     </div>
                 </div>
@@ -96,11 +96,11 @@ export default function NewMain() {
                 {/*    <div className="flex flex-row pb-10  animate-sliderC bg-[#121212]">*/}
                 {/*        {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (*/}
                 {/*            <img src={image} key={index}*/}
-                {/*                 className="w-[300px] h-[400px] px-7  object-cover  bg-[#121212] "/>*/}
+                {/*                 className="w-[210px] h-[280px] px-7  object-cover  bg-[#121212] "/>*/}
                 {/*        ))}*/}
                 {/*        {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (*/}
                 {/*            <img src={image} key={index}*/}
-                {/*                 className="w-[300px] h-[400px] px-7 object-cover  bg-[#121212] "/>*/}
+                {/*                 className="w-[210px] h-[280px] px-7 object-cover  bg-[#121212] "/>*/}
                 {/*        ))}*/}
                 {/*    </div>*/}
                 {/*</div>*/}
