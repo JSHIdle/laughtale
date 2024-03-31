@@ -150,7 +150,7 @@ async function playTTS(text) {
     }
 }
 
-const CustomSlider = ({slides}) => {
+const   CustomSlider = ({slides}) => {
     const [isModalOpenW, setIsModalOpenW] = useState(false);
     const closeModalW = () => setIsModalOpenW(false);
     // 단어 해석 보기
