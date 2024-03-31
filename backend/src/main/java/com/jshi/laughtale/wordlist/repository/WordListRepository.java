@@ -3,13 +3,14 @@ package com.jshi.laughtale.wordlist.repository;
 import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import jakarta.persistence.Tuple;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-
 public interface WordListRepository extends JpaRepository<WordList, Long> {
-    @Query(value = "SELECT x.*, z.id AS speech_id, z.sentence AS sentence , w.definition AS definition, v.width AS width, v.height AS height  FROM (\n"
+
+    @Query(value =
+        "SELECT x.*, z.id AS speech_id, z.sentence AS sentence , w.definition AS definition, v.width AS width, v.height AS height  FROM (\n"
             + "SELECT "
             + "    e.id AS word_data_id, "
             + "    e.word AS answer_word,"
@@ -39,16 +40,23 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
 
     @Query(value = "SELECT wl FROM WordList wl WHERE wl.speech.id = :speechId")
     List<WordList> findAllBySpeechId(Long speechId);
+
     List<WordList> findAllByWordData(WordData wordData);
 
     List<WordList> findByWordDataIdAndSpeechId(Long wordId, Long speechId);
 
 
-    @Query(value = "select ch.id as chapterId, wd.level, count(wd.level) as levelcnt from chapter ch,cut cu, speech sp, word_list wl, word_data wd\n"
-        + "         where ch.id  = cu.chapter_id and cu.id = sp.cut_id and wl.speech_id = sp.id and wl.word_id = wd.id\n"
-        + "          and ch.id = :chapterId \n"
-        + "         group by ch.id, wd.level order by ch.id, wd.level" , nativeQuery = true)
+    @Query(value =
+        "select ch.id as chapterId, wd.level, count(wd.level) as levelcnt from chapter ch,cut cu, speech sp, word_list wl, word_data wd\n"
+            + "         where ch.id  = cu.chapter_id and cu.id = sp.cut_id and wl.speech_id = sp.id and wl.word_id = wd.id\n"
+            + "          and ch.id = :chapterId \n"
+            + "         group by ch.id, wd.level order by ch.id, wd.level", nativeQuery = true)
     List<Tuple> findCalculatedChapterLevel(Long chapterId);
 
-
+    @Query(value = "select wd.level, count(wd.level) as levelcnt"
+        + " from manga ma, chapter ch,cut cu, speech sp, word_list wl, word_data wd"
+        + " where ch.manga_id = ma.id and ch.id  = cu.chapter_id and cu.id = sp.cut_id and wl.speech_id = sp.id and wl.word_id = wd.id"
+        + " and ma.id = :mangaId "
+        + " group by wd.level order by wd.level", nativeQuery = true)
+    List<Tuple> findCalculatedMangaLevel(Long mangaId);
 }
