@@ -112,7 +112,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                             <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
                                                 {slide.option.map((option, idx) => (
                                                     <button key={idx}
-                                                            className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
+                                                            className="text-white font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
                                                 ))}
                                             </div>
                                         </div>
