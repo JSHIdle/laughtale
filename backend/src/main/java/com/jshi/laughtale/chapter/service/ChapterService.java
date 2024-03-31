@@ -11,6 +11,7 @@ import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.wordlist.service.WordListService;
 import jakarta.persistence.Tuple;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -102,11 +103,27 @@ public class ChapterService {
     public List<LevelCount.Response> getChapterLevelCount(long chapterId) {
         List<Tuple> chapterLevelList = wordListService.findCalculatedChapterLevel(chapterId);
 
-        return chapterLevelList.stream()
-            .map(chapterLevel -> LevelCount.Response.builder()
-                .level(chapterLevel.get("level", Integer.class))
-                .count(chapterLevel.get("levelcnt", Long.class))
-                .build())
-            .collect(Collectors.toList());
+        // 모든 레벨에 대해 count를 0으로 초기화
+        List<LevelCount.Response> result = new ArrayList<>();
+        for (int level = 1; level <= 5; level++) {
+            result.add(LevelCount.Response.builder()
+                .level(level)
+                .count(0)
+                .build()
+            );
+        }
+
+        for (Tuple tuple : chapterLevelList) {
+            int level = tuple.get("level", Integer.class);
+            long count = tuple.get("levelcnt", Long.class);
+
+            result.set(level - 1, LevelCount.Response.builder()
+                .level(level)
+                .count(count)
+                .build()
+            );
+        }
+
+        return result;
     }
 }
