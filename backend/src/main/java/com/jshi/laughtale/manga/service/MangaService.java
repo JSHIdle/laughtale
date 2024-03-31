@@ -1,7 +1,9 @@
 package com.jshi.laughtale.manga.service;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.common.dto.LevelCount;
+import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
+import com.jshi.laughtale.chapter.mapper.ChapterMapper;
+import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
@@ -11,7 +13,6 @@ import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
-import com.jshi.laughtale.wordlist.service.WordListService;
 import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class MangaService {
 
     private final MangaRepository mangaRepository;
     private final MangaParser mangaParser;
-    private final WordListService wordListService;
+    private final ChapterRepository chapterRepository;
 
     public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga,
         List<MultipartFile> files) throws
@@ -125,31 +126,10 @@ public class MangaService {
         }
     }
 
-    public List<LevelCount.Response> getMangaLevelCount(long mangaId) {
-        List<Tuple> mangaLevelList = wordListService.findCalculatedMangaLevel(mangaId);
-
-        // 모든 레벨에 대해 count를 0으로 초기화
-        List<LevelCount.Response> result = new ArrayList<>();
-        for (int level = 1; level <= 5; level++) {
-            result.add(LevelCount.Response.builder()
-                .level(level)
-                .count(0)
-                .build()
-            );
-        }
-
-        for (Tuple tuple : mangaLevelList) {
-            int level = tuple.get("level", Integer.class);
-            long count = tuple.get("levelcnt", Long.class);
-
-            result.set(level - 1, LevelCount.Response.builder()
-                .level(level)
-                .count(count)
-                .build()
-            );
-        }
-
-        return result;
+    public List<ChapterLevelDto.Response> getMangaLevelCount(long mangaId) {
+        return chapterRepository.findAllByMangaId(mangaId).stream()
+            .map(ChapterMapper::chapterToChapterLevelDto)
+            .toList();
     }
 
     //    @PostConstruct

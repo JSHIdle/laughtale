@@ -3,7 +3,7 @@ package com.jshi.laughtale.chapter.controller;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.chapter.service.ChapterService;
-import com.jshi.laughtale.common.dto.LevelCount;
+import com.jshi.laughtale.chapter.dto.ChapterLevelCount;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,7 +35,7 @@ public class ChapterController {
     }
 
     @GetMapping("/level")
-    public ResponseEntity<List<LevelCount.Response>> getChapterLevelCount(
+    public ResponseEntity<List<ChapterLevelCount.Response>> getChapterLevelCount(
         @RequestParam("chapterId") long chapterId) {
         return ResponseEntity.ok(chapterService.getChapterLevelCount(chapterId));
     }
