@@ -46,86 +46,57 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
     );
 };
 
-function ExampleModal({isOpen, onClose, Example}) {
+
+
+function ExampleModal({isOpen, onClose, example}) {
+    const [selectedSentenceIndex, setSelectedSentenceIndex] = useState(0);
+    const handleSentenceClick = (index) => {
+        setSelectedSentenceIndex(index);
+    };
+
     if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-[#1D1D21] p-4 rounded-lg w-[1000px]">
-                <div className="flex justify-end">
-                    <button
-                        onClick={onClose}
-                        className="text-white rounded-full bg-grey-500 hover:bg-grey-700"
-                    >
-                        X
-                    </button>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 p-3 mb-[15px]">
-                    {/*만화의 장면과 예문이 함께 넘어간다*/}
-                    <div className="flex col-span-1 justify-end">
-                        <ModalCarousel/>
+        return (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="bg-white p-4 rounded-lg">
+                    <div className="flex justify-between items-center w-full p-3">
+                        <div className="text-black flex-1 text-center">
+                            단어 해석
+                        </div>
+                        <button
+                            onClick={onClose}
+                            className="text-black rounded-full bg-grey-500 hover:bg-grey-700">
+                            X
+                        </button>
                     </div>
+                    <hr className="mt-6 mb-3 border-1 border-black"/>
+                    <div className="grid grid-cols-5 gap-4 p-3 mb-[15px]">
+                        <div className="flex col-span-2 justify-end">
+                            <ModalCarousel example={example} selectedIndex={selectedSentenceIndex}/>
+                        </div>
 
-                    {/*예문 나열*/}
-                    <div className="flex flex-col col-span-2 justify-between ">
-                        <div className="flex flex-col justify-center  h-full text-white p-12">
-                            <div className="overflow-y-scroll h-[350px] scrollbar-hide">
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
-                                    <div className="flex items-center justify-start">
-                                        <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (1) </h2>
+                        <div className="flex flex-col col-span-3 justify-items-center ">
+                            <div className="flex flex-col justify-center  h-full text-black p-12 ">
+                                <div className="overflow-y-scroll scrollbar-hide ">
+                                    {example.speeches.map((item, index) => (
+                                        <div key={index}
+                                             className="scale-90 rounded-xl bg-[#4EDBDE] mb-6 p-6 border-4 border-[#4EDBDE] hover:text-black hover:scale-95 transform transition-transform duration-300 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]"
+                                             onClick={() => handleSentenceClick(index)}>
+                                            <div className="flex items-center justify-start ">
+                                                <div className="mr-3">
+                                                    <h2>{item.sentence}</h2>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
-                                    <div className="flex items-center justify-start ">
-                                        <div className="mr-3 ">
-                                            <h2>여기에 예문이 온다. (2) </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
-                                    <div className="flex items-center justify-start">
-                                        <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (1) </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
-                                    <div className="flex items-center justify-start ">
-                                        <div className="mr-3 ">
-                                            <h2>여기에 예문이 온다. (2) </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]">
-                                    <div className="flex items-center justify-start">
-                                        <div className="mr-3">
-                                            <h2>여기에 예문이 온다. (1) </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="rounded-xl bg-[#2D2D32] mb-6 p-6 hover:text-black hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA] ">
-                                    <div className="flex items-center justify-start ">
-                                        <div className="mr-3 ">
-                                            <h2>여기에 예문이 온다. (2) </h2>
-                                        </div>
-                                    </div>
+
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
 };
 
 //tts
@@ -164,7 +135,10 @@ const   CustomSlider = ({slides}) => {
 
     const [exampleId, setExampleId] = useState(null);
     const [isModalOpenE, setIsModalOpenE] = useState(false);
-    const closeModalE = () => setIsModalOpenE(false);
+    const closeModalE = () => {
+        setIsModalOpenE(false);
+        setExampleId(null); // 모달을 닫을 때 exampleId 초기화
+    };
 
     const { data: example, isLoading, error } = useQuery({
         queryKey: ['example', exampleId],
@@ -172,9 +146,18 @@ const   CustomSlider = ({slides}) => {
         enabled: !!exampleId,
     });
 
+    useEffect(() => {
+        if (!isLoading && example && !error && exampleId) {
+            console.log("3순서실행");
+            setIsModalOpenE(true);
+        }
+    }, [isLoading, example, error, exampleId]);
+
+
     const openModalWithExample = (id) => {
         setExampleId(id);
-        setIsModalOpenE(true);
+        console.log("1순서실행",id);
+        // setIsModalOpenE(true);
     };
 
     async function handleRemoveClick (id){
@@ -250,7 +233,7 @@ const   CustomSlider = ({slides}) => {
                     <ExampleModal
                         isOpen={isModalOpenE}
                         onClose={closeModalE}
-                        Example={example}
+                        example={example}
                     />
                 </div>
     );
