@@ -4,6 +4,7 @@ import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
 import client from "../../apis";
+import getWordExample from "./getWordExample.tsx";
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -129,6 +130,7 @@ function ExampleModal({isOpen, onClose, Example}) {
 
 //tts
 import axios from 'axios';
+import {useQuery} from "@tanstack/react-query";
 
 async function playTTS(text) {
     const clientId = 'slivj7sa6g'; // 클라이언트 ID
@@ -160,12 +162,18 @@ const   CustomSlider = ({slides}) => {
         setIsModalOpenW(true);
     };
 
-
-    const [Example, setExample] = useState('');
+    const [exampleId, setExampleId] = useState(null);
     const [isModalOpenE, setIsModalOpenE] = useState(false);
     const closeModalE = () => setIsModalOpenE(false);
-    const openModalWithExample = (slideone) => {
-        setExample(slideone.definition);
+
+    const { data: example, isLoading, error } = useQuery({
+        queryKey: ['example', exampleId],
+        queryFn: () => getWordExample(exampleId),
+        enabled: !!exampleId,
+    });
+
+    const openModalWithExample = (id) => {
+        setExampleId(id);
         setIsModalOpenE(true);
     };
 
@@ -219,7 +227,7 @@ const   CustomSlider = ({slides}) => {
                                             </button>
                                             <button
                                                 className="text-amber-200 p-3 text-2xl hover:text-black"
-                                                onClick={() => openModalWithExample(slideone)}>
+                                                onClick={() => openModalWithExample(slideone.id)}>
                                                 예문보기
                                             </button>
                                         </div>
@@ -242,7 +250,7 @@ const   CustomSlider = ({slides}) => {
                     <ExampleModal
                         isOpen={isModalOpenE}
                         onClose={closeModalE}
-                        Example={Example}
+                        Example={example}
                     />
                 </div>
     );

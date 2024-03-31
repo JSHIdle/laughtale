@@ -6,31 +6,18 @@ import getWordInfo from "../../../components/mypage/getWordInfo.tsx";
 import { useParams } from 'react-router-dom';
 
 const Index = () => {
-  // const [data, setData] = useState(null);
-  ///api/word-book/{level}?page={value}&size={value}
-
   const { level } = useParams();
   const page = 0;
   const size = 100;
 
+  // 레벨별 단어 목록 데이터
   const { data: wordData, isLoading, error } = useQuery({
     queryKey: ['wordBook', level, page, size],
     queryFn: () => getWordInfo(level, page, size)
   });
 
-  // const [slideDatas, setSlideDatas] = useState([]);
-
   useEffect(() => {
-    // wordData가 로딩되었을 때 slideDatas를 생성.
     console.log('Raw wordData:', wordData);
-    // if (wordData && !isLoading) {
-      // const newSlideDatas = [];
-      // for (let i = 0; i < wordData.length; i += 9) {
-      //   newSlideDatas.push(wordData.slice(i, i + 9));
-      // }
-      // setSlideDatas(newSlideDatas);
-      // console.log('Processed slideDatas:', slideDatas);
-    // }
   }, [wordData, isLoading]);
 
   return (
@@ -38,12 +25,6 @@ const Index = () => {
         <div><Header/></div>
         <div className="flex justify-center items-center">
           <div className="max-w-[1180px] mt-12">
-            {/*<div className="flex justify-center items-center">*/}
-            {/*  <div className="w-[500px] text-white font-bold flex justify-center mt-12 p-12 text-4xl">*/}
-            {/*    /!*<img src={myImage} width="50" height="50"/>*!/*/}
-            {/*    레벨 1 단어장*/}
-            {/*  </div>*/}
-            {/*</div>*/}
             <div className="p-12">
                 {wordData && <CustomSlider slides={wordData}/>}
             </div>
