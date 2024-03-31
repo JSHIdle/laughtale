@@ -22,4 +22,5 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	Optional<Chapter> findChapterByMangaTitleAndChapterNo(String title, Integer chapterNo);
 
 	List<Chapter> findAllByMangaId(Long mangaId);
+
 }
