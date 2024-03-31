@@ -6,7 +6,7 @@ import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.chapter.exception.ChapterNotFoundException;
 import com.jshi.laughtale.chapter.mapper.ChapterMapper;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
-import com.jshi.laughtale.common.dto.LevelCount;
+import com.jshi.laughtale.chapter.dto.ChapterLevelCount;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.wordlist.service.WordListService;
@@ -14,7 +14,6 @@ import jakarta.persistence.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -100,13 +99,13 @@ public class ChapterService {
         }
     }
 
-    public List<LevelCount.Response> getChapterLevelCount(long chapterId) {
+    public List<ChapterLevelCount.Response> getChapterLevelCount(long chapterId) {
         List<Tuple> chapterLevelList = wordListService.findCalculatedChapterLevel(chapterId);
 
         // 모든 레벨에 대해 count를 0으로 초기화
-        List<LevelCount.Response> result = new ArrayList<>();
+        List<ChapterLevelCount.Response> result = new ArrayList<>();
         for (int level = 1; level <= 5; level++) {
-            result.add(LevelCount.Response.builder()
+            result.add(ChapterLevelCount.Response.builder()
                 .level(level)
                 .count(0)
                 .build()
@@ -117,7 +116,7 @@ public class ChapterService {
             int level = tuple.get("level", Integer.class);
             long count = tuple.get("levelcnt", Long.class);
 
-            result.set(level - 1, LevelCount.Response.builder()
+            result.set(level - 1, ChapterLevelCount.Response.builder()
                 .level(level)
                 .count(count)
                 .build()
