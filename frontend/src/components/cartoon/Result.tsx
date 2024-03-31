@@ -1,9 +1,10 @@
 import Header from '../../components/common/Header.tsx';
 
 //이전 페이지에서 보내준 데이터를 받을 수 있다.
-import { useLocation } from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import ResultWord from '../cartoon/ResultWord.tsx';
 
+const prefix = `/cartoon/1`
 
 
 const Result = () => {
@@ -11,6 +12,8 @@ const Result = () => {
     const {  slides , correctAnswersCount } = location.state;
     console.log(correctAnswersCount);
 
+    const {chapterId} = useParams();
+    const nextchapter = +chapterId+1;
 
     return (<div className="flex flex-col bg-[#121212]" style={{ height: 'calc(100vh * 1.1111)' }}>
         <Header/>
@@ -23,21 +26,19 @@ const Result = () => {
                     </div>
                     <div className="text-white mt-6">
                         <div>
-                        전체 단어 : 5
-                        </div>
-                        <div>
-                        맞춘 단어 : {correctAnswersCount}
-                        </div>
-                        <div>
-                        틀린 단어 : {5-correctAnswersCount}
-                        </div>
-                        <div>
-                        점수 : {20*correctAnswersCount}점
+                            점수 : {20 * correctAnswersCount}점
                         </div>
                     </div>
+
                 </div>
                 <div className="p-12">
                     <ResultWord slides={slides}/>
+                </div>
+                <div className="flex justify-center text-white">
+                    <Link to={`${prefix}/viewer/${nextchapter}`} replace
+                          className="p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-115 rounded-3xl ">
+                        다음 회차 보기
+                    </Link>
                 </div>
             </div>
         </div>

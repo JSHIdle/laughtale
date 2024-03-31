@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import './QuizSlider.css';
 import ImageWithWhiteBox from './ImageWithWhiteBox';
 import {useState} from "react";
+import {useQueryClient} from '@tanstack/react-query';
+import axios from 'axios';
+import client from "../../apis";
 
 function Modal({ isOpen, onClose ,  modalData}) {
     if (!isOpen) return null;
@@ -43,13 +46,25 @@ function Modal({ isOpen, onClose ,  modalData}) {
     );
 };
 
+
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     let navigate = useNavigate();
 
     function handleClick() {
-        const correctAnswersCount = calculateCorrectAnswers(); // 정답 개수 계산
-        navigate('result', { state: { slides, correctAnswersCount }}); // 계산된 정답 개수를 전달
+        const correctAnswersCount = calculateCorrectAnswers();
+        navigate('result', { state: { slides, correctAnswersCount }});
         console.log(selectedAnswers);
+
+        const updatedIds = Object.values(selectedAnswers).map(obj => obj.id + 1);
+        console.log(updatedIds);
+
+        client.post('/quiz/solve', { answer: updatedIds })
+            .then(response => {
+                console.log('Request successful', response.data);
+            })
+            .catch(error => {
+                console.error('Request failed', error);
+            });
     }
 
     const settings = {
@@ -92,7 +107,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
         return correctCount; // 정답 개수 반환
     };
 
-
     return (
         <div>
             <Slider ref={sliderRef} {...settings}>
@@ -133,7 +147,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <div className="flex justify-center items-center p-3">
                                         <div className="w-[450px]">

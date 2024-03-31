@@ -95,7 +95,6 @@ const ResultWord=({slides})=>{
                         </button>
                     </div>
                 </div>
-
             </div>
             </div>
             ))}
