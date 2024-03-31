@@ -13,6 +13,13 @@ import java.util.ArrayList;
 
 public class SpeechMapper {
 
+    public static Speech toEntity(String sentence, int speechNo, Position position) {
+        return Speech.builder()
+                .sentence(sentence)
+                .speechNo(speechNo)
+                .position(position)
+                .build();
+    }
     public static Speech toEntity(Cut cut, String sentence, int speechNo, Position position) {
         return Speech.builder()
                 .cut(cut)

@@ -10,6 +10,12 @@ import java.util.ArrayList;
 
 public class ChapterMapper {
 
+    public static Chapter toEntity(int chapterNo, int pageCnt) {
+        return Chapter.builder()
+                .chapterNo(chapterNo)
+                .pageCnt(pageCnt)
+                .build();
+    }
     public static Chapter toEntity(Manga manga, int chapterNo, int pageCnt) {
         return Chapter.builder()
                 .chapterNo(chapterNo)

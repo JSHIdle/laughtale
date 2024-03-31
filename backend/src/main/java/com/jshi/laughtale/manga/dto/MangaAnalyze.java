@@ -3,6 +3,7 @@ package com.jshi.laughtale.manga.dto;
 import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class MangaAnalyze {
         private String category;
         private String description;
         private String thumbnail;
-        private List<ChapterAnalyze.Response> chapter = new ArrayList<>();
+        @Setter
+        private List<ChapterAnalyze.Response> chapter;
 
         @Builder
         public Response(String title, String author, String thumbnail, String category, String description) {

@@ -42,8 +42,9 @@ public class Manga {
     @OneToMany(cascade = {PERSIST}, orphanRemoval = true, mappedBy = "manga")
     private List<Chapter> chapter = new ArrayList<>();
 
-    public void update() {
-        chapterCnt = chapter.size();
+    public void updateChapter(List<Chapter> chapter) {
+        this.chapter = chapter;
+        this.chapterCnt = chapter.size();
     }
     public void updateThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;

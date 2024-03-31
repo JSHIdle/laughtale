@@ -1,4 +1,4 @@
-package com.jshi.laughtale.manga.service;
+package com.jshi.laughtale.parser;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.dto.ChapterAnalyze;
@@ -15,7 +15,6 @@ import com.jshi.laughtale.manga.mapper.MangaMapper;
 import com.jshi.laughtale.position.domain.Position;
 import com.jshi.laughtale.position.mapper.PositionMapper;
 import com.jshi.laughtale.speech.domain.Speech;
-import com.jshi.laughtale.speech.dto.SpeechBasic;
 import com.jshi.laughtale.speech.dto.SpeechDetail;
 import com.jshi.laughtale.speech.mapper.SpeechMapper;
 import com.jshi.laughtale.speech.repository.SpeechRepository;
@@ -25,14 +24,13 @@ import com.jshi.laughtale.worddata.mapper.WordDataMapper;
 import com.jshi.laughtale.worddata.repository.WordDataRepository;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.mapper.WordListMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
@@ -59,7 +57,7 @@ public class MangaParser {
         for (int i = 0; i < chapter.size(); i++) {
             int pageCnt = chapter.get(i).size();
             Chapter chapterEntity = ChapterMapper.toEntity(manga, last + i, pageCnt);
-            chapterRepository.save(chapterEntity);
+            chapterEntity = chapterRepository.save(chapterEntity);
             chapterList.add(chapterEntity);
             analyzeResponse.getChapter().add(parseChapter(chapterEntity, chapter.get(i)));
         }
@@ -105,7 +103,7 @@ public class MangaParser {
             sentences.add(SpeechMapper.toAnalyzeResponse(speechEntity));
             words.addAll(parseWords(speechEntity, wordList));
         }
-        analyzeResponse.setWords(words);
+//        analyzeResponse.setWords(words);
         analyzeResponse.setSentence(sentences);
         return analyzeResponse;
     }
@@ -132,5 +130,4 @@ public class MangaParser {
     private String attachPrefix(String src) {
         return PREFIX + src;
     }
-
 }
