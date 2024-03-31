@@ -1,6 +1,6 @@
 package com.jshi.laughtale.manga.controller;
 
-import com.jshi.laughtale.common.dto.LevelCount;
+import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
 import com.jshi.laughtale.manga.dto.MangaAnalyze;
@@ -90,7 +90,7 @@ public class MangaController {
     }
 
     @GetMapping("/level")
-    public ResponseEntity<List<LevelCount.Response>> getMangaLevelCount(
+    public ResponseEntity<List<ChapterLevelDto.Response>> getMangaLevelCount(
         @RequestParam("mangaId") long mangaId) {
         return ResponseEntity.ok(mangaService.getMangaLevelCount(mangaId));
     }
