@@ -26,14 +26,21 @@ type Id = number;
 export type SpeechBubble = {
     id:number;
     sentence: string;
-    position: Id & Position;
+    position: Position;
 }
 
-export type MangaImgInfo = {
+export type MangaImageInfo = {
     imageUrl: string;
     width: number;
     height: number;
     speeches: Array<SpeechBubble>;
+}
+type WordInfo = {
+    id:number;
+    word:string;
+    level:number;
+    definition: number;
+    color?: string;
 }
 
 
@@ -41,7 +48,7 @@ export type Size = {
     width:number;
     height: number;
 }
-//response.data => chapter => cut => words > definition
+
 export type MangaAnalyze = {
     title: string,
     thumbnail: string,
@@ -76,4 +83,4 @@ export type WordAnalyze = {
     partOfSpeech: string,
     level: number
 }
-export type MangaImageResponse = Response<MangaImgInfo>;
+export type MangaImageResponse = Response<MangaImageInfo>;
