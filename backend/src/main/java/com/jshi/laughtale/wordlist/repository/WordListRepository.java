@@ -26,7 +26,7 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
             + "INNER JOIN "
             + "    word_data e ON d.word_id = e.id "
             + "WHERE "
-            + "    e.level = :level AND a.id = :chapterId "
+            + "    e.level = :level AND a.id = :chapterId AND e.definition IS NOT NULL "
             + "GROUP BY "
             + "    word_data_id, "
             + "    answer_word, "
