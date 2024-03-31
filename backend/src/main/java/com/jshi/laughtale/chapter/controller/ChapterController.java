@@ -1,13 +1,13 @@
 package com.jshi.laughtale.chapter.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.dto.ChapterPaginationDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
@@ -32,5 +32,19 @@ public class ChapterController {
 	@GetMapping("/levels")
 	public ResponseEntity<List<ChapterLevelDto.Response>> getChapterLevels(@RequestParam("mangaId") long mangaId){
 		return ResponseEntity.ok(chapterService.getChapterLevels(mangaId));
+	}
+
+	@GetMapping("/{chapterId}")
+	public ResponseEntity<?> getChapterPagination(
+		@PathVariable Long chapterId
+	){
+		List<Integer> pagination = chapterService.getChapterPagination(chapterId);
+
+		return ResponseEntity.ok(ChapterPaginationDto
+			.Response
+			.builder()
+			.nextPage(pagination.get(1))
+			.prevPage(pagination.get(0))
+			.build());
 	}
 }
