@@ -1,9 +1,18 @@
 import Slider from 'react-slick';
+import React, { useRef, useEffect } from 'react';
 import image1 from '../../assets/samples/e1-1.jpg';
 import image2 from '../../assets/samples/e1-3.jpg';
 import image3 from '../../assets/samples/e1-2.jpg';
 
-const ModalCarousel = () => {
+const ModalCarousel = ({example,selectedIndex}) => {
+    const carouselRef = useRef();
+
+    useEffect(() => {
+        if (carouselRef.current) {
+            carouselRef.current.slickGoTo(selectedIndex); // 선택된 인덱스의 이미지로 이동
+        }
+    }, [selectedIndex]);
+
     const settings = {
         dots: false,
         infinite: true,
@@ -16,34 +25,13 @@ const ModalCarousel = () => {
         adaptiveHeight: true,
     };
 
-    const comics = [
-        {
-            id: 1,
-            title: "만화1",
-            episode: "3화",
-            imageUrl: image1,
-        },
-        {
-            id: 2,
-            title: "만화2",
-            episode: "3화",
-            imageUrl: image2,
-        },
-        {
-            id: 3,
-            title: "만화3",
-            episode: "3화",
-            imageUrl: image3,
-        },
-    ];
-
     return (<div className="flex justify-center">
-        <div className="w-[300px]">
-            <Slider {...settings}>
-                {comics.map(book => (
+        <div className="w-[400px]">
+            <Slider ref={carouselRef} {...settings}>
+                {example.speeches.map((image, index) => (
                     <div className="flex justify-center items-center">
-                    <div key={book.id} className="p-3">
-                        <img src={book.imageUrl} style={{ width: "80%", height: "auto" }} alt={book.title}/>
+                    <div key={index} className="p-3">
+                        <img src={image.imageUrl} style={{ width: "400px", height: "500px" }} />
                     </div>
                     </div>
                 ))}
@@ -55,17 +43,3 @@ const ModalCarousel = () => {
 
 export default ModalCarousel;
 
-
-
-//     return (
-//         <div className="flex justify-center items-center h-full">
-//             <Slider {...settings}>
-//                 {comics.map(book => (
-//                     <div key={book.id}>
-//                         <img src={book.imageUrl} alt={book.title} style={{ width: "100%", height: "auto" }}/>
-//                     </div>
-//                 ))}
-//             </Slider>
-//         </div>
-//     );
-// }
