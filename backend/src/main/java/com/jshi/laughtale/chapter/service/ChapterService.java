@@ -9,79 +9,94 @@ import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.wordlist.service.WordListService;
-
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Tuple;
+import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class ChapterService {
 
-	private final ChapterRepository chapterRepository;
-	private final MangaService mangaService;
-	private final WordListService wordListService;
+    private final ChapterRepository chapterRepository;
+    private final MangaService mangaService;
+    private final WordListService wordListService;
 
-	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
-		Manga manga = mangaService.findById(mangaId);
-		Pageable pageable = PageRequest.of(pageNo, size);
-		return chapterRepository.findAllByMangaOrderByChapterNoDesc(manga, pageable)
-			.map(ChapterMapper::chapterToChapterListDto);
-	}
+    public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
+        Manga manga = mangaService.findById(mangaId);
+        Pageable pageable = PageRequest.of(pageNo, size);
+        return chapterRepository.findAllByMangaOrderByChapterNoDesc(manga, pageable)
+            .map(ChapterMapper::chapterToChapterListDto);
+    }
 
-	public Chapter loadByTitleAndChapterNo(String title, Integer chapterNo) {
-		return chapterRepository.findChapterByMangaTitleAndChapterNo(title, chapterNo)
-			.orElseThrow(ChapterNotFoundException::new);
-	}
+    public Chapter loadByTitleAndChapterNo(String title, Integer chapterNo) {
+        return chapterRepository.findChapterByMangaTitleAndChapterNo(title, chapterNo)
+            .orElseThrow(ChapterNotFoundException::new);
+    }
 
-	public Chapter findById(Long chapterId) {
-		Optional<Chapter> chapter = chapterRepository.findById(chapterId);
-		if (chapter.isPresent()) {
-			return chapter.get();
-		} else {
-			throw new RuntimeException("Chapter not found with id: " + chapterId);
-		}
-	}
+    public Chapter findById(Long chapterId) {
+        Optional<Chapter> chapter = chapterRepository.findById(chapterId);
+        if (chapter.isPresent()) {
+            return chapter.get();
+        } else {
+            throw new RuntimeException("Chapter not found with id: " + chapterId);
+        }
+    }
 
-	public List<ChapterLevelDto.Response> getChapterLevels(Long mangaId) {
+    public List<ChapterLevelDto.Response> getChapterLevels(Long mangaId) {
 
-		return chapterRepository.findAllByMangaId(mangaId).stream().map(ChapterMapper::chapterToChapterLevelDto)
-			.toList();
+        return chapterRepository.findAllByMangaId(mangaId).stream()
+            .map(ChapterMapper::chapterToChapterLevelDto)
+            .toList();
 
-	}
+    }
 
 
-	public int calculateChapterLevel(long chapterId) {
-		List<Tuple> tupleList = wordListService.findCalculatedChapterLevel(chapterId);
-		long totalSum = 0;
-		long totalCnt = 0;
-		for (Tuple tuple : tupleList) {
-			int level = tuple.get("level", Integer.class);
-			long cnt = tuple.get("levelcnt", Long.class);
-			totalSum += level * cnt;
-			totalCnt += cnt;
-		}
-		double avg = (double)totalSum / totalCnt;
-		return averageToLevel(avg);
-	}
+    public int calculateChapterLevel(long chapterId) {
+        List<Tuple> tupleList = wordListService.findCalculatedChapterLevel(chapterId);
+        long totalSum = 0;
+        long totalCnt = 0;
+        for (Tuple tuple : tupleList) {
+            int level = tuple.get("level", Integer.class);
+            long cnt = tuple.get("levelcnt", Long.class);
+            totalSum += level * cnt;
+            totalCnt += cnt;
+        }
+        double avg = (double) totalSum / totalCnt;
+        return averageToLevel(avg);
+    }
 
-	public int averageToLevel(double avg) {
-		if (avg <= 1.67)
+    public int averageToLevel(double avg) {
+		if (avg <= 1.67) {
 			return 1;
-		if (avg <= 1.73)
+		}
+		if (avg <= 1.73) {
 			return 2;
-		if (avg <= 1.8)
+		}
+		if (avg <= 1.8) {
 			return 3;
-		if (avg <= 1.9)
+		}
+		if (avg <= 1.9) {
 			return 4;
-		return 5;
+		}
+        return 5;
+    }
 
-	}
+    //	@PostConstruct
+    @Transactional
+    public void initSetLevel() {    // 기존 DB에 있지만, level이 부여 안된 chapter들 level update
+        for (Chapter chapter : chapterRepository.findAll()) {
+            if (chapter.getLevel() == null) {
+                int chapterLevel = calculateChapterLevel(chapter.getId());
+                chapter.setLevel(chapterLevel);
+                chapterRepository.save(chapter);
+            }
+        }
+    }
 }
