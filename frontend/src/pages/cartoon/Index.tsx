@@ -56,6 +56,7 @@ const Index = () => {
       }
   }, [inView]);
 
+  // console.log("test" ,data?.pages[0]?.totalElements)
   return<>
     <div className="bg-[#1D1D21] min-h-screen">
       <Header/>
@@ -64,8 +65,9 @@ const Index = () => {
         <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
           <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
             <CartoonHeader mangaId={mangaId}/>
-            <TotalEpisode total={100}/>
             <FirstEpisode mangaId={mangaId}/>
+
+            {data?.pages[0]?.totalElements&&  <TotalEpisode total={data.pages[0]?.totalElements}/>}
           </Suspense>
         </ErrorBoundary>
         <div className="mb-3">

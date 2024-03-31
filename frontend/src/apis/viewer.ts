@@ -7,8 +7,7 @@ export type CutImageRequest = {
   page:number,
   size: number
 }
-export const getImageByChapterId = async (d: CutImageRequest)   => {
-  console.log(d);
+export const getImageByChapterId = async (d: CutImageRequest):Promise<MangaImageResponse>   => {
   const { data } =  await client.post<MangaImageResponse>(`/cut/images`, d, {
     headers:{
       "Content-Type":"application/json"
@@ -17,3 +16,6 @@ export const getImageByChapterId = async (d: CutImageRequest)   => {
   return data;
 }
 
+export const addWordList = (id:number) => {
+  return client.post(`/word-book/${id}`);
+}
