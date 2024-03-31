@@ -89,7 +89,6 @@ public class ChapterService {
     }
 
     //	@PostConstruct
-    @Transactional
     public void initSetLevel() {    // 기존 DB에 있지만, level이 부여 안된 chapter들 level update
         for (Chapter chapter : chapterRepository.findAll()) {
             if (chapter.getLevel() == null) {
