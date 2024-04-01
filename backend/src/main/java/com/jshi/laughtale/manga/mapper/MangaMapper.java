@@ -7,6 +7,7 @@ import com.jshi.laughtale.manga.dto.MangaUpload;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MangaMapper {
 
@@ -24,11 +25,15 @@ public class MangaMapper {
 
     public static MangaUpload.Request emptyUploadRequest() {
         return MangaUpload.Request.builder()
-                .title(EMPTY)
+                .title(randomId())
                 .genres(EMPTY)
                 .description(EMPTY)
                 .author(EMPTY)
                 .build();
+    }
+
+    private static String randomId() {
+        return UUID.randomUUID().toString();
     }
 
     public static MangaAnalyze.Request toAnalyze(
