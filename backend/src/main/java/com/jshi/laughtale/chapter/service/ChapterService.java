@@ -1,7 +1,7 @@
 package com.jshi.laughtale.chapter.service;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.chapter.dto.ChapterLevelCount;
+import com.jshi.laughtale.common.dto.LevelCount;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.chapter.exception.ChapterNotFoundException;
@@ -103,13 +103,13 @@ public class ChapterService {
         }
     }
 
-    public List<ChapterLevelCount.Response> getChapterLevelCount(long chapterId) {
+    public List<LevelCount.Response> getChapterLevelCount(long chapterId) {
         List<Tuple> chapterLevelList = wordListService.findCalculatedChapterLevel(chapterId);
 
         // 모든 레벨에 대해 count를 0으로 초기화
-        List<ChapterLevelCount.Response> result = new ArrayList<>();
+        List<LevelCount.Response> result = new ArrayList<>();
         for (int level = 1; level <= 5; level++) {
-            result.add(ChapterLevelCount.Response.builder()
+            result.add(LevelCount.Response.builder()
                 .level(level)
                 .count(0)
                 .build()
@@ -120,7 +120,7 @@ public class ChapterService {
             int level = tuple.get("level", Integer.class);
             long count = tuple.get("levelcnt", Long.class);
 
-            result.set(level - 1, ChapterLevelCount.Response.builder()
+            result.set(level - 1, LevelCount.Response.builder()
                 .level(level)
                 .count(count)
                 .build()
