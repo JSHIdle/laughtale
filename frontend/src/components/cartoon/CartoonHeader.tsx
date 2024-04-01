@@ -17,35 +17,32 @@ type Props = {
 }
 export default function CartoonHeader(p: Props) {
   const {mangaId} = p;
-  const {data:props, isLoading, isError} = useSuspenseQuery({
+  const {data:props, isLoading, isError,} = useSuspenseQuery({
     queryKey: ["mangaInfo", mangaId],
     queryFn: () => getMangaInfo(+ mangaId),
     retry:0
   });
-
+  console.log("data is", props.thumbnail)
   return <>
       <div
         className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
-        {
-          props.thumbnail ? <div style={{
-            backgroundImage: `url(${props.thumbnail})`,
-            objectFit: "cover",
-            flexShrink: 0,
-            width: "300px",
-            height: "400px"
-          }}></div> : null
-        }
+        <div>
+            <img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"300px", height:"100%"}} />
+        </div>
         <div className="p-10 flex-grow">
           <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
-          <div className="font-bold text-xl text-white">작가 : {props.author}</div>
-          <div className="font-bold text-xl text-white">카테고리 : {props.category}</div>
-          <div className="font-bold text-xl text-white">레벨 : {props.level}</div>
+          { props.author && <div className="font-bold text-xl text-white">작가 : {props.author}</div>}
+          { props.category && <div className="font-bold text-xl text-white">카테고리 : {props.category}</div> }
+          { props.level &&<div className="font-bold text-xl text-white">레벨 : {props.level}</div>}
 
           <div className="mb-10"></div>
-          <div className="font-bold text-xl text-white">줄거리</div>
-          {/*<div className="mb-10"></div>*/}
-          <div className="font-bold text-xl text-white">{props.summary}</div>
+          {
+            props.summary && <>
+                  <div className="font-bold text-xl text-white">줄거리</div>
+                  <div className="font-bold text-xl text-white">{props.summary}</div>
+              </>
+          }
         </div>
       </div>
-    </>
+  </>
 }
