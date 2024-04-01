@@ -5,6 +5,7 @@ import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
 import client from "../../apis";
 import getWordExample from "./getWordExample.tsx";
+import { useQueryClient } from '@tanstack/react-query';
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -76,7 +77,7 @@ function ExampleModal({isOpen, onClose, example}) {
                         </div>
 
                         <div className="flex flex-col col-span-3 justify-items-center ">
-                            <div className="flex flex-col justify-center  h-full text-black p-12 ">
+                            <div className="flex flex-col justify-center  h-[500px] text-black p-12 ">
                                 <div className="overflow-y-scroll scrollbar-hide ">
                                     {example.speeches.map((item, index) => (
                                         <div key={index}
@@ -102,6 +103,7 @@ function ExampleModal({isOpen, onClose, example}) {
 //tts
 import axios from 'axios';
 import {useQuery} from "@tanstack/react-query";
+import getWordInfo from "./getWordInfo.tsx";
 
 async function playTTS(text) {
     const clientId = 'slivj7sa6g'; // 클라이언트 ID
@@ -123,7 +125,18 @@ async function playTTS(text) {
     }
 }
 
-const   CustomSlider = ({slides}) => {
+const   CustomSlider = ({level,page,size}) => {
+    // 레벨별 단어 목록 데이터
+    const { data: wordData, isLoading, error } = useQuery({
+        queryKey: ['wordBook', level, page, size],
+        queryFn: () => getWordInfo(level, page, size)
+    });
+
+    useEffect(() => {
+        console.log('단어장에 대한 데이터:', wordData);
+    }, [wordData, isLoading]);
+
+
     const [isModalOpenW, setIsModalOpenW] = useState(false);
     const closeModalW = () => setIsModalOpenW(false);
     // 단어 해석 보기
@@ -140,7 +153,7 @@ const   CustomSlider = ({slides}) => {
         setExampleId(null); // 모달을 닫을 때 exampleId 초기화
     };
 
-    const { data: example, isLoading, error } = useQuery({
+    const { data: example} = useQuery({
         queryKey: ['example', exampleId],
         queryFn: () => getWordExample(exampleId),
         enabled: !!exampleId,
@@ -153,22 +166,24 @@ const   CustomSlider = ({slides}) => {
         }
     }, [isLoading, example, error, exampleId]);
 
-
     const openModalWithExample = (id) => {
         setExampleId(id);
         console.log("1순서실행",id);
         // setIsModalOpenE(true);
     };
 
-    async function handleRemoveClick (id){
-        await client.delete(`/word-book/${id}`
-        ).then(()=>{
+    const queryClient = useQueryClient();
+
+    async function handleRemoveClick(id) {
+        try {
+            await client.delete(`/word-book/${id}`);
             console.log("단어 삭제완료");
-        })
-        .catch((error) => {
+            // 단어 삭제 후 업데이트
+            queryClient.invalidateQueries(['wordBook']);
+        } catch (error) {
             console.error("There was an error!", error);
-        });
-    };
+        }
+    }
 
     // tts 실행함수
     const handleIconClick = (word) => {
@@ -181,7 +196,7 @@ const   CustomSlider = ({slides}) => {
                     {/*    {slides.map(slide => (*/}
                     {/*        <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">*/}
                     {/*            <div className="flex flex-wrap justify-center items-center">*/}
-                    {slides.content.map(slideone => (
+                    {wordData && wordData.content.map(slideone => (
                         <div key={slideone.id}>
                             <div
                                 className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
@@ -235,7 +250,7 @@ const   CustomSlider = ({slides}) => {
                         onClose={closeModalE}
                         example={example}
                     />
-                </div>
+            </div>
     );
 };
 
