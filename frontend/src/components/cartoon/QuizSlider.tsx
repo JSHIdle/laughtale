@@ -9,6 +9,15 @@ import {useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import client from "../../apis";
 
+
+
+type SelectAnswer = {
+    id:number;
+    answerId:number;
+    answerword: string
+}
+
+type AnswerResult = Array<SelectAnswer>;
 function Modal({ isOpen, onClose ,  modalData}) {
     if (!isOpen) return null;
 
@@ -82,15 +91,16 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const closeModal = () => setIsModalOpen(false);
 
     // 정답넣기
-    const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [selectedAnswers, setSelectedAnswers] = useState<AnswerResult>([]);
 
     // 답안 버튼 클릭 이벤트 핸들러
     const handleAnswerClick = (slideIndex, checkwordId, answerwordId , answerword) => {
         // 선택된 답안 정보 업데이트
-        setSelectedAnswers(prev => ({
-            ...prev,
-            [slideIndex]: { id: checkwordId, answerId: answerwordId, answerword: answerword}
-        }));
+        // setSelectedAnswers(prev => ({
+        //     ...prev,
+        //     [slideIndex]: { id: checkwordId, answerId: answerwordId, answerword: answerword}
+        // }));
+        setSelectedAnswers([...selectedAnswers,{ id: checkwordId, answerId: answerwordId, answerword: answerword}]);
         console.log(selectedAnswers);
     };
 
