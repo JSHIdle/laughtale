@@ -14,7 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -40,7 +43,12 @@ public class WordDataService {
     public WordDataDetail.Response loadWordDataDetail(Long id) {
         WordData wordData = wordDataRepository.findById(id).orElseThrow(NotExistWordDataException::new);
         List<WordList> wordList = wordListService.loadWordListByWordData(wordData);
-        List<SpeechBasic.Response> speechBasicList = wordList.stream().map(speechService::loadByWordList).toList();
+        Collections.shuffle(wordList);
+        List<WordList> topTenList = new ArrayList<>();
+        for(int i=0;i<10;i++){
+            topTenList.add(wordList.get(i));
+        }
+        List<SpeechBasic.Response> speechBasicList = topTenList.stream().map(speechService::loadByWordList).toList();
         return WordDataMapper.toDetailResponse(wordData, speechBasicList);
     }
 
