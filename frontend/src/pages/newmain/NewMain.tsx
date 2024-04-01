@@ -101,7 +101,7 @@ export default function NewMain() {
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
                 <div className=" absolute top-[50px] z-10 right-[125px] m-4">
-                    <Link to="/home">
+                    <Link to="/analyze">
                         <div
                             className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
                             漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
