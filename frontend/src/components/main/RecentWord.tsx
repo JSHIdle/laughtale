@@ -6,7 +6,7 @@ import '../../../node_modules/swiper/swiper.min.css'
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
-function RecentSlider(){
+function RecentWord(){
 
   const [swiperRef, setSwiperRef] = useState(null); // 여기에서 swiperRef 상태를 정의합니다.
     // 슬라이드 정보를 저장하는 상태
@@ -98,4 +98,4 @@ function RecentSlider(){
     );
 }
 
-export default RecentSlider;
+export default RecentWord;

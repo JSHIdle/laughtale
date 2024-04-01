@@ -5,15 +5,16 @@ import Header from "../common/Header.tsx";
 
 import { useQuery } from '@tanstack/react-query';
 import getQuizInfo from './getQuizInfo.tsx';
+import {useParams} from "react-router-dom";
 
 const Quiz = () => {
     const sliderRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const quizId = 7;
+    const {chapterId} = useParams();
     const { data: quizData, isLoading, error } = useQuery({
-        queryKey: ['quiz', quizId],
-        queryFn: () => getQuizInfo(quizId)
+        queryKey: ['quiz', chapterId],
+        queryFn: () => getQuizInfo(chapterId)
     });
 
     const updateCurrentSlide = (index) => {
