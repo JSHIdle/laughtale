@@ -14,7 +14,7 @@ export default function SpeechButton (props: Props){
   const speech = new SpeechSynthesisUtterance(sentence);
   const textToSpeech = () => {
     speech.lang = lang ??"ja";
-    speech.pitch = pitch ?? 100;
+    speech.pitch = pitch ?? 1;
     speech.rate = rate ?? 0.8;
     speechSynthesis.speak(speech);
   }
