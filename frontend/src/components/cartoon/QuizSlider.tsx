@@ -9,15 +9,14 @@ import {useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import client from "../../apis";
 
-
-
 type SelectAnswer = {
     id:number;
     answerId:number;
     answerword: string
 }
 
-type AnswerResult = Array<SelectAnswer>;
+type AnswerResult = { [key:number]:SelectAnswer }
+
 function Modal({ isOpen, onClose ,  modalData}) {
     if (!isOpen) return null;
 
@@ -25,30 +24,27 @@ function Modal({ isOpen, onClose ,  modalData}) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-[#ffffff] p-4 rounded-lg w-[600px] ">
 
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center w-full p-3">
+                    <div className="text-black font-bold flex-1 text-center">
+                        단어 해석
+                    </div>
                     <button
                         onClick={onClose}
-                        className="text-black rounded-full bg-grey-500 hover:bg-grey-700"
-                    >
+                        className="text-black rounded-full bg-grey-500 hover:bg-grey-700">
                         X
                     </button>
                 </div>
 
-                    <div className="flex flex-col justify-between ">
-                        <div className="flex flex-col justify-center items-center h-full text-black p-6">
-                            <div className="rounded-xl  mb-6 w-[100px]">
-                                <div>
-                                    <h2 className="flex justify-center text-3xl text-black font-bold">단어 힌트</h2>
-                                </div>
-                            </div>
-                            <div className="rounded-xl bg-[#2D2D32] mb-6 p-12">
-                                <div>
-                                    <h2 className="text-2xl text-black font-bold"
-                                        dangerouslySetInnerHTML={{__html: modalData}}></h2>
-                                </div>
+                <div className="flex flex-col justify-between ">
+                    <div className="flex flex-col justify-center items-center h-full text-black p-6">
+                        <div className="rounded-xl bg-[#4EDBDE] mb-6 p-12">
+                            <div>
+                                <h2 className="text-2xl text-black font-bold"
+                                    dangerouslySetInnerHTML={{__html: modalData}}></h2>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
         </div>
@@ -91,16 +87,15 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const closeModal = () => setIsModalOpen(false);
 
     // 정답넣기
-    const [selectedAnswers, setSelectedAnswers] = useState<AnswerResult>([]);
+    const [selectedAnswers, setSelectedAnswers] = useState({});
 
     // 답안 버튼 클릭 이벤트 핸들러
     const handleAnswerClick = (slideIndex, checkwordId, answerwordId , answerword) => {
         // 선택된 답안 정보 업데이트
-        // setSelectedAnswers(prev => ({
-        //     ...prev,
-        //     [slideIndex]: { id: checkwordId, answerId: answerwordId, answerword: answerword}
-        // }));
-        setSelectedAnswers([...selectedAnswers,{ id: checkwordId, answerId: answerwordId, answerword: answerword}]);
+        setSelectedAnswers(prev => ({
+            ...prev,
+            [slideIndex]: { id: checkwordId, answerId: answerwordId, answerword: answerword}
+        }));
         console.log(selectedAnswers);
     };
 
@@ -108,6 +103,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
         let correctCount = 0; // 정답 개수를 저장할 변수
 
         Object.values(selectedAnswers).forEach(answer => {
+            // @ts-ignore
             if (answer.id + 1 === answer.answerId) { // 여기를 수정함
                 correctCount += 1; // 조건이 맞을 경우 정답 개수 증가
             }
@@ -137,10 +133,10 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     }}/>
                                 </div>
                                 <div>
-                                    <div className="font-semibold text-black p-6 flex justify-center items-center">
+                                    <div className="bg-white font-semibold text-black p-6 flex justify-center items-center">
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
-                                            className="ml-6 font-bold text-base text-black bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
+                                            className="ml-6 font-bold text-xl text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
                                             onClick={() => {
                                                 openModal();
                                                 setModalData(slide.definition);
@@ -149,7 +145,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
 
                                     <div className="flex justify-center items-center p-3 mb-3">
                                         <div
-                                            className="flex justify-center items-center bg-[#2D2D32] rounded-3xl p-3 max-w-[450px]">
+                                            className="flex justify-center items-center bg-white border-2 bg-[#C1C1C1] rounded-3xl p-3 max-w-[450px]">
                                             <div
                                                 className="flex justify-center items-center font-bold p-6 mr-12 ml-12 text-wrap overflow-wrap"
                                                 style={{whiteSpace: 'normal', wordWrap: 'break-word'}}>
