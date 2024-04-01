@@ -11,6 +11,7 @@ import com.jshi.laughtale.speech.domain.Speech;
 import com.jshi.laughtale.speech.mapper.SpeechMapper;
 import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.worddata.mapper.WordDataMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

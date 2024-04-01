@@ -111,7 +111,6 @@ public class MangaAnalyzer {
         for (int i = 0; i < wordDataList.size(); i++) {
             WordData wordData = wordDataList.get(i);
             String def = jaKoService.loadWordMeaning(wordData.getWord());
-            log.info("def : {}", def);
             if (def == null) {
                 continue;
             }
