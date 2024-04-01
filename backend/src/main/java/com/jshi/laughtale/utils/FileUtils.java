@@ -1,5 +1,7 @@
 package com.jshi.laughtale.utils;
 
+import com.jshi.laughtale.common.BaseException;
+import com.jshi.laughtale.common.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Map;
 
 @Slf4j
 public class FileUtils {
@@ -28,5 +29,14 @@ public class FileUtils {
         }
         file.transferTo(path);
         return path.toString();
+    }
+
+    public static void remove(String filename) throws IOException {
+        Path path = Path.of(filename);
+        if (!Files.exists(path)) {
+            log.error("Image Path : {}", path);
+            throw new BaseException(ErrorCode.FILE_NOT_FOUND);
+        }
+        Files.delete(path);
     }
 }

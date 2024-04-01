@@ -36,13 +36,13 @@ public class MangaController {
 
     @PostMapping("/upload")
     public ResponseEntity<MangaAnalyze.Response> upload(
-        @RequestPart MultipartFile thumbnail,
-        @RequestPart MangaUpload.Request manga,
-        @RequestPart List<MultipartFile> files
+        @RequestPart(required = false) MultipartFile thumbnail,
+        @RequestPart(required = false) MangaUpload.Request manga,
+        @RequestPart List<MultipartFile> files,
+        @AuthenticationPrincipal CustomUserDetails customUserDetails
     ) throws IOException {
-        log.info("manga : {}", manga.toString());
-        log.info("thumbnail: {}", thumbnail.getOriginalFilename());
-        return ResponseEntity.ok(mangaService.upload(thumbnail, manga, files));
+        log.info("만화 분석 업로드 요청...");
+        return ResponseEntity.ok(mangaService.upload(thumbnail, manga, files, customUserDetails.getId()));
     }
 
     @GetMapping("/recent")
