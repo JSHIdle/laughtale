@@ -31,11 +31,11 @@ import Manga21 from '../../assets/mainpageimage/mangas/manga_21.png'
 import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
 export default function NewMain() {
-    const OrbitRegular = {
-        fontFamily: 'Orbit-Regular',
+    const customFont = {
+        fontFamily: 'Her-Leeoksun',
     };
     return (
-        <div className="bg-[#FFFFFF] min-h-screen" style={OrbitRegular}>
+        <div className="bg-[#FFFFFF] min-h-screen" style={customFont}>
             <Header/>
 
             <div className="flex justify-end min-h-screen min-w-full items-center">
