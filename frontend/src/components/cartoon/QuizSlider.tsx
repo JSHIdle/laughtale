@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import './QuizSlider.css';
 import ImageWithWhiteBox from './ImageWithWhiteBox';
 import {useState} from "react";
+import {useQueryClient} from '@tanstack/react-query';
+import axios from 'axios';
+import client from "../../apis";
 
 function Modal({ isOpen, onClose ,  modalData}) {
     if (!isOpen) return null;
@@ -43,11 +46,25 @@ function Modal({ isOpen, onClose ,  modalData}) {
     );
 };
 
+
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     let navigate = useNavigate();
 
     function handleClick() {
-        navigate('result');
+        const correctAnswersCount = calculateCorrectAnswers();
+        navigate('result', { state: { slides, correctAnswersCount }});
+        console.log(selectedAnswers);
+
+        const updatedIds = Object.values(selectedAnswers).map(obj => obj.id + 1);
+        console.log(updatedIds);
+
+        client.post('/quiz/solve', { answer: updatedIds })
+            .then(response => {
+                console.log('Request successful', response.data);
+            })
+            .catch(error => {
+                console.error('Request failed', error);
+            });
     }
 
     const settings = {
@@ -64,6 +81,31 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    // 정답넣기
+    const [selectedAnswers, setSelectedAnswers] = useState({});
+
+    // 답안 버튼 클릭 이벤트 핸들러
+    const handleAnswerClick = (slideIndex, checkwordId, answerwordId , answerword) => {
+        // 선택된 답안 정보 업데이트
+        setSelectedAnswers(prev => ({
+            ...prev,
+            [slideIndex]: { id: checkwordId, answerId: answerwordId, answerword: answerword}
+        }));
+        console.log(selectedAnswers);
+    };
+
+    const calculateCorrectAnswers = () => {
+        let correctCount = 0; // 정답 개수를 저장할 변수
+
+        Object.values(selectedAnswers).forEach(answer => {
+            if (answer.id + 1 === answer.answerId) { // 여기를 수정함
+                correctCount += 1; // 조건이 맞을 경우 정답 개수 증가
+            }
+        });
+
+        console.log(`정답 개수: ${correctCount}`); // 콘솔에 정답 개수 출력
+        return correctCount; // 정답 개수 반환
+    };
 
     return (
         <div>
@@ -106,13 +148,19 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                         </div>
                                     </div>
 
-
                                     <div className="flex justify-center items-center p-3">
                                         <div className="w-[450px]">
                                             <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
                                                 {slide.option.map((option, idx) => (
-                                                    <button key={idx}
-                                                            className="text-black font-bold bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px]">{option}</button>
+                                                    <button
+                                                        key={idx}
+                                                        className={`text-white font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
+                                                            selectedAnswers[index]?.id === idx ? "bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]" : ""
+                                                        }`} // 조건부 클래스 추가
+                                                        onClick={() => handleAnswerClick(index, idx, slide.answerNo, slide.option[slide.answerNo-1])} // 클릭 이벤트 핸들러 연결
+                                                    >
+                                                        {option}
+                                                    </button>
                                                 ))}
                                             </div>
                                         </div>

@@ -4,7 +4,7 @@ import Header from '../../components/common/Header';
 import CartoonGrid from "../../components/main/CartoonGrid";
 
 
-import RecentSlider from '../../components/main/RecentSlider';
+import RecentWord from '../../components/main/RecentWord.tsx';
 import '../../index.css'
 
 const Recommend = () => {
@@ -32,10 +32,10 @@ const Recommend = () => {
 
 
     return (
-        <div className="bg-[#1D1D21] min-h-screen text-white">
+        <div className="bg-[#121212] min-h-screen text-white">
             <Header/>
             <div className="mx-auto recent_wrap" style={{maxWidth: '950px'}}>
-            <RecentSlider/>
+            <RecentWord/>
             </div>
             {cartoons.map((cartoonData, index) => (
                 <CartoonGrid key={index} cartoons={cartoonData} level={index + 1} />
