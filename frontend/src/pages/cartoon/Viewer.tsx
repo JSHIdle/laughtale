@@ -59,7 +59,7 @@ const Viewer = () => {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery<ChapterListResponse>({
-        queryKey: ['chapterList', mangaId],
+        queryKey: ['chapterList', mangaId, chapterId],
         queryFn: ({pageParam}) => {
             // console.log("page param " + pageParam);
             return getImageByChapterId({chapterId, page: + pageParam, size:5})
