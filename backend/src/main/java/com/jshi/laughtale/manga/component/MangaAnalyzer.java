@@ -24,6 +24,7 @@ import com.jshi.laughtale.worddata.mapper.WordDataMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,22 +44,26 @@ public class MangaAnalyzer {
     }
 
     private List<ChapterAnalyze.Response> analyzeChapter(Manga manga, List<ChapterContext> chapterContexts, int last) {
-        List<Chapter> chapters = new ArrayList<>();
+        List<Chapter> chapters = Optional.ofNullable(manga.getChapter()).orElse(new ArrayList<>());
+        List<ChapterAnalyze.Response> chapterResponse = new ArrayList<>();
+        int idx = chapters.size();
         for (int i = 0; i < chapterContexts.size(); i++) {
             ChapterContext chapterContext = chapterContexts.get(i);
             Chapter chapter = chapterContext.getChapter();
             chapter.setManga(manga);
             chapter.setChapterNo(chapter.getChapterNo() + last);
+            ChapterAnalyze.Response analyzeResponse = ChapterMapper.toAnalyzeResponse(chapter);
 
-            analyzeCut(chapter, chapterContext.getCutContexts());
+            List<CutAnalyze.Response> cutAnalyze = analyzeCut(chapter, chapterContext.getCutContexts());
+            analyzeResponse.setCuts(cutAnalyze);
             chapters.add(chapter);
+            chapterResponse.add(analyzeResponse);
         }
-        List<ChapterAnalyze.Response> chapterResponse = chapters.stream().map(ChapterMapper::toAnalyzeResponse)
-                .toList();
         chapterResponse.forEach(this::calc);
 
-        for (int i = 0; i < chapters.size(); i++) {
-            chapters.get(i).setLevel(chapterResponse.get(i).getLevel());
+
+        for (int i = 0; i < chapterResponse.size(); i++) {
+            chapters.get(idx + i).setLevel(chapterResponse.get(i).getLevel());
         }
         manga.updateChapter(chapters);
         return chapterResponse;
@@ -66,16 +71,20 @@ public class MangaAnalyzer {
 
     private List<CutAnalyze.Response> analyzeCut(Chapter chapter, List<CutContext> cutContexts) {
         List<Cut> cuts = new ArrayList<>();
+        List<CutAnalyze.Response> cutAnalyze = new ArrayList<>();
         for (int i = 0; i < cutContexts.size(); i++) {
             CutContext cutContext = cutContexts.get(i);
             Cut cut = cutContext.getCut();
             cut.setChapter(chapter);
+            CutAnalyze.Response analyzeResponse = CutMapper.toAnalyzeResponse(cut);
 
-            analyzeSpeech(cut, cutContext.getSpeechContexts());
+            List<SpeechDetail.Response> speechAnalyze = analyzeSpeech(cut, cutContext.getSpeechContexts());
+            analyzeResponse.setSentence(speechAnalyze);
             cuts.add(cut);
+            cutAnalyze.add(analyzeResponse);
         }
         chapter.setCuts(cuts);
-        return cuts.stream().map(CutMapper::toAnalyzeResponse).toList();
+        return cutAnalyze;
     }
 
     private List<SpeechDetail.Response> analyzeSpeech(Cut cut, List<SpeechContext> speechContexts) {
@@ -102,6 +111,7 @@ public class MangaAnalyzer {
         for (int i = 0; i < wordDataList.size(); i++) {
             WordData wordData = wordDataList.get(i);
             String def = jaKoService.loadWordMeaning(wordData.getWord());
+            log.info("def : {}", def);
             if (def == null) {
                 continue;
             }

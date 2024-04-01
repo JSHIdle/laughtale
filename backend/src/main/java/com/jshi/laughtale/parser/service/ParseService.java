@@ -1,7 +1,7 @@
 package com.jshi.laughtale.parser.service;
 
 import com.jshi.laughtale.parser.Attribute;
-import com.jshi.laughtale.parser.MangaParser2;
+import com.jshi.laughtale.parser.MangaParser;
 import com.jshi.laughtale.parser.context.ChapterContext;
 import com.jshi.laughtale.parser.context.CutContext;
 import com.jshi.laughtale.parser.context.MangaContext;
@@ -17,9 +17,10 @@ public class ParseService {
 
     public MangaContext parse(Map attr) {
         MangaContext mangaContext = MangaContext.builder()
-                .manga(MangaParser2.parseManga(attr))
+                .manga(MangaParser.parseManga(attr))
                 .build();
-        List<List<Object>> chapters = (List<List<Object>>) attr.get(Attribute.CHAPTER);
+        attr = (Map<String, Object>) attr.get(mangaContext.getManga().getTitle());
+        List<List<Object>> chapters = (List<List<Object>>) attr.get(Attribute.CHAPTER.toString());
         List<ChapterContext> chapterContexts = new ArrayList<>();
 
         for (int i = 0; i < chapters.size(); i++) {
@@ -32,7 +33,7 @@ public class ParseService {
 
     private ChapterContext chapterParsing(int idx, List<Object> chapter) {
         ChapterContext chapterContext = ChapterContext.builder()
-                .chapter(MangaParser2.parseChapter(idx, chapter.size()))
+                .chapter(MangaParser.parseChapter(idx, chapter.size()))
                 .build();
         List<CutContext> cutContexts = new ArrayList<>();
         for (int i = 0; i < chapter.size(); i++) {
@@ -47,10 +48,10 @@ public class ParseService {
 
     private CutContext cutParsing(Map<String, Object> cut) {
         CutContext cutContext = CutContext.builder()
-                .cut(MangaParser2.parseCut(cut))
+                .cut(MangaParser.parseCut(cut))
                 .build();
         List<SpeechContext> speechContexts = new ArrayList<>();
-        List<Map<String, Object>> speeches = (List<Map<String, Object>>) cut.get(Attribute.SPEECH);
+        List<Map<String, Object>> speeches = (List<Map<String, Object>>) cut.get(Attribute.SPEECH.toString());
         for (int i = 0; i < speeches.size(); i++) {
             Map<String, Object> speech = speeches.get(i);
             SpeechContext speechContext = speechParsing(speech);
@@ -62,12 +63,12 @@ public class ParseService {
 
     private SpeechContext speechParsing(Map<String, Object> speech) {
         SpeechContext speechContext = SpeechContext.builder()
-                .speech(MangaParser2.parseSpeech(speech))
+                .speech(MangaParser.parseSpeech(speech))
                 .build();
-        Map<String, Object> words = (Map<String, Object>) speech.get(Attribute.WORD_LIST);
+        List<Map<String, Object>> words = (List<Map<String, Object>>) speech.get(Attribute.WORD_LIST.toString());
         List<WordData> wordDataList = new ArrayList<>();
         for (int i = 0; i < words.size(); i++) {
-            WordData wordData = wordDataParsing((Map<String, Object>) words.get(i));
+            WordData wordData = wordDataParsing(words.get(i));
             wordDataList.add(wordData);
         }
         speechContext.setWordDataList(wordDataList);
@@ -75,6 +76,6 @@ public class ParseService {
     }
 
     private WordData wordDataParsing(Map<String, Object> word) {
-        return MangaParser2.parseWordData(word);
+        return MangaParser.parseWordData(word);
     }
 }
