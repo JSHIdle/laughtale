@@ -58,8 +58,8 @@ public class MangaParser {
     }
 
     private static String attachPrefix(String src) {
-        if (!src.startsWith("/")) {
-            return PREFIX + '/' + src;
+        if (src.startsWith("/")) {
+            return PREFIX + src.substring(1);
         }
         return PREFIX + src;
     }
