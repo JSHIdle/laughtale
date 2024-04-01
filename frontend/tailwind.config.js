@@ -8,40 +8,40 @@ export default {
             keyframes: {
                 sliderA: {
                     '0%': {
-                        transform: 'translateX(0px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        transform: 'translateX(0px)'
+                       ,opacity : 0.2
                     },
                     '100%': {
-                        transform: 'translateX(-1000px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        transform: 'translateX(-1000px)'
+                        ,opacity : 0.2
                     }
                 },
                 sliderB: {
                     '0%': {
                         transform: 'translateX(-1000px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        backgroundColor: '#FFFFFF'
                     },
                     '100%': {
                         transform: 'translateX(0px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        backgroundColor: '#FFFFFF'
                     }
                 },
                 sliderC: {
                     '0%': {
                         transform: 'translateX(-150px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        backgroundColor: '#FFFFFF'
                     },
                     '100%': {
                         transform: 'translateX(-1150px)',
-                        backgroundColor: '#121212',opacity : 0.2
+                        backgroundColor: '#FFFFFF'
                     }
                 },
 
             },
             animation: {
                 sliderA: 'sliderA 120s linear infinite',
-                sliderB: 'sliderB 120s linear infinite',
-                sliderC: 'sliderC 120s linear infinite',
+                sliderB: 'sliderB 60s linear infinite',
+                sliderC: 'sliderC 60s linear infinite',
             }
         },
     },
