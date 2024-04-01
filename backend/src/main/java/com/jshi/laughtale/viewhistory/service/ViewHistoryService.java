@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.chapter.service.ChapterService;
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.service.MemberService;
@@ -24,15 +25,14 @@ public class ViewHistoryService {
 	private final MemberService memberService;
 	private final ChapterService chapterService;
 	private final ViewHistoryRepository viewHistoryRepository;
+	private final ChapterRepository chapterRepository;
 
-	public void createHistory(String title, Integer chapterNo, Long userId) {
+	public void createHistory(Long chapterId, Long userId) {
 		Member member = memberService.findById(userId);
-		Chapter chapter = chapterService.loadByTitleAndChapterNo(title, chapterNo);
+		Chapter chapter = chapterRepository.findById(chapterId).get();
 		Optional<List<ViewHistory>> existingHistoriesOptional = viewHistoryRepository.findAllByMemberAndChapter(member,
 			chapter);
-		// if (existingHistories == null || existingHistories.isEmpty()) {
-		//     viewHistoryRepository.save(ViewHistoryMapper.toEntity(member, chapter));
-		// }
+
 		if (existingHistoriesOptional.isPresent() && !existingHistoriesOptional.get().isEmpty()) {
 			List<ViewHistory> existingHistories = existingHistoriesOptional.get();
 

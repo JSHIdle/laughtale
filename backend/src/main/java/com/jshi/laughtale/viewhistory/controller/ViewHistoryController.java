@@ -25,12 +25,11 @@ public class ViewHistoryController {
 
 	private final ViewHistoryService viewHistoryService;
 
-	@PostMapping("/{title}/{chapterNo}")
+	@PostMapping("/{chapterId}")
 	public ResponseEntity<Void> createHistory(
-		@PathVariable String title,
-		@PathVariable Integer chapterNo,
+		@PathVariable Long chapterId,
 		@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-		viewHistoryService.createHistory(title, chapterNo, customUserDetails.getId());
+		viewHistoryService.createHistory(chapterId, customUserDetails.getId());
 		return ResponseEntity.ok().build();
 	}
 
