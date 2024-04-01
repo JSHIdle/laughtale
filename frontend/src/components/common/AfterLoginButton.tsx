@@ -11,12 +11,12 @@ export default function AfterLoginButton() {
   }
   return (
       <>
-      <div className="text-lg mr-3">
-        <NavLink to="/mypage">마이페이지</NavLink>
+      <div className="mr-3 text-3xl hover:text-gray-800">
+        <NavLink to="/mypage">マイページ : 마이페이지</NavLink>
       </div>
 
-      <div className="text-lg" onClick={() => logout()}>
-        로그아웃
+      <div className="text-3xl" onClick={() => logout()}>
+          ログアウト : 로그아웃
       </div>
   </>)
 }
