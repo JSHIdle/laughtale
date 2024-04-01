@@ -6,11 +6,9 @@ import com.jshi.laughtale.wordlist.domain.WordList;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.PERSIST;
 
 @AllArgsConstructor
@@ -31,13 +29,15 @@ public class Speech {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cut_id")
+    @Setter
     private Cut cut;
 
     @OneToOne(cascade = PERSIST, optional = true)
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @OneToMany(mappedBy = "speech", orphanRemoval = true, cascade = PERSIST)
+    @OneToMany(mappedBy = "speech", orphanRemoval = true)
+    @Setter
     private List<WordList> wordLists = new ArrayList<>();
 
 }

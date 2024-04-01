@@ -12,6 +12,14 @@ import java.util.List;
 
 public class CutMapper {
 
+	public static Cut toEntity(int page, String imageUrl, List<Integer> size) {
+		return Cut.builder()
+				.cutNo(page)
+				.imageUrl(imageUrl)
+				.width(size.get(0))
+				.height(size.get(1))
+				.build();
+	}
 	public static Cut toEntity(Chapter chapter, int cutNo, String imageUrl, List<Integer> size) {
 		return Cut.builder()
 			.cutNo(cutNo)

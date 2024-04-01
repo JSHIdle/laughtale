@@ -8,9 +8,6 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.ALL;
-import static jakarta.persistence.CascadeType.PERSIST;
-
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -32,10 +29,7 @@ public class Chapter {
     @JoinColumn(name = "manga_id")
     private Manga manga;
 
-    @OneToMany(mappedBy = "chapter", cascade = PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "chapter", orphanRemoval = true)
     private List<Cut> cuts = new ArrayList<>();
 
-    public void updateLevel(int level) {
-        this.level = level;
-    }
 }

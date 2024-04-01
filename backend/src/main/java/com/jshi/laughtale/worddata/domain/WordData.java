@@ -20,7 +20,7 @@ public class WordData {
     private String partOfSpeech;
     @Column
     private Integer frequency;
-    @Column
+    @Column(columnDefinition = "TEXT")
     @Setter
     private String definition;
 

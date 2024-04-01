@@ -10,6 +10,27 @@ import java.util.List;
 
 public class MangaMapper {
 
+    public static final String EMPTY = "EMPTY";
+
+    public static Manga toEntity(String title, String author, String description, String genres, String thumbnail) {
+        return Manga.builder()
+                .title(title)
+                .author(author)
+                .description(description)
+                .category(genres)
+                .thumbnail(thumbnail)
+                .build();
+    }
+
+    public static MangaUpload.Request emptyUploadRequest() {
+        return MangaUpload.Request.builder()
+                .title(EMPTY)
+                .genres(EMPTY)
+                .description(EMPTY)
+                .author(EMPTY)
+                .build();
+    }
+
     public static MangaAnalyze.Request toAnalyze(
             String thumbnailPath,
             MangaUpload.Request upload,
