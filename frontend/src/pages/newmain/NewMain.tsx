@@ -32,8 +32,12 @@ import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
 import OnePieceSet from '../../assets/mainpageimage/onepieceset.png';
 import JapaneseWordCloud  from '../../assets/mainpageimage/japwrcl3.jpg';
+import ReactWordcloud from "react-wordcloud";
 
 export default function NewMain() {
+
+
+
     const customFont = {
         fontFamily: 'GmarketSansMedium',
     };
@@ -156,7 +160,34 @@ export default function NewMain() {
                 </div>
 
             </div>
-            <div className="h-[250px]"></div>
+            <div className="h-[250px]"><SimpleWordcloud /></div>
         </div>
     );
+}
+
+
+
+
+
+const words = [
+    {
+        text: 'told',
+        value: 11164,
+    },
+    {
+        text: 'mistake',
+        value: 11330,
+    },
+    {
+        text: 'thought',
+        value: 11033,
+    },
+    {
+        text: 'bad',
+        value: 11733,
+    },
+]
+
+function SimpleWordcloud() {
+    return <ReactWordcloud words={words} />
 }
