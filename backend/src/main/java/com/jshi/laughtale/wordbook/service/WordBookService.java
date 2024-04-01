@@ -45,8 +45,9 @@ public class WordBookService {
         return wordBookList.map(WordBookMapper::toBasicResponse);
     }
 
-    public void deleteWordBook(Long id) {
-        WordBook wordBook = wordBookRepository.findByWordDataId(id).orElseThrow(NotExistWordBookException::new);
+    public void deleteWordBook(Long id, Long memberId) {
+        WordBook wordBook = wordBookRepository.findByWordDataId(id, memberId)
+                .orElseThrow(NotExistWordBookException::new);
         wordBookRepository.delete(wordBook);
     }
 }
