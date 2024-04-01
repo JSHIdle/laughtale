@@ -17,6 +17,8 @@ import CartoonImage from "../../components/cartoon/CartoonImage.tsx";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {ChapterListResponse} from "../../types/types";
 import {getChapterList} from "../../apis/cartoon.ts";
+import axios from "axios";
+import header from "../../components/common/Header.tsx";
 
 
 type TestType = {
@@ -30,6 +32,17 @@ const Viewer = () => {
     const params = useParams()
     const mangaId = + params.title;
     const chapterId = + params.id;
+    // const [data, setData] = useState<MangaImageResponse>([]);
+    // const [page, setPage] = useState<number>(0);
+
+    useEffect(() => {
+        const fetchMangaWordLevelData = async () => {
+            await client.post(`/history/${chapterId}`)
+        };
+
+        fetchMangaWordLevelData();
+    }, [chapterId]);
+
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
