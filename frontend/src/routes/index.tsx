@@ -24,7 +24,7 @@ import NewMain from "../pages/newmain/NewMain.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/home" replace={true} />,
+    element: <Navigate to="/main" replace={true} />,
   },
   {
     path: "login",
@@ -129,7 +129,7 @@ const router = createBrowserRouter([
     element: <Error />,
   },
   {
-    path : "/newmain",
+    path : "/main",
     element: <NewMain />
   }
 ]);

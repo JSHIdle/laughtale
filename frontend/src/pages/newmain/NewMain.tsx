@@ -39,22 +39,9 @@ import client from "../../apis";
 export default function NewMain() {
     const [data, setData] = useState(null);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const res = await client.get("/word-data/word-cloud?page=0&size=1000");
-    //         const updatedData = res.data.map(word => ({
-    //             text: word.text,
-    //             value: word.value > 1000 ? Math.round(word.value / 10) : word.value
-    //         }));
-    //         const reupdatedData = updatedData.map(word => ({
-    //             text: word.text,
-    //             value: word.value > 1000 ? Math.round(word.value / 10) : word.value
-    //         }));
-    //         setData(reupdatedData);
-    //     })();
-    // }, []);
     useEffect(() => {
         // Function to fetch data from API
+
         const fetchData = async () => {
             const res = await client.get("/word-data/word-cloud?page=0&size=1000");
             const updatedData = res.data.map(word => ({
@@ -66,17 +53,29 @@ export default function NewMain() {
                 value: word.value > 1000 ? Math.round(word.value / 10) : word.value
             }));
             setData(reupdatedData);
+
+            const intervalId = setInterval(() => {
+                const shuffledData = shuffleArray([...reupdatedData]); // Shuffle the data
+                setData(shuffledData);
+            }, 5000);
+
+            return () => clearInterval(intervalId);
         };
 
-        // Initial fetch of data
+
         fetchData();
 
-        // Set interval to shuffle data every 5 seconds
-        const intervalId = setInterval(fetchData, 3000);
 
-        // Clean up function to clear interval when component unmounts
-        return () => clearInterval(intervalId);
     }, []);
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     const customFont = {
         fontFamily: 'GmarketSansMedium',
     };
@@ -158,7 +157,8 @@ export default function NewMain() {
                     <div className="flex flex-col justify-center items-center">
                         {/*<img src={JapaneseWordCloud}*/}
                         {/*     className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>*/}
-                        <div className="rounded-[15px] shadow-lg h-[300px] w-[300px]"><SimpleWordcloud word={data}/></div>
+                        <div className="rounded-[15px] shadow-lg h-[300px] w-[300px]"><SimpleWordcloud word={data}/>
+                        </div>
                         <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
                     </div>
                     <div className="flex flex-col justify-center items-center">

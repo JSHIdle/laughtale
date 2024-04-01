@@ -16,7 +16,7 @@ client.interceptors.request.use(
   (config) => {
     const authStore = useAuthLocalStroage();
     const token = authStore.get();
-    const accessToken = token?.accessToken ?? null;
+    const accessToken = token?.accessToken ?? "";
     console.log(token);
 
     // config.headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MTE1MDI4MjYsImV4cCI6NTE4NTcxMTUwMjgyNiwicm9sZSI6IkFETUlOIn0.5eJr2_G5I4ukcOyhrt6BlvDmQHVDLDUMCyJxND9V4tU';
