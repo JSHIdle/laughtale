@@ -158,7 +158,7 @@ export default function NewMain() {
                     <div className="flex flex-col justify-center items-center">
                         {/*<img src={JapaneseWordCloud}*/}
                         {/*     className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>*/}
-                        <div className="rounded-[15px] shadow-lg"><SimpleWordcloud word={data}/></div>
+                        <div className="rounded-[15px] shadow-lg h-[300px] w-[300px]"><SimpleWordcloud word={data}/></div>
                         <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
@@ -215,5 +215,5 @@ const sizes = [300, 300];
 
 function SimpleWordcloud({word}) {
     // return <ReactWordcloud words={word}/>
-    return <ReactWordcloud size={sizes} words={word}/>
+    return <ReactWordcloud words={word}/>
 }
