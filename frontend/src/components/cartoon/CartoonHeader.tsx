@@ -37,8 +37,7 @@ export default function CartoonHeader(p: Props) {
 
           <div className="mb-10"></div>
           {
-            props.summary &&
-              <>
+            props.summary && <>
                   <div className="font-bold text-xl text-white">줄거리</div>
                   <div className="font-bold text-xl text-white">{props.summary}</div>
               </>
