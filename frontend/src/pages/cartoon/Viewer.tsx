@@ -57,7 +57,7 @@ const Viewer = () => {
 
     return (
       <>
-      <div className="bg-[#1D1D21] min-h-screen">
+      <div className="bg-[#ffffff] min-h-screen">
           <Header/>
           <div className="flex">
               <FlexItem flex="1"/>

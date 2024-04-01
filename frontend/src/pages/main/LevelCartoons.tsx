@@ -34,7 +34,7 @@ const LevelCartoons = () => {
 
 
     return (
-        <div className="bg-[#212529] min-h-screen text-white">
+        <div className="bg-[#212529] min-h-screen text-black">
             <Header/>
             <LevelCartoonGrid cartoons={cartoons} level={parseInt(level, 10)}/>
         </div>

@@ -22,7 +22,7 @@ const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
         <div className="mx-auto comonent_wrap" style={{maxWidth: '600px'}}>
             <div className="flex items-center justify-between mb-4 ComponentHead">
                 <div className="text-2xl font-bold ComponentHead_title">Level {level}</div>
-                <Link to={allCartoonsLink} className="text-lg text-white hover:text-white-800">
+                <Link to={allCartoonsLink} className="text-lg text-black hover:text-black-800">
                     Level {level} 만화 더보기
                 </Link>
             </div>

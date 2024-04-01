@@ -17,7 +17,7 @@ export default function Error (props : Props){
     //     statusCode : "400",
     // }
   return (
-      <div className="bg-[#1D1D21] min-h-screen text-white overflow-hidden ">
+      <div className="bg-[#ffffff] min-h-screen text-black overflow-hidden ">
           <div>
               <Header/>
               <div className="flex justify-center items-center">
@@ -26,7 +26,7 @@ export default function Error (props : Props){
                       <div className="text-lg whitespace-pre-wrap flex flex-col items-center justify-center p-6">{props.message ? props.message : "Error"}</div>
                       <div className="flex justify-center">
                           <Link to={"/home"} replace
-                            className="p-3 text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-3xl ">홈으로
+                            className="p-3 text-base text-black bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-3xl ">홈으로
                               돌아가기
                           </Link>
                       </div>

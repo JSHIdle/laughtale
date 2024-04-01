@@ -10,16 +10,16 @@ const Index = () => {
         navigate(`word/${level}`);
     }
 
-      return <div className="bg-[#121212] min-h-screen" style={{ height: 'calc(100vh * 1.1111)' }}>
+      return <div className="bg-[#ffffff] min-h-screen" style={{ height: 'calc(100vh * 1.1111)' }}>
           <div>
               <Header/>
           </div>
           <div className="max-w-[1300px] m-auto">
               <div className="grid grid-cols-2 gap-12 mb-4 mt-24 flex justify-center items-center">
               <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
-                  <div className="relative mt-12 flex justify-center items-center bg-[#121212] rounded-xl">
+                  <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                       <div
-                          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#121212] font-bold text-white px-12 py-3 rounded-3xl">
+                          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
                           단어장
                       </div>
                       <div className="w-[700px] pt-12 pb-12 px-6 flex justify-evenly items-center">
@@ -69,13 +69,13 @@ const Index = () => {
                   <div>
                       <div>
                       <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
-                          <div className="relative mt-12 flex justify-center items-center bg-[#121212] rounded-xl">
+                          <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                               <div
-                                  className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#121212] font-bold text-white px-12 py-3 rounded-3xl">
+                                  className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
                                   차트 ( 예시 )
                               </div>
                           </div>
-                          <div className="flex justify-center items-center bg-[#121212] rounded-2xl">
+                          <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
                               <div className="w-[700px] h-[180px] rounded-xl flex justify-center items-center ">
                                   <div>
                                       <LineChart />
@@ -91,14 +91,14 @@ const Index = () => {
                   <div>
                       <div>
                           <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
-                              <div className="relative mt-12 flex justify-center items-center bg-[#121212] rounded-xl">
+                              <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                                   <div
-                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#121212] font-bold text-white px-12 py-3 rounded-3xl">
+                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
                                       내가 푼 퀴즈의 난이도 분포
                                   </div>
                               </div>
 
-                              <div className="flex justify-center items-center bg-[#121212] rounded-2xl">
+                              <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
                                   <div className="w-[700px] h-[250px] rounded-xl flex justify-center items-center ">
                                       <div>
                                           <DoughnutChart/>
@@ -112,14 +112,14 @@ const Index = () => {
                   <div>
                       <div>
                           <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
-                              <div className="relative mt-12 flex justify-center items-center bg-[#121212] rounded-xl">
+                              <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                                   <div
-                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#121212] font-bold text-white px-12 py-3 rounded-3xl">
+                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
                                       막대그래프로 단어개수 분포
                                   </div>
                               </div>
 
-                              <div className="flex justify-center items-center bg-[#121212] rounded-2xl">
+                              <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
                                   <div className="w-[700px] h-[250px] rounded-xl flex justify-center items-center ">
                                       <div>
                                           <DoughnutChart/>
