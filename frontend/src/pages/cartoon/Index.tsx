@@ -19,19 +19,32 @@ import Chart from 'react-apexcharts'
 const Index = () => {
     const params = useParams()
     const mangaId = +params.title;
-    const [chartData, setChartData] = useState({labels: [], series: []});
+    const [wordLevelChartData, setWordLevelChartData] = useState({labels: [], series: []});
+    const [chapterLevelChartData, setChapterLevelChartData] = useState({labels: [], series: []});
+
 
     useEffect(() => {
-        const fetchMangaLevelData = async () => {
-            const response = await fetch(`https://j10a705.p.ssafy.io/api/manga/level?mangaId=${mangaId}`);
+        const fetchMangaWordLevelData = async () => {
+            const response = await fetch(`https://j10a705.p.ssafy.io/api/manga/word/level?mangaId=${mangaId}`);
             const data = await response.json();
-            const labels = data.map(item => `Level ${item.level}`);
+            const labels = data.map(item => `Word Level ${item.level}`);
             const series = data.map(item => item.count);
 
-            setChartData({labels, series});
+            setWordLevelChartData({labels, series});
         };
 
-        fetchMangaLevelData();
+        const fetchMangaChapterLevelData = async () => {
+            const response = await fetch(`https://j10a705.p.ssafy.io/api/manga/chapter/level?mangaId=${mangaId}`);
+            if (!response.ok) throw new Error('Response not ok');
+            const data = await response.json();
+            const labels = data.map(item => `Chapter Level ${item.level}`);
+            const series = data.map(item => item.count);
+
+            setChapterLevelChartData({labels, series});
+        }
+
+        fetchMangaWordLevelData();
+        fetchMangaChapterLevelData();
     }, [mangaId]);
 
     const {
@@ -90,28 +103,29 @@ const Index = () => {
                 <div>
                     <Chart
                         type="donut"
-                        series={chartData.series}
+                        series={wordLevelChartData.series}
 
                         options={{
-                            labels: chartData.labels,
+                            labels: wordLevelChartData.labels,
                             chart: {
                                 type: 'donut',
                                 height: 320,
                             },
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 200
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
                         }}
-                        width="320">
-                    </Chart>
+                        width="450"/>
+                    <Chart
+                        type="donut"
+                        series={chapterLevelChartData.series}
+
+                        options={{
+                            labels: chapterLevelChartData.labels,
+                            chart: {
+                                type: 'donut',
+                                height: 320,
+                            },
+                        }}
+                        width="450"
+                    />
                 </div>
 
                 <div className="mb-3">
