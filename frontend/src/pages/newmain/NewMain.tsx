@@ -84,10 +84,11 @@ export default function NewMain() {
         <div className="bg-[#FFFFFF] min-h-screen" style={customFont}>
             <Header/>
 
-            <div className="flex justify-end min-h-screen min-w-full items-center">
+            <div className="flex justify-end min-h-screen min-w-full items-center relative">
                 {/*<div className="gradient-overlay"></div>*/}
                 <img src={ReadingManga}
                      className=" w-[100%] h-[740px] object-cover opacity-80 relative"/>
+
                 {/*<div className="w-[100%] h-[600px] absolute bg-[#000000] z-10 opacity-20 "></div>*/}
                 <div className="w-[100%] h-[670px] absolute z-10">
                     <div
@@ -98,7 +99,7 @@ export default function NewMain() {
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
 
-                <div className=" absolute top-[125px] z-10 right-[45px] m-4">
+                <div className=" absolute top-[60px] z-10 right-[45px] m-4">
                     <button
                         className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl mr-[20px] shadow-lg rounded-t">
                         漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
