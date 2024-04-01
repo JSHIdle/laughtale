@@ -58,7 +58,7 @@ const Index = () => {
 
   // console.log("test" ,data?.pages[0]?.totalElements)
   return<>
-    <div className="bg-[#1D1D21] min-h-screen">
+    <div className="bg-[#ffffff] min-h-screen">
       <Header/>
       <div className="max-w-[700px] m-auto">
         {/*<MagaInfo mangaId={mangaId}/>*/}
@@ -81,7 +81,7 @@ const Index = () => {
           }
           <div ref={ref} className="h-1"></div>
           {
-            isFetchingNextPage && <div className="text-white"> fetching...</div>
+            isFetchingNextPage && <div className="text-black"> fetching...</div>
           }
         </div>
       </div>

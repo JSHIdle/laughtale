@@ -63,7 +63,7 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
                 <div className="overflow-auto h-56 border-2 border-gray-500 rounded-lg p-2">
                     {comicFiles.map((file, index) => (
                         <div key={index} className="flex justify-between items-center p-1 hover:bg-gray-700 rounded">
-                            <span onClick={() => handleFileClick(file)} className="cursor-pointer text-white truncate">
+                            <span onClick={() => handleFileClick(file)} className="cursor-pointer text-black truncate">
                                 {file.name}
                             </span>
                             <button onClick={() => handleDeleteFile(file)} className="text-red-600">X</button>
