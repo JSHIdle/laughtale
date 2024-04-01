@@ -1,6 +1,8 @@
 import Header from '../../components/common/Header';
 import DoughnutChart from "../../components/mypage/DoughnutChart.tsx";
 import { useNavigate } from 'react-router-dom';
+import WordLevelChart from "../../components/chart/WordLevelChart.tsx";
+import Chart from "../../components/chart/Chart.tsx";
 import LineChart from '../../components/mypage/LineChart.tsx';
 
 const Index = () => {
@@ -9,6 +11,8 @@ const Index = () => {
     function goToLevel(level) {
         navigate(`word/${level}`);
     }
+
+    const data = [299, 212, 80, 44, 16]; // api로 받아올 데이터(난이도별 단어 수)
 
       return <div className="bg-[#ffffff] min-h-screen" style={{ height: 'calc(100vh * 1.1111)' }}>
           <div>
@@ -131,6 +135,21 @@ const Index = () => {
                   </div>
               </div>
 
+              <div className="flex justify-center items-center">
+                  <div className="bg-[#2D2D32] w-[700px] h-[300px] rounded-xl mb-12 flex justify-center items-center">
+                      <div>
+                          <WordLevelChart data={data}/>
+                      </div>
+                  </div>
+              </div>
+
+              <div className="flex justify-center items-center">
+                  <div className="bg-[#ffffff] w-[3000px] h-[900px] rounded-xl mb-12 flex justify-center items-center">
+                      <div className="w-[650px] h-[500px] justify-center items-center">
+                          <Chart/>
+                      </div>
+                  </div>
+              </div>
 
           </div>
       </div>
