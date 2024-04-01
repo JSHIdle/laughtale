@@ -21,7 +21,7 @@ const Index = () => {
   }, [wordData, isLoading]);
 
   return (
-      <div className="flex flex-col bg-[#121212]" style={{ height: 'calc(100vh * 1.1111)' }}>
+      <div className="flex flex-col bg-[#ffffff]" style={{ height: 'calc(100vh * 1.1111)' }}>
         <div><Header/></div>
         <div className="flex justify-center items-center">
           <div className="max-w-[1180px] mt-12">

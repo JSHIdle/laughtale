@@ -32,7 +32,7 @@ const Recommend = () => {
 
 
     return (
-        <div className="bg-[#121212] min-h-screen text-white">
+        <div className="bg-[#ffffff] min-h-screen text-black">
             <Header/>
             <div className="mx-auto recent_wrap" style={{maxWidth: '950px'}}>
             <RecentWord/>

@@ -83,7 +83,7 @@ const Index = () => {
     //     </div>
     // )
     return <>
-        <div className="bg-[#1D1D21] min-h-screen relative">
+        <div className="bg-[#ffffff] min-h-screen relative">
             {
                 loading ?
                     <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
@@ -93,7 +93,7 @@ const Index = () => {
                 <div>
                     <Header/>
                 </div>
-                <div className="text-white font-bold pt-10 pb-3">신규만화 등록</div>
+                <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
                 <div>
                     <CartoonInfoComponent
                         title={cartoonInfo.title}
@@ -109,7 +109,7 @@ const Index = () => {
                         filesInputRef={filesInputRef}
                     />
                 </div>
-                <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
+                <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
                     등록하기
                 </button>
             </div>

@@ -14,27 +14,27 @@ function Modal({ isOpen, onClose ,  modalData}) {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-[#1D1D21] p-4 rounded-lg w-[600px] ">
+            <div className="bg-[#ffffff] p-4 rounded-lg w-[600px] ">
 
                 <div className="flex justify-end">
                     <button
                         onClick={onClose}
-                        className="text-white rounded-full bg-grey-500 hover:bg-grey-700"
+                        className="text-black rounded-full bg-grey-500 hover:bg-grey-700"
                     >
                         X
                     </button>
                 </div>
 
                     <div className="flex flex-col justify-between ">
-                        <div className="flex flex-col justify-center items-center h-full text-white p-6">
+                        <div className="flex flex-col justify-center items-center h-full text-black p-6">
                             <div className="rounded-xl  mb-6 w-[100px]">
                                 <div>
-                                    <h2 className="flex justify-center text-3xl text-white font-bold">단어 힌트</h2>
+                                    <h2 className="flex justify-center text-3xl text-black font-bold">단어 힌트</h2>
                                 </div>
                             </div>
                             <div className="rounded-xl bg-[#2D2D32] mb-6 p-12">
                                 <div>
-                                    <h2 className="text-2xl text-white font-bold"
+                                    <h2 className="text-2xl text-black font-bold"
                                         dangerouslySetInnerHTML={{__html: modalData}}></h2>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
 
                     return (
                         <div key={index} className="w-[1300px] ">
-                            <div className="text-white p-12 flex justify-center items-center grid grid-cols-2">
+                            <div className="text-black p-12 flex justify-center items-center grid grid-cols-2">
                                 <div className="flex justify-end items-center">
                                     <pre className="font-semibold p-3"></pre>
                                     <ImageWithWhiteBox src={slide.imageUrl} boxCoordinates={{
@@ -127,10 +127,10 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     }}/>
                                 </div>
                                 <div>
-                                    <div className="font-semibold text-white p-6 flex justify-center items-center">
+                                    <div className="font-semibold text-black p-6 flex justify-center items-center">
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
-                                            className="ml-6 font-bold text-base text-white bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
+                                            className="ml-6 font-bold text-base text-black bg-[#2D2D32] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
                                             onClick={() => {
                                                 openModal();
                                                 setModalData(slide.definition);
@@ -154,7 +154,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                                 {slide.option.map((option, idx) => (
                                                     <button
                                                         key={idx}
-                                                        className={`text-white font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
+                                                        className={`text-black font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
                                                             selectedAnswers[index]?.id === idx ? "bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]" : ""
                                                         }`} // 조건부 클래스 추가
                                                         onClick={() => handleAnswerClick(index, idx, slide.answerNo, slide.option[slide.answerNo-1])} // 클릭 이벤트 핸들러 연결
