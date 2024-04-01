@@ -17,6 +17,7 @@ import Login from "../pages/login/Index.tsx";
 import Admin from "../pages/admin/Index";
 import Error from "../components/common/Error.tsx";
 import Logout from '../pages/logout/Index.tsx';
+import Analyze from "../pages/analyze";
 import NewMain from "../pages/newmain/NewMain.tsx";
 
 
@@ -98,6 +99,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/analyze',
+    element: <Outlet/>,
+    children: [
+      {
+        path: '',
+        element: <Analyze/>
+      }
+    ]
+  },
 
   {
     path: "/admin",
@@ -112,6 +123,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/error",
     element: <Error />,
