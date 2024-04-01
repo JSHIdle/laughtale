@@ -103,7 +103,7 @@ const Index = () => {
                     </button>
                 </div>
             </div>) :
-            (<UploadResult {...data}/>)
+            (<UploadResult props={data} isAdmin={true}/>)
         }
     </>
 }
