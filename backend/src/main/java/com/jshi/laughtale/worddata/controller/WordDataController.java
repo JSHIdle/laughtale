@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,9 +35,10 @@ public class WordDataController {
 	}
 
 	@GetMapping("/word-cloud")
-	public ResponseEntity<List<WordCloudData.Response>> getWordCloudData() {
-		//d
-		return ResponseEntity.ok(wordDataService.loadWordCloudData());
-
+	public ResponseEntity<List<WordCloudData.Response>> getWordCloudData(
+		@RequestParam(defaultValue = "0") int page,
+		@RequestParam(defaultValue = "100") int size
+	) {
+		return ResponseEntity.ok(wordDataService.loadWordCloudData(page, size));
 	}
 }
