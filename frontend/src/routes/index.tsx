@@ -17,6 +17,7 @@ import Login from "../pages/login/Index.tsx";
 import Admin from "../pages/admin/Index";
 import Error from "../components/common/Error.tsx";
 import Logout from '../pages/logout/Index.tsx';
+import NewMain from "../pages/newmain/NewMain.tsx";
 
 
 const router = createBrowserRouter([
@@ -115,7 +116,10 @@ const router = createBrowserRouter([
     path: "/error",
     element: <Error />,
   },
-
+  {
+    path : "/newmain",
+    element: <NewMain />
+  }
 ]);
 
 export default router;
