@@ -36,6 +36,7 @@ import ReactWordcloud from "react-wordcloud";
 import {useEffect, useState} from "react";
 import client from "../../apis";
 import {Button} from "@material-tailwind/react";
+import {Link} from "react-router-dom";
 
 export default function NewMain() {
     const [data, setData] = useState(null);
@@ -84,6 +85,7 @@ export default function NewMain() {
         <div className="bg-[#FFFFFF] min-h-screen" style={customFont}>
             <Header/>
 
+
             <div className="flex justify-end min-h-screen min-w-full items-center relative">
                 {/*<div className="gradient-overlay"></div>*/}
                 <img src={ReadingManga}
@@ -98,19 +100,22 @@ export default function NewMain() {
                 <div className="absolute mt-[510px] left-20 z-20 text-white text-5xl ">楽しく簡単に日本語を学んでみましょう！
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
-
-                <div className=" absolute top-[60px] z-10 right-[45px] m-4">
-                    <button
-                        className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl mr-[20px] shadow-lg rounded-t">
-                        漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
-                    </button>
-                    <button
-                        className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t">
-                        漫<br/>画<br/>を<br/>読<br/>む<br/>--<br/>만<br/>화<br/>읽<br/>기
-                    </button>
+                <div className=" absolute top-[50px] z-10 right-[125px] m-4">
+                    <Link to="/home">
+                        <div
+                            className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
+                            漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
+                        </div>
+                    </Link>
                 </div>
-
-
+                <div className=" absolute top-[50px] z-10 right-[45px] m-4">
+                    <Link to="/home">
+                        <div
+                            className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
+                            漫<br/>画<br/>を<br/>読<br/>む<br/>--<br/>만<br/>화<br/>읽<br/>기
+                        </div>
+                    </Link>
+                </div>
             </div>
 
             <div className=" flex flex-col bg-[#FFFFFF]">
