@@ -7,7 +7,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="z-1000 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-[#ffffff] p-4 rounded-lg">
                 <div className="flex justify-between items-center w-full p-3">
                     <div className="text-black flex-1 text-center">
@@ -22,7 +22,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
                 <div className="flex justify-items-center">
                     {/*단어의 뜻이 클 수 있으므로 오른쪽 영역을 차지하도록 한다*/}
                     <div className="flex justify-center text-black p-12">
-                        <div className="rounded-xl bg-[#2D2D32] p-12">
+                        <div className="rounded-xl bg-[#4EDBDE] p-12">
                             <div>
                                 <h2 className="text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: definition}}></h2>
