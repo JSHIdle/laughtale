@@ -14,7 +14,15 @@ import WordList from "../../components/cartoon/WordList.tsx";
 import FlexItem from "../../components/cartoon/Flex.tsx";
 import WordListWrapper from "../../components/cartoon/WordListWrapper.tsx";
 import CartoonImage from "../../components/cartoon/CartoonImage.tsx";
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {ChapterListResponse} from "../../types/types";
+import {getChapterList} from "../../apis/cartoon.ts";
 
+
+type TestType = {
+    id:number;
+    nmame:string;
+}
 const defaultSize = 5;
 
 const colors = ["#CDFADB", "#F6FDC3", "#FFCF96","#FF8080","#D2E0FB","#F9F3CC","#D7E5CA", "#8EACCD"]
@@ -22,26 +30,49 @@ const Viewer = () => {
     const params = useParams()
     const mangaId = + params.title;
     const chapterId = + params.id;
-    const [data, setData] = useState<MangaImageResponse>([]);
-    const [page, setPage] = useState<number>(0);
+    // const [data, setData] = useState<MangaImageResponse>([]);
+    // const [page, setPage] = useState<number>(0);
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
     })
     const [words, setWords] = useState<WordInfo[]>();
     const [sentence, setSentence] = useState<string>("");
-    useEffect(() => {
-        getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) =>{
-            setData([res]);
-        });
-    }, []);
-    useEffect(() => {
-        if(inView){
-            getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) => {
-                setData([...data, ...res]);
-            });
-        }
-    }, [inView]);
+    // useEffect(() => {
+    //     getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) =>{
+    //         setData([res]);
+    //     });
+    // }, []);
+    // useEffect(() => {
+    //     if(inView){
+    //         getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) => {
+    //             setData([...data, ...res]);
+    //         });
+    //     }
+    // }, [inView]);
+    const {
+        data,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage,
+        status,
+    } = useInfiniteQuery<ChapterListResponse>({
+        queryKey: ['chapterList', mangaId],
+        queryFn: ({pageParam}) => {
+            // console.log("page param " + pageParam);
+            return getImageByChapterId({chapterId, page: + pageParam, size:5})
+        },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+            if(typeof lastPageParam !== 'number') {
+                return 0;
+            }
+            return lastPageParam + 1
+        },
+    });
+
 
     const onClick = useCallback(async ({sentence, id}) => {
         console.log(sentence, id)
@@ -55,6 +86,12 @@ const Viewer = () => {
         setWords(wordData);
     },[]);
 
+    useEffect(() => {
+        if(inView){
+            fetchNextPage();
+        }
+    }, [inView]);
+    console.log(data);
     return (
       <>
       <div className="bg-[#1D1D21] min-h-screen">
@@ -63,7 +100,7 @@ const Viewer = () => {
               <FlexItem flex="1"/>
               <div className=" w-max-[700px] ">
                   {
-                    data.length != 0 && data.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
+                    data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
                   }
               </div>
               <FlexItem flex="1" style={{position:"relative"}}>
@@ -73,6 +110,7 @@ const Viewer = () => {
                   </WordListWrapper>
               </FlexItem>
           </div>
+          <div ref={ref} className="h-1"></div>
           <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>
       </div>
       </>
