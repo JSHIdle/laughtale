@@ -14,7 +14,7 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) =
                     <img
                         src={imageUrl}
                         alt={title}
-                        className="object-cover w-full transition-transform duration-300 h-120 lg:h-120 hover:scale-105"
+                        className="object-cover w-full transition-transform duration-300 h-120 lg:h-120 group-hover:scale-105"
                     />
                 </div>
             </Link>
@@ -23,6 +23,7 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) =
                     <span className="block text-4lg font-bold truncate mt-9 text-center">{title}</span>
                 </Link>
             </div>
+           <span className="flex group-hover:border-2 group-hover:border-[#73ABE5] "></span>
         </li>
     );
 };
