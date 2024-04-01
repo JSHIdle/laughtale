@@ -5,6 +5,7 @@ import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
 import client from "../../apis";
 import getWordExample from "./getWordExample.tsx";
+import { useQueryClient } from '@tanstack/react-query';
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -32,8 +33,8 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
                 </div>
                 <div className="flex justify-items-center">
                     {/*단어의 뜻이 클 수 있으므로 오른쪽 영역을 차지하도록 한다*/}
-                    <div className="flex justify-center text-black p-12">
-                        <div className="rounded-xl bg-[#2D2D32] p-12">
+                    <div className="flex justify-center text-white p-12">
+                        <div className="rounded-xl bg-[#4edbde] p-12">
                             <div>
                                 <h2 className="text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: definition}}></h2>
@@ -76,11 +77,11 @@ function ExampleModal({isOpen, onClose, example}) {
                         </div>
 
                         <div className="flex flex-col col-span-3 justify-items-center ">
-                            <div className="flex flex-col justify-center  h-full text-black p-12 ">
+                            <div className="flex flex-col justify-center  h-[500px] text-black p-12 ">
                                 <div className="overflow-y-scroll scrollbar-hide ">
                                     {example.speeches.map((item, index) => (
                                         <div key={index}
-                                             className="scale-90 rounded-xl bg-[#4EDBDE] mb-6 p-6 border-4 border-[#4EDBDE] hover:text-black hover:scale-95 transform transition-transform duration-300 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]"
+                                             className="scale-90 rounded-xl bg-[#4EDBDE] mb-6 p-6 hover:text-black hover:scale-95 transform transition-transform duration-300 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]"
                                              onClick={() => handleSentenceClick(index)}>
                                             <div className="flex items-center justify-start ">
                                                 <div className="mr-3">
@@ -102,6 +103,7 @@ function ExampleModal({isOpen, onClose, example}) {
 //tts
 import axios from 'axios';
 import {useQuery} from "@tanstack/react-query";
+import getWordInfo from "./getWordInfo.tsx";
 
 async function playTTS(text) {
     const clientId = 'slivj7sa6g'; // 클라이언트 ID
@@ -123,7 +125,18 @@ async function playTTS(text) {
     }
 }
 
-const   CustomSlider = ({slides}) => {
+const   CustomSlider = ({level,page,size}) => {
+    // 레벨별 단어 목록 데이터
+    const { data: wordData, isLoading, error } = useQuery({
+        queryKey: ['wordBook', level, page, size],
+        queryFn: () => getWordInfo(level, page, size)
+    });
+
+    useEffect(() => {
+        console.log('단어장에 대한 데이터:', wordData);
+    }, [wordData, isLoading]);
+
+
     const [isModalOpenW, setIsModalOpenW] = useState(false);
     const closeModalW = () => setIsModalOpenW(false);
     // 단어 해석 보기
@@ -140,7 +153,7 @@ const   CustomSlider = ({slides}) => {
         setExampleId(null); // 모달을 닫을 때 exampleId 초기화
     };
 
-    const { data: example, isLoading, error } = useQuery({
+    const { data: example } = useQuery({
         queryKey: ['example', exampleId],
         queryFn: () => getWordExample(exampleId),
         enabled: !!exampleId,
@@ -153,35 +166,54 @@ const   CustomSlider = ({slides}) => {
         }
     }, [isLoading, example, error, exampleId]);
 
-
     const openModalWithExample = (id) => {
         setExampleId(id);
         console.log("1순서실행",id);
         // setIsModalOpenE(true);
     };
 
-    async function handleRemoveClick (id){
-        await client.delete(`/word-book/${id}`
-        ).then(()=>{
+    const queryClient = useQueryClient();
+
+    async function handleRemoveClick(id) {
+        try {
+            await client.delete(`/word-book/${id}`);
             console.log("단어 삭제완료");
-        })
-        .catch((error) => {
+            // 단어 삭제 후 업데이트
+            // @ts-ignore
+            queryClient.invalidateQueries(['wordBook']);
+        } catch (error) {
             console.error("There was an error!", error);
-        });
-    };
+        }
+    }
 
     // tts 실행함수
     const handleIconClick = (word) => {
         playTTS(word);
     };
 
+    const bgColorClass = level === 1 ? 'bg-[#56cd7c]' :
+                                                            level === 2 ? 'bg-[#e99648]' :
+                                                            level === 3 ? 'bg-[#f54242]' : 'bg-[#56cd7c]'; // 기본값
+
+    // const borderColorClass = level === 1 ? 'border-[#90F880]' :
+    //                                                             level === 2 ? 'border-[#8caef5]' :
+    //                                                             level === 3 ? 'border-[#f56666]' : 'border-[#90F880]'; // 기본값
+    //
+    // const gradientFromClass = level === 1 ? 'from-[#83E893]' :
+    //                                                             level === 2 ? 'from-[#77a7f7]' :
+    //                                                                 level === 3 ? 'from-[#f57575]' : 'from-[#83E893]'; // 기본값
+    //
+    // const gradientToClass = level === 1 ? 'to-[#059C54]' :
+    //                                                             level === 2 ? 'to-[#3761d5]' :
+    //                                                                 level === 3 ? 'to-[#d52828]' : 'to-[#059C54]'; // 기본값
+
     return (
-                <div className="w-[1120px] text-black font-bold flex flex-wrap text-4xl">
+            <div className="w-[1120px] text-white font-bold flex flex-wrap text-4xl">
                     {/*<Slider {...settings}>*/}
                     {/*    {slides.map(slide => (*/}
                     {/*        <div className="flex items-center rounded-xl overflow-hidden w-[500px] h-[480px]">*/}
                     {/*            <div className="flex flex-wrap justify-center items-center">*/}
-                    {slides.content.map(slideone => (
+                    {wordData && wordData.content.map(slideone => (
                         <div key={slideone.id}>
                             <div
                                 className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
@@ -191,7 +223,7 @@ const   CustomSlider = ({slides}) => {
                                     &ndash;
                                 </div>
                                 <div
-                                    className="text-black rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm border-2 border-[#90F880] group-hover:bg-gradient-to-b from-[#83E893] to-[#059C54] hover:border-transparent hover:text-black transition-all duration-300"
+                                className={"bg-[#4EDBDE] text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm border-2 border-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"}
                                 >
                                     <div>
                                         <div className="flex justify-items-center space-x-2 p-3">
@@ -204,12 +236,12 @@ const   CustomSlider = ({slides}) => {
                                         </div>
                                         <div className="flex justify-items-center">
                                             <button
-                                                className="text-emerald-300 p-3 text-2xl hover:text-black"
+                                                className="text-black p-3 text-2xl hover:text-white"
                                                 onClick={() => openModalWithDefinition(slideone)}>
                                                 단어해석
                                             </button>
                                             <button
-                                                className="text-amber-200 p-3 text-2xl hover:text-black"
+                                                className="hover:text-white p-3 text-2xl text-black"
                                                 onClick={() => openModalWithExample(slideone.id)}>
                                                 예문보기
                                             </button>
@@ -235,7 +267,7 @@ const   CustomSlider = ({slides}) => {
                         onClose={closeModalE}
                         example={example}
                     />
-                </div>
+            </div>
     );
 };
 
