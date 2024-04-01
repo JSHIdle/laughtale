@@ -30,26 +30,13 @@ const Viewer = () => {
     const params = useParams()
     const mangaId = + params.title;
     const chapterId = + params.id;
-    // const [data, setData] = useState<MangaImageResponse>([]);
-    // const [page, setPage] = useState<number>(0);
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
     })
     const [words, setWords] = useState<WordInfo[]>();
     const [sentence, setSentence] = useState<string>("");
-    // useEffect(() => {
-    //     getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) =>{
-    //         setData([res]);
-    //     });
-    // }, []);
-    // useEffect(() => {
-    //     if(inView){
-    //         getImageByChapterId({chapterId, page, size:5}).then((res: MangaImageResponse) => {
-    //             setData([...data, ...res]);
-    //         });
-    //     }
-    // }, [inView]);
+    const [originSentence, setOriginSentence] = useState<string>("");
     const {
         data,
         error,
@@ -75,9 +62,10 @@ const Viewer = () => {
 
 
     const onClick = useCallback(async ({sentence, id}) => {
-        console.log(sentence, id)
+        setOriginSentence(sentence);
         const wordData:Array<WordInfo> = await get(`/word-data/speech/${id}`) as Array<any>;
         for(let i = 0; i < wordData.length; i++){
+            if(wordData[i].definition == null) continue;
             const {word} = wordData[i];
             sentence = sentence.replace(word,`<span style='color:${colors[i % colors.length]}'>${word}</span>`);
             wordData[i].color = colors[i%colors.length];
@@ -91,21 +79,21 @@ const Viewer = () => {
             fetchNextPage();
         }
     }, [inView]);
-    console.log(data);
+
     return (
       <>
       <div className="bg-[#ffffff] min-h-screen">
           <Header/>
-          <div className="flex">
+          <div className="flex relative">
               <FlexItem flex="1"/>
               <div className=" w-max-[700px] ">
                   {
                     data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
                   }
               </div>
-              <FlexItem flex="1" style={{position:"relative"}}>
+              <FlexItem flex="1" style={{position:"relative", display:"flex"}}>
                   <WordListWrapper>
-                      { sentence && <Sentence sentence={sentence}/>}
+                      { sentence && <Sentence originSentence={originSentence} sentence={sentence}/>}
                       { words && <WordList words={words}/>}
                   </WordListWrapper>
               </FlexItem>
