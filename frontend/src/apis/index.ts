@@ -19,8 +19,8 @@ client.interceptors.request.use(
     const accessToken = token?.accessToken ?? null;
     console.log(token);
 
-    config.headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MTE1MDI4MjYsImV4cCI6NTE4NTcxMTUwMjgyNiwicm9sZSI6IkFETUlOIn0.5eJr2_G5I4ukcOyhrt6BlvDmQHVDLDUMCyJxND9V4tU';
-    // config.headers.Authorization = `${accessToken}`;
+    // config.headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MTE1MDI4MjYsImV4cCI6NTE4NTcxMTUwMjgyNiwicm9sZSI6IkFETUlOIn0.5eJr2_G5I4ukcOyhrt6BlvDmQHVDLDUMCyJxND9V4tU';
+    config.headers.Authorization = `${accessToken}`;
 
     return config;
   },
