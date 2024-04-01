@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import client from "../../apis";
 import UploadResult from "../../components/admin/UploadResultComponent.tsx";
+import LoadingBar from "../../components/analyze/LoadingComponent.tsx";
 
 const Index = () => {
     const [data, setData] = useState(null);
@@ -9,9 +10,24 @@ const Index = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
+
     const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-            setFiles(Array.from(event.target.files));
+            const limit = 1024 * 1024 * 30;
+            const files = Array.from(event.target.files);
+            const acceptedFiles = files.filter(file => {
+                const allowedExtensions = ['jpg', 'png', 'jpeg'];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                return allowedExtensions.includes(fileExtension);
+            });
+            if (files.reduce((acc, file) => acc + file.size as number, 0) as number >= limit) {
+                alert("용량은 30MB까지 입니다.")
+                return;
+            } else {
+                setFiles(acceptedFiles as File[]);
+            }
+        } else {
+            setFiles(null);
         }
     };
 
@@ -34,10 +50,10 @@ const Index = () => {
         }
 
         client.post("/manga/upload", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
             .then((response) => {
                 setLoading(false);
                 setData(response.data);
@@ -54,7 +70,10 @@ const Index = () => {
     };
 
     return <>
-        {(data == null || false) ?
+
+        {loading ? (
+            <LoadingBar loading={loading}></LoadingBar>
+            ) : (data == null || false) ?
             (<div className="h-[100vh] flex flex-col justify-center items-center">
                 <div className="w-2/3">
                     {/* header */}
@@ -82,7 +101,6 @@ const Index = () => {
                                        className="hidden"/>
                             </label>
                         </div>
-                        {loading && <div>업로드 중...</div>}
                         {files && files.length > 0 ? (
                             <div className="border-2 rounded-lg ps-3 pe-3">
                                 <div className="flex items-center justify-center">
@@ -108,7 +126,7 @@ const Index = () => {
                                     </button>
                                 </div>
                                 <div className="flex justify-center items-center">
-                                    {files.map((files, index) => (
+                                    {files.map((file, index) => (
                                         index == currentPage ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                  fill="currentColor" className="w-6 h-6">
@@ -125,7 +143,7 @@ const Index = () => {
                                 </div>
                             </div>
                         ) : (<div className="flex flex-col justify-center items-center border rounded-lg">
-                            <div className="h-full">
+                            <div className="h-full flex justify-center items-center">
                                 <p className="font-bold">선택된 파일 없음</p>
                             </div>
                         </div>)
@@ -137,7 +155,7 @@ const Index = () => {
                     </div>
                 </div>
             </div>)
-            : (<UploadResult {...data}/>)};
+            : (<UploadResult props={data} isAdmin={false}/>)};
     </>
 }
 

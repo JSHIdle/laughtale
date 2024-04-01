@@ -11,8 +11,12 @@ export default function SentenceResult({sentence, word, color}: { sentence: stri
         speechSynthesis.speak(speech);
     }
     useEffect(() => {
-        setSen(sentence.replace(word, `<span style='background-color:${color}'>${word}</span>`));
-    }, [word, color]);
+        if (word == null) {
+            setSen(sentence);
+        } else {
+            setSen(sentence.replace(word, `<span style='background-color:${color}'>${word}</span>`));
+        }
+    }, [sentence, word, color]);
     return (
         <div className="flex justify-between">
             <p className="text-4xl mb-5" dangerouslySetInnerHTML={{__html: sen}}/>
