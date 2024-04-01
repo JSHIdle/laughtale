@@ -4,22 +4,9 @@ import {Link} from "react-router-dom";
 import AuthButton from "./AuthButton.tsx";
 
 const Header = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 0);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
     return (
-        <div className={` ${isScrolled ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}`}>
+        <div className="sticky top-0 z-50">
             <div className="bg-[#73ABE5] flex justify-center items-center px-10 relative">
                 <div className="absolute left-10 items-center">
                     <Link to={`/admin`} className="text-3xl text-white hover:text-gray-800">
@@ -35,7 +22,7 @@ const Header = () => {
                     <AuthButton/>
                 </div>
             </div>
-        </div>
+          </div>
     )
 }
 
