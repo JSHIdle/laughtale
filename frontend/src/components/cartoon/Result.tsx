@@ -1,19 +1,42 @@
 import Header from '../../components/common/Header.tsx';
 
 //이전 페이지에서 보내준 데이터를 받을 수 있다.
-import {Link, useLocation, useParams} from 'react-router-dom';
+import {Link, useLocation, useParams, useNavigate} from 'react-router-dom';
 import ResultWord from '../cartoon/ResultWord.tsx';
+import {useQuery} from "@tanstack/react-query";
+import getChapterInfo from "../mypage/getChapterInfo.tsx";
+import {useEffect} from "react";
 
 const prefix = `/cartoon/1`
 
-
 const Result = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const {  slides , correctAnswersCount } = location.state;
     console.log(correctAnswersCount);
 
     const {chapterId} = useParams();
-    const nextchapter = +chapterId+1;
+
+    const { data: chapterdata, isLoading, error } = useQuery({
+        queryKey: ['chapterdata', chapterId],
+        queryFn: () => getChapterInfo(chapterId),
+    });
+
+    useEffect(() => {
+        if (!isLoading && chapterdata && !error && chapterId) {
+            console.log("받아졌다!");
+        }
+    }, [isLoading, chapterdata, error, chapterId]);
+
+
+    const handleNextPageClick = (e) => {
+        if (chapterdata.nextPage === null) {
+            e.preventDefault(); // Link의 기본 동작을 방지
+            alert('다음 회차가 없습니다.');
+        } else {
+            navigate(`${prefix}/viewer/${chapterdata.nextPage}`);
+        }
+    };
 
     return (
         <div className="flex flex-col h-screen bg-[#ffffff]" style={{ height: 'calc(100vh * 1.1111)' }}>
@@ -33,11 +56,28 @@ const Result = () => {
                     <div className="z-10 flex justify-center items-center">
                         <ResultWord slides={slides}/>
                     </div>
-                    <div className="flex text-black justify-center items-center mt-4">
-                        <Link to={`${prefix}/viewer/${nextchapter}`} replace
-                              className="z-20 p-6 text-2xl text-black bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
-                            다음 회차 보기
-                        </Link>
+                    <div className="flex text-white justify-center items-center p-6">
+                        <div className="flex text-white justify-center items-center p-3">
+                            {chapterdata &&<Link to={`${prefix}/viewer/${chapterdata.prevPage}`} replace
+                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                이전 회차 보기
+                            </Link>}
+                        </div>
+
+                        <div className="flex text-white justify-center items-center p-3">
+                            <Link to={`${prefix}/viewer/${chapterId}`} replace
+                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                다시보기
+                            </Link>
+                        </div>
+
+                        <div className="flex text-white justify-center items-center p-3">
+                            {chapterdata && <Link to={`${prefix}/viewer/${chapterdata.nextPage}`} replace
+                                  onClick={handleNextPageClick}
+                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                다음 회차 보기
+                            </Link>}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -55,6 +55,9 @@ function Modal({ isOpen, onClose ,  modalData}) {
     );
 };
 
+// type Answerarray = { id: number; answerId: number; answerword: number;}
+// type AnswerItem = { [ key : number ] : Answerarray; }
+// type SelectedAnswer  = Array<{ id: number; answerId: number; answerword: number;}>
 
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     let navigate = useNavigate();
