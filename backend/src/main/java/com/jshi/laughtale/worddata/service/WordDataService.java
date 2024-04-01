@@ -68,8 +68,8 @@ public class WordDataService {
 		return wordDataList.stream().map(WordDataMapper::toDetailResponse).toList();
 	}
 
-	public List<WordCloudData.Response> loadWordCloudData() {
-		Pageable pageable = PageRequest.of(0, 100);
+	public List<WordCloudData.Response> loadWordCloudData(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
 		return wordDataRepository.findAllByOrderByFrequencyDesc(pageable)
 			.stream()
 			.map(WordDataMapper::toWordCloudResponse)
