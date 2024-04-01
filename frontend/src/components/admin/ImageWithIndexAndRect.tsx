@@ -28,7 +28,7 @@ export default function ImageWithIndexAndRect({index, src, boxCoordinates}) {
             ctx.fillText(index, boxCoordinates.x, boxCoordinates.y + boxCoordinates.height - 20);
         };
         image.src = src;
-    }, [src, boxCoordinates]);
+    }, [index, src, boxCoordinates]);
 
     return (
         <div className="relative">

@@ -2,7 +2,7 @@ import {MangaAnalyze} from "../../../types";
 import React, {useState} from "react";
 import ChapterResult from "./ChapterResultComponent.tsx";
 
-export default function UploadResult(props: MangaAnalyze) {
+export default function UploadResult({props, isAdmin} : {props: MangaAnalyze, isAdmin: boolean}) {
     const [isInfo, setInfo] = useState(true);
     return (
         <div className="container mx-auto flex justify-center">
@@ -11,12 +11,12 @@ export default function UploadResult(props: MangaAnalyze) {
                     <div className="absolute top-1/4">
                         <div className="flex justify-between items-center">
                             <div className="grid grid-cols-1 gap-2">
-                                <div>
+                                { isAdmin && (<div>
                                     <p className="text-5xl mt-8 mb-8">{props.title} {props.chapter[0].chapterNo}화</p>
                                     <p className="text-3xl mt-8 mb-8">작가 : {props.author}</p>
                                     <p className="text-3xl mt-8 mb-8">카테고리 : {props.category}</p>
                                     <p className="text-3xl mt-8 mb-8">설명 : {props.description}</p>
-                                </div>
+                                </div>)}
                                 <div className="border border-2">
                                     <p className="text-7xl p-20">그래프 Section</p>
                                 </div>

@@ -15,7 +15,6 @@ export default function CutResult(props: CutAnalyze) {
     const [wordCur, setWordCur] = useState(1);
     const [wordContent, setWordContent] = useState(props.sentence[0].words[0]);
 
-    console.log(props.sentence)
     const [colorIdx, setColorIdx] = useState(0);
     useEffect(() => {
         setSpeechLength(props.sentence.length);
