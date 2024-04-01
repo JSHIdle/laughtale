@@ -35,6 +35,7 @@ import JapaneseWordCloud from '../../assets/mainpageimage/japwrcl3.jpg';
 import ReactWordcloud from "react-wordcloud";
 import {useEffect, useState} from "react";
 import client from "../../apis";
+import {Button} from "@material-tailwind/react";
 
 export default function NewMain() {
     const [data, setData] = useState(null);
@@ -96,17 +97,29 @@ export default function NewMain() {
                 <div className="absolute mt-[510px] left-20 z-20 text-white text-5xl ">楽しく簡単に日本語を学んでみましょう！
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
+
+                <div className=" absolute top-[125px] z-10 right-[45px] m-4">
+                    <button
+                        className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl mr-[20px] shadow-lg rounded-t">
+                        漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
+                    </button>
+                    <button
+                        className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t">
+                        漫<br/>画<br/>を<br/>読<br/>む<br/>--<br/>만<br/>화<br/>읽<br/>기
+                    </button>
+                </div>
+
+
             </div>
 
             <div className=" flex flex-col bg-[#FFFFFF]">
-                <div className="items-center text-7xl ml-[50px] mt-[100px]">
+                <div className="items-center text-7xl px-[150px] mt-[100px]">
                     나에게 맞는 책 고르기<br/>
                     책을 선택하는 고민의 시간을 덜어드려요
                 </div>
                 <hr className="gradient-hr"/>
             </div>
-            <div className=" text-[25px] my-10  px-[50px]">
-
+            <div className=" text-[25px] my-10  px-[150px]">
                 당신을 위한 무한한 만화의 세계로 초대합니다. 다양한 장르와 스토리, 다채로운 캐릭터들이 당신을 기다리고 있습니다. 환상적인 세계를 탐험하고 감동과 재미를 함께 느껴보세요. 우리의 풍부한
                 만화 컬렉션은 당신의 호기심과 상상력을 자극할 것입니다. 지금 바로 시작해보세요!
             </div>
@@ -137,13 +150,13 @@ export default function NewMain() {
                 </div>
             </div>
 
-            <div className="flex h-[100px] items-end text-7xl ml-[50px] mt-[200px]">
+            <div className="flex h-[100px] items-end text-7xl px-[150px] mt-[200px]">
                 맞춤형 퀴즈 서비스
             </div>
             <hr className="gradient-hr"/>
             {/*<div className="h-[200px]"></div>*/}
             <div className=" text-[25px] my-10  px-[50px]">
-                <div className=" text-[25px] my-10 ">
+                <div className=" text-[25px] my-10 px-[100px]">
                     만화 속에서 사용되는 단어들을 분석하여 사용자에게 맞춤형 학습 경험을 제공합니다. 각 페이지에 등장하는 말풍선을 추출하고, 해당 단어들의 빈도수를 카운트하여 단어 난이도를
                     측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 언어 능력을 향상시키는데 도움을 드립니다.
                 </div>
@@ -171,13 +184,13 @@ export default function NewMain() {
             </div>
 
 
-            <div className="flex h-[100px] items-end text-7xl ml-[50px] mt-[200px]">
+            <div className="flex h-[100px] items-end text-7xl px-[150px] mt-[200px]">
                 편리한 단어 검색
             </div>
             <hr className="gradient-hr"/>
             {/*<div className="h-[200px]"></div>*/}
             <div className=" text-[25px] my-10  px-[50px]">
-                <div className=" text-[25px] my-10 ">
+                <div className=" text-[25px] my-10 px-[100px]">
                     말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
                     세계로
                     더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
@@ -191,11 +204,11 @@ export default function NewMain() {
                              className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
                         <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
                     </div>
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
-                    </div>
+                    {/*<div className="flex flex-col justify-center items-center">*/}
+                    {/*    <img src={SpeechDef}*/}
+                    {/*         className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>*/}
+                    {/*    <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>*/}
+                    {/*</div>*/}
                 </div>
 
             </div>
