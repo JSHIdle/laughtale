@@ -18,15 +18,15 @@ import com.jshi.laughtale.worddata.repository.WordDataRepository;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.mapper.WordListMapper;
 import com.jshi.laughtale.wordlist.repository.WordListRepository;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class MangaSaver {
-    private final JaKoService jaKoService;
     private final MangaRepository mangaRepository;
     private final ChapterRepository chapterRepository;
     private final CutRepository cutRepository;
@@ -36,9 +36,8 @@ public class MangaSaver {
 
     public void save(MangaContext mangaContext) {
         Manga manga = mangaContext.getManga();
-        manga = mangaRepository.findByTitle(manga.getTitle()).orElse(manga);
-        mangaRepository.save(manga);
 
+        mangaRepository.save(manga);
         saveChapter(mangaContext.getChapterContexts());
     }
 
@@ -76,12 +75,10 @@ public class MangaSaver {
         List<WordList> wordLists = new ArrayList<>();
         for (int i = 0; i < wordDataList.size(); i++) {
             WordData wordData = wordDataList.get(i);
-            wordData = wordDataRepository.findByWord(wordData.getWord()).orElse(wordData);
-            String def = jaKoService.loadWordMeaning(wordData.getWord());
-            if (def == null) {
-                continue;
+            WordData findWord = wordDataRepository.findByWord(wordData.getWord()).orElse(null);
+            if (findWord != null) {
+                wordData = findWord;
             }
-            wordData.setDefinition(def);
             wordData.updateFrequency();
             wordDataRepository.save(wordData);
 

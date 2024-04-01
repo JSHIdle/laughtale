@@ -65,6 +65,7 @@ public class MangaService {
 
         log.info("파싱...");
         MangaContext mangaContext = parseService.parse(result);
+        mangaContext.setManga(mangaRepository.findByTitle(manga.getTitle()).orElse(mangaContext.getManga()));
 
         log.info("분석...");
         MangaAnalyze.Response response = mangaAnalyzer.analyze(mangaContext, last);
