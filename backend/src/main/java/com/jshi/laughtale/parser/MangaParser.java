@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class MangaParser {
-    private static final String PREFIX = "https://j10a705.p.ssafy.io";
+    private static final String PREFIX = "https://j10a705.p.ssafy.io/";
     public static Manga parseManga(Map attr) {
         List<Object> list = new ArrayList<>(attr.keySet());
         if (list.size() > 1) {
@@ -58,6 +58,9 @@ public class MangaParser {
     }
 
     private static String attachPrefix(String src) {
+        if (!src.startsWith("/")) {
+            return PREFIX + '/' + src;
+        }
         return PREFIX + src;
     }
 }
