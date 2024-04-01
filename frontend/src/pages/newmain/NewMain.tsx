@@ -31,13 +31,52 @@ import Manga21 from '../../assets/mainpageimage/mangas/manga_21.png'
 import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
 import OnePieceSet from '../../assets/mainpageimage/onepieceset.png';
-import JapaneseWordCloud  from '../../assets/mainpageimage/japwrcl3.jpg';
+import JapaneseWordCloud from '../../assets/mainpageimage/japwrcl3.jpg';
 import ReactWordcloud from "react-wordcloud";
+import {useEffect, useState} from "react";
+import client from "../../apis";
 
 export default function NewMain() {
+    const [data, setData] = useState(null);
 
+    // useEffect(() => {
+    //     (async () => {
+    //         const res = await client.get("/word-data/word-cloud?page=0&size=1000");
+    //         const updatedData = res.data.map(word => ({
+    //             text: word.text,
+    //             value: word.value > 1000 ? Math.round(word.value / 10) : word.value
+    //         }));
+    //         const reupdatedData = updatedData.map(word => ({
+    //             text: word.text,
+    //             value: word.value > 1000 ? Math.round(word.value / 10) : word.value
+    //         }));
+    //         setData(reupdatedData);
+    //     })();
+    // }, []);
+    useEffect(() => {
+        // Function to fetch data from API
+        const fetchData = async () => {
+            const res = await client.get("/word-data/word-cloud?page=0&size=1000");
+            const updatedData = res.data.map(word => ({
+                text: word.text,
+                value: word.value > 1000 ? Math.round(word.value / 10) : word.value
+            }));
+            const reupdatedData = updatedData.map(word => ({
+                text: word.text,
+                value: word.value > 1000 ? Math.round(word.value / 10) : word.value
+            }));
+            setData(reupdatedData);
+        };
 
+        // Initial fetch of data
+        fetchData();
 
+        // Set interval to shuffle data every 5 seconds
+        const intervalId = setInterval(fetchData, 3000);
+
+        // Clean up function to clear interval when component unmounts
+        return () => clearInterval(intervalId);
+    }, []);
     const customFont = {
         fontFamily: 'GmarketSansMedium',
     };
@@ -100,45 +139,14 @@ export default function NewMain() {
             </div>
 
             <div className="flex h-[100px] items-end text-7xl ml-[50px] mt-[200px]">
-                모르는 단어를 즉시 검색!
+                맞춤형 퀴즈 서비스
             </div>
             <hr className="gradient-hr"/>
             {/*<div className="h-[200px]"></div>*/}
             <div className=" text-[25px] my-10  px-[50px]">
                 <div className=" text-[25px] my-10 ">
-                    말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
-                    세계로
-                    더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
-                    만화
-                    읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
-                </div>
-
-                <div className="flex justify-evenly items-center">
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
-                    </div>
-                </div>
-
-            </div>
-            <div className="flex h-[100px] items-end text-7xl ml-[50px] mt-[200px]">
-                모르는 단어를 즉시 검색!
-            </div>
-            <hr className="gradient-hr"/>
-            {/*<div className="h-[200px]"></div>*/}
-            <div className=" text-[25px] my-10  px-[50px]">
-                <div className=" text-[25px] my-10 ">
-                    말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
-                    세계로
-                    더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
-                    만화
-                    읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
+                    만화 속에서 사용되는 단어들을 분석하여 사용자에게 맞춤형 학습 경험을 제공합니다. 각 페이지에 등장하는 말풍선을 추출하고, 해당 단어들의 빈도수를 카운트하여 단어 난이도를
+                    측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 언어 능력을 향상시키는데 도움을 드립니다.
                 </div>
 
                 <div className="flex justify-evenly items-center">
@@ -148,8 +156,9 @@ export default function NewMain() {
                         <div className="text-[25px] mt-10">만화 빅데이터</div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
-                        <img src={JapaneseWordCloud}
-                             className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>
+                        {/*<img src={JapaneseWordCloud}*/}
+                        {/*     className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>*/}
+                        <div className="rounded-[15px] shadow-lg"><SimpleWordcloud word={data}/></div>
                         <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
@@ -160,34 +169,51 @@ export default function NewMain() {
                 </div>
 
             </div>
-            <div className="h-[250px]"><SimpleWordcloud /></div>
+
+
+            <div className="flex h-[100px] items-end text-7xl ml-[50px] mt-[200px]">
+                편리한 단어 검색
+            </div>
+            <hr className="gradient-hr"/>
+            {/*<div className="h-[200px]"></div>*/}
+            <div className=" text-[25px] my-10  px-[50px]">
+                <div className=" text-[25px] my-10 ">
+                    말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
+                    세계로
+                    더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
+                    만화
+                    읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
+                </div>
+
+                <div className="flex justify-evenly items-center">
+                    <div className="flex flex-col justify-center items-center">
+                        <img src={SpeechDef}
+                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <img src={SpeechDef}
+                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div className="h-[200px]"></div>
+
         </div>
     );
 }
 
 
+// const options = {
+//     "rotations": 2,
+//     "rotationAngles": [-90, 0],
+// };
+const sizes = [300, 300];
 
-
-
-const words = [
-    {
-        text: 'told',
-        value: 11164,
-    },
-    {
-        text: 'mistake',
-        value: 11330,
-    },
-    {
-        text: 'thought',
-        value: 11033,
-    },
-    {
-        text: 'bad',
-        value: 11733,
-    },
-]
-
-function SimpleWordcloud() {
-    return <ReactWordcloud words={words} />
+function SimpleWordcloud({word}) {
+    // return <ReactWordcloud words={word}/>
+    return <ReactWordcloud size={sizes} words={word}/>
 }
