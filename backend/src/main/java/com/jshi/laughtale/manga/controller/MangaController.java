@@ -80,10 +80,15 @@ public class MangaController {
                 .build());
     }
 
-    @GetMapping("/level")
-    public ResponseEntity<List<LevelCount.Response>> getMangaLevelCount(
+    @GetMapping("/word/level")
+    public ResponseEntity<List<LevelCount.Response>> getMangaWordLevelCount(
             @RequestParam("mangaId") long mangaId) {
-        return ResponseEntity.ok(mangaService.getMangaLevelCount(mangaId));
+        return ResponseEntity.ok(mangaService.getMangaWordLevelCount(mangaId));
     }
 
+    @GetMapping("/chapter/level")
+    public ResponseEntity<List<LevelCount.Response>> getMangaChapterLevelCount(
+            @RequestParam("mangaId") long mangaId) {
+        return ResponseEntity.ok(mangaService.getMangaChapterLevelCount(mangaId));
+    }
 }

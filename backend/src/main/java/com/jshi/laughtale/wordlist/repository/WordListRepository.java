@@ -59,4 +59,11 @@ public interface WordListRepository extends JpaRepository<WordList, Long> {
         + " and ma.id = :mangaId "
         + " group by wd.level order by wd.level", nativeQuery = true)
     List<Tuple> findCalculatedMangaLevel(Long mangaId);
+
+    @Query(value = "select ch.level, count(ch.level) as levelcnt"
+            + " from manga ma, chapter ch"
+            + " where ch.manga_id = ma.id"
+            + " and ma.id = :mangaId "
+            + " group by ch.level order by ch.level", nativeQuery = true)
+    List<Tuple> findCalculatedMangaChapterLevel(Long mangaId);
 }

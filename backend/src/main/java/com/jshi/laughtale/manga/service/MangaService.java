@@ -19,6 +19,7 @@ import com.jshi.laughtale.parser.service.ParseService;
 import com.jshi.laughtale.security.Role;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
+import com.jshi.laughtale.wordlist.repository.WordListRepository;
 import com.jshi.laughtale.wordlist.service.WordListService;
 import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
@@ -44,6 +45,7 @@ public class MangaService {
     //Repository
     private final MangaRepository mangaRepository;
     private final ChapterRepository chapterRepository;
+    private final WordListRepository wordListRepository;
 
     //Component
     private final MangaAnalyzer mangaAnalyzer;
@@ -156,7 +158,7 @@ public class MangaService {
     }
 
 
-    public List<LevelCount.Response> getMangaLevelCount(long mangaId) {
+    public List<LevelCount.Response> getMangaWordLevelCount(long mangaId) {
         List<Tuple> mangaLevelList = wordListService.findCalculatedMangaLevel(mangaId);
 
         // 모든 레벨에 대해 count를 0으로 초기화
@@ -190,5 +192,32 @@ public class MangaService {
             manga.setLevel(mangaLevel);
             mangaRepository.save(manga);
         }
+    }
+
+    public List<LevelCount.Response> getMangaChapterLevelCount(long mangaId) {
+        List<Tuple> mangaChapterLevelList = wordListRepository.findCalculatedMangaChapterLevel(mangaId);
+
+        // 모든 레벨에 대해 count를 0으로 초기화
+        List<LevelCount.Response> result = new ArrayList<>();
+        for (int level = 1; level <= 5; level++) {
+            result.add(LevelCount.Response.builder()
+                    .level(level)
+                    .count(0)
+                    .build()
+            );
+        }
+
+        for (Tuple tuple : mangaChapterLevelList) {
+            int level = tuple.get("level", Integer.class);
+            long count = tuple.get("levelcnt", Long.class);
+
+            result.set(level - 1, LevelCount.Response.builder()
+                    .level(level)
+                    .count(count)
+                    .build()
+            );
+        }
+
+        return result;
     }
 }
