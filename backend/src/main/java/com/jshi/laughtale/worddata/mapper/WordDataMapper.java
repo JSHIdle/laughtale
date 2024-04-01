@@ -12,6 +12,14 @@ public class WordDataMapper {
     private static final int INIT_LEVEL = 5;
     private static final int INIT_FREQUENCY = 0;
 
+    public static WordData toEntity(String word, String partOfSpeech) {
+        return WordData.builder()
+                .word(word)
+                .partOfSpeech(partOfSpeech)
+                .level(INIT_LEVEL)
+                .frequency(INIT_FREQUENCY)
+                .build();
+    }
     public static WordData toEntity(String word, String partOfSpeech, String definition) {
         return WordData.builder()
                 .word(word)
