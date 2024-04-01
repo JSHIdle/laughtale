@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -92,11 +91,6 @@ public class MangaService {
         if (role == Role.ROLE_ADMIN) {
             log.info("DB 저장...");
             mangaSaver.save(mangaContext);
-        } else {
-            log.info("파일 삭제");
-            for (String filename : names) {
-                FileUtils.remove(filename);
-            }
         }
         return response;
     }
