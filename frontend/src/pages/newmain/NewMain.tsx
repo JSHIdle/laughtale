@@ -30,9 +30,12 @@ import Manga21 from '../../assets/mainpageimage/mangas/manga_21.png'
 
 import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
+import OnePieceSet from '../../assets/mainpageimage/onepieceset.png';
+import JapaneseWordCloud  from '../../assets/mainpageimage/japwrcl3.jpg';
+
 export default function NewMain() {
     const customFont = {
-        fontFamily: 'Her-Leeoksun',
+        fontFamily: 'GmarketSansMedium',
     };
     return (
         <div className="bg-[#FFFFFF] min-h-screen" style={customFont}>
@@ -52,87 +55,6 @@ export default function NewMain() {
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
             </div>
-
-            {/*<div className="fixed bottom-[100px] left-1/2 transform -translate-x-1/2 m-4 z-1100">*/}
-            {/*    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold h-[100px] w-[200px] rounded-full">*/}
-            {/*        버튼*/}
-            {/*    </button>*/}
-            {/*</div>*/}
-
-            {/*<div className="flex flex-col justify-center items-center z-50 w-full h-full">*/}
-            {/*    <img src={Logo} className="object-cover -translate-y-[50px] opacity-90 "/>*/}
-            {/*    <div className="text-5xl  font-bold -translate-y-[50px] opacity-80 mb-5 "*/}
-            {/*    >LaughTale에 오신 것을*/}
-            {/*        환영합니다!*/}
-            {/*    </div>*/}
-            {/*    <div*/}
-            {/*        className="text-4xl  font-bold text-center -translate-y-[50px] w-[1000px] opacity-80 mb-5 "*/}
-            {/*    >LaughTale과*/}
-            {/*        함께 일본어를 배우는 흥미진진한 여정에 동참해보세요! 완전한 초보자이든 언어 실력을 향상시키려는 분이든, LaughTale은 일본 문화의 풍부함을 언어를 통해 탐험하는 재미있고*/}
-            {/*        효과적인 방법을 제공합니다.*/}
-            {/*    </div>*/}
-            {/*    <div className="text-4xl  font-bold text-center -translate-y-[50px] w-[1000px] opacity-80 "*/}
-            {/*    >저희*/}
-            {/*        플랫폼은 일본어*/}
-            {/*        학습을 즐거운 경험으로 만들어 드립니다. 지루한 암기를 잊고 웃음과 흥분이 넘치는 인터랙티브 레슨을 즐겨보세요. 혁신적인 접근법으로, 일본어를 정복하는 것이 과제가 아닌 즐거운*/}
-            {/*        모험으로 바뀝니다.*/}
-            {/*    </div>*/}
-            {/*    <div className=" flex">*/}
-            {/*        <button*/}
-            {/*            className="bg-blue-400 hover:bg-blue-700  text-5xl font-bold h-[100px] w-[200px] rounded-full mr-16">*/}
-            {/*            만화읽기*/}
-            {/*        </button>*/}
-            {/*        <button*/}
-            {/*            className="bg-blue-400 hover:bg-blue-700  text-5xl font-bold h-[100px] w-[200px] rounded-full ml-16">*/}
-            {/*            분석하기*/}
-            {/*        </button>*/}
-
-            {/*    </div>*/}
-
-            {/*</div>*/}
-            {/*<div className="mainCustomSlider overflow-y-hidden">*/}
-            {/*    <div className="h-[100px]"></div>*/}
-            {/*1번 슬라이드*/}
-            {/*<div className=" overflow-hidden mb-10">*/}
-            {/*    <div className="flex flex-row pb-10  animate-sliderA">*/}
-            {/*        {[Manga1, Manga2, Manga3, Manga4, Manga5, Manga6, Manga7].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] mx-7  object-cover"/>*/}
-            {/*        ))}*/}
-            {/*        {[Manga1, Manga2, Manga3, Manga4, Manga5, Manga6, Manga7].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] mx-7 object-cover"/>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*2번 슬라이드*/}
-            {/*<div className=" overflow-hidden mb-10">*/}
-            {/*    <div className="flex flex-row pb-10  animate-sliderB bg-[#FFFFFF]">*/}
-            {/*        {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] px-7  object-cover  bg-[#FFFFFF] "/>*/}
-            {/*        ))}*/}
-            {/*        {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] px-7 object-cover  bg-[#FFFFFF] "/>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*3번 슬라이드*/}
-            {/*<div className=" overflow-hidden">*/}
-            {/*    <div className="flex flex-row pb-10  animate-sliderC bg-[#FFFFFF]">*/}
-            {/*        {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] px-7  object-cover  bg-[#FFFFFF] "/>*/}
-            {/*        ))}*/}
-            {/*        {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (*/}
-            {/*            <img src={image} key={index}*/}
-            {/*                 className="w-[210px] h-[280px] px-7 object-cover  bg-[#FFFFFF] "/>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*</div>*/}
-
 
             <div className=" flex flex-col bg-[#FFFFFF]">
                 <div className="items-center text-7xl ml-[50px] mt-[100px]">
@@ -217,19 +139,24 @@ export default function NewMain() {
 
                 <div className="flex justify-evenly items-center">
                     <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                        <img src={OnePieceSet}
+                             className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                        <div className="text-[25px] mt-10">만화 빅데이터</div>
                     </div>
                     <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                        <img src={JapaneseWordCloud}
+                             className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>
+                        <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <img src={OnePieceSet}
+                             className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                        <div className="text-[25px] mt-10">사용자 맞춤형 퀴즈 생성</div>
                     </div>
                 </div>
 
             </div>
-        <div className="h-[250px]"></div>
+            <div className="h-[250px]"></div>
         </div>
     );
 }
