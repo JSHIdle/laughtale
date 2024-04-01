@@ -1,5 +1,6 @@
 package com.jshi.laughtale.manga.repository;
 
+import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.dto.LevelManga;
 import jakarta.persistence.Tuple;
@@ -35,4 +36,6 @@ public interface MangaRepository extends JpaRepository<Manga, Long> {
 
     @Query("SELECT m FROM Manga m JOIN FETCH m.chapter c WHERE m.id = :id")
     Manga findMangaByIdFetchJoinChapter(@Param("id") Long id);
+
+    Manga findByChapter(Chapter chapter);
 }

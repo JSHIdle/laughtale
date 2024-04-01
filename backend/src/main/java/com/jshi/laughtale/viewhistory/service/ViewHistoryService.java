@@ -8,6 +8,8 @@ import java.util.Optional;
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.chapter.service.ChapterService;
+import com.jshi.laughtale.manga.domain.Manga;
+import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.viewhistory.domain.ViewHistory;
@@ -26,26 +28,15 @@ public class ViewHistoryService {
 	private final ChapterService chapterService;
 	private final ViewHistoryRepository viewHistoryRepository;
 	private final ChapterRepository chapterRepository;
+	private final MangaRepository mangaRepository;
 
 	public void createHistory(Long chapterId, Long userId) {
 		Member member = memberService.findById(userId);
 		Chapter chapter = chapterRepository.findById(chapterId).get();
-		Optional<List<ViewHistory>> existingHistoriesOptional = viewHistoryRepository.findAllByMemberAndChapter(member,
-			chapter);
+		Manga manga = mangaRepository.findByChapter(chapter);
 
-		if (existingHistoriesOptional.isPresent() && !existingHistoriesOptional.get().isEmpty()) {
-			List<ViewHistory> existingHistories = existingHistoriesOptional.get();
-
-			// Update the date of existing history entries to the current date
-			for (ViewHistory history : existingHistories) {
-				history.setViewDate(LocalDateTime.now());
-			}
-
-			// Save the updated histories back to the repository
-			viewHistoryRepository.saveAll(existingHistories);
-		} else {
-			// If no existing histories, create a new history entry
-			viewHistoryRepository.save(ViewHistoryMapper.toEntity(member, chapter));
+		if(viewHistoryRepository.findByChapter(chapter).isEmpty()){
+			viewHistoryRepository.save(ViewHistoryMapper.toEntity(member, manga, chapter));
 		}
 	}
 
