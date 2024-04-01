@@ -18,4 +18,6 @@ public interface ViewHistoryRepository extends JpaRepository<ViewHistory, Long> 
 
 	@Query(value = "SELECT vh.chapter.id FROM ViewHistory vh WHERE vh.member.id = :memberId AND vh.chapter.manga.id = :mangaId")
 	List<Long> findChaptersByMemberAndManga(long memberId, long mangaId);
+
+	Optional<ViewHistory> findByChapter(Chapter chapter);
 }
