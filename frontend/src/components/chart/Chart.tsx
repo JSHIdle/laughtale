@@ -4,26 +4,26 @@ import * as d3 from 'd3';
 const Chart = () => {
     const svgRef = useRef(null);
     const [viewRange, setViewRange] = useState('all');
+
     const [dataPoints, setDataPoints] = useState([
         // 데이터 포인트를 이 배열에 초기화합니다. 예를 들어:
-        { level: 1, repeatCnt: 1, date: new Date('2024-04-01T17:53:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 2, date: new Date('2024-04-01T17:53:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 3, date: new Date('2024-04-01T17:53:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 4, date: new Date('2024-04-01T17:53:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 5, date: new Date('2024-04-01T17:53:00'), title: "Data Point 2" },
+        { level: 1, repeatCnt: 1, date: new Date('2024-04-01T17:00:00'), title: "Data Point 1" },
+        { level: 1, repeatCnt: 2, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
+        { level: 1, repeatCnt: 3, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
+        { level: 1, repeatCnt: 4, date: new Date('2024-04-01T17:00:00'), title: "Data Point 1" },
+        { level: 1, repeatCnt: 5, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
         { level: 2, repeatCnt: 1, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
         { level: 2, repeatCnt: 2, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
         { level: 2, repeatCnt: 3, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
         { level: 2, repeatCnt: 4, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
         { level: 2, repeatCnt: 5, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 2, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 3, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 4, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-        { level: 5, repeatCnt: 5, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
+        { level: 3, repeatCnt: 1, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
+        { level: 3, repeatCnt: 2, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
+        { level: 4, repeatCnt: 3, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
+        { level: 4, repeatCnt: 4, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
+        { level: 5, repeatCnt: 5, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
         // ...더 많은 데이터 포인트{ level: 2, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
     ]);
-
 
     // 함수 배열
     const functions = [
@@ -143,26 +143,62 @@ const Chart = () => {
             group.append('circle')
                 .attr('cx', xScale(diffInMinutes)+50)
                 .attr('cy', yScale(yValue)+20)
-                .attr('r', 2)
+                .attr('r', 3)
                 .attr('fill', color)
                 // .attr('stroke', 'black') //테두리
                 .attr('stroke-width', 1)
                 .append('title')
-                .text(`${dataPoint.title}: Level ${dataPoint.level}, Repeat ${dataPoint.repeatCnt}`);
+                .text(`${dataPoint.title}\nLevel : ${dataPoint.level}\n학습횟수 : ${dataPoint.repeatCnt}\n경과시간 : ${diffInMinutes}분\n획득포인트 :${yValue/100}`);
         });
 
     }, [viewRange, dataPoints]);
 
+
+    //레벨별 버튼 생성
+    const renderLevelButtons = () => {
+        const buttons = [];
+        // 'all'은 특별한 경우이므로 별도로 처리합니다.
+        buttons.push(
+            <button
+                key="all"
+                onClick={() => setViewRange('all')}
+                className="bg-gray-200 text-gray-800 hover:bg-gray-300 py-2 px-4 rounded transition duration-200 ease-in-out"
+            >
+                전체보기
+            </button>
+        );
+
+        // 레벨별 색상 클래스
+        const colorClasses = [
+            'bg-custom-bronze hover:bg-custom-bronze-dark',
+            'bg-custom-silver hover:bg-custom-silver-dark',
+            'bg-custom-gold hover:bg-custom-gold-dark',
+            'bg-custom-platinum hover:bg-custom-platinum-dark',
+            'bg-custom-diamond hover:bg-custom-diamond-dark',
+        ];
+
+        // 레벨별 버튼을 생성
+        colorClasses.forEach((colorClass, index) => {
+            const level = index + 1; // 레벨은 1부터 시작합니다.
+            buttons.push(
+                <button
+                    key={level}
+                    onClick={() => setViewRange(`${(level - 1) * 5}-${level * 5 - 1}`)}
+                    className={`py-2 px-4 rounded transition duration-200 ease-in-out ${colorClass} text-white`}
+                >
+                    {level}레벨
+                </button>
+            );
+        });
+        return buttons;
+    }; //레벨 버튼 생성
+
+
     return (
         <div>
             <svg ref={svgRef} width={650} height={550}/>
-            <div>
-                <button onClick={() => setViewRange('all')}>|전체보기 </button>
-                <button onClick={() => setViewRange('0-4')}>|1레벨 </button>
-                <button onClick={() => setViewRange('5-9')}>|2레벨 </button>
-                <button onClick={() => setViewRange('10-14')}>|3레벨 </button>
-                <button onClick={() => setViewRange('15-19')}>|4레벨 </button>
-                <button onClick={() => setViewRange('20-24')}>|5레벨 </button>
+            <div className="flex flex-wrap gap-2">
+                {renderLevelButtons()}
             </div>
         </div>
     );
