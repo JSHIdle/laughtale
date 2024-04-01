@@ -109,10 +109,9 @@ const Index = () => {
                             labels: wordLevelChartData.labels,
                             chart: {
                                 type: 'donut',
-                                height: 320,
                             },
                         }}
-                        width="450"/>
+                    />
                     <Chart
                         type="donut"
                         series={chapterLevelChartData.series}
@@ -121,10 +120,9 @@ const Index = () => {
                             labels: chapterLevelChartData.labels,
                             chart: {
                                 type: 'donut',
-                                height: 320,
                             },
                         }}
-                        width="450"
+
                     />
                 </div>
 
