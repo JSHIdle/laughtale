@@ -1,9 +1,8 @@
 package com.jshi.laughtale.manga.service;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
-import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
-import com.jshi.laughtale.chapter.mapper.ChapterMapper;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
+import com.jshi.laughtale.common.dto.LevelCount;
 import com.jshi.laughtale.manga.component.MangaAnalyzer;
 import com.jshi.laughtale.manga.component.MangaSaver;
 import com.jshi.laughtale.manga.domain.Manga;
@@ -20,6 +19,7 @@ import com.jshi.laughtale.parser.service.ParseService;
 import com.jshi.laughtale.security.Role;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
+import com.jshi.laughtale.wordlist.service.WordListService;
 import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +52,7 @@ public class MangaService {
     //Service
     private final ParseService parseService;
     private final MemberService memberService;
+    private final WordListService wordListService;
 
     /**
      * 파일 저장, 사진 분석 요청, 파싱, 저장 or 파일 삭제
@@ -154,10 +155,32 @@ public class MangaService {
         }
     }
 
-    public List<ChapterLevelDto.Response> getMangaLevelCount(long mangaId) {
-        return chapterRepository.findAllByMangaId(mangaId).stream()
-                .map(ChapterMapper::chapterToChapterLevelDto)
-                .toList();
+
+    public List<LevelCount.Response> getMangaLevelCount(long mangaId) {
+        List<Tuple> mangaLevelList = wordListService.findCalculatedMangaLevel(mangaId);
+
+        // 모든 레벨에 대해 count를 0으로 초기화
+        List<LevelCount.Response> result = new ArrayList<>();
+        for (int level = 1; level <= 5; level++) {
+            result.add(LevelCount.Response.builder()
+                    .level(level)
+                    .count(0)
+                    .build()
+            );
+        }
+
+        for (Tuple tuple : mangaLevelList) {
+            int level = tuple.get("level", Integer.class);
+            long count = tuple.get("levelcnt", Long.class);
+
+            result.set(level - 1, LevelCount.Response.builder()
+                    .level(level)
+                    .count(count)
+                    .build()
+            );
+        }
+
+        return result;
     }
 
     //    @PostConstruct
