@@ -60,6 +60,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
         navigate('result', { state: { slides, correctAnswersCount }});
         console.log(selectedAnswers);
 
+        // @ts-ignore
         const updatedIds = Object.values(selectedAnswers).map(obj => obj.id + 1);
         console.log(updatedIds);
 
