@@ -44,7 +44,7 @@ public class ChapterController {
 	public ResponseEntity<?> getChapterPagination(
 		@PathVariable Long chapterId
 	){
-		List<Integer> pagination = chapterService.getChapterPagination(chapterId);
+		List<Long> pagination = chapterService.getChapterPagination(chapterId);
 
 		return ResponseEntity.ok(ChapterPaginationDto
 			.Response

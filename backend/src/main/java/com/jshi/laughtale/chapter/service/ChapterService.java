@@ -130,39 +130,27 @@ public class ChapterService {
         return result;
     }
 
-    public List<Integer> getChapterPagination(Long chapterId) {
+    public List<Long> getChapterPagination(Long chapterId) {
         Optional<Chapter> currChapter = chapterRepository.findById(chapterId);
         Manga manga = currChapter.get().getManga();
         List<Chapter> chapterList = manga.getChapter();
         Collections.sort(chapterList, (a, b) -> Long.compare(a.getChapterNo(), b.getChapterNo()));
 
-        int idx = getChapterIndex(chapterList, chapterId);
+        Optional<Chapter> next = chapterList.stream()
+                .filter(chapter -> chapter.getId() > chapterId)
+                .findFirst();
 
-        return checkPage(idx, chapterList.size());
+        Optional<Chapter> prev = chapterList.stream()
+                .filter(chapter -> chapter.getId() < chapterId) // 선택한 값보다 작은 값만 필터링
+                .reduce((first, second) -> second);
 
-    }
+        Chapter prevChapter = prev.orElse(null);
+        Chapter nextChapter = next.orElse(null);
 
-    private Integer getChapterIndex(List<Chapter> chapterList, Long getID) {
-        if (chapterList.size() == 0) return null;
-
-        int idx = 0;
-
-        for (idx = 0; idx < chapterList.size(); idx++) {
-            if (getID.equals(chapterList.get(idx).getId())) break;
-        }
-        return idx;
-
-    }
-
-    private List<Integer> checkPage(int curr, int size) {
-        int prev = curr - 1;
-        int next = curr + 1;
-
-        List<Integer> list = new ArrayList<>();
-
-        list.add(prev == -1 ? null : prev);
-        list.add(next == size ? null : next);
-
+        List<Long> list = new ArrayList<>();
+        list.add(prev == null ? null : prevChapter.getId());
+        list.add(nextChapter == null ? null : nextChapter.getId());
         return list;
     }
+
 }
