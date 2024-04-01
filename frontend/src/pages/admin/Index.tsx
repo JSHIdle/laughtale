@@ -4,7 +4,7 @@ import {FileUploadComponent} from "../../components/admin/FileUploadComponent.ts
 import {useCallback, useRef, useState} from "react";
 import client from "../../apis";
 import Spinner from "../../components/common/Spinner.tsx";
-import ResultModal from "../../components/admin/ResultModal.tsx";
+import UploadResult from "../../components/admin/UploadResultComponent.tsx";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
@@ -60,15 +60,10 @@ const Index = () => {
                 },
 
             }).then((response) => {
-                response.data.chapter.map(ch => ch.cuts.map(c => c.words = c.words.filter(word => word !== undefined)))
                 setData(response.data);
+                setLoading(false);
             });
 
-            // if (response.ok) {
-            //     console.log('Upload successful');
-            // } else {
-            //     console.error('Upload failed');
-            // }
         } catch (error) {
             setLoading(false);
 
@@ -76,45 +71,40 @@ const Index = () => {
         }
     };
 
-    // const data = mangaData;
-    // <UploadResult {...data}></UploadResult>
-    // return (
-    //     <div>
-    //     </div>
-    // )
     return <>
-        <div className="bg-[#ffffff] min-h-screen relative">
-            {
-                loading ?
-                    <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
-                    </div> : <></>
-            }
-            <div className="max-w-[700px] m-auto">
-                <div>
-                    <Header/>
+        {(data == null || false) ? (<div className="bg-[#ffffff] min-h-screen relative">
+                {
+                    loading ?
+                        <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
+                        </div> : <></>
+                }
+                <div className="max-w-[700px] m-auto">
+                    <div>
+                        <Header/>
+                    </div>
+                    <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
+                    <div>
+                        <CartoonInfoComponent
+                            title={cartoonInfo.title}
+                            author={cartoonInfo.author}
+                            genres={cartoonInfo.genres}
+                            description={cartoonInfo.description}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <FileUploadComponent
+                            thumbnailInputRef={thumbnailInputRef}
+                            filesInputRef={filesInputRef}
+                        />
+                    </div>
+                    <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
+                        등록하기
+                    </button>
                 </div>
-                <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
-                <div>
-                    <CartoonInfoComponent
-                        title={cartoonInfo.title}
-                        author={cartoonInfo.author}
-                        genres={cartoonInfo.genres}
-                        description={cartoonInfo.description}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <FileUploadComponent
-                        thumbnailInputRef={thumbnailInputRef}
-                        filesInputRef={filesInputRef}
-                    />
-                </div>
-                <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
-                    등록하기
-                </button>
-            </div>
-        </div>
-        {data && <ResultModal {...data}/>}
+            </div>) :
+            (<UploadResult {...data}/>)
+        }
     </>
 }
 

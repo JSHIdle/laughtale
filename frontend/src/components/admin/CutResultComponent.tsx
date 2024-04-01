@@ -1,28 +1,43 @@
 import {CutAnalyze} from "../../../types";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import WordResult from "./WordResultComponent.tsx";
 import Pagination from "./Pagination.tsx";
 import ImageWithIndexAndRect from "./ImageWithIndexAndRect.tsx";
 import SentenceResult from "./SentenceResultComponent.tsx";
 
 export default function CutResult(props: CutAnalyze) {
-    const speechLength = useRef(props.sentence.length);
+    const colors = ["#CDFADB", "#F6FDC3", "#FFCF96", "#FF8080", "#D2E0FB", "#F9F3CC", "#D7E5CA", "#8EACCD"]
+    const [speechLength, setSpeechLength] = useState(props.sentence.length);
     const [speechCur, setSpeechCur] = useState(1);
+    const [speechContent, setSpeechContent] = useState(props.sentence[0]);
 
-    const [speechContent, setSpeechContent] = useState(props.sentence[0] ?? null);
-    const wordLength = useRef(props.words.length);
+    const [wordLength, setWordLength] = useState(props.sentence[0].words.length);
     const [wordCur, setWordCur] = useState(1);
+    const [wordContent, setWordContent] = useState(props.sentence[0].words[0]);
 
-    const [wordContent, setWordContent] = useState(props.words[0] ?? null);
+    console.log(props.sentence)
+    const [colorIdx, setColorIdx] = useState(0);
+    useEffect(() => {
+        setSpeechLength(props.sentence.length);
+        setSpeechCur(1);
+        setSpeechContent(props.sentence[0]);
+    }, [props]);
 
-    const handleWordCur = (value: number) => {
-        setWordCur(wordCur + value);
-        setWordContent(props.words[wordCur + value - 1]);
-    }
+    useEffect(() => {
+        setWordLength(speechContent.words.length);
+        setWordCur(Math.min(1, speechContent.words.length));
+        setWordContent(speechContent.words[0]);
+    }, [speechContent]);
 
     const handleSpeechCur = (value: number) => {
         setSpeechCur(speechCur + value);
         setSpeechContent(props.sentence[speechCur + value - 1]);
+    }
+
+    const handleWordCur = (value: number) => {
+        setWordCur(wordCur + value);
+        setWordContent(speechContent.words[wordCur + value - 1]);
+        setColorIdx((wordCur - 1) % colors.length);
     }
 
     return (
@@ -34,25 +49,25 @@ export default function CutResult(props: CutAnalyze) {
                 height: speechContent.positionBasic.rightTopY - speechContent.positionBasic.leftBottomY
             }}/>
             <div className="flex flex-col border rounded">
-                <p className="text-3xl font-bold p-4 border-b   ">문장</p>
+                <p className="text-3xl font-bold p-4 border-b">문장</p>
                 <div className="p-6 shadow rounded">
                     <div className="text-center mb-5">
-                        <SentenceResult sentence={speechContent.sentence}/>
+                        <SentenceResult sentence={speechContent.sentence} word={wordContent?.word} color={colors[colorIdx]}/>
                     </div>
                 </div>
-                <Pagination length={speechLength.current} cur={speechCur} setCur={handleSpeechCur}></Pagination>
+                <Pagination length={speechLength} cur={speechCur} setCur={handleSpeechCur}></Pagination>
                 <p className="text-3xl font-bold p-4 border rounded">단어</p>
                 <div className="relative flex-1">
                     <div
                         className="absolute top-0 bottom-0 left-0 right-0 overflow-y-scroll">
                         <div className="absolute top-0 bottom-0 left-0 right-0 p-4">
                             <div>
-                                {<WordResult {...wordContent} />}
+                                {<WordResult props={wordContent} color={colors[colorIdx]} />}
                             </div>
                         </div>
                     </div>
                 </div>
-                <Pagination length={wordLength.current} cur={wordCur} setCur={handleWordCur}></Pagination>
+                <Pagination length={wordLength} cur={wordCur} setCur={handleWordCur}></Pagination>
             </div>
         </div>
     );
