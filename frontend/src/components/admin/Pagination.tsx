@@ -9,6 +9,12 @@ type Page = {
 export default function Pagination(page: Page) {
     const [isFirst, setIsFirst] = useState(page.cur > 1);
     const [isLast, setIsLast] = useState(page.cur < page.length);
+
+    useEffect(() => {
+        setIsFirst(page.cur > 1);
+        setIsLast(page.cur < page.length)
+    }, [page]);
+
     const setBtn = (value) => {
         page.setCur(value);
         setIsFirst(page.cur + value > 1);
