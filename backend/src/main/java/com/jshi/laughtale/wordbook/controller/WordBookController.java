@@ -37,8 +37,8 @@ public class WordBookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeWordBook(@PathVariable Long id) {
-        wordBookService.deleteWordBook(id);
+    public ResponseEntity<Void> removeWordBook(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        wordBookService.deleteWordBook(id, customUserDetails.getId());
         return ResponseEntity.ok().build();
     }
 }
