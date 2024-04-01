@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate, Outlet,
-} from "react-router-dom";
+import {createBrowserRouter, Navigate, Outlet,} from "react-router-dom";
 
 
 import Recommend from "../pages/main/Recommend";
@@ -16,7 +13,6 @@ import Viewer from "../pages/cartoon/Viewer";
 
 import Result from "../components/cartoon/Result";
 import Quiz from "../components/cartoon/Quiz";
-import AuthRoute from "./AuthRoute";
 import Login from "../pages/login/Index.tsx";
 import Admin from "../pages/admin/Index";
 import Error from "../components/common/Error.tsx";
@@ -115,7 +111,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/error",
     element: <Error />,

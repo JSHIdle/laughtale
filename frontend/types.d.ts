@@ -69,12 +69,12 @@ export type CutAnalyze = {
     width: number,
     height: number,
     sentence: Array<SpeechAnalyze>,
-    words: Array<WordAnalyze>
 }
 
 export type SpeechAnalyze = {
     sentence: string,
     positionBasic: Position
+    words: Array<WordAnalyze>
 }
 
 export type WordAnalyze = {
