@@ -35,6 +35,7 @@ public class WordDataController {
 
 	@GetMapping("/word-cloud")
 	public ResponseEntity<List<WordCloudData.Response>> getWordCloudData() {
+		//d
 		return ResponseEntity.ok(wordDataService.loadWordCloudData());
 
 	}
