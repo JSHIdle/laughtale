@@ -14,7 +14,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, name, value, maxLen
     return (
         <div className="mb-5 flex">
             <label htmlFor={name} className="block text-sm font-bold text-gray-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
-            <div className="relative flex-grow text-white">
+            <div className="relative flex-grow text-black">
                 <input
                     type="text"
                     id={name}
@@ -37,7 +37,7 @@ export const TextArea: React.FC<TextInputProps> = ({ label, name, value, maxLeng
     return (
         <div className="mb-2 flex">
             <label htmlFor={name} className="block text-sm font-bold text-gray-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
-            <div className="relative flex-grow text-white">
+            <div className="relative flex-grow text-black">
                 <textarea
                     id={name}
                     name={name}

@@ -30,16 +30,16 @@ export default function CartoonHeader(p: Props) {
             <img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"300px", height:"100%"}} />
         </div>
         <div className="p-10 flex-grow">
-          <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
-          { props.author && <div className="font-bold text-xl text-white">작가 : {props.author}</div>}
-          { props.category && <div className="font-bold text-xl text-white">카테고리 : {props.category}</div> }
-          { props.level &&<div className="font-bold text-xl text-white">레벨 : {props.level}</div>}
+          <div className="font-bold text-3xl text-black	mb-10">{props?.title}</div>
+          { props.author && <div className="font-bold text-xl text-black">작가 : {props.author}</div>}
+          { props.category && <div className="font-bold text-xl text-black">카테고리 : {props.category}</div> }
+          { props.level &&<div className="font-bold text-xl text-black">레벨 : {props.level}</div>}
 
           <div className="mb-10"></div>
           {
             props.summary && <>
-                  <div className="font-bold text-xl text-white">줄거리</div>
-                  <div className="font-bold text-xl text-white">{props.summary}</div>
+                  <div className="font-bold text-xl text-black">줄거리</div>
+                  <div className="font-bold text-xl text-black">{props.summary}</div>
               </>
           }
         </div>

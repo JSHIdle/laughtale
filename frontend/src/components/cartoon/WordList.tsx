@@ -11,7 +11,7 @@ export default function WordList(props: Props){
         <span style={{background:`${word.color}`, color:'#000'}} className="rounded-md p-3 inline-block">{word.word}</span>
         <AddWordButton wordId={word.id}/>
       </div>
-      <div dangerouslySetInnerHTML={{__html:word.definition}} className="text-2xl text-white"></div>
+      <div dangerouslySetInnerHTML={{__html:word.definition}} className="text-2xl text-black"></div>
     </div>
   ))
 }

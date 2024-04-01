@@ -101,7 +101,7 @@ function Recent() {
                     }`}
                 />
                 {selected === index && (
-                    <div className="text-center mt-2 text-white">
+                    <div className="text-center mt-2 text-black">
                       <h3 className="text-lg font-bold">{comic.title}</h3>
                       <p>{comic.episode}</p>
                     </div>
