@@ -44,10 +44,11 @@ const Result = () => {
             <div className="flex-grow flex justify-center items-center">
                 <div className="w-full max-w-[1180px] h-[600px]">
                     <div className="flex flex-col justify-center items-center p-12">
-                        <div className="w-[400px] text-[20px] font-bold text-black flex justify-center items-center p-6">
+                        <div
+                            className="w-[400px] text-[20px] font-bold text-black flex justify-center items-center p-6">
                             퀴즈 풀이 결과
                         </div>
-                        <div className="text-black mt-6 p-6 text-5xl">
+                        <div className="text-black font-bold mt-6 p-6 text-5xl">
                             <div>
                                 {20 * correctAnswersCount}점
                             </div>
@@ -59,14 +60,14 @@ const Result = () => {
                     <div className="flex text-white justify-center items-center p-6">
                         <div className="flex text-white justify-center items-center p-3">
                             {chapterdata &&<Link to={`${prefix}/viewer/${chapterdata.prevPage}`} replace
-                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                  className="z-20 p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
                                 이전 회차 보기
                             </Link>}
                         </div>
 
                         <div className="flex text-white justify-center items-center p-3">
                             <Link to={`${prefix}/viewer/${chapterId}`} replace
-                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                  className="z-20 p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
                                 다시보기
                             </Link>
                         </div>
@@ -74,7 +75,7 @@ const Result = () => {
                         <div className="flex text-white justify-center items-center p-3">
                             {chapterdata && <Link to={`${prefix}/viewer/${chapterdata.nextPage}`} replace
                                   onClick={handleNextPageClick}
-                                  className="z-20 p-6 text-2xl text-white bg-[#2D2D32] brightness-100 hover:brightness-125 rounded-3xl">
+                                  className="z-20 p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
                                 다음 회차 보기
                             </Link>}
                         </div>

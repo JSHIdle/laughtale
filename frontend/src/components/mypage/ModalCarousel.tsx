@@ -1,13 +1,21 @@
 import Slider from 'react-slick';
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect } from 'react';
 import image1 from '../../assets/samples/e1-1.jpg';
 import image2 from '../../assets/samples/e1-3.jpg';
 import image3 from '../../assets/samples/e1-2.jpg';
 
-const ModalCarousel = ({example,selectedIndex}: any ) => {
-    let carouselRef = useRef<HTMLElement>();
-    const [slideIndex, setSlideIndex] = useState(0);
-    const [updateCount, setUpdateCount] = useState(0);
+function error(message: string): never {
+    throw new Error(message);
+}
+const ModalCarousel = ({example,selectedIndex}) => {
+    const carouselRef = useRef();
+
+    useEffect(() => {
+        if (carouselRef.current) {
+            // @ts-ignore
+            carouselRef.current.slickGoTo(selectedIndex); // 선택된 인덱스의 이미지로 이동
+        }
+    }, [selectedIndex]);
 
     const settings = {
         dots: false,
@@ -19,27 +27,22 @@ const ModalCarousel = ({example,selectedIndex}: any ) => {
         className: "slider variable-width",
         variableWidth: true,
         adaptiveHeight: true,
-        afterChange: () => setUpdateCount(updateCount + 1),
-        beforeChange: (current, next) => setSlideIndex(next)
     };
 
     return (<div className="flex justify-center">
-        <div className="w-[400px]">
-            <div>test</div>
-
-            <Slider ref={carouselRef} {...settings}>
-                {example.speeches.map((image, index) => (
-                    <div className="flex justify-center items-center">
-                    <div key={index} className="p-3">
-                        <img src={image.imageUrl} style={{ width: "400px", height: "500px" }} />
-                    </div>
-                    </div>
-                ))}
-            </Slider>
+            <div className="w-[400px]">
+                <Slider ref={carouselRef} {...settings}>
+                    {example.speeches.map((image, index) => (
+                        <div className="flex justify-center items-center">
+                            <div key={index} className="p-3">
+                                <img src={image.imageUrl} style={{ width: "400px", height: "500px" }} />
+                            </div>
+                        </div>
+                    ))}
+                </Slider>
+            </div>
         </div>
-    </div>
     );
 }
 
 export default ModalCarousel;
-

@@ -76,7 +76,7 @@ const ResultWord=({slides})=>{
                 className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
                 <div
                     key={index}
-                    className="text-black rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm border-2 border-[#90F880] group-hover:bg-gradient-to-b from-[#83E893] to-[#059C54] hover:border-transparent hover:text-black transition-all duration-300"
+                    className="text-black rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm border-2 bg-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
                 >
                     <div className="flex flex-col items-center space-y-2"> {/* 부모 div에 flex와 flex-col 클래스 적용 */}
                     <div className="flex justify-center space-x-2 p-3">
@@ -89,7 +89,7 @@ const ResultWord=({slides})=>{
                     </div>
                     <div className="flex justify-items-center">
                         <button
-                            className="text-emerald-300 p-3 text-2xl hover:text-black"
+                            className="text-black p-3 text-2xl hover:text-emerald-300"
                             onClick={() => openModalWithDefinition(slide)}>
                             단어해석
                         </button>
