@@ -8,7 +8,7 @@ type Props = {
 };
 export default function CartoonImage(props: Props){
   const {mangaImageInfo} = props;
-  return <div className="relative ml-auto">
+  return <div className="relative ml-auto w-[100%] flex">
     {
       mangaImageInfo.speeches.map(speech => {
         const position: Position = speech.position;
