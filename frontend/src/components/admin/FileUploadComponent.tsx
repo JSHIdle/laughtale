@@ -26,10 +26,6 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
         setPreviewImage(URL.createObjectURL(file));
     };
 
-    const handleDeleteFile = (fileToDelete) => {
-        setComicFiles(comicFiles.filter((file) => file !== fileToDelete));
-    };
-
 
     return (
         <div className="flex gap-4">
@@ -66,7 +62,6 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
                             <span onClick={() => handleFileClick(file)} className="cursor-pointer text-black truncate">
                                 {file.name}
                             </span>
-                            <button onClick={() => handleDeleteFile(file)} className="text-red-600">X</button>
                         </div>
                     ))}
                 </div>

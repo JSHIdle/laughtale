@@ -12,11 +12,11 @@ export default {
                 '10xl': '18rem', // 원하는 크기에 맞게 조정
             },
             colors: {
-                'custom-bronze': 'rgb(173,86,0)',
-                'custom-silver': 'rgb(67,95,122)',
-                'custom-gold': 'rgb(236,154,0)',
-                'custom-platinum': 'rgb(39,226,164)',
-                'custom-diamond': 'rgb(0,180,252)',
+                'custom-bronze': '#58CE7E',
+                'custom-silver': '#E8974D',
+                'custom-gold': '#DAEE66',
+                'custom-platinum': '#67B9E2',
+                'custom-diamond': '#E970D6',
                 'custom-bronze-dark': 'rgba(173,86,0,0.8)',
                 'custom-silver-dark': 'rgba(67,95,122,0.8)',
                 'custom-gold-dark': 'rgba(236,154,0,0.8)',
