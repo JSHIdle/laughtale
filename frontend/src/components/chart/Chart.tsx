@@ -28,64 +28,44 @@ const Chart = () => {
         fetchData();
     }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
 
-    // // const [dataPoints, setDataPoints] = useState([
-    // const [dataPoints, ] = useState([
-    //     { level: 1, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
-    //     { level: 1, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 1, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 1, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
-    //     { level: 1, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 2, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 2, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 2, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 2, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 2, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 3, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 3, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 4, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 4, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     { level: 5, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-    //     // ...더 많은 데이터 포인트{ level: 2, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-    // ]);
-
     // 함수 배열
     const functions = [
         (x :number) => 184 / (Math.pow(Math.log(x), 1.25) + 1.84), //1레벨 1회 학습
-        (x :number) => 360 / (Math.pow(Math.log(x), 1.25) + 3.6), //1레벨 2회 학습
-        (x :number) => 640 / (Math.pow(Math.log(x), 1.25) + 6.4), //1레벨 3회 학습
-        (x :number) => 1280 / (Math.pow(Math.log(x), 1.25) + 12.8), //1레벨 4회 학습
-        (x :number) => 2560 / (Math.pow(Math.log(x), 1.25) + 25.6), //1레벨 5회 학습
+        (x :number) => 368 / (Math.pow(Math.log(x), 1.25) + 3.68), //1레벨 2회 학습
+        (x :number) => 736 / (Math.pow(Math.log(x), 1.25) + 7.36), //1레벨 3회 학습
+        (x :number) => 1472 / (Math.pow(Math.log(x), 1.25) + 14.72), //1레벨 4회 학습
+        (x :number) => 2944 / (Math.pow(Math.log(x), 1.25) + 29.44), //1레벨 5회 학습
         (x :number) => 2*184 / (Math.pow(Math.log(x), 1.25) + 1.84), //2레벨 1회 학습
-        (x :number) => 2*360 / (Math.pow(Math.log(x), 1.25) + 3.6), //2레벨 2회 학습
-        (x :number) => 2*640 / (Math.pow(Math.log(x), 1.25) + 6.4), //2레벨 3회 학습
-        (x :number) => 2*1280 / (Math.pow(Math.log(x), 1.25) + 12.8), //2레벨 4회 학습
-        (x :number) => 2*2560 / (Math.pow(Math.log(x), 1.25) + 25.6), //2레벨 5회 학습
+        (x :number) => 2*368 / (Math.pow(Math.log(x), 1.25) + 3.68), //2레벨 2회 학습
+        (x :number) => 2*736 / (Math.pow(Math.log(x), 1.25) + 7.36), //2레벨 3회 학습
+        (x :number) => 2*1472 / (Math.pow(Math.log(x), 1.25) + 14.72), //2레벨 4회 학습
+        (x :number) => 2*2944 / (Math.pow(Math.log(x), 1.25) + 29.44), //2레벨 5회 학습
         (x :number) => 3*184 / (Math.pow(Math.log(x), 1.25) + 1.84), //3레벨 1회 학습
-        (x :number) => 3*360 / (Math.pow(Math.log(x), 1.25) + 3.6), //3레벨 2회 학습
-        (x :number) => 3*640 / (Math.pow(Math.log(x), 1.25) + 6.4), //3레벨 3회 학습
-        (x :number) => 3*1280 / (Math.pow(Math.log(x), 1.25) + 12.8), //3레벨 4회 학습
-        (x :number) => 3*2560 / (Math.pow(Math.log(x), 1.25) + 25.6), //3레벨 5회 학습
+        (x :number) => 3*368 / (Math.pow(Math.log(x), 1.25) + 3.68), //3레벨 2회 학습
+        (x :number) => 3*736 / (Math.pow(Math.log(x), 1.25) + 7.36), //3레벨 3회 학습
+        (x :number) => 3*1472 / (Math.pow(Math.log(x), 1.25) + 14.72), //3레벨 4회 학습
+        (x :number) => 3*2944 / (Math.pow(Math.log(x), 1.25) + 29.44), //3레벨 5회 학습
         (x :number) => 4*184 / (Math.pow(Math.log(x), 1.25) + 1.84), //4레벨 1회 학습
-        (x :number) => 4*360 / (Math.pow(Math.log(x), 1.25) + 3.6), //4레벨 2회 학습
-        (x :number) => 4*640 / (Math.pow(Math.log(x), 1.25) + 6.4), //4레벨 3회 학습
-        (x :number) => 4*1280 / (Math.pow(Math.log(x), 1.25) + 12.8), //4레벨 4회 학습
-        (x :number) => 4*2560 / (Math.pow(Math.log(x), 1.25) + 25.6), //4레벨 5회 학습
+        (x :number) => 4*368 / (Math.pow(Math.log(x), 1.25) + 3.68), //4레벨 2회 학습
+        (x :number) => 4*736 / (Math.pow(Math.log(x), 1.25) + 7.36), //4레벨 3회 학습
+        (x :number) => 4*1472 / (Math.pow(Math.log(x), 1.25) + 14.72), //4레벨 4회 학습
+        (x :number) => 4*2944 / (Math.pow(Math.log(x), 1.25) + 29.44), //4레벨 5회 학습
         (x :number) => 5*184 / (Math.pow(Math.log(x), 1.25) + 1.84), //5레벨 1회 학습
-        (x :number) => 5*360 / (Math.pow(Math.log(x), 1.25) + 3.6), //5레벨 2회 학습
-        (x :number) => 5*640 / (Math.pow(Math.log(x), 1.25) + 6.4), //5레벨 3회 학습
-        (x :number) => 5*1280 / (Math.pow(Math.log(x), 1.25) + 12.8), //5레벨 4회 학습
-        (x :number) => 5*2560 / (Math.pow(Math.log(x), 1.25) + 25.6), //5레벨 5회 학습
+        (x :number) => 5*368 / (Math.pow(Math.log(x), 1.25) + 3.68), //5레벨 2회 학습
+        (x :number) => 5*736 / (Math.pow(Math.log(x), 1.25) + 7.36), //5레벨 3회 학습
+        (x :number) => 5*1472 / (Math.pow(Math.log(x), 1.25) + 14.72), //5레벨 4회 학습
+        (x :number) => 5*2944 / (Math.pow(Math.log(x), 1.25) + 29.44), //5레벨 5회 학습
     ];
 
     // 레벨별 색상을 정의합니다.
-    const levelColors = ['rgb(173,86,0)', 'rgb(67,95,122)', 'rgb(236,154,0)', 'rgb(39,226,164)', 'rgb(0,180,252)'];
+    const levelColors = ['#58CE7E', '#E8974D', '#DAEE66', '#67B9E2', '#E970D6'];
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
             const svg = d3.select(svgRef.current);
             svg.selectAll("*").remove(); // 기존 그래프를 지웁니다.
 
-            const width = 650;
+            const width = 640;
             const height = 550;
             const margin = { top: 20, right: 20, bottom: 50, left: 50 };
             const innerWidth = width - margin.left - margin.right;
