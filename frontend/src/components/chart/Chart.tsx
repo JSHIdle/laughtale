@@ -172,11 +172,11 @@ const Chart = () => {
 
         // 레벨별 색상 클래스
         const colorClasses = [
-            'bg-custom-bronze hover:bg-custom-bronze-dark',
-            'bg-custom-silver hover:bg-custom-silver-dark',
-            'bg-custom-gold hover:bg-custom-gold-dark',
-            'bg-custom-platinum hover:bg-custom-platinum-dark',
-            'bg-custom-diamond hover:bg-custom-diamond-dark',
+            'bg-custom-bronze ',
+            'bg-custom-silver ',
+            'bg-custom-gold ',
+            'bg-custom-platinum ',
+            'bg-custom-diamond',
         ];
 
         // 레벨별 버튼을 생성
@@ -186,7 +186,7 @@ const Chart = () => {
                 <button
                     key={level}
                     onClick={() => setViewRange(`${(level - 1) * 5}-${level * 5 - 1}`)}
-                    className={`py-2 px-4 rounded transition duration-200 ease-in-out ${colorClass} text-white`}
+                    className={`py-2 px-4 rounded transition duration-200 ease-in-out ${colorClass} text-white brightness-100 hover:brightness-125`}
                 >
                     {level}레벨
                 </button>
