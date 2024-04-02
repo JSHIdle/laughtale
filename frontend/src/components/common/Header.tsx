@@ -4,11 +4,8 @@ import {Link} from "react-router-dom";
 import AuthButton from "./AuthButton.tsx";
 
 const Header = () => {
-
-
     return (<>
-          <div className=" h-[50px]"></div>
-        <div className="absolute top-0 z-50 w-[100%]">
+        <div className="sticky top-0 z-50 w-[100%]">
             <div className="bg-[#73ABE5] flex justify-center items-center px-10 relative h-[50px]">
                 <div className="absolute left-10 items-center">
                     <Link to={`/admin`} className="text-3xl text-white hover:text-gray-800">
