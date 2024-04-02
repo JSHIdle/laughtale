@@ -5,6 +5,8 @@ import AuthButton from "./AuthButton.tsx";
 
 const Header = () => {
 
+
+
     return (
         <div className="sticky top-0 z-50">
             <div className="bg-[#73ABE5] flex justify-center items-center px-10 relative">
