@@ -2,6 +2,7 @@ import { useRef, useState} from 'react';
 import QuizSlider from "./QuizSlider.tsx";
 import Progressbar from "./Progressbar.tsx";
 import Header from "../common/Header.tsx";
+import BlueHeader from "../common/BlueHeader.tsx";
 
 import { useQuery } from '@tanstack/react-query';
 import getQuizInfo from './getQuizInfo.tsx';
@@ -29,7 +30,7 @@ const Quiz = () => {
 
     return (
         <div className="bg-[#ffffff]" style={{ height: 'calc(100vh * 1.1111)' }}>
-            <Header/>
+            <BlueHeader/>
             <div className="max-w-[450px] m-auto">
                 <div className="flex justify-center pt-6">
                     {quizData && <Progressbar value={currentSlide} max={quizData.length} onNumberClick={handleNumberClick}/>}

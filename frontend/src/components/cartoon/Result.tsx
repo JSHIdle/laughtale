@@ -1,5 +1,5 @@
 import Header from '../../components/common/Header.tsx';
-
+import BlueHeader from '../../components/common/BlueHeader.tsx';
 //이전 페이지에서 보내준 데이터를 받을 수 있다.
 import {Link, useLocation, useParams, useNavigate} from 'react-router-dom';
 import ResultWord from '../cartoon/ResultWord.tsx';
@@ -40,7 +40,7 @@ const Result = () => {
 
     return (
         <div className="flex flex-col h-screen bg-[#ffffff]" style={{ height: 'calc(100vh * 1.1111)' }}>
-            <Header/>
+            <BlueHeader/>
             <div className="flex-grow flex justify-center items-center">
                 <div className="w-full max-w-[1180px] h-[600px]">
                     <div className="flex flex-col justify-center items-center p-12">

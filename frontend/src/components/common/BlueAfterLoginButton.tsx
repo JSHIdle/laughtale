@@ -12,11 +12,11 @@ export default function AfterLoginButton() {
     return (
         <>
             <div className="flex justify-end">
-                <div className="mr-10 text-3xl hover:text-blue-200">
+                <div className="mr-10 text-3xl hover:text-black">
                     <NavLink to="/mypage">マイページ : 마이페이지</NavLink>
                 </div>
 
-                <div className="text-3xl hover:text-blue-200 hover:cursor-pointer" onClick={() => logout()}>
+                <div className="text-3xl hover:text-black hover:cursor-pointer" onClick={() => logout()}>
                     ログアウト : 로그아웃
                 </div>
             </div>
