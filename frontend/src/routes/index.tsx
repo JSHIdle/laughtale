@@ -23,6 +23,8 @@ import Logout from '../pages/logout/Index.tsx';
 import Analyze from "../pages/analyze";
 import NewMain from "../pages/newmain/NewMain.tsx";
 import Quizcount from "../components/cartoon/Quizcount.tsx";
+import AuthRoute from "./AuthRoute.tsx";
+import {Role} from "../constants/Role.ts";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cartoon",
-    element: <Outlet/>,
+    element: <AuthRoute roles={[Role.USER]} />,
     children:[
       {
         path:":title", element: <Cartoon/>,
