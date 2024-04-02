@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.Customizer;
@@ -27,6 +28,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.PATCH;
 
 @Slf4j
 @Configuration
@@ -64,18 +68,12 @@ public class SecurityConfig {
                 )
                 .addFilterAt(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/member/{id}").permitAll()
-                        .requestMatchers("/api/manga").permitAll()
-                        .requestMatchers("/api/mamga/info/{mangaId}").permitAll()
-                        .requestMatchers("/api/chapter/list").permitAll()
-                        .requestMatchers("/api/cut/images").permitAll()
-                        .requestMatchers("/api/cahpter/{chapterId}").permitAll()
-                        .requestMatchers("/api/manga/{level}").permitAll()
-                        .requestMatchers("/api/member/signup").permitAll()
-                        .requestMatchers("/api/member/login").permitAll()
-                        .requestMatchers("/api/member/role").hasRole(Role.ROLE_ADMIN.value())
-                        .anyRequest().permitAll())
-//                         .anyRequest().authenticated())
+                        .requestMatchers(GET, "/api/member/{id}").permitAll()
+                        .requestMatchers(GET, "/api/manga").permitAll()
+                        .requestMatchers(GET, "/api/manga/{level}").permitAll()
+                        .requestMatchers(GET, "/api/word-data/word-cloud").permitAll()
+                        .requestMatchers(PATCH, "/api/member/role").hasRole(Role.ROLE_ADMIN.value())
+                         .anyRequest().authenticated())
                 .oauth2Login(oauth ->
                         oauth
                                 .defaultSuccessUrl("/")
