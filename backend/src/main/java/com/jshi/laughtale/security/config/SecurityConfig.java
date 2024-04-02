@@ -65,10 +65,17 @@ public class SecurityConfig {
                 .addFilterAt(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/member/{id}").permitAll()
+                        .requestMatchers("/api/manga").permitAll()
+                        .requestMatchers("/api/mamga/info/{mangaId}").permitAll()
+                        .requestMatchers("/api/chapter/list").permitAll()
+                        .requestMatchers("/api/cut/images").permitAll()
+                        .requestMatchers("/api/cahpter/{chapterId}").permitAll()
+                        .requestMatchers("/api/manga/{level}").permitAll()
                         .requestMatchers("/api/member/signup").permitAll()
                         .requestMatchers("/api/member/login").permitAll()
                         .requestMatchers("/api/member/role").hasRole(Role.ROLE_ADMIN.value())
-                         .anyRequest().authenticated())
+                        .anyRequest().permitAll())
+//                         .anyRequest().authenticated())
                 .oauth2Login(oauth ->
                         oauth
                                 .defaultSuccessUrl("/")
