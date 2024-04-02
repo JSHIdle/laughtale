@@ -86,8 +86,6 @@ const Viewer = () => {
         setSentence(sentence);
         setWords(wordData);
     },[]);
-    useEffect(() => {
-    }, []);
 
     useEffect(() => {
         if(inView){
@@ -109,15 +107,13 @@ const Viewer = () => {
                 </div>
                   {sentence &&
                       <FlexItem flex="1" style={{position: "relative"}} >
-                                  <WordListWrapper>
-                                      <Sentence originSentence={originSentence} sentence={sentence}/>
-                                      <WordList words={words}/>
-                                  </WordListWrapper>
-
+                          <WordListWrapper>
+                              <Sentence originSentence={originSentence} sentence={sentence}/>
+                              <WordList words={words}/>
+                          </WordListWrapper>
                       </FlexItem>
                   }
               </div>
-
           </div>
           <div ref={ref} className="h-1"></div>
           <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}/cnt`}>Quiz</Link></div>
