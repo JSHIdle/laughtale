@@ -111,7 +111,7 @@ export default function NewMain() {
                 <div className=" absolute top-[50px] z-10 right-[45px] m-4">
                     <Link to="/home">
                         <div
-                            className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
+                            className="bg-[#444444] hover:bg-black text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
                             漫<br/>画<br/>を<br/>読<br/>む<br/>--<br/>만<br/>화<br/>읽<br/>기
                         </div>
                     </Link>
