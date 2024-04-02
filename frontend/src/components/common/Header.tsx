@@ -14,7 +14,7 @@ const Header = () => {
                     {user?.role == Role.ADMIN && <Link to={`/admin`} className="text-3xl text-white hover:text-gray-800">
                         관리자페이지
                     </Link>}
-                    <Link to={`/analyze`} className="text-3xl text-white hover:text-gray-800">
+                    <Link to={`/analyze`} className="ml-10 text-3xl text-white hover:text-gray-800">
                         만화분석
                     </Link>
 
