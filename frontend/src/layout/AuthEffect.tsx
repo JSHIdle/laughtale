@@ -20,7 +20,7 @@ export default function AuthEffect ({children}){
 
     get<User>("/member").then(res => {
       setToken({accessToken: authData.accessToken});
-      setUser({role:Role.ADMIN});
+      setUser({...res});
 
       setLoding(false);
     }).catch(error => {
