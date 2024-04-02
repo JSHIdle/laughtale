@@ -27,6 +27,7 @@ const Index = () => {
     const filesInputRef = useRef(null);
 
     const handleSubmit = async () => {
+        setLoading(true);
         const formData = new FormData();
 
         // 1. 만화 정보를 JSON 형식으로 추가
@@ -47,14 +48,12 @@ const Index = () => {
         }
 
         // FormData 내용을 콘솔에 출력하기 위한 로직 추가
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
+        // for (const [key, value] of formData.entries()) {
+        //     console.log(key, value);
+        // }
 
-        setLoading(prev => !prev);
         // FormData를 사용하여 백엔드로 데이터 전송
         try {
-            setLoading(prev => !prev);
             await client.post(`/manga/upload`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
@@ -62,20 +61,19 @@ const Index = () => {
 
             }).then((response) => {
                 setData(response.data);
-                setLoading(prev => !prev);
+                setLoading(false);
             });
 
         } catch (error) {
-            setLoading(prev => !prev);
+            setLoading(false);
             console.error('Error:', error);
         }
     };
 
     return <>
-        {(data == null || false) ? (<div className="bg-[#ffffff] min-h-screen relative">
-                {
-                    loading ?
-                        <LoadingBar/> :
+        {loading ? <LoadingBar/> :
+            (data == null || false) ? (<div className="bg-[#ffffff] min-h-screen relative">
+                    {
                         <div>
                             <div>
                                 <Header/>
@@ -104,8 +102,8 @@ const Index = () => {
                                 </div>
                             </div>
                         </div>}
-            </div>) :
-            (<UploadResult props={data} isAdmin={true}/>)
+                </div>) :
+                (<UploadResult props={data} isAdmin={true}/>)
         }
     </>
 }
