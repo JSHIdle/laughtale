@@ -15,7 +15,7 @@ export default function WordListWrapper(props:Props){
   useEffect(() => {
 
   }, []);
-  return <div className="flex-1 fixed pl-5 pr-5 break-all overflow-auto" style={{maxHeight:"100vh", width:"-webkit-fill-available"}}>
-    {props.children}
+  return <div className="pl-5 pr-5 break-all overflow-auto sticky top-0 " style={{maxHeight: "100vh"}}>
+      {props.children}
   </div>
 }

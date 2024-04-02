@@ -6,10 +6,10 @@ import AuthButton from "./AuthButton.tsx";
 const Header = () => {
 
 
-
-    return (
-        <div className="sticky top-0 z-50">
-            <div className="bg-[#73ABE5] flex justify-center items-center px-10 relative">
+    return (<>
+          <div className=" h-[50px]"></div>
+        <div className="absolute top-0 z-50 w-[100%]">
+            <div className="bg-[#73ABE5] flex justify-center items-center px-10 relative h-[50px]">
                 <div className="absolute left-10 items-center">
                     <Link to={`/admin`} className="text-3xl text-white hover:text-gray-800">
                         관리자페이지
@@ -24,7 +24,7 @@ const Header = () => {
                     <AuthButton/>
                 </div>
             </div>
-          </div>
+          </div></>
     )
 }
 
