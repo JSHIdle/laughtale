@@ -34,10 +34,10 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
     return (
         <div className="flex gap-4">
             {/* Thumbnail Upload */}
-            <div className="w-1/3 bg-gray-800 p-6 rounded-lg mt-4 flex flex-col">
-                <div className="mb-2 font-bold text-gray-300">썸네일 등록</div>
+            <div className="w-1/3 bg-blue-200 p-6 rounded-lg mt-4 flex flex-col">
+                <div className="mb-2 font-bold text-black">썸네일 등록</div>
                 <label
-                    className="w-56 h-80 bg-gray-500 bg-no-repeat bg-center bg-cover rounded border-2 border-blue-400 flex items-center justify-center cursor-pointer">
+                    className="w-56 h-80 bg-blue-100 bg-no-repeat bg-center bg-cover rounded border-2 border-blue-400 flex items-center justify-center cursor-pointer">
                     {thumbnailPreview ? (
                         <img src={thumbnailPreview} alt="Thumbnail preview" className="rounded cursor-pointer"/>
                     ) : (
@@ -58,11 +58,11 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
             </div>
 
             {/* Comic Files Upload */}
-            <div className="w-1/2 bg-gray-800 p-6 rounded-lg mt-4 flex flex-col">
-                <div className="mb-2 font-bold text-gray-300">만화 파일 등록</div>
-                <div className="overflow-auto h-56 border-2 border-gray-500 rounded-lg p-2">
+            <div className="w-1/2 bg-blue-200 p-6 rounded-lg mt-4 flex flex-col">
+                <div className="mb-2 font-bold text-black">만화 파일 등록</div>
+                <div className="overflow-auto h-56 bg-blue-50 border-2 border-gray-500 rounded-lg p-2">
                     {comicFiles.map((file, index) => (
-                        <div key={index} className="flex justify-between items-center p-1 hover:bg-gray-700 rounded">
+                        <div key={index} className="flex justify-between items-center p-1 hover:bg-blue-200 rounded">
                             <span onClick={() => handleFileClick(file)} className="cursor-pointer text-black truncate">
                                 {file.name}
                             </span>
@@ -74,9 +74,9 @@ export const FileUploadComponent = ({ thumbnailInputRef, filesInputRef }) => {
                        className="cursor-pointer mt-2"/>
             </div>
             {/* Preview Area */}
-            <div className="w-1/3 bg-gray-800 p-6 rounded-lg mt-4">
-                <div className="mb-2 font-bold text-gray-300">미리보기</div>
-                <div className="w-full h-64 border-2 border-gray-500 rounded-lg">
+            <div className="w-1/3 bg-blue-200 p-6 rounded-lg mt-4">
+                <div className="mb-2 font-bold text-black">미리보기</div>
+                <div className="w-full h-64 border-2 bg-blue-50 border-gray-500 rounded-lg">
                     {previewImage && (
                         <img src={previewImage} alt="Preview" className="w-full h-full object-cover"/>
                     )}
