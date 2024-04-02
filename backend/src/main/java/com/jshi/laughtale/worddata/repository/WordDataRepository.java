@@ -16,6 +16,9 @@ public interface WordDataRepository extends JpaRepository<WordData, Long> {
 
 	Page<WordData> findAllByOrderByFrequencyDesc(Pageable pageable);
 
+	@Query("SELECT w.level FROM WordData w WHERE w.word = :word")
+	Optional<Integer> findLevelByWord(String word);
+
 	@Query("SELECT w FROM WordData w WHERE w.definition IS NOT NULL ORDER BY rand() LIMIT 5")
 	List<WordData> findRandom();
 }

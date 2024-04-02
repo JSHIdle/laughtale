@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.jshi.laughtale.worddata.service.WordDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MangaAnalyzer {
     private final JaKoService jaKoService;
+    private final WordDataService wordDataService;
 
     public MangaAnalyze.Response analyze(MangaContext mangaContext, int last) {
         Manga manga = mangaContext.getManga();
@@ -115,6 +118,7 @@ public class MangaAnalyzer {
                 continue;
             }
             wordData.setDefinition(def);
+            wordData.setLevel(wordDataService.loadLevelByWord(wordData.getWord()));
             wordDataResponse.add(WordDataMapper.toDetailResponse(wordData));
         }
         return wordDataResponse;
