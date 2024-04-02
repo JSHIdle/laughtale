@@ -81,6 +81,6 @@ public class WordDataService {
 	}
 
 	public Integer loadLevelByWord(String word) {
-		return wordDataRepository.findLevelByWord(word).orElseThrow(NotExistWordDataException::new);
+		return wordDataRepository.findLevelByWord(word).orElse(null);
 	}
 }
