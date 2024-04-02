@@ -198,3 +198,19 @@ body {
   color: white; /* 호버 시 색상 - Tailwind의 blue-500에 해당하는 색상 코드 */
   filter: brightness(200%);
 }
+
+@keyframes counting {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
