@@ -86,7 +86,10 @@ const Index = () => {
             fetchNextPage();
         }
     }, [inView]);
-
+    const {data: firstChapter, isLoading, isError} = useQuery<{id: number}>({
+        queryKey: [`mangaFirstChapter`, mangaId],
+        queryFn:() => get(`/chapter/first/${mangaId}`)
+});
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
         <div className="bg-[#ffffff] h-full absolute top-0 bottom-0 right-0 left-0 ">
@@ -98,7 +101,7 @@ const Index = () => {
                                     <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
                                         <CartoonHeader mangaId={mangaId}/>
 
-                                        <FirstEpisode mangaId={mangaId}/>
+                                        {firstChapter?.id && <FirstEpisode mangaId={mangaId} chapterId={firstChapter.id}/>}
 
                                         {data?.pages[0]?.totalElements && <TotalEpisode total={data.pages[0]?.totalElements}/>}
                                     </Suspense>
