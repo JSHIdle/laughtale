@@ -41,9 +41,6 @@ const Recommend = () => {
                         만화를 통한 수준별 일본어 학습 LaughTale
                     </div>
                 </div>
-            <div className="mx-auto recent_wrap" style={{maxWidth: '1400px'}}>
-                <RecentWord/>
-            </div>
 
             <div className="flex justify-center items-center p-3 ">
                 <div
