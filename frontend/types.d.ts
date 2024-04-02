@@ -1,9 +1,11 @@
+import {Role} from "./src/constants/Role.ts";
+
 export type Token = {
     accessToken: string;
     refreshToken?: string;
 }
 
-export type Role = "USER" | "ANONYMOUS" | "ADMIN" ;
+// export type Role = "USER" | "ANONYMOUS" | "ADMIN" ;
 
 export type User = {
     // id:number;
