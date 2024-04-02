@@ -28,7 +28,7 @@ const Header = () => {
                     <AuthButton/>
                 </div>
             </div>
-          </div></>
+          </div>
     )
 }
 

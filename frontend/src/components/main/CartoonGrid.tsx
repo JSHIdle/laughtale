@@ -27,9 +27,9 @@ const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
                 {/*</Link>*/}
             </div>
             <div className="p-6">
-                <div className="mx-auto" style={{maxWidth: '1100px'}}>
-                    <ul className="grid grid-cols-1 gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        {cartoons.map((webtoon, index) => ( // 배열에서 처음 4개의 요소만 렌더링
+                <div className="mx-auto" style={{maxWidth: '1350px'}}>
+                    <ul className="grid grid-cols-1 gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                        {cartoons.map((webtoon, index) => (
                             <CartoonCard
                                 key={index}
                                 imageUrl={webtoon.thumbnail}
