@@ -3,16 +3,16 @@ import Logo from '../../assets/logo.png';
 import '../../styles/fontstyle.css';
 import '../../styles/mainpagestyle.css';
 
-import AuthButton from "../../components/common/AuthButton.tsx";
-import MainBG from '../../assets/mainpageimage/mainbg.png';
+// import AuthButton from "../../components/common/AuthButton.tsx";
+// import MainBG from '../../assets/mainpageimage/mainbg.png';
 import SpeechDef from '../../assets/mainpageimage/speech_def.jpg'
-import Manga1 from '../../assets/mainpageimage/mangas/manga_1.webp'
-import Manga2 from '../../assets/mainpageimage/mangas/manga_2.jpg'
-import Manga3 from '../../assets/mainpageimage/mangas/manga_3.jpg'
-import Manga4 from '../../assets/mainpageimage/mangas/manga_4.jpg'
-import Manga5 from '../../assets/mainpageimage/mangas/manga_5.png'
-import Manga6 from '../../assets/mainpageimage/mangas/manga_6.webp'
-import Manga7 from '../../assets/mainpageimage/mangas/manga_7.jfif'
+// import Manga1 from '../../assets/mainpageimage/mangas/manga_1.webp'
+// import Manga2 from '../../assets/mainpageimage/mangas/manga_2.jpg'
+// import Manga3 from '../../assets/mainpageimage/mangas/manga_3.jpg'
+// import Manga4 from '../../assets/mainpageimage/mangas/manga_4.jpg'
+// import Manga5 from '../../assets/mainpageimage/mangas/manga_5.png'
+// import Manga6 from '../../assets/mainpageimage/mangas/manga_6.webp'
+// import Manga7 from '../../assets/mainpageimage/mangas/manga_7.jfif'
 import Manga8 from '../../assets/mainpageimage/mangas/manga_8.jpg'
 import Manga9 from '../../assets/mainpageimage/mangas/manga_9.jpg'
 import Manga10 from '../../assets/mainpageimage/mangas/manga_10.jpeg'
@@ -31,15 +31,26 @@ import Manga21 from '../../assets/mainpageimage/mangas/manga_21.png'
 import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
 import OnePieceSet from '../../assets/mainpageimage/onepieceset.png';
-import JapaneseWordCloud from '../../assets/mainpageimage/japwrcl3.jpg';
+// import JapaneseWordCloud from '../../assets/mainpageimage/japwrcl3.jpg';
 import ReactWordcloud from "react-wordcloud";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import client from "../../apis";
-import {Button} from "@material-tailwind/react";
+// import {Button} from "@material-tailwind/react";
 import {Link} from "react-router-dom";
 
 export default function NewMain() {
     const [data, setData] = useState(null);
+
+    // IntersectionObserver를 사용하기 위한 ref 생성
+    const sectionRefs = useRef([]);
+    sectionRefs.current = [];
+
+    // 요소를 sectionRefs 배열에 추가하는 함수
+    const addToRefs = (el) => {
+        if (el && !sectionRefs.current.includes(el)) {
+            sectionRefs.current.push(el);
+        }
+    };
 
     useEffect(() => {
         // Function to fetch data from API
@@ -67,7 +78,30 @@ export default function NewMain() {
 
         fetchData();
 
+        // IntersectionObserver 설정
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("opacity-100", "translate-y-0"); // 타겟 요소가 화면에 보일 때 클래스 추가
+                        entry.target.classList.remove("opacity-0", "translate-y-10"); // 초기 상태 클래스 제거
+                    } else { // 화면에서 벗어날 때
+                        entry.target.classList.add('opacity-0', 'translate-y-10');
+                        entry.target.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+            },
+            {
+                threshold: 0.12, // 12%가 보일 때 콜백 함수 실행
+            }
+        );
 
+        // 모든 참조된 요소에 대해 observer 등록
+        sectionRefs.current.forEach((el) => observer.observe(el));
+
+        return () => {
+            sectionRefs.current.forEach((el) => observer.unobserve(el));
+        };
     }, []);
 
     function shuffleArray(array) {
@@ -78,17 +112,15 @@ export default function NewMain() {
         return array;
     }
 
-    const customFont = {
-        fontFamily: 'GmarketSansMedium',
-    };
+    // const customFont = {
+    //     fontFamily: 'GmarketSansMedium',
+    // };
     return (
         <div className="bg-[#FFFFFF] min-h-screen laughtale-font">
             <Header/>
-
-
             <div className="flex justify-end min-h-screen min-w-full items-center relative">
                 {/*<div className="gradient-overlay"></div>*/}
-                <img src={ReadingManga}
+                <img src={ReadingManga} alt="만화 읽는 사람 이미지"
                      className=" w-[100%] h-[740px] object-cover opacity-80 relative"/>
 
                 {/*<div className="w-[100%] h-[600px] absolute bg-[#000000] z-10 opacity-20 "></div>*/}
@@ -96,7 +128,7 @@ export default function NewMain() {
                     <div
                         className="h-full w-full bg-gradient-to-r from-[#121212]  to-transparent"></div>
                 </div>
-                <img src={Logo} className="absolute mt-[250px] left-0 z-20"/>
+                <img src={Logo} alt="로고 이미지" className="absolute mt-[250px] left-0 z-20"/>
                 <div className="absolute mt-[510px] left-20 z-20 text-white text-5xl ">楽しく簡単に日本語を学んでみましょう！
                     : 일본어를 쉽고 재밌게 배워보세요!
                 </div>
@@ -120,24 +152,35 @@ export default function NewMain() {
 
             <div className=" flex flex-col bg-[#FFFFFF]">
                 <div className="items-center text-7xl px-[150px] mt-[100px]">
-                    나에게 맞는 책 고르기<br/>
-                    책을 선택하는 고민의 시간을 덜어드려요
+
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        나에게 맞는 책 고르기<br/>
+                        책을 선택하는 고민의 시간을 덜어드려요
+                    </div>
                 </div>
                 <hr className="gradient-hr"/>
             </div>
             <div className=" text-[25px] my-10  px-[150px]">
-                당신을 위한 무한한 만화의 세계로 초대합니다. 다양한 장르와 스토리, 다채로운 캐릭터들이 당신을 기다리고 있습니다. 환상적인 세계를 탐험하고 감동과 재미를 함께 느껴보세요. 우리의 풍부한
-                만화 컬렉션은 당신의 호기심과 상상력을 자극할 것입니다. 지금 바로 시작해보세요!
+                <div
+                    ref={addToRefs}
+                    className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                >
+                    당신을 위한 무한한 만화의 세계로 초대합니다. 다양한 장르와 스토리, 다채로운 캐릭터들이 당신을 기다리고 있습니다. 환상적인 세계를 탐험하고 감동과 재미를 함께 느껴보세요. 우리의 풍부한
+                    만화 컬렉션은 당신의 호기심과 상상력을 자극할 것입니다. 지금 바로 시작해보세요!
+                </div>
             </div>
             {/*1번 슬라이드*/}
             <div className=" overflow-hidden mb-10">
                 <div className="flex flex-row pb-10  animate-sliderC">
                     {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (
-                        <img src={image} key={index}
+                        <img src={image} alt="만화 슬라이드 1-1" key={index}
                              className="w-[210px] h-[280px] mx-7  object-cover rounded-[15px] shadow-lg"/>
                     ))}
                     {[Manga15, Manga16, Manga17, Manga18, Manga19, Manga20, Manga21].map((image, index) => (
-                        <img src={image} key={index}
+                        <img src={image} alt="만화 슬라이드 1-2" key={index}
                              className="w-[210px] h-[280px] mx-7 object-cover rounded-[15px] shadow-lg"/>
                     ))}
                 </div>
@@ -146,67 +189,96 @@ export default function NewMain() {
             <div className=" overflow-hidden mb-10">
                 <div className="flex flex-row pb-10  animate-sliderB bg-[#FFFFFF]">
                     {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (
-                        <img src={image} key={index}
+                        <img src={image} alt="만화 슬라이드 2-1" key={index}
                              className="w-[210px] h-[280px] mx-7  object-cover rounded-[15px] shadow-lg "/>
                     ))}
                     {[Manga8, Manga9, Manga10, Manga11, Manga12, Manga13, Manga14].map((image, index) => (
-                        <img src={image} key={index}
+                        <img src={image} alt="만화 슬라이드 2-2" key={index}
                              className="w-[210px] h-[280px] mx-7 object-cover  rounded-[15px] shadow-lg"/>
                     ))}
                 </div>
             </div>
 
             <div className="flex h-[100px] items-end text-7xl px-[150px] mt-[200px]">
-                맞춤형 퀴즈 서비스
+                <div
+                    ref={addToRefs}
+                    className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                >
+                    맞춤형 퀴즈 서비스
+                </div>
             </div>
             <hr className="gradient-hr"/>
             {/*<div className="h-[200px]"></div>*/}
             <div className=" text-[25px] my-10  px-[50px]">
                 <div className=" text-[25px] my-10 px-[100px]">
-                    만화 속에서 사용되는 단어들을 분석하여 사용자에게 맞춤형 학습 경험을 제공합니다. 각 페이지에 등장하는 말풍선을 추출하고, 해당 단어들의 빈도수를 카운트하여 단어 난이도를
-                    측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 언어 능력을 향상시키는데 도움을 드립니다.
+
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        만화 속에서 사용되는 단어들을 분석하여 사용자에게 맞춤형 학습 경험을 제공합니다. 각 페이지에 등장하는 말풍선을 추출하고, 해당 단어들의 빈도수를 카운트하여 단어 난이도를
+                        측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 언어 능력을 향상시키는데 도움을 드립니다.
+                    </div>
                 </div>
 
-                <div className="flex justify-evenly items-center">
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={OnePieceSet}
-                             className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">만화 빅데이터</div>
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                        {/*<img src={JapaneseWordCloud}*/}
-                        {/*     className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>*/}
-                        <div className="rounded-[15px] shadow-lg h-[300px] w-[300px]"><SimpleWordcloud word={data}/>
+                <div
+                    ref={addToRefs}
+                    className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                >
+                    <div className="flex justify-evenly items-center">
+                        <div className="flex flex-col justify-center items-center">
+                            <img src={OnePieceSet} alt="원피스 세트 이미지"
+                                 className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                            <div className="text-[25px] mt-10">만화 빅데이터</div>
                         </div>
-                        <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={OnePieceSet}
-                             className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">사용자 맞춤형 퀴즈 생성</div>
+                        <div className="flex flex-col justify-center items-center">
+                            {/*<img src={JapaneseWordCloud}*/}
+                            {/*     className=" h-[300px] w-[300px] object-cover rounded-[15px] border-2 shadow-lg"/>*/}
+                            <div className="rounded-[15px] shadow-lg h-[300px] w-[300px]"><SimpleWordcloud word={data}/>
+                            </div>
+                            <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <img src={OnePieceSet} alt="원피스 책 이미지"
+                                 className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                            <div className="text-[25px] mt-10">사용자 맞춤형 퀴즈 생성</div>
+                        </div>
                     </div>
                 </div>
+
+
 
             </div>
 
 
             <div className="flex h-[100px] items-end text-7xl px-[150px] mt-[200px]">
-                편리한 단어 검색
+
+                <div
+                    ref={addToRefs}
+                    className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                >
+                    편리한 단어 검색
+                </div>
             </div>
             <hr className="gradient-hr"/>
             {/*<div className="h-[200px]"></div>*/}
             <div className=" text-[25px] my-10  px-[50px]">
                 <div className=" text-[25px] my-10 px-[100px]">
-                    말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
-                    세계로
-                    더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
-                    만화
-                    읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
+                        세계로
+                        더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
+                        만화
+                        읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
+                    </div>
                 </div>
 
                 <div className="flex justify-evenly items-center">
                     <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef}
+                        <img src={SpeechDef} alt="만화보기 화면"
                              className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
                         <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
                     </div>
@@ -230,7 +302,7 @@ export default function NewMain() {
 //     "rotations": 2,
 //     "rotationAngles": [-90, 0],
 // };
-const sizes = [300, 300];
+// const sizes = [300, 300];
 
 function SimpleWordcloud({word}) {
     // return <ReactWordcloud words={word}/>
