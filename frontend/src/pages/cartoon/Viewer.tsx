@@ -100,14 +100,14 @@ const Viewer = () => {
                 <div className="flex relative justify-center">
                     <div className="max-w-[1200px] flex">
 
-                        <div className="flex-1">
+                        <div className="flex-2 min-w-[800px]">
                             {
                                 data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage
                                     mangaImageInfo={imageInfo} onClick={onClick}/>))
                             }
                         </div>
                         {sentence &&
-                            <FlexItem flex="1" style={{position: "relative"}}>
+                            <FlexItem flex="1" style={{position: "relative", minWidth:"400px"}}>
                                 <WordListWrapper>
                                     <Sentence originSentence={originSentence} sentence={sentence}/>
                                     <WordList words={words}/>
