@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
 import '../../../node_modules/swiper/swiper.min.css'
+import client from "../../apis";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
@@ -17,9 +18,9 @@ function RecentWord(){
     useEffect(() => {
         const fetchSlidesData = async () => {
             try {
-                const response = await fetch('http://j10a705.p.ssafy.io/api/manga/recent'); // API 엔드포인트로 변경하세요.
-                const data = await response.json();
-                const slides = data.map(item => ({
+                const response = await client.get('/manga/recent');
+                console.log("캐러셀 : ", response)
+                const slides = response.data.map(item => ({
                     id: item.mangaId,
                     title: item.title,
                     imageUrl: item.thumbnail,
