@@ -17,7 +17,7 @@ interface CartoonInfoProps {
 export const CartoonInfoComponent: React.FC<CartoonInfoProps> = ({ title, author, genres, description, onChange }) => {
 
     return(
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="bg-blue-200 p-6 rounded-lg shadow-lg">
         <TextInput
             label="작품명"
             name="title"

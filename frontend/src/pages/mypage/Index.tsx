@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import WordLevelChart from "../../components/chart/WordLevelChart.tsx";
 import Chart from "../../components/chart/Chart.tsx";
 import LineChart from '../../components/mypage/LineChart.tsx';
+import RecentWord from "../../components/main/RecentWord.tsx";
 
 const Index = () => {
 
@@ -89,6 +90,7 @@ const Index = () => {
                       </div>
                   </div>
                   </div>
+
               </div>
 
               <div className="grid grid-cols-2 gap-12 mb-4">
@@ -119,36 +121,64 @@ const Index = () => {
                               <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                                   <div
                                       className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
-                                      막대그래프로 단어개수 분포
+                                      단어장 난이도별 단어 개수 분포
                                   </div>
                               </div>
 
                               <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
                                   <div className="w-[700px] h-[250px] rounded-xl flex justify-center items-center ">
                                       <div>
-                                          <DoughnutChart/>
+                                          <WordLevelChart data={data}/>
                                       </div>
                                   </div>
                               </div>
                           </div>
                       </div>
                   </div>
-              </div>
 
-              <div className="flex justify-center items-center">
-                  <div className="bg-[#2D2D32] w-[700px] h-[300px] rounded-xl mb-12 flex justify-center items-center">
+                  <div>
                       <div>
-                          <WordLevelChart data={data}/>
-                      </div>
-                  </div>
-              </div>
+                          <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
+                              <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
+                                  <div
+                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
+                                      학습 단어 망각곡선
+                                  </div>
+                              </div>
 
-              <div className="flex justify-center items-center">
-                  <div className="bg-[#ffffff] w-[3000px] h-[900px] rounded-xl mb-12 flex justify-center items-center">
-                      <div className="w-[650px] h-[500px] justify-center items-center">
-                          <Chart/>
+                              <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
+                                  <div className="w-[750px] h-[600px] rounded-xl flex justify-center items-center ">
+                                      <div>
+                                          <Chart/>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                   </div>
+
+                  <div>
+                      <div>
+                          <div className="bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]  p-3 rounded-xl mt-6 mb-6">
+                              <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
+                                  <div
+                                      className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
+                                      최근 본 만화목록
+                                  </div>
+                              </div>
+
+                              <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
+                                  <div className="w-[750px] h-[420px] rounded-xl flex justify-center items-center ">
+                                      <div>
+                                          <RecentWord/>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
               </div>
 
           </div>
