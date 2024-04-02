@@ -1,4 +1,7 @@
-import {createBrowserRouter, Navigate, Outlet,} from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate, Outlet,
+} from "react-router-dom";
 
 
 import Recommend from "../pages/main/Recommend";
@@ -93,6 +96,10 @@ const router = createBrowserRouter([
       {
         path:'',
         element: <Quiz/>,
+      },
+      {
+        path:'cnt',
+        element: <Quizcount/>,
       },
       {
         path:"result", element: <Result/>,

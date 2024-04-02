@@ -94,7 +94,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const [selectedAnswers, setSelectedAnswers] = useState({});
 
     // 답안 버튼 클릭 이벤트 핸들러
-    const handleAnswerClick = (slideIndex, checkwordId, answerwordId , answerword) => {
+    const handleAnswerClick = (slideIndex, checkwordId, answerwordId , answerword ) => {
         // 선택된 답안 정보 업데이트
         setSelectedAnswers(prev => ({
             ...prev,

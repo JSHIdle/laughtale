@@ -99,7 +99,7 @@ const Viewer = () => {
               </FlexItem>}
           </div>
           <div ref={ref} className="h-1"></div>
-          <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>
+          <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}/cnt`}>Quiz</Link></div>
       </div>
       </>
     );
