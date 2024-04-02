@@ -1,7 +1,6 @@
 import { create } from "zustand"
 import {Token, User} from "../../types";
 import useAuthLocalStorage from "./useAuthLocalStorage.ts";
-import {To} from "react-router-dom";
 type AuthState  ={
     user : User;
     token : Token;
