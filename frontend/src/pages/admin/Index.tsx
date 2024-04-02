@@ -3,8 +3,8 @@ import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
 import client from "../../apis";
-import Spinner from "../../components/common/Spinner.tsx";
 import UploadResult from "../../components/admin/UploadResultComponent.tsx";
+import LoadingBar from "../../components/analyze/LoadingComponent.tsx";
 
 const Index = () => {
     const [cartoonInfo, setCartoonInfo] = useState({
@@ -51,9 +51,10 @@ const Index = () => {
             console.log(key, value);
         }
 
+        setLoading(prev => !prev);
         // FormData를 사용하여 백엔드로 데이터 전송
         try {
-            setLoading(true);
+            setLoading(prev => !prev);
             await client.post(`/manga/upload`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
@@ -61,12 +62,11 @@ const Index = () => {
 
             }).then((response) => {
                 setData(response.data);
-                setLoading(false);
+                setLoading(prev => !prev);
             });
 
         } catch (error) {
-            setLoading(false);
-
+            setLoading(prev => !prev);
             console.error('Error:', error);
         }
     };
@@ -75,33 +75,31 @@ const Index = () => {
         {(data == null || false) ? (<div className="bg-[#ffffff] min-h-screen relative">
                 {
                     loading ?
-                        <div className="absolute" style={{top: "50%", left: "50%", right: "50%", bottom: "50%"}}><Spinner/>
-                        </div> : <></>
-                }
-                <div className="max-w-[700px] m-auto">
-                    <div>
-                        <Header/>
-                    </div>
-                    <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
-                    <div>
-                        <CartoonInfoComponent
-                            title={cartoonInfo.title}
-                            author={cartoonInfo.author}
-                            genres={cartoonInfo.genres}
-                            description={cartoonInfo.description}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <FileUploadComponent
-                            thumbnailInputRef={thumbnailInputRef}
-                            filesInputRef={filesInputRef}
-                        />
-                    </div>
-                    <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
-                        등록하기
-                    </button>
-                </div>
+                        <LoadingBar/> :
+                        <div className="max-w-[700px] m-auto">
+                            <div>
+                                <Header/>
+                            </div>
+                            <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
+                            <div>
+                                <CartoonInfoComponent
+                                    title={cartoonInfo.title}
+                                    author={cartoonInfo.author}
+                                    genres={cartoonInfo.genres}
+                                    description={cartoonInfo.description}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <FileUploadComponent
+                                    thumbnailInputRef={thumbnailInputRef}
+                                    filesInputRef={filesInputRef}
+                                />
+                            </div>
+                            <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
+                                등록하기
+                            </button>
+                        </div>}
             </div>) :
             (<UploadResult props={data} isAdmin={true}/>)
         }
