@@ -73,14 +73,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/cartoon",
-    element: <AuthRoute roles={[Role.USER]} />,
+    element: <AuthRoute roles={[Role.USER, Role.ADMIN]} />,
     children:[
       {
         path:":title", element: <Cartoon/>,
       },
       {
         path:":title/viewer",
-        // element: <AuthRoute/>,
         element: <Outlet/>,
         children:[
           {
