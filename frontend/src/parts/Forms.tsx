@@ -13,7 +13,7 @@ interface TextInputProps {
 export const TextInput: React.FC<TextInputProps> = ({ label, name, value, maxLength, placeholder, onChange }) => {
     return (
         <div className="mb-5 flex">
-            <label htmlFor={name} className="block text-sm font-bold text-gray-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
+            <label htmlFor={name} className="block text-xl font-bold text-black-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
             <div className="relative flex-grow text-black">
                 <input
                     type="text"
@@ -23,7 +23,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, name, value, maxLen
                     onChange={onChange}
                     maxLength={maxLength}
                     placeholder={placeholder}
-                    className="block w-full rounded-md bg-gray-700 border-transparent focus:border-gray-500 focus:bg-gray-600 focus:ring-0 pr-10"
+                    className="block w-full rounded-md bg-white border-transparent focus:border-gray-500 focus:bg-blue-100 focus:ring-0 pr-10"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                     <span className="text-gray-500">{value.length}/{maxLength}</span>
@@ -36,7 +36,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, name, value, maxLen
 export const TextArea: React.FC<TextInputProps> = ({ label, name, value, maxLength,placeholder, onChange }) => {
     return (
         <div className="mb-2 flex">
-            <label htmlFor={name} className="block text-sm font-bold text-gray-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
+            <label htmlFor={name} className="block text-xl font-bold text-black-300 mr-3 flex-none" style={{ width: '10%' }}>{label}</label>
             <div className="relative flex-grow text-black">
                 <textarea
                     id={name}
@@ -45,7 +45,7 @@ export const TextArea: React.FC<TextInputProps> = ({ label, name, value, maxLeng
                     onChange={onChange}
                     maxLength={maxLength}
                     placeholder={placeholder}
-                    className="block w-full rounded-md bg-gray-700 border-transparent focus:border-gray-500 focus:bg-gray-600 focus:ring-0 pr-10"
+                    className="block w-full rounded-md bg-white border-transparent focus:border-gray-500 focus:bg-blue-100 focus:ring-0 pr-10"
                     style={{ minHeight: '160px' }} // TextArea 높이 설정
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-end text-sm leading-5">

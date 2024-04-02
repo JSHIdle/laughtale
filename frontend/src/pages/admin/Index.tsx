@@ -76,29 +76,33 @@ const Index = () => {
                 {
                     loading ?
                         <LoadingBar/> :
-                        <div className="max-w-[700px] m-auto">
+                        <div>
                             <div>
                                 <Header/>
                             </div>
-                            <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
-                            <div>
-                                <CartoonInfoComponent
-                                    title={cartoonInfo.title}
-                                    author={cartoonInfo.author}
-                                    genres={cartoonInfo.genres}
-                                    description={cartoonInfo.description}
-                                    onChange={handleChange}
-                                />
+                            <div className="max-w-[700px] m-auto">
+                                <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>
+                                <div>
+                                    <CartoonInfoComponent
+                                        title={cartoonInfo.title}
+                                        author={cartoonInfo.author}
+                                        genres={cartoonInfo.genres}
+                                        description={cartoonInfo.description}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <FileUploadComponent
+                                        thumbnailInputRef={thumbnailInputRef}
+                                        filesInputRef={filesInputRef}
+                                    />
+                                </div>
+                                <div className="flex justify-end">
+                                    <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
+                                        등록하기
+                                    </button>
+                                </div>
                             </div>
-                            <div>
-                                <FileUploadComponent
-                                    thumbnailInputRef={thumbnailInputRef}
-                                    filesInputRef={filesInputRef}
-                                />
-                            </div>
-                            <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
-                                등록하기
-                            </button>
                         </div>}
             </div>) :
             (<UploadResult props={data} isAdmin={true}/>)
