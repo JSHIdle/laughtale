@@ -2,8 +2,10 @@ package com.jshi.laughtale.member.service;
 
 import com.jshi.laughtale.ebbinghaus.EbbinghausUtils;
 import com.jshi.laughtale.member.domain.Member;
+import com.jshi.laughtale.member.dto.MemberCheck;
 import com.jshi.laughtale.member.dto.MemberUpdate;
 import com.jshi.laughtale.member.exception.MemberNotFoundException;
+import com.jshi.laughtale.member.mapper.MemberMapper;
 import com.jshi.laughtale.member.repository.MemberRepository;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 import com.jshi.laughtale.security.jwt.JwtProcessor;
@@ -32,6 +34,12 @@ public class MemberService {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         String jwtToken = jwtProcessor.createJwtToken(member.getEmail(), member.getRole().value());
         return Map.of("accessToken", jwtToken);
+    }
+
+    public MemberCheck.Response check(Long memberId) {
+        return MemberMapper.toCheckResponse(
+                memberRepository.findById(memberId)
+                        .orElseThrow(MemberNotFoundException::new));
     }
 
     public void update(CustomUserDetails customUserDetails, MemberUpdate.Request update) {
