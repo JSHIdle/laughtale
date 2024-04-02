@@ -15,6 +15,7 @@ public class WordData {
     @Column
     private String word;
     @Column
+    @Setter
     private Integer level;
     @Column
     private String partOfSpeech;
