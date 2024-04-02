@@ -32,8 +32,9 @@ export default function ChartResult( props: MangaAnalyze ) {
                 labels: ["Level 1 단어", "Level 2 단어", "Level 3 단어", "Level 4 단어", "Level 5 단어"],
                 chart: {
                     type: 'donut',
+                    width: 480,
                 },
-                width: 480,
+
             }}
         />
 
