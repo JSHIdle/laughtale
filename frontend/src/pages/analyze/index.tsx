@@ -15,7 +15,7 @@ const Index = () => {
 
     const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-            const limit = 1024 * 1024 * 30;
+            const limit = 1024 * 1024 * 5;
             const files = Array.from(event.target.files);
             const acceptedFiles = files.filter(file => {
                 const allowedExtensions = ['jpg', 'png', 'jpeg'];
@@ -23,9 +23,12 @@ const Index = () => {
                 return allowedExtensions.includes(fileExtension);
             });
             if (files.reduce((acc, file) => acc + file.size as number, 0) as number >= limit) {
-                alert("용량은 30MB까지 입니다.")
+                alert("용량은 5MB까지 입니다.")
                 return;
-            } else {
+            } else if (files.length > 3) {
+                alert("파일은 3개까지 선택할 수 있습니다.")
+            }
+            else {
                 setFiles(acceptedFiles as File[]);
             }
         } else {
