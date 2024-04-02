@@ -25,8 +25,8 @@ export default function CartoonHeader(p: Props) {
   console.log("data is", props.thumbnail)
   return <>
       <div
-        className="flex mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100% h-1/2">
-        <div className="flex-1" style={{backgroundImage:`url(${props.thumbnail})`,backgroundSize: "cover"}}>
+        className="flex bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100% rounded-2xl overflow-hidden">
+        <div className="flex-1 min-h-[300px]  w-[50%]" style={{backgroundImage:`url(${props.thumbnail})`,backgroundSize: "cover"}}>
             {/*<img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"100%", height:"100%"}} />*/}
         </div>
         <div className="p-10 flex-1">

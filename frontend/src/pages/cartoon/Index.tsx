@@ -89,73 +89,71 @@ const Index = () => {
 
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
-        <div className="bg-[#ffffff] h-full">
+        <div className="bg-[#ffffff] h-full absolute top-0 bottom-0 right-0 left-0 ">
             <Header/>
-            <div className="max-w-[1180px] m-auto ">
-                <div className="h-full flex flex-row">
-                    <div className="flex-1 h-full">
-                        <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
-                            <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
-                                <CartoonHeader mangaId={mangaId}/>
+            <div className="absolute top-[50px] bottom-0 left-0 right-0">
+                    <div className=" flex flex-row h-full p-10">
+                        <div className="flex-1 mr-2.5">
+                            <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
+                                    <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
+                                        <CartoonHeader mangaId={mangaId}/>
 
-                                {/*<FirstEpisode mangaId={mangaId}/>*/}
+                                        <FirstEpisode mangaId={mangaId}/>
 
-                                {data?.pages[0]?.totalElements && <TotalEpisode total={data.pages[0]?.totalElements}/>}
-                            </Suspense>
-                        </ErrorBoundary>
+                                        {data?.pages[0]?.totalElements && <TotalEpisode total={data.pages[0]?.totalElements}/>}
+                                    </Suspense>
+                            </ErrorBoundary>
+                            {/*e도넛*/}
+                            <div className="flex h-1/2">
+                                <Chart
+                                  type="donut"
+                                  series={wordLevelChartData.series}
+
+                                  options={{
+                                      labels: wordLevelChartData.labels,
+                                      chart: {
+                                          type: 'donut',
+                                      },
+
+                                  }}
+                                  style={{
+                                      width:"100%"
+                                  }}
+                                />
+                                <Chart
+                                  type="donut"
+                                  series={chapterLevelChartData.series}
+
+                                  options={{
+                                      labels: chapterLevelChartData.labels,
+                                      chart: {
+                                          type: 'donut',
+                                      },
+                                  }}
+                                  style={{
+                                      width:"100%"
+                                  }}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex-1 ml-2.5 relative">
+                            <div className="absolute top-0 left-0 right-0 bottom-0 overflow-auto p-10">
+                                {!data ? <div>...loading..</div> :
+                                  <>
+                                      {
+                                          data.pages.map((pages) => <>
+                                              <ChapterList content={pages.content} title={getData.title} mangaId={mangaId}/>
+                                          </>)}
+                                  </>
+                                }
+                                <div ref={ref} className="h-1"></div>
+                                {
+                                  isFetchingNextPage && <div className="text-black"> fetching...</div>
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex-1">test</div>
-                </div>
-                {/*<MagaInfo mangaId={mangaId}/>*/}
-
-                {/*/!* 도넛 Chart*!/*/}
-                <div className="flex ">
-                    <Chart
-                        type="donut"
-                        series={wordLevelChartData.series}
-
-                        options={{
-                            labels: wordLevelChartData.labels,
-                            chart: {
-                                type: 'donut',
-                            },
-
-                        }}
-                        style={{
-                            width:"100%"
-                        }}
-                    />
-                    <Chart
-                        type="donut"
-                        series={chapterLevelChartData.series}
-
-                        options={{
-                            labels: chapterLevelChartData.labels,
-                            chart: {
-                                type: 'donut',
-                            },
-                        }}
-                        style={{
-                            width:"100%"
-                        }}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    {!data ? <div>...loading..</div> :
-                        <>
-                            {
-                                data.pages.map((pages) => <>
-                                    <ChapterList content={pages.content} title={getData.title} mangaId={mangaId}/>
-                                </>)}
-                        </>
-                    }
-                    <div ref={ref} className="h-1"></div>
-                    {
-                        isFetchingNextPage && <div className="text-black"> fetching...</div>
-                    }
-                </div>
-            </div>
+             </div>
         </div>
     </>
 
