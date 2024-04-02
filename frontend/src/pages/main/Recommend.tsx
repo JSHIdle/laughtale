@@ -31,11 +31,12 @@ const Recommend = () => {
     }, [cartoons, selectedLevel]);
 
     return (
+
         <div className="bg-[#ffffff] min-h-screen text-black">
             <Header/>
             <div className="mx-auto recent_wrap" style={{maxWidth: '950px'}}>
-            <RecentWord/>
             </div>
+            <RecentWord/>
             <NavBar selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel} />
             <div className="flex justify-center">
             <CartoonGrid cartoons={filteredCartoons} level={selectedLevel} />

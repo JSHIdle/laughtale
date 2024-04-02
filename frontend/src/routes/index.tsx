@@ -22,7 +22,7 @@ import Error from "../components/common/Error.tsx";
 import Logout from '../pages/logout/Index.tsx';
 import Analyze from "../pages/analyze";
 import NewMain from "../pages/newmain/NewMain.tsx";
-
+import Quizcount from "../components/cartoon/Quizcount.tsx";
 
 const router = createBrowserRouter([
   {

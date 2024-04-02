@@ -19,6 +19,7 @@ function RecentWord(){
         const fetchSlidesData = async () => {
             try {
                 const response = await client.get('/manga/recent');
+                console.log("캐러셀 : ", response)
                 const slides = response.data.map(item => ({
                     id: item.mangaId,
                     title: item.title,
