@@ -5,23 +5,24 @@ const Chart = () => {
     const svgRef = useRef(null);
     const [viewRange, setViewRange] = useState('all');
 
-    const [dataPoints, setDataPoints] = useState([
-        // 데이터 포인트를 이 배열에 초기화합니다. 예를 들어:
-        { level: 1, repeatCnt: 1, date: new Date('2024-04-01T17:00:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 2, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 3, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 4, date: new Date('2024-04-01T17:00:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 5, date: new Date('2024-04-01T17:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 1, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 2, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 3, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 4, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 5, date: new Date('2024-04-01T16:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 1, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 2, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 3, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 4, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
-        { level: 5, repeatCnt: 5, date: new Date('2024-04-01T15:00:00'), title: "Data Point 2" },
+
+    // const [dataPoints, setDataPoints] = useState([
+    const [dataPoints, ] = useState([
+        { level: 1, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
+        { level: 1, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 1, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 1, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
+        { level: 1, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 2, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 2, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 2, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 2, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 2, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 3, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 3, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 4, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 4, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+        { level: 5, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
         // ...더 많은 데이터 포인트{ level: 2, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
     ]);
 
@@ -100,10 +101,10 @@ const Chart = () => {
             .attr("text-anchor", "end")
             .text("학습경과시간(분)");
 
-        // line 생성기
-        const line = d3.line()
-            .x((_, i) => xScale(i + 1)) // i + 1 은 x 좌표가 됩니다.
-            .y(d => yScale(d)) // d는 y 좌표가 됩니다. d 자체가 숫자이기 때문에 yScale(d)는 유효합니다.
+        // line 생성기 설정
+        const line = d3.line<[number, number]>() // 타입 어설션 추가
+            .x(d => xScale(d[0]))
+            .y(d => yScale(d[1]))
             .curve(d3.curveMonotoneX);
 
         const colors = ['rgba(237,28,36,0.5)', 'rgba(255,127,39,0.5)', 'rgba(0,255,0,0.5)', 'rgba(0,0,255,0.5)', 'rgba(134,0,134,0.5)']; // 레벨별 색상
@@ -115,12 +116,12 @@ const Chart = () => {
 
         // 각 레벨별로 그래프를 그립니다.
         filteredFunctions.forEach((func, index) => {
-            const data = Array.from({ length: 500 }, (_, i) => func(i + 1));
+            const data: [number, number][] = Array.from({ length: 500 }, (_, i) => [i + 1, func(i + 1)]); // 명시적 타입 어설션
             g.append('path')
-                .datum(data.map(y => y)) // .datum 함수에 데이터를 전달합니다.
+                .datum(data) // 직접 데이터 전달
                 .attr('fill', 'none')
                 .attr('stroke', colors[index % colors.length])
-                .attr('d', line);
+                .attr('d', line); // 수정된 부분
         });
 
         // 데이터 포인트를 차트에 표시하는 로직
@@ -130,8 +131,7 @@ const Chart = () => {
             const selectedFunction = functions[funcIndex];
 
             // 현재 시간과 데이터의 date 차이를 분 단위로 계산
-            const diffInMinutes = Math.floor((new Date() - new Date(dataPoint.date)) / (1000 * 60))+1;
-
+            const diffInMinutes = Math.floor((new Date().getTime() - new Date(dataPoint.date).getTime()) / (1000 * 60)) + 1;
             // 함수를 사용하여 y 값을 계산
             const yValue = selectedFunction(diffInMinutes);
 
