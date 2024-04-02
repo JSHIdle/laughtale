@@ -2,6 +2,7 @@ package com.jshi.laughtale.member.mapper;
 
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.domain.Provider;
+import com.jshi.laughtale.member.dto.MemberCheck;
 import com.jshi.laughtale.member.dto.MemberLogin;
 import com.jshi.laughtale.member.dto.MemberSignup;
 import com.jshi.laughtale.security.Role;
@@ -14,6 +15,12 @@ public class MemberMapper {
                 .role(Role.ROLE_USER)
                 .provider(Provider.SELF)
                 .nickname(signup.getNickname())
+                .build();
+    }
+
+    public static MemberCheck.Response toCheckResponse(Member member) {
+        return MemberCheck.Response.builder()
+                .role(member.getRole().value())
                 .build();
     }
 

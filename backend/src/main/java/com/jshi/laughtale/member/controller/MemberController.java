@@ -1,5 +1,6 @@
 package com.jshi.laughtale.member.controller;
 
+import com.jshi.laughtale.member.dto.MemberCheck;
 import com.jshi.laughtale.member.dto.MemberUpdate;
 import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.security.details.CustomUserDetails;
@@ -17,9 +18,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("ok");
+    @GetMapping
+    public ResponseEntity<MemberCheck.Response> check(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        return ResponseEntity.ok(memberService.check(customUserDetails.getId()));
     }
 
     @GetMapping("/{memberId}")

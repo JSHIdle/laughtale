@@ -64,15 +64,11 @@ public class SecurityConfig {
                 )
                 .addFilterAt(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/member/{id}").permitAll()
                         .requestMatchers("/api/member/signup").permitAll()
                         .requestMatchers("/api/member/login").permitAll()
                         .requestMatchers("/api/member/role").hasRole(Role.ROLE_ADMIN.value())
-                        .requestMatchers("/api/health").permitAll()  // 토큰 체크 필터 과정을 거치지 않는 경로 설정
-//                        .anyRequest().authenticated())
-                        .requestMatchers("/api/health").permitAll()  // 토큰 체크 필터 과정을 거치지 않는 경로 설정
-                        .requestMatchers("/api/member/test").authenticated()
-                        .anyRequest().permitAll())
-                        // .anyRequest().authenticated())
+                         .anyRequest().authenticated())
                 .oauth2Login(oauth ->
                         oauth
                                 .defaultSuccessUrl("/")
