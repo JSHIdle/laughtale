@@ -86,6 +86,8 @@ const Viewer = () => {
         setSentence(sentence);
         setWords(wordData);
     },[]);
+    useEffect(() => {
+    }, []);
 
     useEffect(() => {
         if(inView){
@@ -97,19 +99,25 @@ const Viewer = () => {
       <>
       <div className="bg-[#ffffff] min-h-screen">
           <Header/>
-          <div className="flex relative">
-              <FlexItem flex="1"/>
-              <div className=" w-max-[30%] ">
-                  {
-                    data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
+          <div className="flex relative justify-center">
+              <div className="max-w-[1200px] flex">
+
+                <div className="flex-1">
+                    {
+                      data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
+                    }
+                </div>
+                  {sentence &&
+                      <FlexItem flex="1" style={{position: "relative"}} >
+                                  <WordListWrapper>
+                                      <Sentence originSentence={originSentence} sentence={sentence}/>
+                                      <WordList words={words}/>
+                                  </WordListWrapper>
+
+                      </FlexItem>
                   }
               </div>
-              {sentence && <FlexItem flex="1" style={{position: "relative", display: "flex"}}>
-                  <WordListWrapper>
-                      <Sentence originSentence={originSentence} sentence={sentence}/>
-                      <WordList words={words}/>
-                  </WordListWrapper>
-              </FlexItem>}
+
           </div>
           <div ref={ref} className="h-1"></div>
           <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}/cnt`}>Quiz</Link></div>
