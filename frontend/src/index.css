@@ -20,6 +20,10 @@ html {
   padding:0;
 }
 
+#root, body {
+  height: 100%;
+}
+
 @media (min-width: 1440px) {
   html {
     zoom: 0.9;
