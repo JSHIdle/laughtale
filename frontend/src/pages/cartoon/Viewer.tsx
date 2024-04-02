@@ -19,19 +19,19 @@ import {ChapterListResponse} from "../../types/types";
 import {getChapterList} from "../../apis/cartoon.ts";
 import axios from "axios";
 import header from "../../components/common/Header.tsx";
-
+import QuizButton from "../../components/cartoon/QuizButton.tsx";
 
 type TestType = {
-    id:number;
-    nmame:string;
+    id: number;
+    nmame: string;
 }
 const defaultSize = 5;
 
-const colors = ["#CDFADB", "#F6FDC3", "#FFCF96","#FF8080","#D2E0FB","#F9F3CC","#D7E5CA", "#8EACCD"]
+const colors = ["#CDFADB", "#F6FDC3", "#FFCF96", "#FF8080", "#D2E0FB", "#F9F3CC", "#D7E5CA", "#8EACCD"]
 const Viewer = () => {
     const params = useParams()
-    const mangaId = + params.title;
-    const chapterId = + params.id;
+    const mangaId = +params.title;
+    const chapterId = +params.id;
     // const [data, setData] = useState<MangaImageResponse>([]);
     // const [page, setPage] = useState<number>(0);
 
@@ -62,11 +62,11 @@ const Viewer = () => {
         queryKey: ['chapterList', mangaId, chapterId],
         queryFn: ({pageParam}) => {
             // console.log("page param " + pageParam);
-            return getImageByChapterId({chapterId, page: + pageParam, size:5})
+            return getImageByChapterId({chapterId, page: +pageParam, size: 5})
         },
         initialPageParam: 0,
         getNextPageParam: (lastPage, allPages, lastPageParam) => {
-            if(typeof lastPageParam !== 'number') {
+            if (typeof lastPageParam !== 'number') {
                 return 0;
             }
             return lastPageParam + 1
@@ -76,49 +76,50 @@ const Viewer = () => {
 
     const onClick = useCallback(async ({sentence, id}) => {
         setOriginSentence(sentence);
-        const wordData:Array<WordInfo> = await get(`/word-data/speech/${id}`) as Array<any>;
-        for(let i = 0; i < wordData.length; i++){
-            if(wordData[i].definition == null) continue;
+        const wordData: Array<WordInfo> = await get(`/word-data/speech/${id}`) as Array<any>;
+        for (let i = 0; i < wordData.length; i++) {
+            if (wordData[i].definition == null) continue;
             const {word} = wordData[i];
-            sentence = sentence.replace(word,`<span style='color:${colors[i % colors.length]}'>${word}</span>`);
-            wordData[i].color = colors[i%colors.length];
+            sentence = sentence.replace(word, `<span style='color:${colors[i % colors.length]}'>${word}</span>`);
+            wordData[i].color = colors[i % colors.length];
         }
         setSentence(sentence);
         setWords(wordData);
-    },[]);
+    }, []);
 
     useEffect(() => {
-        if(inView){
+        if (inView) {
             fetchNextPage();
         }
     }, [inView]);
 
     return (
-      <>
-      <div className="bg-[#ffffff] min-h-screen">
-          <Header/>
-          <div className="flex relative justify-center">
-              <div className="max-w-[1200px] flex">
+        <>
+            <div className="bg-[#ffffff] min-h-screen">
+                <Header/>
+                <div className="flex relative justify-center">
+                    <div className="max-w-[1200px] flex">
 
-                <div className="flex-1">
-                    {
-                      data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
-                    }
+                        <div className="flex-1">
+                            {
+                                data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage
+                                    mangaImageInfo={imageInfo} onClick={onClick}/>))
+                            }
+                        </div>
+                        {sentence &&
+                            <FlexItem flex="1" style={{position: "relative"}}>
+                                <WordListWrapper>
+                                    <Sentence originSentence={originSentence} sentence={sentence}/>
+                                    <WordList words={words}/>
+                                </WordListWrapper>
+                            </FlexItem>
+                        }
+                    </div>
                 </div>
-                  {sentence &&
-                      <FlexItem flex="1" style={{position: "relative"}} >
-                          <WordListWrapper>
-                              <Sentence originSentence={originSentence} sentence={sentence}/>
-                              <WordList words={words}/>
-                          </WordListWrapper>
-                      </FlexItem>
-                  }
-              </div>
-          </div>
-          <div ref={ref} className="h-1"></div>
-          <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}/cnt`}>Quiz</Link></div>
-      </div>
-      </>
+                <div ref={ref} className="h-1"></div>
+                <QuizButton chapterId={chapterId} mangaId={mangaId} />
+            </div>
+        </>
     );
 }
 export default Viewer;
