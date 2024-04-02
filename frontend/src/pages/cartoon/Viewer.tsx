@@ -86,17 +86,17 @@ const Viewer = () => {
           <Header/>
           <div className="flex relative">
               <FlexItem flex="1"/>
-              <div className=" w-max-[700px] ">
+              <div className=" w-max-[30%] ">
                   {
                     data && data.pages.map((page) => page.content.map((imageInfo) => <CartoonImage mangaImageInfo={imageInfo} onClick={onClick}/>))
                   }
               </div>
-              <FlexItem flex="1" style={{position:"relative", display:"flex"}}>
+              {sentence && <FlexItem flex="1" style={{position: "relative", display: "flex"}}>
                   <WordListWrapper>
-                      { sentence && <Sentence originSentence={originSentence} sentence={sentence}/>}
-                      { words && <WordList words={words}/>}
+                      <Sentence originSentence={originSentence} sentence={sentence}/>
+                      <WordList words={words}/>
                   </WordListWrapper>
-              </FlexItem>
+              </FlexItem>}
           </div>
           <div ref={ref} className="h-1"></div>
           <div className="text-center bg-amber-300 p-10"><Link to={`/quiz/new/${chapterId}`}>test</Link></div>

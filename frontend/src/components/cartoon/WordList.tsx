@@ -8,18 +8,17 @@ import React, {useCallback, useEffect, useRef} from "react";
 type Props = {
   words: Array<WordInfo>,
 }
-const l = 3;
-const arr = new Array(3);
+
 export default function WordList(props: Props){
   const scroll = useRef();
   // const scrollFn= () => scroll?.current?.scrollIntoView({ behavior: "smooth", block:'start'});
-  const scrollFn  = () => scroll?.current?.scrollIntoView({
-    block:"end",
-    inline: "start",
-    behavior: "smooth",
-  });
+  // const scrollFn  = () => scroll?.current?.scrollIntoView({
+  //   block:"end",
+  //   inline: "start",
+  //   behavior: "smooth",
+  // });
   useEffect(() => {
-    scrollFn();
+    // scrollFn();
   }, [props.words]);
 
   return props.words.map(word =>{
