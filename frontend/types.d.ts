@@ -7,6 +7,11 @@ export type Token = {
 
 // export type Role = "USER" | "ANONYMOUS" | "ADMIN" ;
 
+export type Level = {
+    level: number;
+    count: number;
+}
+
 export type User = {
     // id:number;
     // profile:string;
