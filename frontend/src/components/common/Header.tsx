@@ -5,7 +5,10 @@ import AuthButton from "./AuthButton.tsx";
 import {useAuth} from "../../stores/useAuth.ts";
 import {Role} from "../../constants/Role.ts";
 
-const Header = () => {
+type Props = {
+    color?: Color;
+}
+const Header = ({color} :Props) => {
     const user = useAuth(state => state.user);
     return (<>
         <div className="sticky top-0 z-50 w-[100%]">
