@@ -26,9 +26,9 @@ export default function CartoonHeader(p: Props) {
   return <>
       <div
         className="flex bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100% rounded-2xl overflow-hidden">
-        <div className="flex-1 min-h-[300px]  w-[50%]" style={{backgroundImage:`url(${props.thumbnail})`,backgroundSize: "cover"}}>
+        {props.thumbnail && <div className="flex-1 min-h-[300px]  w-[50%]" style={{backgroundImage:`url(${props.thumbnail})`,backgroundSize: "cover"}}></div>}
             {/*<img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"100%", height:"100%"}} />*/}
-        </div>
+
         <div className="p-10 flex-1">
           <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
           { props.author && <div className="font-bold text-xl text-white">작가 : {props.author}</div>}
