@@ -96,9 +96,11 @@ const Index = () => {
                                     filesInputRef={filesInputRef}
                                 />
                             </div>
-                            <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-black p-2 rounded">
-                                등록하기
-                            </button>
+                            <div className="flex justify-end">
+                                <button onClick={handleSubmit} className="mt-4 bg-blue-500 text-white p-2 rounded">
+                                    등록하기
+                                </button>
+                            </div>
                         </div>}
             </div>) :
             (<UploadResult props={data} isAdmin={true}/>)

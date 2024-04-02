@@ -1,30 +1,52 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import client from "../../apis";
 
 const Chart = () => {
     const svgRef = useRef(null);
     const [viewRange, setViewRange] = useState('all');
 
+    const [dataPoints, setDataPoints] = useState([]);
 
-    // const [dataPoints, setDataPoints] = useState([
-    const [dataPoints, ] = useState([
-        { level: 1, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 1, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
-        { level: 1, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 2, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 3, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 4, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        { level: 5, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
-        // ...더 많은 데이터 포인트{ level: 2, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
-    ]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await client.get('/wordhistory/data'); // 실제 API 엔드포인트 URL로 교체
+
+                // API로부터 받은 데이터를 사용하여 dataPoints 상태를 업데이트
+                const formattedData = response.data.historyList.map(item => ({
+                    level: item.level,
+                    repeatCnt: item.repeatCnt,
+                    date: new Date(item.time),
+                    title: item.word,
+                }));
+                setDataPoints(formattedData);
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        };
+        fetchData();
+    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
+
+    // // const [dataPoints, setDataPoints] = useState([
+    // const [dataPoints, ] = useState([
+    //     { level: 1, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
+    //     { level: 1, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 1, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 1, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 1" },
+    //     { level: 1, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 2, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 2, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 2, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 2, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 2, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 3, repeatCnt: 1, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 3, repeatCnt: 2, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 4, repeatCnt: 3, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 4, repeatCnt: 4, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     { level: 5, repeatCnt: 5, date: new Date('2024-04-02T09:00:00'), title: "Data Point 2" },
+    //     // ...더 많은 데이터 포인트{ level: 2, repeatCnt: 1, date: new Date('2024-04-01T14:00:00'), title: "Data Point 2" },
+    // ]);
 
     // 함수 배열
     const functions = [
@@ -197,7 +219,7 @@ const Chart = () => {
     return (
         <div>
             <svg ref={svgRef} width={650} height={550}/>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
                 {renderLevelButtons()}
             </div>
         </div>

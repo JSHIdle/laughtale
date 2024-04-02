@@ -19,9 +19,9 @@ const WordLevelChart = ({ data }) => {
                 display: false, // 범례 숨기기
             },
             title: {
-                display: true,
+                display: false,
                 text: '단어 난이도별 개수 비교',
-                color: '#ffffff',
+                color: '#000000',
                 font: {
                     size: 11,
                 },
@@ -31,7 +31,7 @@ const WordLevelChart = ({ data }) => {
             x: { // 가로축 설정
                 ticks: {
                     display:true,
-                    color: '#ffffff', // X축 라벨의 글씨 색상
+                    color: '#000000', // X축 라벨의 글씨 색상
                     font: {
                         size: 10, // X축 라벨의 글씨 크기
                     },
@@ -42,7 +42,7 @@ const WordLevelChart = ({ data }) => {
             },
             y: { // 세로축 설정
                 ticks: {
-                    color: '#ffffff', // Y축 라벨의 글씨 색상
+                    color: '#000000', // Y축 라벨의 글씨 색상
                     font: {
                         size: 8, // Y축 라벨의 글씨 크기
                     },
