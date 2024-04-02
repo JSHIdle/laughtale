@@ -41,4 +41,9 @@ public class WordDataController {
 	) {
 		return ResponseEntity.ok(wordDataService.loadWordCloudData(page, size));
 	}
+
+	@GetMapping("/random")
+	public ResponseEntity<List<WordDataDetail.Response>> getRandomWord() {
+		return ResponseEntity.ok(wordDataService.loadRandomWord());
+	}
 }
