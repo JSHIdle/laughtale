@@ -1,4 +1,5 @@
 import Header from '../../components/common/Header';
+import BlueHeader from '../../components/common/BlueHeader.tsx';
 import DoughnutChart from "../../components/mypage/DoughnutChart.tsx";
 import { useNavigate } from 'react-router-dom';
 import WordLevelChart from "../../components/chart/WordLevelChart.tsx";
@@ -17,7 +18,7 @@ const Index = () => {
 
       return <div className="bg-[#ffffff] min-h-screen" style={{ height: 'calc(100vh * 1.1111)' }}>
           <div>
-              <Header/>
+              <BlueHeader/>
           </div>
           <div className="max-w-[1300px] m-auto">
               <div className="grid grid-cols-2 gap-12 mb-4 mt-24 flex justify-center items-center">
