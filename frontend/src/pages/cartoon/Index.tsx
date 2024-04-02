@@ -14,7 +14,11 @@ import MangaErrorBoundary from "./manga/MangaErrorBoundary.tsx";
 import CartoonHeader from "../../components/cartoon/CartoonHeader.tsx";
 import {ErrorBoundary} from "react-error-boundary";
 import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
-import Chart from 'react-apexcharts'
+import client, {get} from "../../apis";
+import Chart from "react-apexcharts";
+import {Level} from "../../../types";
+
+
 
 const Index = () => {
     const params = useParams()
@@ -25,8 +29,8 @@ const Index = () => {
 
     useEffect(() => {
         const fetchMangaWordLevelData = async () => {
-            const response = await fetch(`https://j10a705.p.ssafy.io/api/manga/word/level?mangaId=${mangaId}`);
-            const data = await response.json();
+            const data:Array<any> = await get(`/manga/word/level?mangaId=${mangaId}`);
+            console.log(data);
             const labels = data.map(item => `Word Level ${item.level}`);
             const series = data.map(item => item.count);
 
@@ -34,9 +38,8 @@ const Index = () => {
         };
 
         const fetchMangaChapterLevelData = async () => {
-            const response = await fetch(`https://j10a705.p.ssafy.io/api/manga/chapter/level?mangaId=${mangaId}`);
-            if (!response.ok) throw new Error('Response not ok');
-            const data = await response.json();
+            const data: Array<Level> = await get(`/manga/chapter/level?mangaId=${mangaId}`);
+            console.log(data);
             const labels = data.map(item => `Chapter Level ${item.level}`);
             const series = data.map(item => item.count);
 
@@ -78,7 +81,6 @@ const Index = () => {
     })
     const queryClient = useQueryClient();
     const getData = queryClient.getQueryData<Cartoon>(["mangaInfo", mangaId])
-    // console.log("getdata", getData);
     useEffect(() => {
         if (inView) {
             fetchNextPage();
@@ -87,20 +89,27 @@ const Index = () => {
 
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
-        <div className="bg-[#ffffff] min-h-screen">
+        <div className="bg-[#ffffff] h-full">
             <Header/>
-            <div className="max-w-[700px] m-auto">
-                {/*<MagaInfo mangaId={mangaId}/>*/}
-                <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
-                    <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
-                        <CartoonHeader mangaId={mangaId}/>
-                        <FirstEpisode mangaId={mangaId}/>
+            <div className="max-w-[1180px] m-auto ">
+                <div className="h-full flex flex-row">
+                    <div className="flex-1 h-full">
+                        <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
+                            <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
+                                <CartoonHeader mangaId={mangaId}/>
 
-                        {data?.pages[0]?.totalElements && <TotalEpisode total={data.pages[0]?.totalElements}/>}
-                    </Suspense>
-                </ErrorBoundary>
-                {/* 도넛 Chart*/}
-                <div>
+                                {/*<FirstEpisode mangaId={mangaId}/>*/}
+
+                                {data?.pages[0]?.totalElements && <TotalEpisode total={data.pages[0]?.totalElements}/>}
+                            </Suspense>
+                        </ErrorBoundary>
+                    </div>
+                    <div className="flex-1">test</div>
+                </div>
+                {/*<MagaInfo mangaId={mangaId}/>*/}
+
+                {/*/!* 도넛 Chart*!/*/}
+                <div className="flex ">
                     <Chart
                         type="donut"
                         series={wordLevelChartData.series}
@@ -110,6 +119,10 @@ const Index = () => {
                             chart: {
                                 type: 'donut',
                             },
+
+                        }}
+                        style={{
+                            width:"100%"
                         }}
                     />
                     <Chart
@@ -122,7 +135,9 @@ const Index = () => {
                                 type: 'donut',
                             },
                         }}
-
+                        style={{
+                            width:"100%"
+                        }}
                     />
                 </div>
 

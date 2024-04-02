@@ -25,11 +25,11 @@ export default function CartoonHeader(p: Props) {
   console.log("data is", props.thumbnail)
   return <>
       <div
-        className="mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100%">
-        <div>
-            <img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"300px", height:"100%"}} />
+        className="flex mt-6 flex rounded-3xl overflow-hidden bg-gradient-to-r from-[#64BEE2] from-5%  to-[#8395E8] to-100% h-1/2">
+        <div className="flex-1" style={{backgroundImage:`url(${props.thumbnail})`,backgroundSize: "cover"}}>
+            {/*<img src={`${props.thumbnail}`} style={{all:"unset",margin:0,width:"100%", height:"100%"}} />*/}
         </div>
-        <div className="p-10 flex-grow">
+        <div className="p-10 flex-1">
           <div className="font-bold text-3xl text-white	mb-10">{props?.title}</div>
           { props.author && <div className="font-bold text-xl text-white">작가 : {props.author}</div>}
           { props.category && <div className="font-bold text-xl text-white">카테고리 : {props.category}</div> }
