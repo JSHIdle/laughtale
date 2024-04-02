@@ -23,4 +23,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
 	List<Chapter> findAllByMangaId(Long mangaId);
 
+	@Query("SELECT c FROM Chapter c WHERE c.manga.id = :mangaId ORDER BY c.id ASC LIMIT 1")
+	Optional<Chapter> findFirstChapterByMangaId(Long mangaId);
+
 }

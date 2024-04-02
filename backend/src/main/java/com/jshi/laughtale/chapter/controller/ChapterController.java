@@ -1,5 +1,6 @@
 package com.jshi.laughtale.chapter.controller;
 
+import com.jshi.laughtale.chapter.dto.ChapterFirst;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
 import com.jshi.laughtale.chapter.service.ChapterService;
@@ -37,6 +38,11 @@ public class ChapterController {
     public ResponseEntity<List<LevelCount.Response>> getChapterLevelCount(
         @RequestParam("chapterId") long chapterId) {
         return ResponseEntity.ok(chapterService.getChapterLevelCount(chapterId));
+    }
+
+    @GetMapping("/first/{mangaId}")
+    public ResponseEntity<ChapterFirst.Response> getFirstChapter(@PathVariable Long mangaId) {
+        return ResponseEntity.ok(chapterService.loadFirstChapter(mangaId));
     }
 
 
