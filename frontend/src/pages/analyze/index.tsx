@@ -65,6 +65,7 @@ const Index = () => {
                 setFiles(null);
             })
             .catch((error) => {
+                alert('로그인을 해주세요');
                 setLoading(false);
                 console.error(error);
             });
