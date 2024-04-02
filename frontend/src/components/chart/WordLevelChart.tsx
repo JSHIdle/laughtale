@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import getWordInfo from "../mypage/getWordInfo.tsx";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const WordLevelChart = ({ data }) => {
+const WordLevelChart = () => {
+    const [chartData, setChartData] = useState({
+        labels: [],
+        datasets: []
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const levels = [1, 2, 3, 4, 5];
+            const wordCounts = await Promise.all(levels.map(level => getWordInfo(level, 0, 1000))); // 페이지 0, size 1000으로 설정
+            const data = wordCounts.map(result => result.totalElements); // totalElements는 각 레벨별 단어의 총 개수를 나타냄
+            const labels = levels.map(level => `Level ${level}`);
+
+            setChartData({
+                labels: labels,
+                datasets: [
+                    {
+                        label: '단어 수',
+                        data: data,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: [
+                            '#58CE7E', '#E8974D', '#DAEE66', '#67B9E2', '#E970D6'
+                        ],
+                    },
+                ],
+            });
+        };
+
+        fetchData();
+    }, []);
+
     const options = {
         maintainAspectRatio: false,
-        indexAxis: 'y' as const, // 가로 막대 그래프로 만들기 위해 'y' 축을 인덱스 축으로 설정
+        indexAxis: 'y' as const,
         elements: {
             bar: {
                 borderWidth: 0,
@@ -16,63 +47,40 @@ const WordLevelChart = ({ data }) => {
         responsive: true,
         plugins: {
             legend: {
-                display: false, // 범례 숨기기
+                display: false,
             },
             title: {
                 display: false,
-                text: '단어 난이도별 개수 비교',
-                color: '#000000',
-                font: {
-                    size: 11,
-                },
             },
         },
         scales: {
-            x: { // 가로축 설정
+            x: {
                 ticks: {
-                    display:true,
-                    color: '#000000', // X축 라벨의 글씨 색상
+                    display: false,
+                    color: '#000000',
                     font: {
-                        size: 10, // X축 라벨의 글씨 크기
+                        size: 10,
                     },
                 },
                 grid: {
-                    display: false, // 가로축 그리드 라인 비활성화
+                    display: false,
                 },
             },
-            y: { // 세로축 설정
+            y: {
                 ticks: {
-                    color: '#000000', // Y축 라벨의 글씨 색상
+                    color: '#000000',
                     font: {
-                        size: 8, // Y축 라벨의 글씨 크기
+                        size: 8,
                     },
                 },
                 grid: {
-                    display: false, // 세로축 그리드 라인 활성화
+                    display: false,
                 },
-                barThickness: 24, // 막대 두께 고정 값
-                categoryPercentage: 0.8, // 카테고리 내에서 막대가 차지하는 너비의 비율
-                barPercentage: 0.7, // 막대가 카테고리 내에서 차지하는 비율
+                barThickness: 24,
+                categoryPercentage: 0.8,
+                barPercentage: 0.7,
             }
         },
-    };
-
-    const chartData = {
-        labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5'], // 세로축 라벨
-        datasets: [
-            {
-                label: '단어 수',
-                data: data, // 단어 수 데이터 배열
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: [
-                    'rgb(173,86,0)',
-                    'rgb(67,95,122)',
-                    'rgb(236,154,0)',
-                    'rgb(39,226,164)',
-                    'rgb(0,180,252)',
-                ], // 각 막대의 배경색
-            },
-        ],
     };
 
     return <Bar data={chartData} options={options} />;

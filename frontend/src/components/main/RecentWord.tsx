@@ -4,6 +4,7 @@ import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
 import '../../../node_modules/swiper/swiper.min.css'
 import client from "../../apis";
+import {useNavigate} from "react-router-dom";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
@@ -21,7 +22,7 @@ function RecentWord(){
                 const response = await client.get('/manga/recent');
                 console.log("캐러셀 : ", response)
                 const slides = response.data.map(item => ({
-                    id: item.mangaId,
+                    id: item.id,
                     title: item.title,
                     imageUrl: item.thumbnail,
                 }));
@@ -32,6 +33,7 @@ function RecentWord(){
         };
         fetchSlidesData();
     }, []);
+    const navigate = useNavigate();
 
 
     // 슬라이드 클릭 핸들러 함수
@@ -41,14 +43,16 @@ function RecentWord(){
             swiperRef.slideTo(index);
         } else {
             // 여기에 중앙 슬라이드를 클릭했을 때의 페이지 이동 로직을 추가합니다.
-            console.log(`Navigating to: /comic/${slidesData[index].id}`);
+            console.log(`Navigating to: /cartoon/${slidesData[index].id}`);
+            console.log(slidesData, index)
+            navigate(`/cartoon/${slidesData[index].id}`)
             // 예: window.location.href = `/comic/${slidesData[index].id}`;
         }
     };
 
     // slidesData가 비어 있으면 아무것도 렌더링하지 않음
     if (slidesData.length === 0) {
-        return null;
+        return <div>최근 본 만화가 없습니다</div>;
     }
 
 
