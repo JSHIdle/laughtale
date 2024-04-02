@@ -75,4 +75,8 @@ public class WordDataService {
 			.map(WordDataMapper::toWordCloudResponse)
 			.toList();
 	}
+
+	public List<WordDataDetail.Response> loadRandomWord() {
+		return wordDataRepository.findRandom().stream().map(WordDataMapper::toDetailResponse).toList();
+	}
 }
