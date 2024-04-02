@@ -79,4 +79,8 @@ public class WordDataService {
 	public List<WordDataDetail.Response> loadRandomWord() {
 		return wordDataRepository.findRandom().stream().map(WordDataMapper::toDetailResponse).toList();
 	}
+
+	public Integer loadLevelByWord(String word) {
+		return wordDataRepository.findLevelByWord(word).orElseThrow(NotExistWordDataException::new);
+	}
 }
