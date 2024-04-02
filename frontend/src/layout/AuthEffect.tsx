@@ -4,6 +4,7 @@ import client, {get} from "../apis";
 import {useAuth} from "../stores/useAuth.ts";
 import Loading from "../components/common/Loading.tsx";
 import {User} from "../../types";
+import {Role} from "../constants/Role.ts";
 
 export default function AuthEffect ({children}){
   const authLocalStorage = useAuthLocalStorage();
@@ -19,16 +20,14 @@ export default function AuthEffect ({children}){
 
     get<User>("/member").then(res => {
       setToken({accessToken: authData.accessToken});
-      setUser({...res});
-      console.log("data",res);
-      console.log("ut " ,user, token)
+      setUser({role:Role.ADMIN});
+
       setLoding(false);
     }).catch(error => {
       console.log(error);
       clear();
       setLoding(false);
     });
-
   }, []);
   if(loading) {
     return <Loading/>;
