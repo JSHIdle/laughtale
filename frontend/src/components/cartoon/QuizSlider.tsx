@@ -122,7 +122,9 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
             <Slider ref={sliderRef} {...settings}>
                 {slides.map((slide, index) => {
                     const replaceWord = slide.option[slide.answerNo - 1];
-                    const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '  __?__  ');
+                    const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '  🟦🟦🟦  ');
+
+
 
                     return (
                         <div key={index} className="w-[1300px] ">

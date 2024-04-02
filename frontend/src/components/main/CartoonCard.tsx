@@ -9,12 +9,12 @@ interface CartoonCardProps {
 const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) => {
     return (
         <li className="mb-5 item sm:w-46 md:w-50">
-            <Link to={`/cartoon/${mangaId}`} className="block overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-110">
+            <Link to={`/cartoon/${mangaId}`} className="block overflow-hidden rounded-lg shadow-2xl transition-transform duration-300 hover:scale-110">
                 <div className="relative overflow-hidden ">
                     <img
                         src={imageUrl}
                         alt={title}
-                        className="object-cover w-full transition-transform duration-300 h-120 lg:h-120 group-hover:scale-105"
+                        className="object-cover w-full transition-transform duration-300 h-96 lg:h-96 group-hover:scale-105"
                     />
                 </div>
             </Link>
