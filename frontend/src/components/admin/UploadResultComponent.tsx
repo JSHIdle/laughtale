@@ -10,9 +10,7 @@ export default function UploadResult({props, isAdmin}: { props: MangaAnalyze, is
 
     return (
         <>
-            isAdmin ?
-            <Header/>
-
+            { isAdmin ? <Header/> : null}
             <div className="container mx-auto flex justify-center">
                 {
                     isInfo ?
