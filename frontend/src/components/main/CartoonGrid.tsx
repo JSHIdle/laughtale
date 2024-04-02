@@ -16,19 +16,19 @@ interface CartoonGridProps {
 
 const CartoonGrid: React.FC<CartoonGridProps> = ({ cartoons, level }) => {
 
-    const allCartoonsLink = `/cartoons/level/${level}`;
+    // const allCartoonsLink = `/cartoons/level/${level}`;
     return (
 
-        <div className="mx-auto comonent_wrap" style={{maxWidth: '600px'}}>
+        <div className="mx-auto comonent_wrap " >
             <div className="flex items-center justify-between mb-4 ComponentHead">
-                <div className="text-2xl font-bold ComponentHead_title">Level {level}</div>
-                <Link to={allCartoonsLink} className="text-lg text-black hover:text-black-800">
-                    Level {level} 만화 더보기
-                </Link>
+                {/*<div className="text-2xl font-bold ComponentHead_title">Level {level}</div>*/}
+                {/*<Link to={allCartoonsLink} className="text-lg text-black hover:text-black-800">*/}
+                {/*    Level {level} 만화 더보기*/}
+                {/*</Link>*/}
             </div>
-            <div className="p-2 mb-8">
-                <div className="mx-auto" style={{maxWidth: '950px'}}>
-                    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="p-6">
+                <div className="mx-auto" style={{maxWidth: '1100px'}}>
+                    <ul className="grid grid-cols-1 gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {cartoons.map((webtoon, index) => ( // 배열에서 처음 4개의 요소만 렌더링
                             <CartoonCard
                                 key={index}
