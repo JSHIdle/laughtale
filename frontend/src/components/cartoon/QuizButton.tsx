@@ -29,13 +29,12 @@ const QuizButton: React.FC<QuizButtonProps> = ({ chapterId, mangaId }) => {
                 className="cursor-pointer text-5xl"
                 onClick={handlePreviousClick}
             />
-            <Button
-                color="blue"
+            <button
                 onClick={handleQuizButtonClick}
-                className="text-5xl py-6 px-12"
+                className="text-5xl py-6 px-12 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-3xl"
             >
                 퀴즈 풀면서 단어 학습하기!
-            </Button>
+            </button>
             <MdChevronRight
                 className="cursor-pointer text-5xl"
                 onClick={handleNextClick}
