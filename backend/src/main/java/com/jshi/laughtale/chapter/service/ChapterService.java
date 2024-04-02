@@ -1,6 +1,7 @@
 package com.jshi.laughtale.chapter.service;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
+import com.jshi.laughtale.chapter.dto.ChapterFirst;
 import com.jshi.laughtale.common.dto.LevelCount;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
@@ -12,8 +13,10 @@ import com.jshi.laughtale.manga.service.MangaService;
 import com.jshi.laughtale.wordlist.service.WordListService;
 
 import jakarta.persistence.Tuple;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -28,35 +31,40 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ChapterService {
 
-	private final ChapterRepository chapterRepository;
-	private final MangaService mangaService;
-	private final WordListService wordListService;
+    private final ChapterRepository chapterRepository;
+    private final MangaService mangaService;
+    private final WordListService wordListService;
 
-	public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
-		Manga manga = mangaService.findById(mangaId);
-		Pageable pageable = PageRequest.of(pageNo, size);
-		return chapterRepository.findAllByMangaOrderByChapterNoDesc(manga, pageable)
-			.map(ChapterMapper::chapterToChapterListDto);
-	}
+    public Page<ChapterListDto.Response> getChaptersFromManga(Long mangaId, int pageNo, int size) {
+        Manga manga = mangaService.findById(mangaId);
+        Pageable pageable = PageRequest.of(pageNo, size);
+        return chapterRepository.findAllByMangaOrderByChapterNoDesc(manga, pageable)
+                .map(ChapterMapper::chapterToChapterListDto);
+    }
 
-	public Chapter loadByTitleAndChapterNo(String title, Integer chapterNo) {
-		return chapterRepository.findChapterByMangaTitleAndChapterNo(title, chapterNo)
-			.orElseThrow(ChapterNotFoundException::new);
-	}
+    public ChapterFirst.Response loadFirstChapter(Long mangaId) {
+        return ChapterMapper.toFirstResponse(chapterRepository.findFirstChapterByMangaId(mangaId)
+                .orElseThrow(ChapterNotFoundException::new));
+    }
 
-	public Chapter findById(Long chapterId) {
-		Optional<Chapter> chapter = chapterRepository.findById(chapterId);
-		if (chapter.isPresent()) {
-			return chapter.get();
-		} else {
-			throw new RuntimeException("Chapter not found with id: " + chapterId);
-		}
-	}
+    public Chapter loadByTitleAndChapterNo(String title, Integer chapterNo) {
+        return chapterRepository.findChapterByMangaTitleAndChapterNo(title, chapterNo)
+                .orElseThrow(ChapterNotFoundException::new);
+    }
 
-	public List<ChapterLevelDto.Response> getChapterLevels(Long mangaId) {
+    public Chapter findById(Long chapterId) {
+        Optional<Chapter> chapter = chapterRepository.findById(chapterId);
+        if (chapter.isPresent()) {
+            return chapter.get();
+        } else {
+            throw new RuntimeException("Chapter not found with id: " + chapterId);
+        }
+    }
 
-		return chapterRepository.findAllByMangaId(mangaId).stream().map(ChapterMapper::chapterToChapterLevelDto)
-			.toList();
+    public List<ChapterLevelDto.Response> getChapterLevels(Long mangaId) {
+
+        return chapterRepository.findAllByMangaId(mangaId).stream().map(ChapterMapper::chapterToChapterLevelDto)
+                .toList();
 
     }
 
@@ -110,9 +118,9 @@ public class ChapterService {
         List<LevelCount.Response> result = new ArrayList<>();
         for (int level = 1; level <= 5; level++) {
             result.add(LevelCount.Response.builder()
-                .level(level)
-                .count(0)
-                .build()
+                    .level(level)
+                    .count(0)
+                    .build()
             );
         }
 
@@ -121,9 +129,9 @@ public class ChapterService {
             long count = tuple.get("levelcnt", Long.class);
 
             result.set(level - 1, LevelCount.Response.builder()
-                .level(level)
-                .count(count)
-                .build()
+                    .level(level)
+                    .count(count)
+                    .build()
             );
         }
 
