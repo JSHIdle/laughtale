@@ -82,7 +82,7 @@ export default function NewMain() {
         fontFamily: 'GmarketSansMedium',
     };
     return (
-        <div className="bg-[#FFFFFF] min-h-screen" style={customFont}>
+        <div className="bg-[#FFFFFF] min-h-screen laughtale-font">
             <Header/>
 
 
