@@ -11,7 +11,7 @@ const Header = () => {
         <div className="sticky top-0 z-50 w-[100%]">
             <div className="bg-black flex justify-center items-center px-10 relative h-[50px]">
                 <div className="absolute left-10 items-center">
-                    <Link to={`/home`} className="ml-10 text-3xl text-white hover:text-gray-800">
+                    <Link to={`/home`} className="text-3xl text-white hover:text-gray-800">
                         만화읽기
                     </Link>
                     <Link to={`/analyze`} className="ml-10 text-3xl text-white hover:text-gray-800">
