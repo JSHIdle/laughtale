@@ -3,7 +3,7 @@ import client from "../../apis";
 import UploadResult from "../../components/admin/UploadResultComponent.tsx";
 import LoadingBar from "../../components/analyze/LoadingComponent.tsx";
 import Header from "../../components/common/Header.tsx";
-
+import BlueHeader from "../../components/common/BlueHeader.tsx";
 
 const Index = () => {
     const [data, setData] = useState(null);
@@ -76,7 +76,7 @@ const Index = () => {
     };
 
     return <div className="laughtale-font">
-        <Header/>
+        <BlueHeader/>
         {loading ? (
             <LoadingBar/>
         ) : (data == null || false) ?
