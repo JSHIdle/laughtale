@@ -30,7 +30,10 @@ export type SpeechBubble = {
     sentence: string;
     position: Position;
 }
-
+export type Level = {
+    level:number;
+    count: number;
+}
 export type MangaImageInfo = {
     imageUrl: string;
     width: number;
