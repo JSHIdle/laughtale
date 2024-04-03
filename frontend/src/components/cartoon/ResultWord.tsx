@@ -59,7 +59,7 @@ const handleIconClick = (word) => {
     playTTS(word);
 };
 
-const ResultWord=({slides})=>{
+const ResultWord=({slides,selectedAnswers})=>{
     const [isModalOpenW, setIsModalOpenW] = useState(false);
     const closeModalW = () => setIsModalOpenW(false);
     const [definition, setDefinition] = useState('');
@@ -69,18 +69,22 @@ const ResultWord=({slides})=>{
     };
 
     console.log("데이터 출력" ,slides);
+    console.log("여기지금새로출력" ,selectedAnswers);
+
     return(
-        <div className=" laughtale-font w-[1050px] text-black font-bold flex flex-wrap text-4xl"    >
-        {slides.map((slide, index) => (
+        <div className=" laughtale-font w-[1050px] text-white font-bold flex flex-wrap text-4xl">
+        {slides.map((slide, index) =>{
+            const isCorrect = selectedAnswers[index]?.answerId === selectedAnswers[index].id+1;
+            return (
             <div
-                className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
+                className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative" style={{ color: isCorrect ? '#BD2B2B' : '#19895D' }}>
                 <div
                     key={index}
-                    className=" laughtale-font text-black rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm border-2 bg-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
+                    className="laughtale-font rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm  bg-[#73ABE5] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
                 >
-                    <div className="flex flex-col items-center space-y-2"> {/* 부모 div에 flex와 flex-col 클래스 적용 */}
+                    <div className="flex flex-col items-center space-y-2">
                     <div className="flex justify-center space-x-2 p-3">
-                        <div className=" laughtale-font text-black font-semibold hover:text-black">
+                        <div className=" laughtale-font font-semibold hover:text-black">
                             {slide.option[slide.answerNo - 1]}
                         </div>
                         <div onClick={() => handleIconClick(slide.option[slide.answerNo - 1])}>
@@ -89,7 +93,7 @@ const ResultWord=({slides})=>{
                     </div>
                     <div className="flex justify-items-center">
                         <button
-                            className=" laughtale-font text-black p-3 text-2xl hover:text-emerald-300"
+                            className=" laughtale-font p-3 text-2xl hover:text-white"
                             onClick={() => openModalWithDefinition(slide)}>
                             단어해석
                         </button>
@@ -97,7 +101,7 @@ const ResultWord=({slides})=>{
                 </div>
             </div>
             </div>
-            ))}
+            )})}
 <DefinitionModal
     isOpen={isModalOpenW}
     onClose={closeModalW}
