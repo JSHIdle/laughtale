@@ -1,7 +1,8 @@
 import Icon from "@mdi/react";
 import {mdiVolumeHigh} from "@mdi/js";
 import axios from "axios";
-import {useState} from "react";
+import React, {useState} from "react";
+import SpeechButton from "../common/SpeechButton.tsx";
 
 function DefinitionModal({ isOpen, onClose, definition  }) {
     if (!isOpen) return null;
@@ -55,9 +56,9 @@ async function playTTS(text) {
     }
 }
 
-const handleIconClick = (word) => {
-    playTTS(word);
-};
+// const handleIconClick = (word) => {
+//     playTTS(word);
+// };
 
 const ResultWord=({slides,selectedAnswers})=>{
     const [isModalOpenW, setIsModalOpenW] = useState(false);
@@ -87,8 +88,10 @@ const ResultWord=({slides,selectedAnswers})=>{
                         <div className=" laughtale-font font-semibold hover:text-black">
                             {slide.option[slide.answerNo - 1]}
                         </div>
-                        <div onClick={() => handleIconClick(slide.option[slide.answerNo - 1])}>
-                            <Icon className="hoverIcon" path={mdiVolumeHigh} size={1.5}/>
+                        <div
+                            // onClick={() => handleIconClick(slide.option[slide.answerNo - 1])}
+                        >
+                            <SpeechButton sentence={slide.option[slide.answerNo - 1]} style={{width:"3rem", display:"inline", marginLeft:'1rem'}}/>
                         </div>
                     </div>
                     <div className="flex justify-items-center">
