@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jshi.laughtale.speech.dto.SpeechBasic;
 import lombok.Builder;
 import lombok.Getter;
-import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 
