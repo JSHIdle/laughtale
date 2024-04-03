@@ -107,11 +107,9 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     const goNext = () => {
         sliderRef.current.slickNext()
     }
-
     const goPrev = () => {
         sliderRef.current.slickPrev()
     }
-
     const calculateCorrectAnswers = () => {
         let correctCount = 0; // 정답 개수를 저장할 변수
 
@@ -132,8 +130,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                 {slides.map((slide, index) => {
                     const replaceWord = slide.option[slide.answerNo - 1];
                     const modifiedSentence = slide.sentence.replace(new RegExp(replaceWord, 'gi'), '  🟦🟦🟦  ');
-
-
 
                     return (
                         <div key={index} className="w-[1300px] ">
@@ -203,7 +199,6 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     </div>
                                     <div>
                                         <MdChevronRight
-
                                       className="cursor-pointer text-5xl"
                                       onClick={() => goNext()}
                                     /></div>
