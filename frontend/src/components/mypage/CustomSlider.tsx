@@ -1,11 +1,12 @@
 import Slider from "react-slick";
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
 import client from "../../apis";
 import getWordExample from "./getWordExample.tsx";
 import { useQueryClient } from '@tanstack/react-query';
+import SpeechButton from "../../components/common/SpeechButton.tsx";
 
 const settings = {
     dots: false, // 점으로 페이지 위치 표시
@@ -229,6 +230,7 @@ const   CustomSlider = ({level,page,size}) => {
                                             <div className="text-black font-semibold hover:text-black">
                                                 {slideone.word}
                                             </div>
+                                            <SpeechButton sentence={slideone.word} style={{width:"3rem", display:"inline", marginLeft:'1rem'}}/>
                                             {/*<div onClick={() => handleIconClick(slideone.word)}>*/}
                                             {/*    <Icon className="hoverIcon" path={mdiVolumeHigh} size={1.5}/>*/}
                                             {/*</div>*/}
