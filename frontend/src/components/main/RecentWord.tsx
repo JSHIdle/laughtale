@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
+import React, {useState, useEffect} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import SwiperCore, {EffectCoverflow, Pagination, Navigation} from 'swiper';
 
 import '../../../node_modules/swiper/swiper.min.css'
 import client from "../../apis";
@@ -8,11 +8,11 @@ import {useNavigate} from "react-router-dom";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
-function RecentWord(){
+function RecentWord() {
 
-  const [swiperRef, setSwiperRef] = useState(null); // 여기에서 swiperRef 상태를 정의합니다.
+    const [swiperRef, setSwiperRef] = useState(null); // 여기에서 swiperRef 상태를 정의합니다.
     // 슬라이드 정보를 저장하는 상태
-  const [slideInfo, setSlideInfo] = useState({ title: ''});
+    const [slideInfo, setSlideInfo] = useState({title: ''});
 
     const [slidesData, setSlidesData] = useState([]);
 
@@ -57,48 +57,50 @@ function RecentWord(){
 
 
     return (
-        <div className="container" style={{maxWidth:'700px'}} >
-        {/*<h1 className="heading">최근 본 만화목록</h1>*/}
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          loop={false}
-          slidesPerView={'auto'}
-          coverflowEffect={{
-            rotate: 5,
-            stretch: 0,
-            depth: 190,
-            modifier: 2.5,
-          }}
-          pagination={{ el: '.swiper-pagination', clickable: true }}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }}
-          onSwiper={setSwiperRef} // Swiper 인스턴스 설정
-          onSlideChange={(swiper) => {
-            // 현재 중앙 슬라이드의 정보를 업데이트합니다.
-            const currentSlideData = slidesData[swiper.realIndex];
-              setSlideInfo(currentSlideData);
-          }}
-          onInit={(swiper) => {
-            // Swiper 초기화 시, 첫 번째 슬라이드 정보를 설정합니다.
-            const currentSlideData = slidesData[swiper.realIndex];
-            setSlideInfo(currentSlideData);
-          }}
-          className="swiper_container"
-        >
-            {slidesData.map((slide, index) => (
-                <SwiperSlide key={slide.id} onClick={() => handleSlideClick(index)}>
-                    <img src={slide.imageUrl} alt={`slide_image_${index}`} />
-                </SwiperSlide>
-            ))}
+        <div className="container" style={{maxWidth: '700px'}}>
+            {/*<h1 className="heading">최근 본 만화목록</h1>*/}
+            <Swiper
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                loop={false}
+                slidesPerView={'auto'}
+                coverflowEffect={{
+                    rotate: 5,
+                    stretch: 0,
+                    depth: 190,
+                    modifier: 2.5,
+                }}
+
+                pagination={{el: '.swiper-pagination', clickable: true}}
+                navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }}
+                onSwiper={setSwiperRef} // Swiper 인스턴스 설정
+                onSlideChange={(swiper) => {
+                    // 현재 중앙 슬라이드의 정보를 업데이트합니다.
+                    const currentSlideData = slidesData[swiper.realIndex];
+                    setSlideInfo(currentSlideData);
+                }}
+                onInit={(swiper) => {
+                    // Swiper 초기화 시, 첫 번째 슬라이드 정보를 설정합니다.
+                    const currentSlideData = slidesData[swiper.realIndex];
+                    setSlideInfo(currentSlideData);
+                }}
+                className="swiper_container"
+            >
+                {slidesData.map((slide, index) => (
+                    <SwiperSlide className="fixslidewidth" key={slide.id} onClick={() => handleSlideClick(index)}>
+                        <img src={slide.imageUrl} alt={`slide_image_${index}`}/>
+                    </SwiperSlide>
+                ))}
+
             </Swiper>
             <div className="slide-info">
                 <div className='truncate '>{slideInfo.title}</div>
             </div>
-           
+
         </div>
     );
 }
