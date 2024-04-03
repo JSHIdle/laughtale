@@ -12,6 +12,7 @@ public class ChapterAnalyze {
     @Getter
     public static class Response {
         private Integer chapterNo;
+        @Setter
         private Integer level;
         @Setter
         private List<CutAnalyze.Response> cuts;
