@@ -16,13 +16,8 @@ import {ErrorBoundary} from "react-error-boundary";
 import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
 import client, {get} from "../../apis";
 import Chart from "react-apexcharts";
-import {Level} from "../../../types";
+import {ChapterHistory, Level} from "../../../types";
 
-export type ChapterHistory = {
-    memberId:number;
-    mangaId: number;
-    chaptersViewed: Array<number>
-}
 
 const Index = () => {
     const params = useParams()
