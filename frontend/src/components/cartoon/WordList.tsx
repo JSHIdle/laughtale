@@ -21,7 +21,7 @@ export default function WordList(props: Props){
     // scrollFn();
   }, [props.words]);
 
-  return props.words.map(word =>{
+  return props?.words?.map(word =>{
     if(word?.definition) return (<div className="sticky border-2 border-[#3ECBF7] p-5 rounded-md text-3xl word_info_box " ref={scroll}>
         <div className="mb-5 flex justify-between" >
           <div className="flex items-center "> <span style={{background:`${word.color}`, color:'#000'}} className="rounded-md p-3 inline-block">{word.word}</span>
