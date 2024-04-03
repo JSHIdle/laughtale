@@ -21,16 +21,16 @@ import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.worddata.dto.WordDataDetail;
 import com.jshi.laughtale.worddata.dto.WordDataDetail.Response;
 import com.jshi.laughtale.worddata.mapper.WordDataMapper;
+import com.jshi.laughtale.worddata.service.WordDataService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import com.jshi.laughtale.worddata.service.WordDataService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -146,6 +146,7 @@ public class MangaAnalyzer {
     }
 
     public int averageToLevel(double avg) {
+        log.info("avg : {}", avg);
         if (avg <= 1.67) {
             return 1;
         }
