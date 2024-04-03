@@ -7,6 +7,7 @@ import NavBar from "./NavBar.tsx";
 import mainimage from "../../assets/main/mainimage.png";
 import imageboy from "../../assets/main/imageboy.png";
 import theme from "../../assets/main/theme.jpg";
+import cartoonstudy from "../../assets/main/cartoonstudy.jpg";
 
 const Recommend = () => {
     const [selectedLevel, setSelectedLevel] = useState(1);
@@ -59,7 +60,7 @@ const Recommend = () => {
             <div className="flex justify-center items-center">
                 {/*<div className="absolute bg-[#64BDE2] w-full h-[550px] top-0">*/}
                 {/*</div>*/}
-                <img src={theme} className="absolute w-full h-[450px] top-40 translate-y-24 object-cover"/>
+                <img src={cartoonstudy} className="absolute w-full h-[450px] top-40 translate-y-24 object-cover"/>
             </div>
 
 
