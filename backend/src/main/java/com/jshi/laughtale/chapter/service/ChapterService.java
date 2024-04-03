@@ -154,7 +154,7 @@ public class ChapterService {
         }
 
         int prevIdx = Math.max(0, cur - 1);
-        int nextIdx = Math.min(chapterList.size(), cur + 1);
+        int nextIdx = Math.min(chapterList.size() - 1, cur + 1);
 
         Long prevId = prevIdx == cur ? null : chapterList.get(prevIdx).getId();
         Long nextId = nextIdx == cur ? null : chapterList.get(nextIdx).getId();
@@ -162,8 +162,8 @@ public class ChapterService {
         return ChapterPaginationDto
                 .Response
                 .builder()
-                .nextPage(prevId)
-                .prevPage(nextId)
+                .prevPage(prevId)
+                .nextPage(nextId)
                 .build();
     }
 
