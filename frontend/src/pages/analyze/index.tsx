@@ -91,7 +91,7 @@ const Index = () => {
                     </div>
                     {/* body */}
 
-                    <div className="grid grid-cols-2 gap-5 h-[500px]">
+                    <div className="grid grid-cols-2 gap-5 h-[570px]">
                         <div className="flex flex-col justify-center">
                             <label htmlFor="dropzone-file"
                                    className="flex flex-col items-center justify-center w-full h-full border-2 rounded-lg cursor-pointer dark:hover:bg-gray-700">
