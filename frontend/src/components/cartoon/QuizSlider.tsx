@@ -58,9 +58,10 @@ function Modal({ isOpen, onClose ,  modalData}) {
 const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
     let navigate = useNavigate();
 
+
     function handleClick() {
         const correctAnswersCount = calculateCorrectAnswers();
-        navigate('result', { state: { slides, correctAnswersCount }});
+        navigate('result', { state: { slides, correctAnswersCount, selectedAnswers }});
         console.log(selectedAnswers);
 
         // @ts-ignore
