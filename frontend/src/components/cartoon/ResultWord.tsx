@@ -23,7 +23,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
                 <div className="flex justify-items-center">
                     {/*단어의 뜻이 클 수 있으므로 오른쪽 영역을 차지하도록 한다*/}
                     <div className="flex justify-center text-black p-12">
-                        <div className="rounded-xl bg-[#4EDBDE] p-12">
+                        <div className="rounded-xl bg-[#73ABE5] p-12">
                             <div>
                                 <h2 className=" laughtale-font text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: definition}}></h2>
