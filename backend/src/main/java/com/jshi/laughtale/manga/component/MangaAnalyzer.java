@@ -62,7 +62,7 @@ public class MangaAnalyzer {
             chapters.add(chapter);
             chapterResponse.add(analyzeResponse);
         }
-        chapterResponse.forEach(this::calc);
+        chapterResponse.forEach(c -> c.setLevel(calc(c)));
 
 
         for (int i = 0; i < chapterResponse.size(); i++) {
