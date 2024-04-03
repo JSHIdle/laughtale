@@ -77,7 +77,7 @@ const ResultWord=({slides,selectedAnswers})=>{
             const isCorrect = selectedAnswers[index]?.answerId === selectedAnswers[index].id+1;
             return (
             <div
-                className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative" style={{ color: isCorrect ? '#BD2B2B' : '#19895D' }}>
+                className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative" style={{ color: isCorrect ? '#19895D' : '#BD2B2B' }}>
                 <div
                     key={index}
                     className="laughtale-font rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm  bg-[#73ABE5] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
