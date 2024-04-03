@@ -229,9 +229,9 @@ const   CustomSlider = ({level,page,size}) => {
                                             <div className="text-black font-semibold hover:text-black">
                                                 {slideone.word}
                                             </div>
-                                            <div onClick={() => handleIconClick(slideone.word)}>
-                                                <Icon className="hoverIcon" path={mdiVolumeHigh} size={1.5}/>
-                                            </div>
+                                            {/*<div onClick={() => handleIconClick(slideone.word)}>*/}
+                                            {/*    <Icon className="hoverIcon" path={mdiVolumeHigh} size={1.5}/>*/}
+                                            {/*</div>*/}
                                         </div>
                                         <div className="flex justify-items-center">
                                             <button
