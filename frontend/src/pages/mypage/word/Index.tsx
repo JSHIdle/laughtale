@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CustomSlider from '../../../components/mypage/CustomSlider.tsx';
-import BlueHeader from "../../../components/common/Header.tsx";
+import BlueHeader from "../../../components/common/BlueHeader.tsx";
 import {useQuery} from "@tanstack/react-query";
 import getWordInfo from "../../../components/mypage/getWordInfo.tsx";
 import { useParams } from 'react-router-dom';
