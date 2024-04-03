@@ -1,4 +1,5 @@
-![logo](https://github.com/j-yong98/j-yong98/assets/120557342/eaee8660-0288-46a1-aeed-f6b2c51676e6)
+![캡처-removebg-preview (15)](https://github.com/Youth787/SSAFY_Algorithm_Study/assets/90955152/c86199b1-7fdb-446c-a69b-eabb88f90219)
+
 
 ---
 [1. 서비스 개요](#1-서비스-개요)  
