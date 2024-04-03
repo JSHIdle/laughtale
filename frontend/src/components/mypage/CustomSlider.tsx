@@ -63,7 +63,7 @@ function ExampleModal({isOpen, onClose, example}) {
                 <div className="bg-white p-4 rounded-lg">
                     <div className="flex justify-between items-center w-full p-3">
                         <div className="text-black flex-1 text-center">
-                            단어 해석
+                            예문 보기
                         </div>
                         <button
                             onClick={onClose}
