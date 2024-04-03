@@ -1,4 +1,3 @@
-import Header from '../../components/common/Header.tsx';
 import BlueHeader from '../../components/common/BlueHeader.tsx';
 //이전 페이지에서 보내준 데이터를 받을 수 있다.
 import {Link, useLocation, useParams, useNavigate} from 'react-router-dom';
