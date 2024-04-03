@@ -20,6 +20,7 @@ import {getChapterList} from "../../apis/cartoon.ts";
 import axios from "axios";
 import header from "../../components/common/Header.tsx";
 import QuizButton from "../../components/cartoon/QuizButton.tsx";
+import {Toaster} from "react-hot-toast";
 
 type TestType = {
     id: number;
@@ -99,6 +100,8 @@ const Viewer = () => {
 
     return (
         <>
+            <Toaster />
+
             <div className="bg-[#ffffff] min-h-screen">
                 <BlueHeader/>
                 <div className="flex relative justify-center">
