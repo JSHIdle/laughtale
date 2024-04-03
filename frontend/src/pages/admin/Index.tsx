@@ -1,4 +1,4 @@
-import Header from '../../components/common/Header';
+import BlueHeader from '../../components/common/BlueHeader';
 import {CartoonInfoComponent} from "../../components/admin/CartoonInfoComponent.tsx";
 import {FileUploadComponent} from "../../components/admin/FileUploadComponent.tsx";
 import {useCallback, useRef, useState} from "react";
@@ -76,7 +76,7 @@ const Index = () => {
                     {
                         <div>
                             <div>
-                                <Header/>
+                                <BlueHeader/>
                             </div>
                             <div className="max-w-[700px] m-auto">
                                 <div className="text-black font-bold pt-10 pb-3">신규만화 등록</div>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LevelCartoonGrid from "../../components/main/LevelCartoonGrid";
-import Header from '../../components/common/Header';
+import BlueHeader from '../../components/common/BlueHeader';
 
 
 const LevelCartoons = () => {
@@ -35,7 +35,7 @@ const LevelCartoons = () => {
 
     return (
         <div className="bg-[#212529] min-h-screen text-black">
-            <Header/>
+            <BlueHeader/>
             <LevelCartoonGrid cartoons={cartoons} level={parseInt(level, 10)}/>
         </div>
     );

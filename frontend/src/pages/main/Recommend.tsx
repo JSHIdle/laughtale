@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/common/Header';
+import BlueHeader from '../../components/common/BlueHeader';
 import CartoonGrid from "../../components/main/CartoonGrid";
 import RecentWord from '../../components/main/RecentWord.tsx';
 import '../../index.css'
@@ -35,7 +35,7 @@ const Recommend = () => {
 
     return (
         <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
-            <Header/>
+            <BlueHeader/>
                 <div className="w-full flex justify-center">
                     <div className="flex justify-center font-bold text-3xl mt-12 laughtale-font">
                         만화를 통한 수준별 일본어 학습 LaughTale
