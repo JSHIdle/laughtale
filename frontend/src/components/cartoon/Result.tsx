@@ -59,14 +59,14 @@ const Result = () => {
                     <div className=" laughtale-font flex text-white justify-center items-center p-6">
                         <div className=" laughtale-font flex text-white justify-center items-center p-3">
                             {chapterdata &&<Link to={`${prefix}/viewer/${chapterdata.prevPage}`} replace
-                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
+                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#73ABE5] brightness-75 hover:brightness-100 rounded-3xl">
                                 이전 회차 보기
                             </Link>}
                         </div>
 
                         <div className=" laughtale-font flex text-white justify-center items-center p-3">
                             <Link to={`${prefix}/viewer/${chapterId}`} replace
-                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
+                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#73ABE5] brightness-75 hover:brightness-100 rounded-3xl">
                                 다시보기
                             </Link>
                         </div>
@@ -74,7 +74,7 @@ const Result = () => {
                         <div className=" laughtale-font flex text-white justify-center items-center p-3">
                             {chapterdata && <Link to={`${prefix}/viewer/${chapterdata.nextPage}`} replace
                                   onClick={handleNextPageClick}
-                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-3xl">
+                                  className=" laughtale-font p-6 text-2xl font-bold text-black bg-[#73ABE5] brightness-75 hover:brightness-100 rounded-3xl">
                                 다음 회차 보기
                             </Link>}
                         </div>
