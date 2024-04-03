@@ -1,5 +1,6 @@
-![logo.png](..%2F..%2F..%2FWebstormProjects%2FS10P22A705%2Ffrontend%2Fsrc%2Fassets%2Flogo.png)
+![logo](https://github.com/j-yong98/j-yong98/assets/120557342/eaee8660-0288-46a1-aeed-f6b2c51676e6)
 
+---
 [1. 서비스 개요](#1-서비스-개요)  
 [2. 팀원 소개](#2-팀원-소개)  
 [3. 기술 스택](#3-기술-스택)  
@@ -19,19 +20,19 @@
 
 |  **정승환**  |
 |:---------:|
-| 보관함, 커뮤니티 |
+|  |
 
 ### Frontend
 
 |  **김재찬**  | **김도형**  |   **정연미**    |
 |:---------:|:--------:|:------------:|
-| 보관함, 커뮤니티 | 회원, 1인면접 | 셀프 스피치, 다인면접 |
+|  |  |  |
 
 ### Backend
 
-|  **양진우**  |   **최재용**   |
-|:---------:|:-----------:|
-| 인프라, 파일서버 | 영상관리, 회원 매칭 |
+|  **양진우**  |                **최재용**                |
+|:---------:|:-------------------------------------:|
+|  | 데이터 처리, 회원 관리 및 인증/인가, 단어장, 만화 분석 API |
 
 ## 3. 기술 스택
 
@@ -74,9 +75,9 @@
 <img src="https://img.shields.io/badge/Mattermost-0058CC?style=for-the-badge&logo=Mattermost&logoColor=white">
 
 ## 4. 서비스 아키텍처
-![architecture](img_2.png)
+![Architecture](https://github.com/j-yong98/j-yong98/assets/120557342/eec4548c-5479-40b9-a11c-b3c603f06617)
 ## 5. ERD
-![ERD](img_1.png)
+![ERD](https://github.com/j-yong98/j-yong98/assets/120557342/16811f7b-29b3-498f-8c20-c568e0d80d5a)
 ## 6. 디렉토리 구조
 ```text
 Frontend
@@ -145,7 +146,12 @@ Backend
 └── wordlist
 ```
 ## 7. API 명세서
-![img.png](img.png)  
+  
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
 ## 8. 서비스 설명
+---
+
+---
+![analyze1-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ead00f2b-271b-4acf-bbbf-2e3a0f0e522f)
+![analyze2-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ba14306c-735b-4f1e-88b1-d0370cab1148)
