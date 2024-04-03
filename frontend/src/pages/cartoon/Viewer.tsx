@@ -36,14 +36,13 @@ const Viewer = () => {
     // const [data, setData] = useState<MangaImageResponse>([]);
     // const [page, setPage] = useState<number>(0);
 
-
     const {ref, inView} = useInView({
         threshold: 0,
         triggerOnce: false
     })
-    const [words, setWords] = useState<WordInfo[]>();
-    const [sentence, setSentence] = useState<string>("");
-    const [originSentence, setOriginSentence] = useState<string>("");
+    const [words, setWords] = useState<WordInfo[]>(null);
+    const [sentence, setSentence] = useState<string>(null);
+    const [originSentence, setOriginSentence] = useState<string>(null);
     const {
         data,
         error,
@@ -80,7 +79,12 @@ const Viewer = () => {
         setSentence(sentence);
         setWords(wordData);
     }, []);
-
+    const close = () => {
+        console.log("conclick")
+        setSentence(null);
+        setWords(null);
+        setOriginSentence(null);
+    }
     useEffect(() => {
         if (inView) {
             fetchNextPage();
@@ -113,10 +117,10 @@ const Viewer = () => {
                                     mangaImageInfo={imageInfo} onClick={onClick}/>))
                             }
                         </div>
-                        {sentence &&
+                        {sentence != null &&
                             <FlexItem flex="1" style={{position: "relative", minWidth:"400px"}}>
                                 <WordListWrapper>
-                                    <Sentence originSentence={originSentence} sentence={sentence}/>
+                                    <Sentence originSentence={originSentence} sentence={sentence} close={close}/>
                                     <WordList words={words}/>
                                 </WordListWrapper>
                             </FlexItem>
