@@ -1,4 +1,4 @@
-import Header from '../../components/common/Header';
+// import Header from '../../components/common/Header';
 import BlueHeader from '../../components/common/BlueHeader.tsx';
 import DoughnutChart from "../../components/mypage/DoughnutChart.tsx";
 import { useNavigate } from 'react-router-dom';
@@ -102,7 +102,7 @@ const Index = () => {
                               <div className="relative mt-12 flex justify-center items-center bg-[#ffffff] rounded-xl">
                                   <div
                                       className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] font-bold text-black px-12 py-3 rounded-3xl">
-                                      단어 난이도별 단어 개수 분포
+                                      단어장 난이도별 단어 개수 분포
                                   </div>
                               </div>
 
