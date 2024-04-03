@@ -13,6 +13,7 @@ export default function AuthEffect ({children}){
   const [loading, setLoding] = useState(true);
   useEffect(() => {
     console.log("authEffect")
+    console.log("TEST", token, user)
     if(!authData?.accessToken) {
       setLoding(false);
       return;
