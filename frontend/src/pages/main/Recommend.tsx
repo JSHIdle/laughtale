@@ -37,15 +37,15 @@ const Recommend = () => {
     return (
         <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
             <BlueHeader/>
-                <div className="w-full flex justify-center">
-                    <div className="flex justify-center font-bold text-3xl mt-12 laughtale-font">
-                        만화를 통한 수준별 일본어 학습 LaughTale
-                    </div>
+            <div className="w-full flex justify-center">
+                <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
+                    만화를 통한 수준별 일본어 학습 LaughTale
                 </div>
+            </div>
 
-            <div className="flex justify-center items-center p-3 ">
+            <div className="flex justify-center items-center p-6 ">
                 <div
-                    className="w-full grid grid-cols-16 gap-4 justify-items-center fixed inset-x-0 top-0 translate-y-2/4">
+                    className="w-full grid grid-cols-16 gap-4 justify-items-center fixed inset-x-0 top-0 translate-y-3/4">
                     <div className="col-span-2">
                     </div>
                     <div className="col-span-8">
@@ -60,7 +60,35 @@ const Recommend = () => {
             <div className="flex justify-center items-center">
                 {/*<div className="absolute bg-[#64BDE2] w-full h-[550px] top-0">*/}
                 {/*</div>*/}
-                <img src={cartoonstudy} className="absolute w-full h-[450px] top-40 translate-y-24 object-cover"/>
+                <img src={cartoonstudy} className="absolute w-full h-[540px] top-40 translate-y-40 object-cover"/>
+            </div>
+
+            <div className="text-4xl fixed inset-x-0 translate-y-20 p-16 laughtale-font">
+                <div className="flex items-center p-3">
+                    <div className="bg-white p-3 text-black font-bold">
+                        lv1 : 간단한 어휘 사용 가능
+                    </div>
+                </div>
+                <div className="flex items-center p-3">
+                    <div className="bg-white p-3 text-black font-bold">
+                        lv2 : 정확한 어휘, 발음, 문법 사용 가능
+                    </div>
+                </div>
+                <div className="flex items-center p-3">
+                    <div className="bg-white p-3 text-black font-bold">
+                        lv3 : 정확한 시제 구사, 이유와 설명 전달 가능
+                    </div>
+                </div>
+                <div className="flex items-center p-3">
+                    <div className="bg-white p-3  text-black font-bold">
+                        lv4 : 일상 대화 수준의 의사소통 가능
+                    </div>
+                </div>
+                <div className="flex items-center p-3">
+                    <div className="bg-white p-3  text-black font-bold">
+                        lv 5 : 업무, 비지니스 수준의 의사소통 가능
+                    </div>
+                </div>
             </div>
 
 
