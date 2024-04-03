@@ -25,10 +25,5 @@ type Props = {
 export default function ChapterList(props: Props){
   const queryClient = useQueryClient();
   const cache = queryClient.getQueryData<ChapterHistory>(["mangaHistory", props.mangaId]);
-<<<<<<< HEAD
-=======
-  console.log("cache", cache);
-
->>>>>>> 6e3d82f (feat/everything)
   return props.content.map((item) => <ChapterItem {...item} mangaId={props.mangaId} title={props.title} viewed={cache.chaptersViewed.includes(item.chapterId)} />)
 }
