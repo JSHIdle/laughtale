@@ -16,8 +16,7 @@ import {ErrorBoundary} from "react-error-boundary";
 import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
 import client, {get} from "../../apis";
 import Chart from "react-apexcharts";
-import {Level} from "../../../types";
-
+import {ChapterHistory, Level} from "../../../types";
 
 
 const Index = () => {
@@ -25,7 +24,11 @@ const Index = () => {
     const mangaId = +params.title;
     const [wordLevelChartData, setWordLevelChartData] = useState({labels: [], series: []});
     const [chapterLevelChartData, setChapterLevelChartData] = useState({labels: [], series: []});
-
+    const {data:history , isLoading:historyLoading} = useQuery<ChapterHistory>({
+        queryFn:() => get<ChapterHistory>(`/history/${mangaId}`),
+        queryKey: ["mangaHistory", mangaId],
+        refetchOnMount:"always"
+    })
 
     useEffect(() => {
         const fetchMangaWordLevelData = async () => {
@@ -49,7 +52,7 @@ const Index = () => {
         fetchMangaWordLevelData();
         fetchMangaChapterLevelData();
     }, [mangaId]);
-
+    console.log(history)
     const {
         data,
         error,
@@ -90,6 +93,7 @@ const Index = () => {
         queryKey: [`mangaFirstChapter`, mangaId],
         queryFn:() => get(`/chapter/first/${mangaId}`)
 });
+
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
             <BlueHeader/>
