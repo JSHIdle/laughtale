@@ -19,7 +19,8 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) =
                     <img
                         src={imageUrl}
                         alt={title}
-                        className="object-cover w-72 h-96 shadow-lg transition-transform duration-300 group-hover:scale-105"
+                        // className="object-cover w-72 h-96 shadow-lg transition-transform duration-300 group-hover:scale-105"
+                      style={{width:"30rem"}}
                     />
                 {/*</div>*/}
             </Link>
