@@ -57,7 +57,7 @@ function RecentWord() {
 
 
     return (
-        <div className="container" style={{maxWidth: '700px'}}>
+        <div className="container scale-[80%]" style={{maxWidth: '700px'}}>
             {/*<h1 className="heading">최근 본 만화목록</h1>*/}
             <Swiper
                 effect={'coverflow'}
