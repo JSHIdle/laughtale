@@ -35,13 +35,6 @@ const Viewer = () => {
     // const [data, setData] = useState<MangaImageResponse>([]);
     // const [page, setPage] = useState<number>(0);
 
-    useEffect(() => {
-        const fetchMangaWordLevelData = async () => {
-            await client.post(`/history/${chapterId}`)
-        };
-
-        fetchMangaWordLevelData();
-    }, [chapterId]);
 
     const {ref, inView} = useInView({
         threshold: 0,
@@ -92,6 +85,17 @@ const Viewer = () => {
             fetchNextPage();
         }
     }, [inView]);
+    const fn = async () => {
+        return client.post(`/history/${chapterId}`);
+
+    }
+    useEffect(() => {
+        console.log("tiqlf")
+        fn().then(d => {
+            console.log("a" , d)
+        }).catch(e => console.log("b " , e));
+        console.log("tiqlf22")
+    }, [chapterId]);
 
     return (
         <>
