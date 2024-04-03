@@ -1,6 +1,7 @@
 import ChapterItem from "./ChapterItem.tsx";
 import {useQueryClient} from "@tanstack/react-query";
 import {Cartoon} from "../../types/types";
+import {ChapterHistory} from "../../pages/cartoon";
 // "chapterId": 7,
 //   "chapterNo": 0,
 //   "thumbnail": "/home/ubuntu/images/ジャガイモ農家の村娘、剣神と謳われるまで。/1/ジャガイモ農家の村娘、剣神と謳われるまで。--4-1.jpg",
@@ -12,13 +13,15 @@ type Props = {
     chapterId: number;
     chapterNo: number;
     thumbnail: string;
-    level:null | number;
+    level: number;
   }>
   mangaId: number;
   title: string;
 }
 export default function ChapterList(props: Props){
-  return props.content.map((item) => <ChapterItem {...item} mangaId={props.mangaId} title={props.title} />)
+  const queryClient = useQueryClient();
+  const cache = queryClient.getQueryData<ChapterHistory>(["mangaHistory", props.mangaId]);
+  console.log("cache", cache);
+
+  return props.content.map((item) => <ChapterItem {...item} mangaId={props.mangaId} title={props.title} viewed={cache.chaptersViewed.includes(item.chapterId)} />)
 }
-
-

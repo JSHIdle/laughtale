@@ -16,6 +16,10 @@ type Page = {
 
 const QuizButton: React.FC<QuizButtonProps> = ({ chapterId, mangaId }) => {
   const navigate = useNavigate();
+  // const data = {
+  //   prevPage:1,
+  //   nextPage:1
+  // }
   const {data, isLoading, isFetching} = useQuery<Page>({
     queryKey: ["pageNextPrev", chapterId],
     queryFn: () => get<Page>(`/chapter/${chapterId}`)

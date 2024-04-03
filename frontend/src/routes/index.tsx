@@ -109,7 +109,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/analyze',
-    element: <Outlet/>,
+    element: <AuthRoute roles={[Role.USER]}/>,
     children: [
       {
         path: '',

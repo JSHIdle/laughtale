@@ -18,14 +18,22 @@ import client, {get} from "../../apis";
 import Chart from "react-apexcharts";
 import {Level} from "../../../types";
 
-
+export type ChapterHistory = {
+    memberId:number;
+    mangaId: number;
+    chaptersViewed: Array<number>
+}
 
 const Index = () => {
     const params = useParams()
     const mangaId = +params.title;
     const [wordLevelChartData, setWordLevelChartData] = useState({labels: [], series: []});
     const [chapterLevelChartData, setChapterLevelChartData] = useState({labels: [], series: []});
-
+    const {data:history , isLoading:historyLoading} = useQuery<ChapterHistory>({
+        queryFn:() => get<ChapterHistory>(`/history/${mangaId}`),
+        queryKey: ["mangaHistory", mangaId],
+        refetchOnMount:"always"
+    })
 
     useEffect(() => {
         const fetchMangaWordLevelData = async () => {
@@ -49,7 +57,7 @@ const Index = () => {
         fetchMangaWordLevelData();
         fetchMangaChapterLevelData();
     }, [mangaId]);
-
+    console.log(history)
     const {
         data,
         error,
@@ -90,6 +98,7 @@ const Index = () => {
         queryKey: [`mangaFirstChapter`, mangaId],
         queryFn:() => get(`/chapter/first/${mangaId}`)
 });
+
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
             <BlueHeader/>
