@@ -3,14 +3,14 @@ import React, {useEffect, useState} from "react";
 import ChapterResult from "./ChapterResultComponent.tsx";
 import Chart from "react-apexcharts";
 import ChartResult from "./ChartComponent.tsx";
-import Header from "../common/Header.tsx";
+import BlueHeader from "../common/BlueHeader.tsx";
 
 export default function UploadResult({props, isAdmin}: { props: MangaAnalyze, isAdmin: boolean }) {
     const [isInfo, setInfo] = useState(true);
 
     return (
         <>
-            { isAdmin ? <Header/> : null}
+            { isAdmin ? <BlueHeader/> : null}
             <div className="container mx-auto flex justify-center">
                 {
                     isInfo ?

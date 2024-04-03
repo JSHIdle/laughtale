@@ -8,7 +8,7 @@ import {getImageByChapterId} from "../../apis/viewer.ts";
 import {Link, useParams} from "react-router-dom";
 import client, {get} from "../../apis";
 import {MangaImageInfo, MangaImageResponse, Position, WordInfo} from "../../../types";
-import Header from "../../components/common/Header.tsx";
+import BlueHeader from "../../components/common/BlueHeader.tsx";
 import Sentence from "../../components/cartoon/Sentence.tsx";
 import WordList from "../../components/cartoon/WordList.tsx";
 import FlexItem from "../../components/cartoon/Flex.tsx";
@@ -96,7 +96,7 @@ const Viewer = () => {
     return (
         <>
             <div className="bg-[#ffffff] min-h-screen">
-                <Header/>
+                <BlueHeader/>
                 <div className="flex relative justify-center">
                     <div className="max-w-[1200px] flex">
 
