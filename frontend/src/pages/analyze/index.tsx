@@ -91,10 +91,10 @@ const Index = () => {
                     </div>
                     {/* body */}
 
-                    <div className="grid grid-cols-2 gap-5 h-[570px]">
+                    <div className="grid grid-cols-2 gap-5 h-[550px]">
                         <div className="flex flex-col justify-center">
                             <label htmlFor="dropzone-file"
-                                   className="flex flex-col items-center justify-center w-full h-full border-2 rounded-lg cursor-pointer dark:hover:bg-gray-700">
+                                   className="flex flex-col items-center justify-center w-full border-2 rounded-lg cursor-pointer dark:hover:bg-gray-700">
                                 <div className="flex flex-col items-center justify-center pt-5 pb-6 h-full">
                                     <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                                          aria-hidden="true"
@@ -122,7 +122,7 @@ const Index = () => {
                                         </svg>
                                     </button>
                                     <img src={URL.createObjectURL(files[currentPage])}
-                                         className="h-[570px] w-[470px] object-contain pt-5 px-5"
+                                         className="h-[550px] w-[470px] object-contain pt-5 px-5"
                                          alt=""/>
                                     <button
                                         onClick={() => handlePageChange(1)}
@@ -152,7 +152,7 @@ const Index = () => {
                                 </div>
                             </div>
                         ) : (<div className="flex flex-col justify-center items-center border rounded-lg">
-                            <div className="h-full flex justify-center items-center">
+                            <div className="flex justify-center items-center">
                                 <p className="font-bold">선택된 파일 없음</p>
                             </div>
                         </div>)
@@ -166,7 +166,7 @@ const Index = () => {
                     </div>
                 </div>
             </div>)
-            : (<UploadResult props={data} isAdmin={false}/>)};
+            : (<UploadResult props={data} isAdmin={false}/>)}
     </div>
 }
 
