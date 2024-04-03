@@ -11,7 +11,7 @@ import LevelCartoons from '../pages/main/LevelCartoons';
 import Mypage from "../pages/mypage/Index";
 import Word from "../pages/mypage/word/Index";
 
-import Cartoon from "../pages/cartoon/Index";
+import Cartoon from "../pages/cartoon/Index.tsx";
 import Viewer from "../pages/cartoon/Viewer";
 
 import Result from "../components/cartoon/Result";

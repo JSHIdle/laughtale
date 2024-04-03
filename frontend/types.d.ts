@@ -69,6 +69,11 @@ export type ChapterAnalyze = {
     cuts: Array<CutAnalyze>
 }
 
+export type ChapterHistory = {
+    memberId:number;
+    mangaId: number;
+    chaptersViewed: Array<number>
+}
 export type CutAnalyze = {
     imageUrl: string,
     width: number,
