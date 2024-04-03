@@ -161,7 +161,7 @@ const Index = () => {
 
 
                     {/* footer */}
-                    <div className=" bg-[#73ABE5] h-[80px] border flex justify-center hover:bg-blue-700 mt-10 rounded-lg text-5xl text-white">
+                    <div className=" bg-[#73ABE5] h-[80px] border flex justify-center hover:bg-blue-500 mt-10 rounded-lg text-5xl text-white">
                         <button onClick={() => onUploadClick()}>漫画分析(만화 분석)</button>
                     </div>
                 </div>

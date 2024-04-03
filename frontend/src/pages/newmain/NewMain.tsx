@@ -1,4 +1,4 @@
-import Header from "../../components/common/Header.tsx";
+import BlueHeader from "../../components/common/BlueHeader.tsx";
 import Logo from '../../assets/logo.png';
 import '../../styles/fontstyle.css';
 import '../../styles/mainpagestyle.css';
@@ -117,7 +117,7 @@ export default function NewMain() {
     // };
     return (
         <div className="bg-[#FFFFFF] min-h-screen laughtale-font">
-            <Header/>
+            <BlueHeader/>
             <div className="flex justify-end min-h-screen min-w-full items-center relative">
                 {/*<div className="gradient-overlay"></div>*/}
                 <img src={ReadingManga} alt="만화 읽는 사람 이미지"
@@ -135,7 +135,7 @@ export default function NewMain() {
                 <div className=" absolute top-[50px] z-10 right-[125px] m-4">
                     <Link to="/analyze">
                         <div
-                            className="bg-[#73ABE5] hover:bg-blue-700 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
+                            className="bg-[#73ABE5] hover:bg-blue-500 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
                             漫<br/>画<br/>分<br/>析<br/>--<br/>만<br/>화<br/>분<br/>석
                         </div>
                     </Link>
@@ -143,7 +143,7 @@ export default function NewMain() {
                 <div className=" absolute top-[50px] z-10 right-[45px] m-4">
                     <Link to="/home">
                         <div
-                            className="bg-[#444444] hover:bg-black text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
+                            className="bg-[#73abe5] hover:bg-blue-500 text-white font-bold p-5  text-5xl shadow-lg rounded-t z-[200]">
                             漫<br/>画<br/>を<br/>読<br/>む<br/>--<br/>만<br/>화<br/>읽<br/>기
                         </div>
                     </Link>

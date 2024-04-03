@@ -1,4 +1,4 @@
-import Header from "../../../src/components/common/Header.tsx";
+import BlueHeader from "../../../src/components/common/BlueHeader.tsx";
 import {useInfiniteQuery, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useParams} from "react-router-dom";
 import {getChapterList, getMangaHistory} from "../../apis/cartoon.ts";
@@ -92,7 +92,7 @@ const Index = () => {
 });
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
-            <Header/>
+            <BlueHeader/>
         <div className="bg-[#ffffff] h-full absolute top-0 bottom-0 right-0 left-0 ">
             <div className="absolute top-[50px] bottom-0 left-0 right-0">
                     <div className=" flex flex-row h-full p-10">

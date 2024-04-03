@@ -3,7 +3,7 @@
 //   statusCode: string;
 // }
 
-import Header from "./Header.tsx";
+import BlueHeader from "./BlueHeader.tsx";
 import {Link} from "react-router-dom";
 
 type Props = {
@@ -19,7 +19,7 @@ export default function Error (props : Props){
   return (
       <div className="bg-[#ffffff] min-h-screen text-black overflow-hidden ">
           <div>
-              <Header/>
+              <BlueHeader/>
               <div className="flex justify-center items-center">
                   <div>
                       <div className="text-8xl p-3 mt-40">{props?.statusCode ?? props.statusCode }</div>
