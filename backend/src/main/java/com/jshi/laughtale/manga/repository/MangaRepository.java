@@ -32,7 +32,8 @@ public interface MangaRepository extends JpaRepository<Manga, Long> {
         + "ORDER BY MAX(v.view_date) desc LIMIT 10", nativeQuery = true)
     List<Tuple> findRecentManga(Long memberId);
 
-    Page<LevelManga.Response> findAllByLevel(int level, Pageable pageable);
+    // Page<LevelManga.Response> findAllByLevel(int level, Pageable pageable);
+    Page<LevelManga.Response> findAllByLevelOrderByIdDesc(int level, Pageable pageable);
 
     @Query("SELECT m FROM Manga m JOIN FETCH m.chapter c WHERE m.id = :id")
     Manga findMangaByIdFetchJoinChapter(@Param("id") Long id);
