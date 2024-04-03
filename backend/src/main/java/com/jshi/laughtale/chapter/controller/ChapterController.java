@@ -47,16 +47,9 @@ public class ChapterController {
 
 
 	@GetMapping("/{chapterId}")
-	public ResponseEntity<?> getChapterPagination(
+	public ResponseEntity<ChapterPaginationDto.Response> getChapterPagination(
 		@PathVariable Long chapterId
 	){
-		List<Long> pagination = chapterService.getChapterPagination(chapterId);
-
-		return ResponseEntity.ok(ChapterPaginationDto
-			.Response
-			.builder()
-			.nextPage(pagination.get(1))
-			.prevPage(pagination.get(0))
-			.build());
+		return ResponseEntity.ok(chapterService.getChapterPagination(chapterId));
 	}
 }

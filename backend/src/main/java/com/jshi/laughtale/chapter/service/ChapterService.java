@@ -2,6 +2,7 @@ package com.jshi.laughtale.chapter.service;
 
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.dto.ChapterFirst;
+import com.jshi.laughtale.chapter.dto.ChapterPaginationDto;
 import com.jshi.laughtale.common.dto.LevelCount;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
@@ -138,27 +139,32 @@ public class ChapterService {
         return result;
     }
 
-    public List<Long> getChapterPagination(Long chapterId) {
-        Optional<Chapter> currChapter = chapterRepository.findById(chapterId);
-        Manga manga = currChapter.get().getManga();
+    public ChapterPaginationDto.Response getChapterPagination(Long chapterId) {
+        Chapter currChapter = chapterRepository.findById(chapterId).orElseThrow(ChapterNotFoundException::new);
+        Manga manga = currChapter.getManga();
         List<Chapter> chapterList = manga.getChapter();
         Collections.sort(chapterList, (a, b) -> Long.compare(a.getChapterNo(), b.getChapterNo()));
 
-        Optional<Chapter> next = chapterList.stream()
-                .filter(chapter -> chapter.getId() > chapterId)
-                .findFirst();
+        int cur = -1;
+        for (int i = 0; i < chapterList.size(); i++) {
+            if (chapterList.get(i) == currChapter) {
+                cur = i;
+                break;
+            }
+        }
 
-        Optional<Chapter> prev = chapterList.stream()
-                .filter(chapter -> chapter.getId() < chapterId) // 선택한 값보다 작은 값만 필터링
-                .reduce((first, second) -> second);
+        int prevIdx = Math.max(0, cur - 1);
+        int nextIdx = Math.min(chapterList.size(), cur + 1);
 
-        Chapter prevChapter = prev.orElse(null);
-        Chapter nextChapter = next.orElse(null);
+        Long prevId = prevIdx == cur ? null : chapterList.get(prevIdx).getId();
+        Long nextId = nextIdx == cur ? null : chapterList.get(nextIdx).getId();
 
-        List<Long> list = new ArrayList<>();
-        list.add(prev == null ? null : prevChapter.getId());
-        list.add(nextChapter == null ? null : nextChapter.getId());
-        return list;
+        return ChapterPaginationDto
+                .Response
+                .builder()
+                .nextPage(prevId)
+                .prevPage(nextId)
+                .build();
     }
 
 }
