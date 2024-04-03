@@ -4,10 +4,11 @@ import Slider from "react-slick";
 import { useNavigate } from 'react-router-dom';
 import './QuizSlider.css';
 import ImageWithWhiteBox from './ImageWithWhiteBox';
-import {useState} from "react";
+import React, {useState} from "react";
 import {useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import client from "../../apis";
+import {MdChevronLeft, MdChevronRight} from "react-icons/md";
 
 type SelectAnswer = {
     id:number;
@@ -103,6 +104,13 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
         }));
         console.log(selectedAnswers);
     };
+    const goNext = () => {
+        sliderRef.current.slickNext()
+    }
+
+    const goPrev = () => {
+        sliderRef.current.slickPrev()
+    }
 
     const calculateCorrectAnswers = () => {
         let correctCount = 0; // 정답 개수를 저장할 변수
@@ -139,53 +147,69 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                         height: slide.rightTopY - slide.leftBottomY
                                     }}/>
                                 </div>
-                                <div>
-                                    <div className="bg-white font-semibold laughtale-font text-black p-6 flex justify-center items-center">
-                                        Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
-                                        <button
-                                            className="laughtale-font ml-6 font-bold text-xl flex justify-center items-center text-black border-2 border-[#73ABE5] hover:bg-[#73ABE5] hover:text-white rounded-xl w-[50px] h-[30px]"
-                                            onClick={() => {
-                                                openModal();
-                                                setModalData(slide.definition);
-                                            }}>힌트</button>
-                                    </div>
-
-                                    <div className="flex justify-center items-center p-3 mb-3">
+                                <div className="flex flex-row items-center">
+                                    <div><MdChevronLeft
+                                      className="cursor-pointer text-5xl"
+                                      onClick={() => goPrev()}
+                                    /></div>
+                                    <div className="flex-1">
                                         <div
-                                            className="flex justify-center items-center bg-white border-2 bg-[#C1C1C1] rounded-3xl p-3 max-w-[450px]">
+                                          className="bg-white font-semibold laughtale-font text-black p-6 flex justify-center items-center">
+                                            Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
+                                            <button
+                                              className="laughtale-font ml-6 font-bold text-xl flex justify-center items-center text-black border-2 border-[#73ABE5] hover:bg-[#73ABE5] hover:text-white rounded-xl w-[50px] h-[30px]"
+                                              onClick={() => {
+                                                  openModal();
+                                                  setModalData(slide.definition);
+                                              }}>힌트</button>
+                                        </div>
+
+                                        <div className="flex justify-center items-center p-3 mb-3">
                                             <div
-                                                className="flex justify-center items-center font-bold p-6 mr-12 ml-12 text-wrap overflow-wrap"
-                                                style={{whiteSpace: 'normal', wordWrap: 'break-word'}}>
-                                                {modifiedSentence}
+                                              className="flex justify-center items-center bg-white border-2 bg-[#C1C1C1] rounded-3xl p-3 max-w-[450px]">
+                                                <div
+                                                  className="flex justify-center items-center font-bold p-6 mr-12 ml-12 text-wrap overflow-wrap"
+                                                  style={{whiteSpace: 'normal', wordWrap: 'break-word'}}>
+                                                    {modifiedSentence}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className="flex justify-center items-center p-3">
-                                        <div className="w-[450px]">
-                                            <div className="grid grid-cols-2 gap-6 justify-items-center items-center">
-                                                {slide.option.map((option, idx) => (
-                                                    <button
+                                        <div className="flex justify-center items-center p-3">
+                                            <div className="w-[450px]">
+                                                <div
+                                                  className="grid grid-cols-2 gap-6 justify-items-center items-center">
+                                                    {slide.option.map((option, idx) => (
+                                                      <button
                                                         key={idx}
                                                         className={` laughtale-font text-black font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
-                                                            selectedAnswers[index]?.id === idx ? "bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]" : ""
+                                                          selectedAnswers[index]?.id === idx ? "bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]" : ""
                                                         }`} // 조건부 클래스 추가
-                                                        onClick={() => handleAnswerClick(index, idx, slide.answerNo, slide.option[slide.answerNo-1])} // 클릭 이벤트 핸들러 연결
-                                                    >
-                                                        {option}
-                                                    </button>
-                                                ))}
+                                                        onClick={() => handleAnswerClick(index, idx, slide.answerNo, slide.option[slide.answerNo - 1])} // 클릭 이벤트 핸들러 연결
+                                                      >
+                                                          {option}
+                                                      </button>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
+                                        {index === slides.length - 1 && (
+                                          <div className="flex justify-center items-center mt-4 p-12">
+                                              <button onClick={handleClick}
+                                                      className=" laughtale-font text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
+                                              </button>
+                                          </div>
+                                        )}
                                     </div>
-                                    {index === slides.length - 1 && (
-                                        <div className="flex justify-center items-center mt-4 p-12">
-                                            <button onClick={handleClick}
-                                                    className=" laughtale-font text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
-                                            </button>
-                                        </div>
-                                    )}
+                                    <div>
+                                        <MdChevronRight
+
+                                      className="cursor-pointer text-5xl"
+                                      onClick={() => goNext()}
+                                    /></div>
+
                                 </div>
+
                             </div>
                         </div>
                     );
