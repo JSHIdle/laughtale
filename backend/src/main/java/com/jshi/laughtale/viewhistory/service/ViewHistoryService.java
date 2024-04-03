@@ -30,7 +30,7 @@ public class ViewHistoryService {
         Chapter chapter = chapterRepository.findById(chapterId).orElseThrow(ChapterNotFoundException::new);
         Manga manga = mangaRepository.findByChapter(chapter);
 
-        if (viewHistoryRepository.findByChapter(chapter).isEmpty()) {
+        if (viewHistoryRepository.findViewHistoryByChapter(chapter).isEmpty()) {
             log.info("history 등록 완료 : {}, {}", member.getEmail(), chapter.getId());
             viewHistoryRepository.save(ViewHistoryMapper.toEntity(member, manga, chapter));
         }
