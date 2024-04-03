@@ -16,9 +16,10 @@ const Header = ({color} :Props) => {
                     <Link to={`/home`} className="text-3xl hover:text-blue-200">
                         만화읽기
                     </Link>
-                    <Link to={`/analyze`} className="ml-10 text-3xl  hover:text-blue-200">
+
+                    {user?.role == Role.USER && <Link to={`/analyze`} className="ml-10 text-3xl  hover:text-blue-200">
                         만화분석
-                    </Link>
+                    </Link>}
                     {user?.role == Role.ADMIN && <Link to={`/admin`} className="ml-10 text-3xl  hover:text-blue-200">
                         관리자페이지
                     </Link>}
