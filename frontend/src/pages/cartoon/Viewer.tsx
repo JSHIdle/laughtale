@@ -80,7 +80,7 @@ const Viewer = () => {
         for (let i = 0; i < wordData.length; i++) {
             if (wordData[i].definition == null) continue;
             const {word} = wordData[i];
-            sentence = sentence.replace(word, `<span style='color:${colors[i % colors.length]}'>${word}</span>`);
+            sentence = sentence.replace(word, `<span style='background-color:${colors[i % colors.length]}; line-height: 1.5em; border-radius: 10px'>${word}</span>`);
             wordData[i].color = colors[i % colors.length];
         }
         setSentence(sentence);
