@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import BlueHeader from '../../components/common/BlueHeader';
 import CartoonGrid from "../../components/main/CartoonGrid";
-import RecentWord from '../../components/main/RecentWord.tsx';
 import '../../index.css'
 import NavBar from "./NavBar.tsx";
-import mainimage from "../../assets/main/mainimage.png";
-import imageboy from "../../assets/main/imageboy.png";
-import theme from "../../assets/main/theme.jpg";
-import cartoonstudy from "../../assets/main/cartoonstudy.jpg";
 
+import cartoonstudy from "../../assets/main/cartoonstudy.jpg";
+import MainText from "./MainText.tsx";
+import CartoonCard from "../../components/main/CartoonCard.tsx";
 const Recommend = () => {
     const [selectedLevel, setSelectedLevel] = useState(1);
     const [filteredCartoons, setFilteredCartoons] = useState([]);
@@ -57,44 +55,38 @@ const Recommend = () => {
                 </div>
             </div>
 
-            <div className="flex justify-center items-center">
-                {/*<div className="absolute bg-[#64BDE2] w-full h-[550px] top-0">*/}
-                {/*</div>*/}
-                <img src={cartoonstudy} className="absolute w-full h-[540px] top-40 translate-y-40 object-cover"/>
-            </div>
+            <div
+              className="flex w-[100%] pl-20 pr-20 justify-between  h-[540px] translate-y-40 object-cover relative"
+              style={{ backgroundSize:'cover',backgroundImage:`url(${cartoonstudy})`, backgroundRepeat:'no-repeat'}}>
+                <div className="absolute top-0 left-0 right-0 bottom-0 opacity-80 bg-amber-50">
 
-            <div className="text-4xl fixed inset-x-0 translate-y-20 p-16 laughtale-font">
-                <div className="flex items-center p-3">
-                    <div className="bg-white p-3 text-black font-bold">
-                        lv1 : 간단한 어휘 사용 가능
-                    </div>
                 </div>
-                <div className="flex items-center p-3">
-                    <div className="bg-white p-3 text-black font-bold">
-                        lv2 : 정확한 어휘, 발음, 문법 사용 가능
-                    </div>
+                <div className="flex z-10">
+                  <div className="flex items-center gap-20 ">
+                    {
+                      filteredCartoons.map((webtoon, index) => (
+                        <CartoonCard
+                          key={index}
+                          imageUrl={webtoon.thumbnail}
+                          title={webtoon.title}
+                          mangaId={webtoon.id}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
-                <div className="flex items-center p-3">
-                    <div className="bg-white p-3 text-black font-bold">
-                        lv3 : 정확한 시제 구사, 이유와 설명 전달 가능
-                    </div>
-                </div>
-                <div className="flex items-center p-3">
-                    <div className="bg-white p-3  text-black font-bold">
-                        lv4 : 일상 대화 수준의 의사소통 가능
-                    </div>
-                </div>
-                <div className="flex items-center p-3">
-                    <div className="bg-white p-3  text-black font-bold">
-                        lv 5 : 업무, 비지니스 수준의 의사소통 가능
-                    </div>
-                </div>
+              <MainText />
+
+
+              {/*<CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>*/}
+              {/*<img src={cartoonstudy} className="absolute w-full h-[540px] top-40 translate-y-40 object-cover"/>*/}
             </div>
 
 
-            <div className="flex justify-center p-3 fixed inset-x-0 bottom-10">
-                <CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>
-            </div>
+
+            {/*<div className="flex justify-center p-3 fixed inset-x-0 bottom-10">*/}
+            {/*    <CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>*/}
+            {/*</div>*/}
             {/*{cartoons.map((cartoonData, index) => (*/}
             {/*    <CartoonGrid key={index} cartoons={cartoonData} level={index + 1} />*/}
             {/*))}*/}
