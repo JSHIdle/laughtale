@@ -34,7 +34,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
                 <div className="flex justify-items-center">
                     {/*단어의 뜻이 클 수 있으므로 오른쪽 영역을 차지하도록 한다*/}
                     <div className="flex justify-center text-white p-12">
-                        <div className="rounded-xl bg-[#4edbde] p-12">
+                        <div className="rounded-xl bg-[#73ABE5] p-12">
                             <div>
                                 <h2 className="text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: definition}}></h2>
@@ -81,7 +81,7 @@ function ExampleModal({isOpen, onClose, example}) {
                                 <div className="overflow-y-scroll scrollbar-hide ">
                                     {example.speeches.map((item, index) => (
                                         <div key={index}
-                                             className="scale-90 rounded-xl bg-[#4EDBDE] mb-6 p-6 hover:text-black hover:scale-95 transform transition-transform duration-300 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]"
+                                             className="scale-90 rounded-xl bg-[#73ABE5] mb-6 p-6 hover:text-black hover:scale-95 transform transition-transform duration-300 hover:bg-gradient-to-r from-[#4EDBDE] from-5% to-[#8675DA]"
                                              onClick={() => handleSentenceClick(index)}>
                                             <div className="flex items-center justify-start ">
                                                 <div className="mr-3">
@@ -191,10 +191,9 @@ const   CustomSlider = ({level,page,size}) => {
         playTTS(word);
     };
 
-    const bgColorClass = level === 1 ? 'bg-[#56cd7c]' :
-                                                            level === 2 ? 'bg-[#e99648]' :
-                                                            level === 3 ? 'bg-[#f54242]' : 'bg-[#56cd7c]'; // 기본값
-
+    // const bgColorClass = level === 1 ? 'bg-[#56cd7c]' :
+    //                                                         level === 2 ? 'bg-[#e99648]' :
+    //                                                         level === 3 ? 'bg-[#f54242]' : 'bg-[#56cd7c]'; // 기본값
     // const borderColorClass = level === 1 ? 'border-[#90F880]' :
     //                                                             level === 2 ? 'border-[#8caef5]' :
     //                                                             level === 3 ? 'border-[#f56666]' : 'border-[#90F880]'; // 기본값
@@ -223,7 +222,7 @@ const   CustomSlider = ({level,page,size}) => {
                                     &ndash;
                                 </div>
                                 <div
-                                className={"bg-[#4EDBDE] text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm border-2 border-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"}
+                                className={"bg-[#73ABE5] text-white rounded-xl overflow-hidden w-[250px] h-[120px] flex justify-center items-center shadow-sm border-2 border-[#73ABE5] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"}
                                 >
                                     <div>
                                         <div className="flex justify-items-center space-x-2 p-3">

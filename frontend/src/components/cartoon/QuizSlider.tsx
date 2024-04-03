@@ -25,21 +25,21 @@ function Modal({ isOpen, onClose ,  modalData}) {
             <div className="bg-[#ffffff] p-4 rounded-lg w-[600px] ">
 
                 <div className="flex justify-between items-center w-full p-3">
-                    <div className="text-black font-bold flex-1 text-center">
+                    <div className=" laughtale-font text-black font-bold flex-1 text-center">
                         단어 해석
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-black rounded-full bg-grey-500 hover:bg-grey-700">
+                        className=" laughtale-font text-black rounded-full bg-grey-500 hover:bg-grey-700">
                         X
                     </button>
                 </div>
 
                 <div className="flex flex-col justify-between ">
                     <div className="flex flex-col justify-center items-center h-full text-black p-6">
-                        <div className="rounded-xl bg-[#4EDBDE] mb-6 p-12">
+                        <div className="rounded-xl bg-[#73ABE5] mb-6 p-12">
                             <div>
-                                <h2 className="text-2xl text-black font-bold"
+                                <h2 className=" laughtale-font text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: modalData}}></h2>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
 
                     return (
                         <div key={index} className="w-[1300px] ">
-                            <div className="text-black p-12 flex justify-center items-center grid grid-cols-2">
+                            <div className=" laughtale-font text-black p-12 flex justify-center items-center grid grid-cols-2">
                                 <div className="flex justify-end items-center">
                                     <pre className="font-semibold p-3"></pre>
                                     <ImageWithWhiteBox src={slide.imageUrl} boxCoordinates={{
@@ -139,10 +139,10 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     }}/>
                                 </div>
                                 <div>
-                                    <div className="bg-white font-semibold text-black p-6 flex justify-center items-center">
+                                    <div className="bg-white font-semibold laughtale-font text-black p-6 flex justify-center items-center">
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
-                                            className="ml-6 font-bold text-xl text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
+                                            className="laughtale-font ml-6 font-bold text-xl flex justify-center items-center text-black border-2 border-[#73ABE5] hover:bg-[#73ABE5] hover:text-white rounded-xl w-[50px] h-[30px]"
                                             onClick={() => {
                                                 openModal();
                                                 setModalData(slide.definition);
@@ -166,7 +166,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                                 {slide.option.map((option, idx) => (
                                                     <button
                                                         key={idx}
-                                                        className={`text-black font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
+                                                        className={` laughtale-font text-black font-bold border-2 border-[#59CDE0] hover:bg-gradient-to-b from-[#59CDE0] to-[#8F89EB] rounded-xl w-[200px] h-[50px] ${
                                                             selectedAnswers[index]?.id === idx ? "bg-gradient-to-b from-[#59CDE0] to-[#8F89EB]" : ""
                                                         }`} // 조건부 클래스 추가
                                                         onClick={() => handleAnswerClick(index, idx, slide.answerNo, slide.option[slide.answerNo-1])} // 클릭 이벤트 핸들러 연결
@@ -180,7 +180,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     {index === slides.length - 1 && (
                                         <div className="flex justify-center items-center mt-4 p-12">
                                             <button onClick={handleClick}
-                                                    className="text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
+                                                    className=" laughtale-font text-black font-bold px-4 py-2 bg-gradient-to-b from-[#5ACDE1] to-[#8F89EB] rounded-3xl w-[150px]">제출하기
                                             </button>
                                         </div>
                                     )}

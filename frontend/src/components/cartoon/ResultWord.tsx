@@ -10,12 +10,12 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
         <div className="z-1000 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-[#ffffff] p-4 rounded-lg">
                 <div className="flex justify-between items-center w-full p-3">
-                    <div className="text-black flex-1 text-center">
+                    <div className=" laughtale-font text-black flex-1 text-center">
                         단어 해석
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-black rounded-full bg-grey-500 hover:bg-grey-700">
+                        className=" laughtale-font text-black rounded-full bg-grey-500 hover:bg-grey-700">
                         X
                     </button>
                 </div>
@@ -24,7 +24,7 @@ function DefinitionModal({ isOpen, onClose, definition  }) {
                     <div className="flex justify-center text-black p-12">
                         <div className="rounded-xl bg-[#4EDBDE] p-12">
                             <div>
-                                <h2 className="text-2xl text-black font-bold"
+                                <h2 className=" laughtale-font text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: definition}}></h2>
                             </div>
                         </div>
@@ -70,17 +70,17 @@ const ResultWord=({slides})=>{
 
     console.log("데이터 출력" ,slides);
     return(
-        <div className="w-[1050px] text-black font-bold flex flex-wrap text-4xl"    >
+        <div className=" laughtale-font w-[1050px] text-black font-bold flex flex-wrap text-4xl"    >
         {slides.map((slide, index) => (
             <div
                 className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative">
                 <div
                     key={index}
-                    className="text-black rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm border-2 bg-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
+                    className=" laughtale-font text-black rounded-xl overflow-hidden w-[180px] h-[100px] flex justify-center items-center shadow-sm border-2 bg-[#4EDBDE] group-hover:bg-gradient-to-b from-[#4EDBDE] to-[#8675DA] hover:border-transparent hover:text-black transition-all duration-300"
                 >
                     <div className="flex flex-col items-center space-y-2"> {/* 부모 div에 flex와 flex-col 클래스 적용 */}
                     <div className="flex justify-center space-x-2 p-3">
-                        <div className="text-black font-semibold hover:text-black">
+                        <div className=" laughtale-font text-black font-semibold hover:text-black">
                             {slide.option[slide.answerNo - 1]}
                         </div>
                         <div onClick={() => handleIconClick(slide.option[slide.answerNo - 1])}>
@@ -89,7 +89,7 @@ const ResultWord=({slides})=>{
                     </div>
                     <div className="flex justify-items-center">
                         <button
-                            className="text-black p-3 text-2xl hover:text-emerald-300"
+                            className=" laughtale-font text-black p-3 text-2xl hover:text-emerald-300"
                             onClick={() => openModalWithDefinition(slide)}>
                             단어해석
                         </button>

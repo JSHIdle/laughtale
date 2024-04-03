@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import client from "../../apis";
 import UploadResult from "../../components/admin/UploadResultComponent.tsx";
 import LoadingBar from "../../components/analyze/LoadingComponent.tsx";
-import Header from "../../components/common/Header.tsx";
 import BlueHeader from "../../components/common/BlueHeader.tsx";
 
 const Index = () => {
@@ -75,12 +74,13 @@ const Index = () => {
         setCurrentPage(prev => (prev + totalPages + value) % totalPages);
     };
 
-    return <div className="laughtale-font">
+
+    return <div className="laughtale-font " style={{ height: 'calc(100vh * 1.1111)' }}>
         <BlueHeader/>
         {loading ? (
             <LoadingBar/>
         ) : (data == null || false) ?
-            (<div className="h-[100vh] flex flex-col items-center">
+            (<div className="flex flex-col items-center">
                 <div className="w-2/3">
                     {/* header */}
                     <div className="text-6xl p-10 mt-10 text-center">
@@ -91,7 +91,7 @@ const Index = () => {
                     </div>
                     {/* body */}
 
-                    <div className="grid grid-cols-2 gap-5 h-[600px]">
+                    <div className="grid grid-cols-2 gap-5 h-[500px]">
                         <div className="flex flex-col justify-center">
                             <label htmlFor="dropzone-file"
                                    className="flex flex-col items-center justify-center w-full h-full border-2 rounded-lg cursor-pointer dark:hover:bg-gray-700">
@@ -161,7 +161,7 @@ const Index = () => {
 
 
                     {/* footer */}
-                    <div className=" bg-[#73ABE5] h-[80px] border flex justify-center hover:bg-blue-700 mt-10 mb-[200px] rounded-lg text-5xl text-white">
+                    <div className=" bg-[#73ABE5] h-[80px] border flex justify-center hover:bg-blue-700 mt-10 rounded-lg text-5xl text-white">
                         <button onClick={() => onUploadClick()}>漫画分析(만화 분석)</button>
                     </div>
                 </div>

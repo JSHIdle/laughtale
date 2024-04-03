@@ -9,12 +9,16 @@ function ImageWithDottedBoxAndQuestionMark({ src, boxCoordinates, scaleFactor = 
         const image = new Image();
 
         image.onload = () => {
-            const scaledWidth = image.width * scaleFactor;
-            const scaledHeight = image.height * scaleFactor;
-            const scaledX = boxCoordinates.x * scaleFactor;
-            const scaledY = boxCoordinates.y * scaleFactor;
-            const scaledBoxWidth = boxCoordinates.width * scaleFactor;
-            const scaledBoxHeight = boxCoordinates.height * scaleFactor;
+            const x_scalefactor = 500 / image.width;
+            const y_scalefactor = 630 / image.height;
+
+            const scaledWidth = image.width * x_scalefactor;
+            const scaledHeight = image.height * y_scalefactor;
+
+            const scaledX = boxCoordinates.x * x_scalefactor;
+            const scaledY = boxCoordinates.y * y_scalefactor;
+            const scaledBoxWidth = boxCoordinates.width * x_scalefactor;
+            const scaledBoxHeight = boxCoordinates.height * y_scalefactor;
 
             canvas.width = scaledWidth;
             canvas.height = scaledHeight;

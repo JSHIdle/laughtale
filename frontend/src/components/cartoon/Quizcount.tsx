@@ -22,7 +22,7 @@ const QuizCountdown = () => {
                 <div className="w-96 h-96 flex items-center justify-center">
                 <div
                     key={countDown} // key 프로퍼티 추가
-                    className="text-white text-10xl font-bold"
+                    className=" laughtale-font text-white text-10xl font-bold"
                     style={{
                         animation: "counting 1s ease-in-out forwards",
                     }}
@@ -32,12 +32,12 @@ const QuizCountdown = () => {
                 </div>
             ) : (
                 <div
-                    className="text-white text-xl transition-opacity duration-1000 ease-in-out"
+                    className=" laughtale-font text-white text-xl transition-opacity duration-1000 ease-in-out"
                     style={{opacity: countDown === 0 ? 1 : 0}}
                 >
                 </div>
             )}
-        <div className="mt-12 text-3xl font-bold text-white">
+        <div className=" laughtale-font mt-12 text-3xl font-bold text-white">
             곧 퀴즈가 시작됩니다
         </div>
 </div>
