@@ -32,11 +32,11 @@ const Quiz = () => {
         <div className="bg-[#ffffff]" style={{ height: 'calc(100vh * 1.1111)' }}>
             <BlueHeader/>
             <div className="max-w-[450px] m-auto">
-                <div className="flex justify-center pt-6">
+                <div className="flex justify-center pt-6 mt-12">
                     {quizData && <Progressbar value={currentSlide} max={quizData.length} onNumberClick={handleNumberClick}/>}
                 </div>
             </div>
-            <div className="text-black max-w-[1200px] m-auto p-6">
+            <div className="text-black max-w-[1200px] m-auto p-6 mt-12">
                 {quizData && <QuizSlider slides={quizData} updateCurrentSlide={updateCurrentSlide} sliderRef = {sliderRef}/>}
             </div>
         </div>
