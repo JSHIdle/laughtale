@@ -146,12 +146,9 @@ Backend
 └── wordlist
 ```
 ## 7. API 명세서
-  
+![image](https://github.com/j-yong98/j-yong98/assets/120557342/ec924eb3-157c-4ca6-9031-4e7182770028)
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
 ## 8. 서비스 설명
----
-
----
-![analyze1-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ead00f2b-271b-4acf-bbbf-2e3a0f0e522f)
-![analyze2-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ba14306c-735b-4f1e-88b1-d0370cab1148)
+![main](https://github.com/j-yong98/j-yong98/assets/120557342/07850adf-fd1b-4e7e-8c6f-657d0d96da40)
+![analyze](https://github.com/j-yong98/j-yong98/assets/120557342/007f6931-7f9b-4187-abb3-0b10cf4395cf)
