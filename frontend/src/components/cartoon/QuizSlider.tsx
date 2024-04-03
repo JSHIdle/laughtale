@@ -37,7 +37,7 @@ function Modal({ isOpen, onClose ,  modalData}) {
 
                 <div className="flex flex-col justify-between ">
                     <div className="flex flex-col justify-center items-center h-full text-black p-6">
-                        <div className="rounded-xl bg-[#4EDBDE] mb-6 p-12">
+                        <div className="rounded-xl bg-[#73ABE5] mb-6 p-12">
                             <div>
                                 <h2 className=" laughtale-font text-2xl text-black font-bold"
                                     dangerouslySetInnerHTML={{__html: modalData}}></h2>
@@ -142,7 +142,7 @@ const QuizSlider = ({slides, updateCurrentSlide, sliderRef}) => {
                                     <div className="bg-white font-semibold laughtale-font text-black p-6 flex justify-center items-center">
                                         Q{index + 1} 다음 말풍선에 들어갈 단어를 고르세요.
                                         <button
-                                            className="laughtale-font ml-6 font-bold text-xl text-black bg-[#C1C1C1] brightness-75 hover:brightness-100 rounded-xl w-[50px] h-[25px]"
+                                            className="laughtale-font ml-6 font-bold text-xl flex justify-center items-center text-black border-2 border-[#73ABE5] hover:bg-[#73ABE5] hover:text-white rounded-xl w-[50px] h-[30px]"
                                             onClick={() => {
                                                 openModal();
                                                 setModalData(slide.definition);
