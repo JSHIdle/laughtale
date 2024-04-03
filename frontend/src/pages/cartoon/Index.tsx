@@ -92,13 +92,14 @@ const Index = () => {
 });
     // console.log("test" ,data?.pages[0]?.totalElements)
     return <>
-        <div className="bg-[#ffffff] h-full absolute top-0 bottom-0 right-0 left-0 ">
             <Header/>
+        <div className="bg-[#ffffff] h-full absolute top-0 bottom-0 right-0 left-0 ">
             <div className="absolute top-[50px] bottom-0 left-0 right-0">
                     <div className=" flex flex-row h-full p-10">
                         <div className="flex-1 mr-2.5">
                             <ErrorBoundary fallbackRender={(props) => <CartoonHeaderSuspense type={"error"}/>}>
                                     <Suspense fallback={<CartoonHeaderSuspense type={"loading"}/>}>
+
                                         <CartoonHeader mangaId={mangaId}/>
 
                                         {firstChapter?.id && <FirstEpisode mangaId={mangaId} chapterId={firstChapter.id}/>}
@@ -140,7 +141,7 @@ const Index = () => {
                             </div>
                         </div>
                         <div className="flex-1 ml-2.5 relative">
-                            <div className="absolute top-0 left-0 right-0 bottom-0 overflow-auto p-10">
+                            <div className="absolute top-0 left-0 right-0 bottom-0 overflow-auto pb-10 pr-10 pl-10 pt-1">
                                 {!data ? <div>...loading..</div> :
                                   <>
                                       {
