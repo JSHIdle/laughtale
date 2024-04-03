@@ -34,10 +34,10 @@ const Recommend = () => {
     }, [cartoons, selectedLevel]);
 
     return (
-        <div className="bg-[#ffffff] min-h-screen text-black " style={{height: 'calc(100vh * 1.1111)'}}>
+        <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
             <Header/>
                 <div className="w-full flex justify-center">
-                    <div className="flex justify-center font-bold text-3xl mt-8">
+                    <div className="flex justify-center font-bold text-3xl mt-12 laughtale-font">
                         만화를 통한 수준별 일본어 학습 LaughTale
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const Recommend = () => {
                 </div>
             </div>
 
-            <div className="h-screen flex justify-center items-center">
+            <div className="flex justify-center items-center">
                 {/*<div className="absolute bg-[#64BDE2] w-full h-[550px] top-0">*/}
                 {/*</div>*/}
                 <img src={theme} className="absolute w-full h-[450px] top-40 translate-y-24 object-cover"/>
