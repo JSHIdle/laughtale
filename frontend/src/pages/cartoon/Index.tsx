@@ -18,7 +18,6 @@ import client, {get} from "../../apis";
 import Chart from "react-apexcharts";
 import {ChapterHistory, Level} from "../../../types";
 
-
 const Index = () => {
     const params = useParams()
     const mangaId = +params.title;
