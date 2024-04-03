@@ -82,9 +82,9 @@ const Index = () => {
 
                               <div className="flex justify-center items-center bg-[#ffffff] rounded-2xl">
                                   <div className="w-[700px] h-[320px] rounded-xl flex justify-center items-center ">
-                                      <div>
+
                                           <RecentWord/>
-                                      </div>
+
                                   </div>
                               </div>
                           </div>
