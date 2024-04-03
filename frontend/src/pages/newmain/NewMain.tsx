@@ -5,7 +5,8 @@ import '../../styles/mainpagestyle.css';
 
 // import AuthButton from "../../components/common/AuthButton.tsx";
 // import MainBG from '../../assets/mainpageimage/mainbg.png';
-import SpeechDef from '../../assets/mainpageimage/speech_def.jpg'
+import mainPageCartoon from '../../assets/mainpageimage/mainPageCartoon.jpg'
+import userUpload from '../../assets/mainpageimage/userUpload.gif'
 // import Manga1 from '../../assets/mainpageimage/mangas/manga_1.webp'
 // import Manga2 from '../../assets/mainpageimage/mangas/manga_2.jpg'
 // import Manga3 from '../../assets/mainpageimage/mangas/manga_3.jpg'
@@ -31,6 +32,8 @@ import Manga21 from '../../assets/mainpageimage/mangas/manga_21.png'
 import ReadingManga from '../../assets/mainpageimage/readingmanga.jpg';
 
 import OnePieceSet from '../../assets/mainpageimage/onepieceset.png';
+import ebbinghausCurve from '../../assets/mainpageimage/ebbinghausCurve.jpg';
+
 // import JapaneseWordCloud from '../../assets/mainpageimage/japwrcl3.jpg';
 import ReactWordcloud from "react-wordcloud";
 import {useEffect, useState, useRef} from "react";
@@ -157,8 +160,7 @@ export default function NewMain() {
                         ref={addToRefs}
                         className="transition-all duration-1000 transform opacity-0 translate-y-10"
                     >
-                        나에게 맞는 책 고르기<br/>
-                        책을 선택하는 고민의 시간을 덜어드려요
+                        난이도에 맞춰 선별된 만화를 즐겨보세요.<br/>
                     </div>
                 </div>
                 <hr className="gradient-hr"/>
@@ -168,8 +170,9 @@ export default function NewMain() {
                     ref={addToRefs}
                     className="transition-all duration-1000 transform opacity-0 translate-y-10"
                 >
-                    당신을 위한 무한한 만화의 세계로 초대합니다. 다양한 장르와 스토리, 다채로운 캐릭터들이 당신을 기다리고 있습니다. 환상적인 세계를 탐험하고 감동과 재미를 함께 느껴보세요. 우리의 풍부한
-                    만화 컬렉션은 당신의 호기심과 상상력을 자극할 것입니다. 지금 바로 시작해보세요!
+                    다양한 일본 만화의 세계로 당신을 초대합니다. 각 만화는 등장하는 단어의 난이도에 따라 분류되어 있어, 선택의 폭이 넓습니다.<br/> 캐릭터들이 여러분을 기다리고 있어요.
+                    흥미진진한 이야기들과 함께 자연스럽게 일본어를 배워보세요. 지금 시작해보세요!
+
                 </div>
             </div>
             {/*1번 슬라이드*/}
@@ -204,7 +207,7 @@ export default function NewMain() {
                     ref={addToRefs}
                     className="transition-all duration-1000 transform opacity-0 translate-y-10"
                 >
-                    맞춤형 퀴즈 서비스
+                    맞춤형 퀴즈로 일본어 실력을 한 단계 업그레이드하세요.
                 </div>
             </div>
             <hr className="gradient-hr"/>
@@ -217,7 +220,7 @@ export default function NewMain() {
                         className="transition-all duration-1000 transform opacity-0 translate-y-10"
                     >
                         만화 속에서 사용되는 단어들을 분석하여 사용자에게 맞춤형 학습 경험을 제공합니다. 각 페이지에 등장하는 말풍선을 추출하고, 해당 단어들의 빈도수를 카운트하여 단어 난이도를
-                        측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 언어 능력을 향상시키는데 도움을 드립니다.
+                        측정합니다. 이를 토대로 사용자에게 최적화된 퀴즈를 제공하여 일본어 실력을 향상시키는데 도움을 드립니다.
                     </div>
                 </div>
 
@@ -239,13 +242,12 @@ export default function NewMain() {
                             <div className="text-[25px] mt-10">만화에 등장한 단어 빈도수 수집</div>
                         </div>
                         <div className="flex flex-col justify-center items-center">
-                            <img src={OnePieceSet} alt="원피스 책 이미지"
+                            <img src={ebbinghausCurve} alt="원피스 책 이미지"
                                  className=" h-[300px] w-[300px] object-fill rounded-[15px] border-2 shadow-lg"/>
                             <div className="text-[25px] mt-10">사용자 맞춤형 퀴즈 생성</div>
                         </div>
                     </div>
                 </div>
-
 
 
             </div>
@@ -268,28 +270,63 @@ export default function NewMain() {
                         ref={addToRefs}
                         className="transition-all duration-1000 transform opacity-0 translate-y-10"
                     >
-                        말풍선을 클릭하면 순식간에 단어의 뜻이 펼쳐집니다. 이 특별한 기능은 당신이 만화를 읽는 새로운 경험을 만날 수 있게 해줍니다. 매 순간 새로운 단어를 배우며, 이를 통해 언어의
-                        세계로
-                        더욱 깊게 빠져들어보세요. 단어의 뜻을 쉽고 빠르게 이해하며, 독해 능력을 향상시킬 수 있습니다. 우리의 기능은 당신의 학습을 즐겁고 효과적으로 이끌어줄 것입니다. 이제 당신의
-                        만화
-                        읽기를 더욱 풍부하고 유익한 경험으로 바꿔보세요!
+                        만화를 읽다가 모르는 단어가 등장하면 말풍선을 클릭해 보세요! 따로 검색해볼 필요 없이, 단어의 뜻과 발음을 제공합니다. <br/>
+                        이제 만화 읽기를 통해 더욱 풍부하고 유익한 학습 경험을 누리세요.
                     </div>
                 </div>
 
                 <div className="flex justify-evenly items-center">
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={SpeechDef} alt="만화보기 화면"
-                             className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>
-                        <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        <div className="flex flex-col justify-center items-center">
+                            <img src={mainPageCartoon} alt="만화보기 화면"
+                                 className=" h-[500px] w-[870px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                            <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>
+                        </div>
                     </div>
-                    {/*<div className="flex flex-col justify-center items-center">*/}
-                    {/*    <img src={SpeechDef}*/}
-                    {/*         className=" h-[600px] w-[800px] object-fill rounded-[15px] border-2 shadow-lg"/>*/}
-                    {/*    <div className="text-[25px] mt-10">말풍선을 클릭합니다</div>*/}
-                    {/*</div>*/}
                 </div>
 
             </div>
+
+            <div className="flex h-[100px] items-end text-7xl px-[150px] mt-[200px]">
+
+                <div
+                    ref={addToRefs}
+                    className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                >
+                    원하는 만화를 직접 업로드해서 분석
+                </div>
+            </div>
+            <hr className="gradient-hr"/>
+            {/*<div className="h-[200px]"></div>*/}
+            <div className=" text-[25px] my-10  px-[50px]">
+                <div className=" text-[25px] my-10 px-[100px]">
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        당신이 가지고 있는 만화를 업로드하면 분석해드립니다! <br/>
+                        업로드한 만화 속 단어들의 뜻부터 난이도, 발음까지 쉽고 빠르게 확인하세요
+                    </div>
+                </div>
+
+                <div className="flex justify-evenly items-center">
+                    <div
+                        ref={addToRefs}
+                        className="transition-all duration-1000 transform opacity-0 translate-y-10"
+                    >
+                        <div className="flex flex-col justify-center items-center">
+                            <img src={userUpload} alt="만화보기 화면"
+                                 className=" h-[500px] w-[870px] object-fill rounded-[15px] border-2 shadow-lg"/>
+                            {/*<div className="text-[25px] mt-10">말풍선을 클릭합니다</div>*/}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
 
             <div className="h-[200px]"></div>
 

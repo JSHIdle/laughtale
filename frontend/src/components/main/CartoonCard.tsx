@@ -23,9 +23,9 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) =
                     />
                 {/*</div>*/}
             </Link>
-            <div className="mt-2">
+            <div className="mt-2 flex justify-center">
                 <Link to={`/cartoon/${mangaId}`} className="block">
-                    <span className="w-[100px] overflow-ellipsis block text-4lg font-bold truncate mt-9 text-center">{title}</span>
+                    <span className="w-[150px] overflow-ellipsis block text-4lg font-bold truncate mt-8 text-center">{title}</span>
                 </Link>
             </div>
            <span className="flex group-hover:border-2 group-hover:border-[#73ABE5] "></span>
