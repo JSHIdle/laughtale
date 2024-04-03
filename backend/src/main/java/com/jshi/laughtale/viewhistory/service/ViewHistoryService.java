@@ -7,6 +7,7 @@ import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.member.service.MemberService;
+import com.jshi.laughtale.viewhistory.domain.ViewHistory;
 import com.jshi.laughtale.viewhistory.exception.AlreadyReadThisChapterException;
 import com.jshi.laughtale.viewhistory.mapper.ViewHistoryMapper;
 import com.jshi.laughtale.viewhistory.repository.ViewHistoryRepository;
@@ -31,7 +32,8 @@ public class ViewHistoryService {
         Chapter chapter = chapterRepository.findById(chapterId).orElseThrow(ChapterNotFoundException::new);
         Manga manga = mangaRepository.findByChapter(chapter);
 
-        if (viewHistoryRepository.findViewHistoryByChapter(chapter).isEmpty()) {
+        ViewHistory viewHistory = viewHistoryRepository.findViewHistoryByChapter(chapter).orElse(null);
+        if (viewHistory == null) {
             log.info("history 등록 완료 : {}, {}", member.getEmail(), chapter.getId());
             viewHistoryRepository.save(ViewHistoryMapper.toEntity(member, manga, chapter));
         } else {
