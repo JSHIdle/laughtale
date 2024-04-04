@@ -14,7 +14,7 @@ public class UserInfo {
 
     private String email;
     private String nickname;
-    private Role role = Role.ROLE_ANONYMOUS;
+    private Role role = Role.ROLE_USER;
     @Setter
     private Provider provider;
 
