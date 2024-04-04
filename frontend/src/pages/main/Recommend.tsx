@@ -3,14 +3,17 @@ import BlueHeader from '../../components/common/BlueHeader';
 import CartoonGrid from "../../components/main/CartoonGrid";
 import '../../index.css'
 import NavBar from "./NavBar.tsx";
-
+import "./fade-out.css"
+import { text } from '../../constants/text.ts';
 import cartoonstudy from "../../assets/main/cartoonstudy.jpg";
 import MainText from "./MainText.tsx";
 import CartoonCard from "../../components/main/CartoonCard.tsx";
+import {colors} from "../../constants/colors.ts";
 const Recommend = () => {
     const [selectedLevel, setSelectedLevel] = useState(1);
     const [filteredCartoons, setFilteredCartoons] = useState([]);
     const [cartoons, setCartoons] = useState([]);
+    const [same, isSame] = useState(false);
     useEffect(() => {
         // API 요청을 통해 만화 데이터를 가져옵니다.
         const fetchCartoons = async () => {
@@ -35,34 +38,33 @@ const Recommend = () => {
     return (
         <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
             <BlueHeader/>
-            <div className="w-full flex justify-center">
-                <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
-                    만화를 통한 수준별 일본어 학습 LaughTale
-                </div>
-            </div>
-
-            <div className="flex justify-center items-center p-6 ">
-                <div
-                    className="w-full grid grid-cols-16 gap-4 justify-items-center fixed inset-x-0 top-0 translate-y-3/4">
-                    <div className="col-span-2">
-                    </div>
-                    <div className="col-span-8">
-                        <NavBar selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel}/>
-                    </div>
-                    <div className="col-span-2>
-                    </div>
-                    <div className=" col-span-4x></div>
-                </div>
-            </div>
-
             <div
-              className="flex w-[100%] pl-20 pr-20 justify-between  h-[540px] translate-y-40 object-cover relative"
-              style={{ backgroundSize:'cover',backgroundImage:`url(${cartoonstudy})`, backgroundRepeat:'no-repeat'}}>
-                <div className="absolute top-0 left-0 right-0 bottom-0 opacity-80 bg-amber-50">
+              className="flex w-[100%] pl-20 pr-20 justify-between  h-[80vh] translate-y-40 object-cover relative ">
+                <div
+                  className="absolute top-0 left-0 right-0 bottom-0 -z-10 blur-md	 "
+                  style={{ backgroundSize:'cover',backgroundImage:`url(${cartoonstudy})`, backgroundRepeat:'no-repeat'}}
+                >
 
                 </div>
-                <div className="flex z-10">
-                  <div className="flex items-center gap-20 ">
+                <div className="absolute top-0 left-0 right-0 bottom-0 opacity-50 bg-black "
+                     // style={{ backgroundColor: 'rgba(0,0,0, 0.4);' }}
+                >
+                </div>
+              <div className="z-10 flex-1">
+                <div className="w-full flex justify-center ">
+                  <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
+                    <span className="">만화를 통한 수준별 일본어 학습</span>
+                  </div>
+
+                </div>
+                <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
+                  <span className="fadeInUp-animation">{ text[selectedLevel - 1] }</span>
+                </div>
+                {/*<NavBar selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel}/>*/}
+
+
+                <div className="flex z-10 flex-1 ">
+                  <div className="flex gap-20 justify-center items-center flex-1">
                     {
                       filteredCartoons.map((webtoon, index) => (
                         <CartoonCard
@@ -75,7 +77,30 @@ const Recommend = () => {
                     }
                   </div>
                 </div>
-              <MainText />
+
+                <ul className="flex mt-4 md:space-x-32 md:flex-row text-5xl justify-center absolute bottom-10 left-0 right-0">
+                  {[1, 2, 3, 4, 5].map(level => (
+                    <li key={level}>
+                      <div
+                        className={`p-3 rounded-xl}`}
+                      >
+                        <button onClick={() => setSelectedLevel(level)}
+                          // className="text-5xl block py-2 px-3 md:p-0 font-bold rounded md:bg-transparent md:dark:text-blue-500 md:dark:bg-transparent"
+                                className="text-5xl block py-2 px-3 md:p-0 font-bold rounded"
+                                style={{color: `${selectedLevel === level ?  'text-[#64BDE2]' : colors[level-1]}`}}
+                        >
+                          Lv {level}
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+
+              </div>
+
+
+              {/*<MainText />*/}
 
 
               {/*<CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>*/}

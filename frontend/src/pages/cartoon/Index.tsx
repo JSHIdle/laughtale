@@ -17,6 +17,7 @@ import CartoonHeaderSuspense from "./manga/CartoonHeaderError.tsx";
 import client, {get} from "../../apis";
 import Chart from "react-apexcharts";
 import {ChapterHistory, Level} from "../../../types";
+import {colors} from "../../constants/colors.ts";
 
 const Index = () => {
     const params = useParams()
@@ -121,7 +122,7 @@ const Index = () => {
                                       chart: {
                                           type: 'donut',
                                       },
-
+                                        colors: colors
                                   }}
                                   style={{
                                       width:"100%"
@@ -136,6 +137,7 @@ const Index = () => {
                                       chart: {
                                           type: 'donut',
                                       },
+                                      colors: colors
                                   }}
                                   style={{
                                       width:"100%"
