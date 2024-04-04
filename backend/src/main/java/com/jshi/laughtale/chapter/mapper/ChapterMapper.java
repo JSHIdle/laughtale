@@ -16,12 +16,14 @@ public class ChapterMapper {
                 .id(chapter.getId())
                 .build();
     }
+
     public static Chapter toEntity(int chapterNo, int pageCnt) {
         return Chapter.builder()
                 .chapterNo(chapterNo)
                 .pageCnt(pageCnt)
                 .build();
     }
+
     public static Chapter toEntity(Manga manga, int chapterNo, int pageCnt) {
         return Chapter.builder()
                 .chapterNo(chapterNo)
@@ -42,19 +44,19 @@ public class ChapterMapper {
     public static ChapterListDto.Response chapterToChapterListDto(Chapter chapter) {
         String thumbnailUrl = chapter.getCuts().isEmpty() ? "" : chapter.getCuts().get(0).getImageUrl();
         return ChapterListDto.Response.builder()
-            .chapterNo(chapter.getChapterNo())
-            .chapterId(chapter.getId())
-            .thumbnail(thumbnailUrl)
-            .level(chapter.getLevel())
-            .build();
+                .chapterNo(chapter.getChapterNo())
+                .chapterId(chapter.getId())
+                .thumbnail(thumbnailUrl)
+                .level(chapter.getLevel())
+                .build();
     }
 
-    public static ChapterLevelDto.Response chapterToChapterLevelDto(Chapter chapter){
+    public static ChapterLevelDto.Response chapterToChapterLevelDto(Chapter chapter) {
         return ChapterLevelDto.Response.builder()
-            .chapterNo(chapter.getChapterNo())
-            .chapterId(chapter.getId())
-            .level(chapter.getLevel())
-            .build();
+                .chapterNo(chapter.getChapterNo())
+                .chapterId(chapter.getId())
+                .level(chapter.getLevel())
+                .build();
     }
 
     public static Integer toChapterNo(Chapter chapter) {

@@ -10,7 +10,6 @@ import com.jshi.laughtale.wordbook.mapper.WordBookMapper;
 import com.jshi.laughtale.wordbook.repository.WordBookRepository;
 import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.worddata.service.WordDataService;
-import com.jshi.laughtale.wordlist.exception.NotExistWordListException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

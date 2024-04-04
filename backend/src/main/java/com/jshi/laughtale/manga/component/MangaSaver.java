@@ -4,7 +4,6 @@ import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.cut.domain.Cut;
 import com.jshi.laughtale.cut.repository.CutRepository;
-import com.jshi.laughtale.jako.service.JaKoService;
 import com.jshi.laughtale.manga.domain.Manga;
 import com.jshi.laughtale.manga.repository.MangaRepository;
 import com.jshi.laughtale.parser.context.ChapterContext;

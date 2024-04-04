@@ -4,9 +4,6 @@ import com.jshi.laughtale.member.domain.Member;
 import com.jshi.laughtale.wordbook.domain.WordBook;
 import com.jshi.laughtale.wordbook.dto.WordBookBasic;
 import com.jshi.laughtale.worddata.domain.WordData;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public class WordBookMapper {
 
@@ -16,6 +13,7 @@ public class WordBookMapper {
                 .wordData(wordData)
                 .build();
     }
+
     public static WordBookBasic.Response toBasicResponse(WordBook wordBook) {
         WordData wordData = wordBook.getWordData();
         return WordBookBasic.Response.builder()

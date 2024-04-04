@@ -11,13 +11,13 @@ import lombok.*;
 @Entity
 @Getter
 public class WordBook {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne
-	@JoinColumn(name = "member_id")
-	private Member member;
-	@ManyToOne
-	@JoinColumn(name = "word_id")
-	private WordData wordData;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "word_id")
+    private WordData wordData;
 }
