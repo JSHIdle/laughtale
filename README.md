@@ -13,26 +13,17 @@
 ---
 
 ## 1. 서비스 개요
+만화를 통해 일본어 어휘를 자연스럽게 익히도록 돕는 만화 기반의 일본어 학습 플랫폼입니다.
 
-## 2. 팀원 소개
-
-### Infra
-
-|  **정승환**  |
-|:---------:|
-|  |
-
-### Frontend
-
-|  **김재찬**  | **김도형**  |   **정연미**    |
-|:---------:|:--------:|:------------:|
-|  |  |  |
-
-### Backend
-
-|  **양진우**  |                **최재용**                |
-|:---------:|:-------------------------------------:|
-|  | 데이터 처리, 회원 관리 및 인증/인가, 단어장, 만화 분석 API |
+## 2. 주요 기능
+- 다양한 일본어 만화 제공
+    - 다양한 장르와 스타일의 일본어 만화를 제공
+- 클릭 번역
+    - 만화를 보면서 모르는 단어를 클릭하면 해석과 단어 설명을 제공하며, 해당 단어를 단어장에 추가할 수 있습니다.
+- 학습 기능
+    - 만화 퀴즈를 제공하여 사용자의 학습을 돕습니다.
+- 마이페이지
+    - 단어장 기능 제공
 
 ## 3. 기술 스택
 
@@ -76,9 +67,22 @@
 
 ## 4. 서비스 아키텍처
 ![Architecture](https://github.com/j-yong98/j-yong98/assets/120557342/eec4548c-5479-40b9-a11c-b3c603f06617)
-## 5. ERD
+
+## 5. 팀 소개
+
+| 이름 | 역할 | 개발 내용 |
+| --- | --- | --- |
+| 정승환 (팀장) | Infra | - **CICD 구축**<br> &emsp; - Jenkins 연결, 파이프라인 작성<br> &emsp; - gitlab 연결<br> &emsp; - MultiBranch Pipeline을 이용하여 front, back CI/CD 분리<br> - **도커 구축**<br> &emsp; - SpringBoot, React, MySQL<br> &emsp; - Nginx 구축<br> &emsp; &emsp; - HTTPS 적용<br> &emsp; &emsp; - 리버스 프록시 설정 |
+| 김재찬 | FrontEnd | - 로그인 및 인증 라우터 구현<br> - 페이지 UI/UX 디자인<br>   - HOME 페이지 디자인<br>   - CHAPTER 페이지 UI/UX<br>   - VIEWER 페이지 UI/UX |
+| 김도형 | FrontEnd | **UI/UX 디자인**<br> &emsp; - 메인페이지, 만화 업로드 페이지 구현<br> &emsp; - 사용자 학습 데이터 시각화<br> &emsp; - d3.js를 통한 망각곡선 그래프 제작<br> &emsp; - 파비콘 디자인<br> &emsp; - 스크롤 애니메이션 구현 |
+| 정연미 | BackEnd | - **UI/UX 디자인**<br> &emsp; - 퀴즈 페이지 (로딩, 풀이, 결과)<br> &emsp; - 마이페이지, 단어장<br> &emsp; - 메인 페이지<br> - **초기 프로젝트 생성 및 설계** |
+| 양진우 | BackEnd | - **SpringBoot 서버 RestAPI 작성**<br> - **데이터베이스 설계**<br> - **사용자 맞춤형 퀴즈 생성 로직 설계 및 구현**<br> - **사용자 실력 측정 로직 설계 및 구현**<br> - **단어 빈도수 기반 난이도 측정**<br> - **UI/UX 메인페이지 구현** |
+| 최재용 | BackEnd | - **데이터 처리**<br> - **만화 분석 로직 설계 및 구현**<br> - **Spring boot API 작성 (회원 관리 및 단어장)**<br> - **Spring Security를 이용한 사용자 인증/인가**<br> - **만화 분석 페이지 UI/UX** |
+
+## 6. ERD
 ![ERD](https://github.com/j-yong98/j-yong98/assets/120557342/16811f7b-29b3-498f-8c20-c568e0d80d5a)
-## 6. 디렉토리 구조
+
+## 7. 디렉토리 구조
 ```text
 Frontend
 ├── apis
@@ -145,11 +149,11 @@ Backend
 ├── wordhistory
 └── wordlist
 ```
-## 7. API 명세서
+## 8. API 명세서
 ![image](https://github.com/j-yong98/j-yong98/assets/120557342/ec924eb3-157c-4ca6-9031-4e7182770028)
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
-## 8. 서비스 설명
+## 9. 서비스 설명
 ![main-2024-04-03](https://github.com/j-yong98/j-yong98/assets/120557342/78f1b83a-d0d9-46e2-82d8-3aefc0963c88)
 ![manga-list-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/7d0df80e-2f58-4e10-8409-0758c1517415)
 ![info-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/6ed7142b-318b-4161-ad62-898d6a0a7012)
