@@ -2,13 +2,7 @@ package com.jshi.laughtale.quiz.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jshi.laughtale.position.domain.Position;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -77,6 +71,7 @@ public class QuizWord {
 
     private Integer rightBottomX;
     private Integer rightBottomY;
+
     public QuizWord(Long speechId, Long wordDataId, String answerWord, Integer level, Long wordListId) {
         super();
         this.speechId = speechId;
@@ -85,6 +80,7 @@ public class QuizWord {
         this.level = level;
         this.wordListId = wordListId;
     }
+
     public void addPositionToQuizWord(Position position) {
         this.setLeftTopX(position.getLeftTopX());
         this.setLeftTopY(position.getLeftTopY());
@@ -99,7 +95,6 @@ public class QuizWord {
         this.setRightBottomY(position.getRightBottomY());
 
     }
-
 
 
 }

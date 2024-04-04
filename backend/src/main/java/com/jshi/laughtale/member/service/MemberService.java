@@ -12,7 +12,6 @@ import com.jshi.laughtale.security.jwt.JwtProcessor;
 import com.jshi.laughtale.wordhistory.domain.WordHistory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,8 +67,8 @@ public class MemberService {
             sum += wordLevel * ebbinghausUtil.calculateMemory(wordHistory.getStudyDate(), wordHistory.getStudyCnt());
             // log.info("sum : " + sum);
         }
-        log.info("계산된 회원 실력 : " +  (((sum / wordHistoryList.size())/100) + 1));
-        return (int) Math.round(((sum / wordHistoryList.size())/100) + 1);
+        log.info("계산된 회원 실력 : " + (((sum / wordHistoryList.size()) / 100) + 1));
+        return (int) Math.round(((sum / wordHistoryList.size()) / 100) + 1);
     }
 
     public Member findById(Long id) {

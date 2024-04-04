@@ -7,13 +7,10 @@ import com.jshi.laughtale.security.handler.SecurityAccessDeniedHandler;
 import com.jshi.laughtale.security.handler.SecurityAuthenticationEntryPoint;
 import com.jshi.laughtale.security.jwt.JwtAuthenticationFilter;
 import com.jshi.laughtale.security.jwt.JwtAuthenticationProvider;
-import java.util.Arrays;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.Customizer;
@@ -28,6 +25,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.PATCH;
@@ -73,7 +73,7 @@ public class SecurityConfig {
                         .requestMatchers(GET, "/api/manga/{level}").permitAll()
                         .requestMatchers(GET, "/api/word-data/word-cloud").permitAll()
                         .requestMatchers(PATCH, "/api/member/role").hasRole(Role.ROLE_ADMIN.value())
-                         .anyRequest().authenticated())
+                        .anyRequest().authenticated())
                 .oauth2Login(oauth ->
                         oauth
                                 .defaultSuccessUrl("/")

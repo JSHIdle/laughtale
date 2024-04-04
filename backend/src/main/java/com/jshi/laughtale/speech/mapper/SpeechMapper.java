@@ -20,6 +20,7 @@ public class SpeechMapper {
                 .position(position)
                 .build();
     }
+
     public static Speech toEntity(Cut cut, String sentence, int speechNo, Position position) {
         return Speech.builder()
                 .cut(cut)
@@ -40,8 +41,7 @@ public class SpeechMapper {
     }
 
     public static SpeechDetail.Response toDetailResponse(
-            String title, Integer chapterNo, CutBasic.Response cut, PositionBasic.Response positionBasic)
-    {
+            String title, Integer chapterNo, CutBasic.Response cut, PositionBasic.Response positionBasic) {
         return SpeechDetail.Response.builder()
                 .positionBasic(positionBasic)
                 .title(title)

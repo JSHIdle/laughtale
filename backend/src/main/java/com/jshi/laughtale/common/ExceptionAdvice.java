@@ -1,9 +1,7 @@
 package com.jshi.laughtale.common;
 
-import com.nimbusds.jwt.JWT;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;

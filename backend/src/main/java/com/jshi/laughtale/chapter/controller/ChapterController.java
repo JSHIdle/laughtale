@@ -3,15 +3,15 @@ package com.jshi.laughtale.chapter.controller;
 import com.jshi.laughtale.chapter.dto.ChapterFirst;
 import com.jshi.laughtale.chapter.dto.ChapterLevelDto;
 import com.jshi.laughtale.chapter.dto.ChapterListDto;
+import com.jshi.laughtale.chapter.dto.ChapterPaginationDto;
 import com.jshi.laughtale.chapter.service.ChapterService;
 import com.jshi.laughtale.common.dto.LevelCount;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
-
-import com.jshi.laughtale.chapter.dto.ChapterPaginationDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,21 +22,21 @@ public class ChapterController {
 
     @GetMapping("/list")
     public ResponseEntity<Page<ChapterListDto.Response>> getMangaChapters(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "20") int size,
-        @RequestParam("mangaid") long mangaid) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam("mangaid") long mangaid) {
         return ResponseEntity.ok(chapterService.getChaptersFromManga(mangaid, page, size));
     }
 
     @GetMapping("/levels")
     public ResponseEntity<List<ChapterLevelDto.Response>> getChapterLevels(
-        @RequestParam("mangaId") long mangaId) {
+            @RequestParam("mangaId") long mangaId) {
         return ResponseEntity.ok(chapterService.getChapterLevels(mangaId));
     }
 
     @GetMapping("/level")
     public ResponseEntity<List<LevelCount.Response>> getChapterLevelCount(
-        @RequestParam("chapterId") long chapterId) {
+            @RequestParam("chapterId") long chapterId) {
         return ResponseEntity.ok(chapterService.getChapterLevelCount(chapterId));
     }
 
@@ -46,10 +46,10 @@ public class ChapterController {
     }
 
 
-	@GetMapping("/{chapterId}")
-	public ResponseEntity<ChapterPaginationDto.Response> getChapterPagination(
-		@PathVariable Long chapterId
-	){
-		return ResponseEntity.ok(chapterService.getChapterPagination(chapterId));
-	}
+    @GetMapping("/{chapterId}")
+    public ResponseEntity<ChapterPaginationDto.Response> getChapterPagination(
+            @PathVariable Long chapterId
+    ) {
+        return ResponseEntity.ok(chapterService.getChapterPagination(chapterId));
+    }
 }

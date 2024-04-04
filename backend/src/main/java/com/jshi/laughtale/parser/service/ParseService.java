@@ -7,10 +7,11 @@ import com.jshi.laughtale.parser.context.CutContext;
 import com.jshi.laughtale.parser.context.MangaContext;
 import com.jshi.laughtale.parser.context.SpeechContext;
 import com.jshi.laughtale.worddata.domain.WordData;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ParseService {

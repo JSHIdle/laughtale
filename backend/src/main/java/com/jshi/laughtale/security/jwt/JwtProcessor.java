@@ -6,13 +6,14 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import java.time.Duration;
-import java.util.Date;
-import javax.crypto.SecretKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
+
+import javax.crypto.SecretKey;
+import java.time.Duration;
+import java.util.Date;
 
 @Slf4j
 @Component
@@ -41,6 +42,7 @@ public class JwtProcessor implements BeanPostProcessor {
 
         return now.before(expiration);
     }
+
     public String createJwtToken(String email, String role) {
         SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
