@@ -3,23 +3,6 @@ import React, {useEffect, useState} from 'react';
 import Icon from '@mdi/react';
 import { mdiVolumeHigh } from '@mdi/js';
 import ModalCarousel from "./ModalCarousel.tsx";
-
-const dummyData = {
-    text: 'こんにちは、世界！私の名前はAIです。', // 예시 일본어 텍스트
-    translate : '안녕? 뜻이 들어간다 ',
-    sentence : [{"idx" : 1, "japan" : "こんにちは、世界！私の名前はAIです", "korean" : "문장 뜻입니다."},
-        {
-            "idx": 2,
-            "japan": "こんにちは、世界！私の名前はAIです",
-            "korean": "문장 뜻입니다."
-        },
-        {
-            "idx": 3,
-            "japan": "こんにちは、世界！私の名前はAIです",
-            "korean": "문장 뜻입니다."
-        },
-        ]
-};
 import client from "../../apis";
 import getWordExample from "./getWordExample.tsx";
 import { useQueryClient } from '@tanstack/react-query';
