@@ -5,12 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.jshi.laughtale.cut.dto.CutBasic;
 import com.jshi.laughtale.position.dto.PositionBasic;
 import com.jshi.laughtale.worddata.dto.WordDataDetail;
-import com.jshi.laughtale.worddata.dto.WordDataDetail.Response;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 public class SpeechDetail {
 

@@ -3,14 +3,11 @@ package com.jshi.laughtale.wordbook.controller;
 import com.jshi.laughtale.security.details.CustomUserDetails;
 import com.jshi.laughtale.wordbook.dto.WordBookBasic;
 import com.jshi.laughtale.wordbook.service.WordBookService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/word-book")

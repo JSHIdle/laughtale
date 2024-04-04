@@ -5,11 +5,12 @@ import com.jshi.laughtale.worddata.domain.WordData;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.repository.WordListRepository;
 import jakarta.persistence.Tuple;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,16 +25,16 @@ public class WordListService {
         List<QuizWord> quizList = new ArrayList<>();
         for (Tuple tuple : tempList) {
             quizList.add(QuizWord.builder()
-                .wordDataId(tuple.get("word_data_id", Long.class))
-                .answerWord(tuple.get("answer_word", String.class))
-                .level(tuple.get("level", Integer.class))
-                .wordListId(tuple.get("word_list_id", Long.class))
-                .speechId(tuple.get("speech_id", Long.class))
-                .sentence(tuple.get("sentence", String.class))
-                .definition(tuple.get("definition", String.class))
-                .height(tuple.get("height", Integer.class))
-                .width(tuple.get("width", Integer.class))
-                .build());
+                    .wordDataId(tuple.get("word_data_id", Long.class))
+                    .answerWord(tuple.get("answer_word", String.class))
+                    .level(tuple.get("level", Integer.class))
+                    .wordListId(tuple.get("word_list_id", Long.class))
+                    .speechId(tuple.get("speech_id", Long.class))
+                    .sentence(tuple.get("sentence", String.class))
+                    .definition(tuple.get("definition", String.class))
+                    .height(tuple.get("height", Integer.class))
+                    .width(tuple.get("width", Integer.class))
+                    .build());
         }
         return quizList;
     }
