@@ -1,5 +1,4 @@
-![캡처-removebg-preview (15)](https://github.com/Youth787/SSAFY_Algorithm_Study/assets/90955152/c86199b1-7fdb-446c-a69b-eabb88f90219)
-
+![logo](https://github.com/j-yong98/j-yong98/assets/120557342/eaee8660-0288-46a1-aeed-f6b2c51676e6)
 
 ---
 [1. 서비스 개요](#1-서비스-개요)  
@@ -14,22 +13,6 @@
 ---
 
 ## 1. 서비스 개요
-### Laugh Tale 이란?
-우리가 일반적으로 '놀이'라고 생각하는 만화보기로 학습 효과를 누릴 수 있다니 '참 웃긴 이야기'입니다. 우리의 서비스 laugh tale은 사용자가 일본어를 재미있고 효과적으로 배울 수 있도록 도와주는 일본어 학습 도구를 제공합니다. 사용자의 일본어 수준에 따라 맞춤 단어를 추천하고 자동 생성 퀴즈 풀이를 통해 개인화된 학습을 이어나갈 수 있습니다. 
-
-### 기획 배경
-- 일본 만화에 대한 수요 증가
-- 지속성이 낮은 기존의 일본어 학습 서비스
-
-### 타겟 사용자 
-- 일본 만화를 좋아하는 사람
-- 일본어 학습에 지루함을 느끼는 사람
-
-
-### 기대 효과
-- 재미있는 만화를 통한 자연스러운 일본어 학습
-- 개인화 맞춤 단어장, 자동 생성 퀴즈, 만화 분석 등의 기능을 통한 실력 향상
-
 
 ## 2. 팀원 소개
 
@@ -69,10 +52,7 @@
 ### Frontend
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
 <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
-<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
-<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
-<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+
 
 ### Backend
 <img src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot">
@@ -166,12 +146,16 @@ Backend
 └── wordlist
 ```
 ## 7. API 명세서
-  
+![image](https://github.com/j-yong98/j-yong98/assets/120557342/ec924eb3-157c-4ca6-9031-4e7182770028)
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
 ## 8. 서비스 설명
----
-
----
-![analyze1-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ead00f2b-271b-4acf-bbbf-2e3a0f0e522f)
-![analyze2-2024-4-3](https://github.com/j-yong98/j-yong98/assets/120557342/ba14306c-735b-4f1e-88b1-d0370cab1148)
+![main-2024-04-03](https://github.com/j-yong98/j-yong98/assets/120557342/78f1b83a-d0d9-46e2-82d8-3aefc0963c88)
+![manga-list-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/7d0df80e-2f58-4e10-8409-0758c1517415)
+![info-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/6ed7142b-318b-4161-ad62-898d6a0a7012)
+![view-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/c42d529e-6beb-4218-b50c-73d5d9aab247)
+![quiz-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/826d5343-9f75-46c5-80c8-170399a3cbc5)
+![mypage-1-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/1568e0e3-0b09-4d49-9141-b1e85fe337b0)
+![word-book-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/88087e12-c812-47e6-9af6-4afd3c13a687)
+![admin-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/3f117a28-813e-446b-b53e-908909bf38c7)
+![analyze-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/71b6d581-51e7-4144-bc45-f6facc7d8b2a)
