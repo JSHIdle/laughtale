@@ -25,6 +25,28 @@
 - 마이페이지
     - 단어장 기능 제공
 
+
+
+## 2. 팀원 소개
+
+### Infra
+
+|  **정승환**  |
+|:---------:|
+|  |
+
+### Frontend
+
+|  **김재찬**  | **김도형**  |   **정연미**    |
+|:---------:|:--------:|:------------:|
+|  |  |  |
+
+### Backend
+
+|  **양진우**  |                **최재용**                |
+|:---------:|:-------------------------------------:|
+|  | 데이터 처리, 회원 관리 및 인증/인가, 단어장, 만화 분석 API |
+
 ## 3. 기술 스택
 
 ### IDE
@@ -43,7 +65,8 @@
 ### Frontend
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
 <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
-
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+<img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white" />
 
 ### Backend
 <img src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot">
@@ -156,10 +179,39 @@ Backend
 ## 9. 서비스 설명
 ![main-2024-04-03](https://github.com/j-yong98/j-yong98/assets/120557342/78f1b83a-d0d9-46e2-82d8-3aefc0963c88)
 ![manga-list-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/7d0df80e-2f58-4e10-8409-0758c1517415)
+
+### 만화 페이지
+- 만화에 대한 내용 제공
+- 만화에 나온 단어들을 그래프로 시각화
+- 해당 만화에 대한 챕터 목록과 챕터의 난이도 제공
+
 ![info-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/6ed7142b-318b-4161-ad62-898d6a0a7012)
+
+
+### 뷰어 페이지
+- 만화 제공
+- 말풍선 문장에 대한 단어의 뜻 제공
+- 단어장에 단어 추가 기능 제공
+- 단어와 문장을 읽어주는 스피치 기능 제공
+
 ![view-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/c42d529e-6beb-4218-b50c-73d5d9aab247)
+
+### 퀴즈 페이지
+- 만화 챕터를 기반한 실시간 랜덤 문제 생성
+- 문제에 대한 힌트 제공
+- 문제풀이에 대한 결과 제공
+
 ![quiz-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/826d5343-9f75-46c5-80c8-170399a3cbc5)
+
+### 마이 페이지
+- 자신의 레벨 별 단어장 제공
+- 최근 본 만화 목록 제공
+- 단어장 난이도 별 단어 개수 시각화
+- 내가 푼 퀴즈의 난이도 시각화
+- 자신의 학습 단어 망각곡선 시각화
+- 학습 단어 망각곡선 설명 제공
 ![mypage-1-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/1568e0e3-0b09-4d49-9141-b1e85fe337b0)
+
 ![word-book-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/88087e12-c812-47e6-9af6-4afd3c13a687)
 ![admin-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/3f117a28-813e-446b-b53e-908909bf38c7)
 ![analyze-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/71b6d581-51e7-4144-bc45-f6facc7d8b2a)
