@@ -62,4 +62,6 @@ export default {
                 sliderC: 'sliderC 60s linear infinite',
             }
         },
+    },
+}
 
