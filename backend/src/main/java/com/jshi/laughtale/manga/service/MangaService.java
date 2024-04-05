@@ -16,7 +16,6 @@ import com.jshi.laughtale.member.service.MemberService;
 import com.jshi.laughtale.parser.Attribute;
 import com.jshi.laughtale.parser.context.MangaContext;
 import com.jshi.laughtale.parser.service.ParseService;
-import com.jshi.laughtale.security.Role;
 import com.jshi.laughtale.utils.DataRequest;
 import com.jshi.laughtale.utils.FileUtils;
 import com.jshi.laughtale.wordlist.repository.WordListRepository;
@@ -59,21 +58,10 @@ public class MangaService {
     /**
      * 파일 저장, 사진 분석 요청, 파싱, 저장 or 파일 삭제
      */
-    public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files, Long memberId)
+    public MangaAnalyze.Response upload(MultipartFile thumbnail, MangaUpload.Request manga, List<MultipartFile> files)
             throws IOException {
-        Role role = memberService.findById(memberId).getRole();
-        if ((role == Role.ROLE_ADMIN && (thumbnail == null || manga == null)) ||
-                ((role == Role.ROLE_USER || role == Role.ROLE_ANONYMOUS) && (thumbnail != null && manga != null))
-        ) {
-            throw new IllegalArgumentException("BAD REQUEST");
-        }
         log.info("파일 저장...");
-        String thumbnailPath = MangaMapper.EMPTY;
-        if (role == Role.ROLE_ADMIN) {
-            thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), Attribute.THUMBNAIL.toString());
-        } else {
-            manga = MangaMapper.emptyUploadRequest();
-        }
+        String thumbnailPath = FileUtils.save(thumbnail, manga.getTitle(), Attribute.THUMBNAIL.toString());
         int last = mangaRepository.findLastChapterByManga(manga.getTitle()).orElse(0) + 1;
         List<String> names = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -91,12 +79,31 @@ public class MangaService {
         log.info("분석...");
         MangaAnalyze.Response response = mangaAnalyzer.analyze(mangaContext, last);
 
-        if (role == Role.ROLE_ADMIN) {
-            log.info("DB 저장...");
-            mangaSaver.save(mangaContext);
-        }
+        log.info("DB 저장...");
+        mangaSaver.save(mangaContext);
         return response;
     }
+
+    public MangaAnalyze.Response analyzeManga(List<MultipartFile> files) throws IOException {
+        log.info("파일 저장...");
+        String thumbnailPath = MangaMapper.EMPTY;
+        MangaUpload.Request request = MangaMapper.emptyUploadRequest();
+
+        List<String> names = new ArrayList<>();
+        for (MultipartFile file : files) {
+            String filename = FileUtils.save(file, request.getTitle(), String.valueOf(0));
+            names.add(filename);
+        }
+        MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, request, 0, names);
+        Map result = DataRequest.analyze(analyzeRequest);
+
+        log.info("파싱...");
+        MangaContext mangaContext = parseService.parse(result);
+
+        log.info("분석...");
+        return mangaAnalyzer.analyze(mangaContext, 0);
+    }
+
 
     public List<RecentManga.Response> getRecentManga(Long memberId) {
         List<Tuple> tupleList = mangaRepository.findRecentManga(memberId);
