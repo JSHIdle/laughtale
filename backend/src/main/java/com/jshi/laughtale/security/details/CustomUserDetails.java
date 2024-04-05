@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetails implements UserDetails {
-
     private Long id;
     private String email;
     private String password;
@@ -27,7 +26,7 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public static CustomUserDetails withMember(Member member) {
-        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(member.getRole().value());
+        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(member.getRole().toString());
         return new CustomUserDetails(
                 member.getId(),
                 member.getEmail(),
