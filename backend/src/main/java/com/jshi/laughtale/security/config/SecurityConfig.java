@@ -29,8 +29,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.PATCH;
+import static com.jshi.laughtale.security.Role.*;
+import static com.jshi.laughtale.security.Role.ROLE_TEMPORARY_USER;
+import static org.springframework.http.HttpMethod.*;
 
 @Slf4j
 @Configuration
@@ -72,8 +73,10 @@ public class SecurityConfig {
                         .requestMatchers(GET, "/api/manga").permitAll()
                         .requestMatchers(GET, "/api/manga/{level}").permitAll()
                         .requestMatchers(GET, "/api/word-data/word-cloud").permitAll()
-                        .requestMatchers(PATCH, "/api/member/role").hasRole(Role.ROLE_ADMIN.value())
-                         .anyRequest().authenticated())
+                        .requestMatchers(PATCH, "/api/member/role").hasRole(ROLE_ADMIN.value())
+                        .requestMatchers(POST, "/api/manga/upload").hasRole(ROLE_ADMIN.value())
+                        .requestMatchers(POST, "/api/manga/analyze").hasRole(ROLE_TEMPORARY_USER.value())
+                        .anyRequest().authenticated())
                 .oauth2Login(oauth ->
                         oauth
                                 .defaultSuccessUrl("/")
