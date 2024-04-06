@@ -25,3 +25,17 @@
 .fadeInUp-animation {
     animation: 1.5s fadeInUp;
 }
+
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.test{
+    font-family: 'yg-jalnan';
+}
+.custom-shadow {
+    text-shadow: -1px 0px #333333, 0px 1px  #333333, 1px 0px  #333333, 0px -1px  #333333;
+}
