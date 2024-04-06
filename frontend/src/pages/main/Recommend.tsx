@@ -56,7 +56,7 @@ const Recommend = () => {
                                   <div className="p-4">Lv2 : 자주 쓰이는데 조금 덜 흔하다. 여전히 일상 대화에서 자주 등장한다.</div>
                                   <div className="p-4">Lv3 : 정확한 시제 구사, 이유와 설명 전달 가능하다.</div>
                                  <div className="p-4"> Lv4 : 일상 대화 수준의 의사소통 가능하다.</div>
-                                 <div className="p-4"> Lv5 : 흔히 사용되지 않는 단어하다.</div>
+                                 <div className="p-4"> Lv5 : 흔히 사용되지 않는 단어이다.</div>
                               </div>
                           </div>
 
