@@ -3,7 +3,10 @@ import router from "./routes";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {useEffect} from "react";
+import Modal from 'react-modal';
+
 import AuthEffect from "./layout/AuthEffect.tsx";
+import AlertModal from "./components/common/AlertModal.tsx";
 const queryClient = new QueryClient({
   defaultOptions:{
     queries:{
@@ -12,9 +15,12 @@ const queryClient = new QueryClient({
   }
 });
 
+
 export default function App(){
   return <QueryClientProvider client={queryClient}>
-    <AuthEffect><RouterProvider router={router} /></AuthEffect>
+    <AuthEffect>
+      <AlertModal/>
+      <RouterProvider router={router} /></AuthEffect>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 }

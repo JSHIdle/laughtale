@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import BlueHeader from '../../components/common/BlueHeader';
+import Header from '../../components/common/Header';
 import CartoonGrid from "../../components/main/CartoonGrid";
+import RecentWord from '../../components/main/RecentWord.tsx';
 import '../../index.css'
 import NavBar from "./NavBar.tsx";
-import "./fade-out.css"
-import { text } from '../../constants/text.ts';
-import cartoonstudy from "../../assets/main/cartoonstudy.jpg";
-import MainText from "./MainText.tsx";
-import CartoonCard from "../../components/main/CartoonCard.tsx";
-import {colors} from "../../constants/colors.ts";
+import mainimage from "../../assets/main/mainimage.png";
+import imageboy from "../../assets/main/imageboy.png";
+import theme from "../../assets/main/theme.jpg";
+import preview from '../../assets/main/preview.png'
+import "./fade-out.css";
+import BlueHeader from "../../components/common/BlueHeader.tsx";
+
 const Recommend = () => {
     const [selectedLevel, setSelectedLevel] = useState(1);
     const [filteredCartoons, setFilteredCartoons] = useState([]);
     const [cartoons, setCartoons] = useState([]);
-    const [same, isSame] = useState(false);
     useEffect(() => {
         // API 요청을 통해 만화 데이터를 가져옵니다.
         const fetchCartoons = async () => {
@@ -36,87 +37,42 @@ const Recommend = () => {
     }, [cartoons, selectedLevel]);
 
     return (
-        <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
-            <BlueHeader/>
-            <div
-              className="flex w-[100%] pl-20 pr-20 justify-between  h-[80vh] translate-y-40 object-cover relative ">
-                <div
-                  className="absolute top-0 left-0 right-0 bottom-0 -z-10 blur-md	 "
-                  style={{ backgroundSize:'cover',backgroundImage:`url(${cartoonstudy})`, backgroundRepeat:'no-repeat'}}
-                >
+          <div className="bg-[#ffffff] text-black laughtale-font" style={{height: 'calc(100vh * 1.1111)'}}>
+              <BlueHeader/>
 
-                </div>
-                <div className="absolute top-0 left-0 right-0 bottom-0 opacity-50 bg-black "
-                     // style={{ backgroundColor: 'rgba(0,0,0, 0.4);' }}
-                >
-                </div>
-              <div className="z-10 flex-1">
-                <div className="w-full flex justify-center ">
-                  <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
-                    <span className="">만화를 통한 수준별 일본어 학습</span>
-                  </div>
-
-                </div>
-                <div className="flex justify-center font-bold text-5xl mt-20 laughtale-font">
-                  <span className="fadeInUp-animation">{ text[selectedLevel - 1] }</span>
-                </div>
-                {/*<NavBar selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel}/>*/}
-
-
-                <div className="flex z-10 flex-1 ">
-                  <div className="flex gap-20 justify-center items-center flex-1">
-                    {
-                      filteredCartoons.map((webtoon, index) => (
-                        <CartoonCard
-                          key={index}
-                          imageUrl={webtoon.thumbnail}
-                          title={webtoon.title}
-                          mangaId={webtoon.id}
-                        />
-                      ))
-                    }
-                  </div>
-                </div>
-
-                <ul className="flex mt-4 md:space-x-32 md:flex-row text-5xl justify-center absolute bottom-10 left-0 right-0">
-                  {[1, 2, 3, 4, 5].map(level => (
-                    <li key={level}>
-                      <div
-                        className={`p-3 rounded-xl}`}
-                      >
-                        <button onClick={() => setSelectedLevel(level)}
-                          // className="text-5xl block py-2 px-3 md:p-0 font-bold rounded md:bg-transparent md:dark:text-blue-500 md:dark:bg-transparent"
-                                className="text-5xl block py-2 px-3 md:p-0 font-bold rounded"
-                                style={{color: `${selectedLevel === level ?  'text-[#64BDE2]' : colors[level-1]}`}}
-                        >
-                          Lv {level}
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-
-              </div>
-
-
-              {/*<MainText />*/}
-
-
-              {/*<CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>*/}
-              {/*<img src={cartoonstudy} className="absolute w-full h-[540px] top-40 translate-y-40 object-cover"/>*/}
-            </div>
-
-
-
-            {/*<div className="flex justify-center p-3 fixed inset-x-0 bottom-10">*/}
-            {/*    <CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>*/}
+            {/*<div className="flex justify-center font-bold text-5xl mt-16 laughtale-font p-10">*/}
+            {/*  만화를 통한 수준별 일본어 학습 LaughTale*/}
             {/*</div>*/}
-            {/*{cartoons.map((cartoonData, index) => (*/}
-            {/*    <CartoonGrid key={index} cartoons={cartoonData} level={index + 1} />*/}
-            {/*))}*/}
-        </div>
-    );
-}
 
-export default Recommend;
+
+                      <div className="flex justify-center items-center relative overflow-hidden h-[450px] mt-[70px]">
+                          <img src={preview} className="absolute top-0 bottom-0 right-0 left-0 w-full h-[450px]  object-cover z-1 blur"/>
+
+                          <div className="relative w-[70%] h-full z-10 mt-[150px] text-8xl test">
+                              <span className="test text-[#444444]">나에게 맞는 <span className="text-yellow-400 custom-shadow">만화책</span> 고르기</span>
+                              {/*<span className="test text-[#444444] absolute top- left-0 translate-x-1 translate-y-1">나에게 맞는 책 고르기</span>*/}
+                              <div className="text-4xl mt-4  text-[#333]">
+                                  <div className="p-4">Lv1 : 흔한 단어들이 많이 등장한다. 일상 대화나 글에서 자주 들을 수 있다.</div>
+                                  <div className="p-4">Lv2 : 자주 쓰이는데 조금 덜 흔하다. 여전히 일상 대화에서 자주 등장한다.</div>
+                                  <div className="p-4">Lv3 : 정확한 시제 구사, 이유와 설명 전달 가능하다.</div>
+                                 <div className="p-4"> Lv4 : 일상 대화 수준의 의사소통 가능하다.</div>
+                                 <div className="p-4"> Lv5 : 흔히 사용되지 않는 단어하다.</div>
+                              </div>
+                          </div>
+
+
+                      </div>
+                      <div className="flex justify-center items-center p-3 ">
+                        <NavBar selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel}/>
+                      </div>
+
+                      <div className="flex justify-center p-3">
+                          <CartoonGrid cartoons={filteredCartoons} level={selectedLevel}/>
+                      </div>
+                      {/*{cartoons.map((cartoonData, index) => (*/}
+                      {/*    <CartoonGrid key={index} cartoons={cartoonData} level={index + 1} />*/}
+                      {/*))}*/}
+                  </div>
+                  );
+}
+                  export default Recommend;
