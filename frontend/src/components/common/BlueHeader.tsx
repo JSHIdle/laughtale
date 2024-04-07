@@ -14,14 +14,15 @@ const Header = ({color}: Props) => {
     const menu = ['만화 읽기', '만화 분석']
     const menuLink = ['/home', '/analyze']
     const user = useAuth(state => state.user);
-    const {isToggled, setIsToggle} = useToggle(state => state);
+    const isToggled = useToggle(state => state.isToggled);
+    const setIsToggle = useToggle(state => state.setIsToggle);
 
     return (
         <div className="sticky top-0 z-50 w-[100%] text-white laughtale-font">
             <div className="md:hidden flex justify-between px-6 items-center w-full h-[70px] bg-[#73ABE5] text-white">
                 <BsList className="w-12 h-12 p-2 hover:bg-slate-500 rounded-md transform"
                         onClick={() => setIsToggle(!isToggled)}/>
-                <Link to="/main">
+                <Link to="/main" >
                     <img src={Logo} alt="Logo" height="200" width="150"></img>
                 </Link>
                 <BlueAuthButton/>
@@ -29,7 +30,7 @@ const Header = ({color}: Props) => {
             {isToggled ? <ul className="block overflow-auto md:hidden w-full h-screen p-6 bg-[#73ABE5]">
                 {menu.map((menu, idx) => (
                     <li className="w-full.5 border-b p-6 text-2xl text-white font-bold">{<Link
-                        to={menuLink[idx]}>{menu}</Link>}</li>
+                        to={menuLink[idx]} onClick={() => setIsToggle(!isToggled)} >{menu}</Link>}</li>
                 ))}
                 {user?.role == Role.ADMIN &&
                     <li className="w-full p-6 text-white font-bold bg-gray-400">
