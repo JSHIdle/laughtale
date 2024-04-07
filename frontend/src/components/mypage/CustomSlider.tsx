@@ -86,7 +86,7 @@ function ExampleModal({isOpen, onClose, example}) {
                                              onClick={() => handleSentenceClick(index)}>
                                             <div className="flex items-center justify-start ">
                                                 <div className="mr-3">
-                                                    <h2>{item.sentence}</h2>
+                                                    <h2>{item.sentence}<SpeechButton sentence={item.sentence} style={{color:'black', width:"24px", height:'24px'}} /></h2>
                                                 </div>
                                             </div>
                                         </div>
