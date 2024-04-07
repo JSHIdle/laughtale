@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/Logo4.png';
 import {Link} from "react-router-dom";
 import BlueAuthButton from "./BlueAuthButton.tsx";
 import {useAuth} from "../../stores/useAuth.ts";
