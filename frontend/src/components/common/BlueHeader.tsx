@@ -54,7 +54,7 @@ const Header = ({color}: Props) => {
                     </Link>}
                 </div>
 
-                <div className="-translate-y-2 center">
+                <div className="flex justify-center items-center">
                     <Link to="/main">
                         <img src={Logo} alt="Logo" height="200" width="170"></img>
                     </Link>
