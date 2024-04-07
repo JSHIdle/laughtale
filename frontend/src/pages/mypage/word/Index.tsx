@@ -6,12 +6,14 @@ import getWordInfo from "../../../components/mypage/getWordInfo.tsx";
 import { useParams } from 'react-router-dom';
 import SpeechButton from "../../../components/common/SpeechButton.tsx";
 import image from '../../../assets/test.jpg'
-import {get} from "../../../apis";
+import client, {get} from "../../../apis";
+import { useQueryClient } from '@tanstack/react-query'
+
 const Index = () => {
   const { level } = useParams();
   const page = 0;
   const size = 100;
-
+  const queryClient = useQueryClient();
 
   const [wordInfo, setWordInfo] = useState<any>();
   const [wordRelativeInfo, setWordRelativeInfo] = useState<any>();
@@ -21,12 +23,18 @@ const Index = () => {
     queryFn: () => getWordInfo(level, page, size)
   });
 
-
   const clickTranslate = async (data) => {
     setWordInfo(data);
     const res = await get<any>(`/word-data/${data.id}`);
     setWordRelativeInfo(res);
     setSelectedSentence(res.speeches[0] as any);
+  }
+  const clickRemove = (data) => {
+    client.delete(`/word-book/${data.id}`);
+    const d = queryClient.getQueryData(['wordBook', level, page, size]);
+
+    // @ts-ignore
+    queryClient.setQueryData(['wordBook', level, page, size], {...d, content: d.content.filter(c => c.id !== data.id)});
   }
 
   return (
@@ -38,9 +46,10 @@ const Index = () => {
         {wordData && wordData.content.map(slideone => (
           <div key={slideone.id}>
             <div
-              className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative " onClick={() => clickTranslate(slideone)}>
+              className="group p-6 flex justify-center items-center transform hover:scale-110 transition duration-300 relative " >
               <div
                 className="absolute top-0 right-0 transform translate-y-10 -translate-x-12 text-red-600 w-6 h-6 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
+                onClick={() => clickRemove(slideone)}
               >
                 &ndash;
               </div>
@@ -49,11 +58,10 @@ const Index = () => {
               >
                 <div>
                   <div className="flex justify-items-center space-x-2 p-3">
-                    <div className="text-black font-semibold hover:text-black text-6xl">
+                    <div className="text-black font-semibold hover:text-black text-6xl cursor-pointer" onClick={() => clickTranslate(slideone)}>
                       {slideone.word}
                     </div>
                     <SpeechButton sentence={slideone.word} style={{width:"3rem", display:"inline", marginLeft:'1rem'}}/>
-
                   </div>
                 </div>
               </div>
