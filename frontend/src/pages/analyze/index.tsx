@@ -53,7 +53,7 @@ const Index = () => {
             formData.append("files", file);
         }
 
-        client.post("/manga/upload", formData, {
+        client.post("/manga/analyze", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

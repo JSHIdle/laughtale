@@ -7,6 +7,9 @@ const Chart = () => {
     const [viewRange, setViewRange] = useState('all');
 
     const [dataPoints, setDataPoints] = useState([]);
+    const [showTooltip, setShowTooltip] = useState(false); // 툴팁 표시 상태
+
+    // 툴팁 토글 함수
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,14 +65,14 @@ const Chart = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-            const svg = d3.select(svgRef.current);
-            svg.selectAll("*").remove(); // 기존 그래프를 지웁니다.
+        const svg = d3.select(svgRef.current);
+        svg.selectAll("*").remove(); // 기존 그래프를 지웁니다.
 
-            const width = 640;
-            const height = 550;
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-            const innerWidth = width - margin.left - margin.right;
-            const innerHeight = height - margin.top - margin.bottom;
+        const width = 640;
+        const height = 550;
+        const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
 
         // 스케일 설정
         const xScale = d3.scaleLinear()
@@ -91,7 +94,7 @@ const Chart = () => {
             .attr("y", -30)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("획득 포인트");
+            .text("예측 기억량");
 
         g.append('g')
             .call(d3.axisBottom(xScale))
@@ -109,7 +112,6 @@ const Chart = () => {
             .y(d => yScale(d[1]))
             .curve(d3.curveMonotoneX);
 
-        const colors = ['rgba(237,28,36,0.5)', 'rgba(255,127,39,0.5)', 'rgba(0,255,0,0.5)', 'rgba(0,0,255,0.5)', 'rgba(134,0,134,0.5)']; // 레벨별 색상
 
         // 필터링 로직을 추가하여 현재 선택된 범위에 따라 표시할 함수를 결정합니다.
         const filteredFunctions = viewRange === 'all'
@@ -118,12 +120,20 @@ const Chart = () => {
 
         // 각 레벨별로 그래프를 그립니다.
         filteredFunctions.forEach((func, index) => {
-            const data: [number, number][] = Array.from({ length: 500 }, (_, i) => [i + 1, func(i + 1)]); // 명시적 타입 어설션
+            const data: [number, number][] = Array.from({ length: 500 }, (_, i) => [i + 1, func(i + 1)]);
+            let colorIndex;
+            if (viewRange === 'all') {
+                colorIndex = Math.floor(index / 5) % levelColors.length; // 전체보기일 때는 기존 로직을 사용
+            } else {
+                // 특정 레벨 보기일 때는 viewRange에서 레벨을 계산
+                const level = parseInt(viewRange.split('-')[0]) / 5 + 1;
+                colorIndex = Math.floor(level) - 1; // viewRange가 0 시작이므로 -1
+            }
             g.append('path')
-                .datum(data) // 직접 데이터 전달
+                .datum(data)
                 .attr('fill', 'none')
-                .attr('stroke', colors[index % colors.length])
-                .attr('d', line); // 수정된 부분
+                .attr('stroke', levelColors[colorIndex])
+                .attr('d', line);
         });
 
         // 데이터 포인트를 차트에 표시하는 로직
@@ -197,13 +207,49 @@ const Chart = () => {
 
 
     return (
-        <div>
+        <div className="relative">
             <svg ref={svgRef} width={650} height={550}/>
+
+            {/* 툴팁 토글 버튼 */}
+            <button
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                className="absolute top-5 right-10 w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold cursor-pointer"
+                aria-label="정보"
+            >
+                ?
+            </button>
+
+            {/* 툴팁 내용 */}
+            {showTooltip && (
+                <div
+                    className="absolute top-10 right-10 w-300px p-4 bg-white rounded shadow-lg z-10" // w-64 대신 w-300px 를 사용하거나 적절한 값을 설정하세요.
+                    style={{ right: '50px', top: '50px', width: '500px' }} // 인라인 스타일에서 width 값을 설정합니다.
+                >
+                    <div>
+                        <div className="mt-5 ml-9 mb-2 mr-9 ">
+                            <div className="font-bold mb-5 text-4xl">에빙하우스 망각곡선</div>
+                            망각곡선 가설은 시간이 지남에 따라 기억이 남아있는 감소의 정도를 말하는 가설로,
+                            이 곡선은 기억을 유지하려는 시도가 없을 때 정보가 시간이 지남에 따라 손실되는 정도를 보여줍니다.<br/>
+                            곡선을 살펴보면 시간이 지남에 따라 잊어버리는 속도가 줄어듦을 알 수 있습니다.
+                        </div>
+
+                        <div className="mt-5 ml-9 mb-2 mr-9 ">
+                            이러한 망각곡선 주기에 착안하여 적절한 시점에 퀴즈를 통한 반복학습을 통해
+                            장기기억으로 유도하고 있습니다.<br/><br/>
+                            ※ 해당 그래프는 학습 단어 망각곡선에는 최근에 퀴즈에서 푼 단어의 예측 기억량을
+                            시각화한 것입니다.
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="flex flex-wrap gap-2 justify-center">
                 {renderLevelButtons()}
             </div>
         </div>
     );
 };
+
 
 export default Chart;

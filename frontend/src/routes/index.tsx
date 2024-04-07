@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate, Outlet,
-} from "react-router-dom";
+import {createBrowserRouter, Navigate, Outlet,} from "react-router-dom";
 
 
 import Recommend from "../pages/main/Recommend";
@@ -73,7 +70,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cartoon",
-    element: <AuthRoute roles={[Role.USER, Role.ADMIN]} />,
+    element: <AuthRoute roles={[Role.USER, Role.TEMPORARY_USER, Role.ADMIN]} />,
     children:[
       {
         path:":title", element: <Cartoon/>,
@@ -109,7 +106,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/analyze',
-    element: <AuthRoute roles={[Role.USER]}/>,
+    element: <AuthRoute roles={[Role.TEMPORARY_USER]}/>,
     children: [
       {
         path: '',
@@ -120,7 +117,7 @@ const router = createBrowserRouter([
 
   {
     path: "/admin",
-    element: <Outlet/>,
+    element:  <AuthRoute roles={[Role.ADMIN, Role.TEMPORARY_USER]}/>,
     children:[
       {
         path:'',
