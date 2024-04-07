@@ -29,7 +29,7 @@ const Header = ({color}: Props) => {
             {isToggled ? <ul className="block overflow-auto md:hidden w-full h-screen p-6 bg-[#73ABE5]">
                 {menu.map((menu, idx) => (
                     <li className="w-full.5 border-b p-6 text-2xl text-white font-bold">{<Link
-                        to={menuLink[idx]}>{menu}</Link>}</li>
+                        to={menuLink[idx]} onClick={() => setIsToggle(!isToggled)}>{menu}</Link>}</li>
                 ))}
                 {user?.role == Role.ADMIN &&
                     <li className="w-full p-6 text-white font-bold bg-gray-400">
