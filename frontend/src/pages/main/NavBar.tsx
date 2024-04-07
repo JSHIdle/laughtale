@@ -11,10 +11,10 @@ const NavBar = ({ selectedLevel, onSelectLevel }) => {
                     {[1, 2, 3, 4, 5].map(level => (
                         <li key={level}>
                             <div
-                                className={`p-3 rounded-xl ${selectedLevel === level ? 'text-[#64BDE2]' : ''}`}>
+                                className={`p-3 rounded-xl}`}>
                                 <button onClick={() => onSelectLevel(level)}
                                         className="text-5xl block py-2 px-3 md:p-0 font-bold rounded md:bg-transparent md:dark:text-blue-500 md:dark:bg-transparent"
-
+                                      style={{ "color" : selectedLevel === level ? '#64BDE2' : '#000'}}
                                 >
                                     Lv {level}
                                 </button>

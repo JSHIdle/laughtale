@@ -1,5 +1,7 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import AuthLink from "../common/AuthLink.tsx";
+import {Role} from "../../constants/Role.ts";
+
 interface CartoonCardProps {
     imageUrl: string;
     title: string;
@@ -9,7 +11,7 @@ interface CartoonCardProps {
 const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) => {
     return (
         <li className="mb-5 item ">
-            <Link to={`/cartoon/${mangaId}`} className="flex block rounded-lg transition-transform duration-300 hover:scale-110 justify-center">
+            <AuthLink roles={[Role.USER, Role.ADMIN, Role.TEMPORARY_USER]} to={`/cartoon/${mangaId}`} className="flex block rounded-lg transition-transform duration-300 hover:scale-110 justify-center">
                 {/*<div className="flex justify-center">*/}
                     {/*<img*/}
                     {/*    src={imageUrl}*/}
@@ -23,11 +25,11 @@ const CartoonCard: React.FC<CartoonCardProps> = ({ imageUrl, title, mangaId }) =
                       style={{width:"30rem"}}
                     />
                 {/*</div>*/}
-            </Link>
+            </AuthLink>
             <div className="mt-2 flex justify-center">
-                <Link to={`/cartoon/${mangaId}`} className="block">
+                <AuthLink roles={[Role.USER, Role.ADMIN, Role.TEMPORARY_USER]} to={`/cartoon/${mangaId}`} className="block">
                     <span className="w-[150px] overflow-ellipsis block text-4lg font-bold truncate mt-8 text-center">{title}</span>
-                </Link>
+                </AuthLink>
             </div>
            <span className="flex group-hover:border-2 group-hover:border-[#73ABE5] "></span>
         </li>
