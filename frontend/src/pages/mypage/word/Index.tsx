@@ -13,9 +13,9 @@ const Index = () => {
   const size = 100;
 
 
-  const [wordInfo, setWordInfo] = useState();
-  const [wordRelativeInfo, setWordRelativeInfo] = useState();
-  const [selectedSentence, setSelectedSentence] = useState();
+  const [wordInfo, setWordInfo] = useState<any>();
+  const [wordRelativeInfo, setWordRelativeInfo] = useState<any>();
+  const [selectedSentence, setSelectedSentence] = useState<any>();
   const { data: wordData, isLoading, error } = useQuery({
     queryKey: ['wordBook', level, page, size],
     queryFn: () => getWordInfo(level, page, size)
@@ -24,9 +24,9 @@ const Index = () => {
 
   const clickTranslate = async (data) => {
     setWordInfo(data);
-    const res = await get(`/word-data/${data.id}`);
+    const res = await get<any>(`/word-data/${data.id}`);
     setWordRelativeInfo(res);
-    setSelectedSentence(res.speeches[0]);
+    setSelectedSentence(res.speeches[0] as any);
   }
 
   return (
