@@ -25,6 +25,13 @@ const QuizButton: React.FC<QuizButtonProps> = ({ chapterId, mangaId }) => {
     queryFn: () => get<Page>(`/chapter/${chapterId}`)
   })
 
+  useEffect(() => {
+    if(data) {
+      console.log(typeof data.nextPage)
+      console.log(typeof data.prevPage)
+
+    }
+  }, [data]);
   const handlePreviousClick = () => {
     navigate(`/cartoon/${mangaId}/viewer/${data.prevPage}`);
   };
