@@ -156,11 +156,11 @@ Backend
 ├── wordhistory
 └── wordlist
 ```
-## 8. API 명세서
+## 9. API 명세서
 ![image](https://github.com/j-yong98/j-yong98/assets/120557342/ec924eb3-157c-4ca6-9031-4e7182770028)
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
-## 9. 서비스 설명
+## 10. 서비스 설명
 ![main-2024-04-03](https://github.com/j-yong98/j-yong98/assets/120557342/78f1b83a-d0d9-46e2-82d8-3aefc0963c88)
 ![manga-list-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/7d0df80e-2f58-4e10-8409-0758c1517415)
 
