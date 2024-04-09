@@ -24,7 +24,7 @@ public class MangaMapper {
 
     public static MangaUpload.Request emptyUploadRequest() {
         return MangaUpload.Request.builder()
-                .title(randomId())
+                .title(EMPTY + "/" + randomId())
                 .genres(EMPTY)
                 .description(EMPTY)
                 .author(EMPTY)
