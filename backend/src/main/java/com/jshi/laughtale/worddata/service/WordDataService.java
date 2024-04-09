@@ -1,5 +1,6 @@
 package com.jshi.laughtale.worddata.service;
 
+import com.jshi.laughtale.chapter.mapper.ChapterMapper;
 import com.jshi.laughtale.speech.dto.SpeechBasic;
 import com.jshi.laughtale.speech.service.SpeechService;
 import com.jshi.laughtale.worddata.domain.WordData;
@@ -10,8 +11,10 @@ import com.jshi.laughtale.worddata.mapper.WordDataMapper;
 import com.jshi.laughtale.worddata.repository.WordDataRepository;
 import com.jshi.laughtale.wordlist.domain.WordList;
 import com.jshi.laughtale.wordlist.service.WordListService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -47,7 +51,8 @@ public class WordDataService {
         List<WordList> wordList = wordListService.loadWordListByWordData(wordData);
         Collections.shuffle(wordList);
         List<WordList> topTenList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        int len = Math.min(wordList.size(), 10);
+        for (int i = 0; i < len; i++) {
             topTenList.add(wordList.get(i));
         }
         List<SpeechBasic.Response> speechBasicList = topTenList.stream().map(speechService::loadByWordList).toList();
