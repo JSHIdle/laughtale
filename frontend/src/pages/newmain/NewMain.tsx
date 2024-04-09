@@ -1,7 +1,8 @@
 import BlueHeader from "../../components/common/BlueHeader.tsx";
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/Logo3.png';
 import '../../styles/fontstyle.css';
 import '../../styles/mainpagestyle.css';
+
 
 // import AuthButton from "../../components/common/AuthButton.tsx";
 // import MainBG from '../../assets/mainpageimage/mainbg.png';
