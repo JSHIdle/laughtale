@@ -161,8 +161,8 @@ Backend
 [명세서 보기](https://www.notion.so/seunghw2/API-LAUGH-TALE-d955ba75e622445d846eed9ca94840db)
 
 ## 10. 서비스 설명
-![main-2024-04-03](https://github.com/j-yong98/j-yong98/assets/120557342/78f1b83a-d0d9-46e2-82d8-3aefc0963c88)
-![manga-list-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/7d0df80e-2f58-4e10-8409-0758c1517415)
+![main-2024-04-11](https://github.com/j-yong98/j-yong98/assets/120557342/86249877-ecbb-4450-b69a-e77945eda95a)  
+![main2-2024-4-12](https://github.com/j-yong98/j-yong98/assets/120557342/d17119eb-0bf7-4fc0-a49f-639c559155c8)  
 
 ### 만화 페이지
 - 만화에 대한 내용 제공
@@ -197,6 +197,6 @@ Backend
 
 ![mypage-1-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/1568e0e3-0b09-4d49-9141-b1e85fe337b0)
 
-![word-book-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/88087e12-c812-47e6-9af6-4afd3c13a687)
+![wordbook-2024-4-12](https://github.com/j-yong98/j-yong98/assets/120557342/a7e560bf-9ea5-43f9-ad97-f7f4a857bd61)  
 ![admin-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/3f117a28-813e-446b-b53e-908909bf38c7)
 ![analyze-2024-4-4](https://github.com/j-yong98/j-yong98/assets/120557342/71b6d581-51e7-4144-bc45-f6facc7d8b2a)
