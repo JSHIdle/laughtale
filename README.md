@@ -59,8 +59,8 @@
 
 
 ### Python Server
-<img src="	https://img.shields.io/badge/fastapi-109989?style=for-the-badge&logo=FASTAPI&logoColor=white">
-<img src="	https://img.shields.io/badge/mecab-ff1709?style=for-the-badge&logoColor=white">
+<img src="https://img.shields.io/badge/fastapi-109989?style=for-the-badge&logo=FASTAPI&logoColor=white">
+<img src="https://img.shields.io/badge/mecab-ff1709?style=for-the-badge&logoColor=white">
 <img src="https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white">
 
 
