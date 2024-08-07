@@ -48,7 +48,7 @@ public class MangaService {
 
     //Component
     private final MangaAnalyzer mangaAnalyzer;
-    private final MangaSaver mangaSaver;
+    private final JdbcMangaSaver mangaSaver;
 
     //Service
     private final ParseService parseService;
