@@ -72,21 +72,21 @@ public class MangaAnalyzer {
         return chapterResponse;
     }
 
-    private List<CutAnalyze.Response> analyzeCut(Chapter chapter, List<CutContext> cutContexts) {
+    public List<CutAnalyze.Response> analyzeCut(Chapter chapter, List<CutContext> cutContexts) {
         List<Cut> cuts = new ArrayList<>();
-        List<CutAnalyze.Response> cutAnalyze = new ArrayList<>();
-        for (int i = 0; i < cutContexts.size(); i++) {
-            CutContext cutContext = cutContexts.get(i);
+        List<CutAnalyze.Response> cutAnalyze = cutContexts.parallelStream().map(cutContext -> {
             Cut cut = cutContext.getCut();
             cut.setChapter(chapter);
             CutAnalyze.Response analyzeResponse = CutMapper.toAnalyzeResponse(cut);
 
+            cuts.add(cut);
             List<SpeechDetail.Response> speechAnalyze = analyzeSpeech(cut, cutContext.getSpeechContexts());
             analyzeResponse.setSentence(speechAnalyze);
-            cuts.add(cut);
-            cutAnalyze.add(analyzeResponse);
-        }
+            return analyzeResponse;
+        }).collect(Collectors.toList());
+
         chapter.setCuts(cuts);
+
         return cutAnalyze;
     }
 
@@ -111,10 +111,15 @@ public class MangaAnalyzer {
 
     private List<WordDataDetail.Response> analyzeWordData(List<WordData> wordDataList) {
         List<WordDataDetail.Response> wordDataResponse = new ArrayList<>();
+        List<String> words = wordDataList.stream().map(WordData::getWord).toList();
+        Map<String, String> dictionary = jaKoService.loadWordMeanings(words);
+        Map<String, Integer> levelMap = wordDataService.loadLevelsByWords(words);
+
         for (int i = 0; i < wordDataList.size(); i++) {
             WordData wordData = wordDataList.get(i);
-            String def = jaKoService.loadWordMeaning(wordData.getWord());
-            Integer level = wordDataService.loadLevelByWord(wordData.getWord());
+            String w = wordData.getWord();
+            String def = dictionary.get(w);
+            Integer level = levelMap.get(w);
             if (def == null || level == null) {
                 continue;
             }
