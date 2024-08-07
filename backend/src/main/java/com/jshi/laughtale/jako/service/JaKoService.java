@@ -5,6 +5,10 @@ import com.jshi.laughtale.jako.repository.JaKoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class JaKoService {
@@ -13,5 +17,11 @@ public class JaKoService {
 
     public String loadWordMeaning(String from) {
         return jaKoRepository.findByLangFrom(from).map(JaKo::getParsedDef).orElse(null);
+    }
+
+    public Map<String, String> loadWordMeanings(List<String> words) {
+        List<JaKo> jaKos = jaKoRepository.findByLangFromIn(words);
+        return jaKos.stream()
+                .collect(Collectors.toMap(JaKo::getLangFrom, JaKo::getParsedDef));
     }
 }

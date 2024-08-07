@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +21,8 @@ public interface WordDataRepository extends JpaRepository<WordData, Long> {
 
     @Query("SELECT w FROM WordData w WHERE w.definition IS NOT NULL ORDER BY rand() LIMIT 5")
     List<WordData> findRandom();
+
+    // 단어 목록으로 레벨을 배치 조회
+    @Query("SELECT w.word, w.level FROM WordData w WHERE w.word IN :words")
+    List<Object[]> findLevelsByWords(@Param("words") List<String> words);
 }

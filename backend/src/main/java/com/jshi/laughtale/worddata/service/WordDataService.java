@@ -20,10 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -83,5 +81,14 @@ public class WordDataService {
 
     public Integer loadLevelByWord(String word) {
         return wordDataRepository.findLevelByWord(word).orElse(null);
+    }
+
+    public Map<String, Integer> loadLevelsByWords(List<String> words) {
+        List<Object[]> results = wordDataRepository.findLevelsByWords(words);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        result -> (String) result[0],
+                        result -> (Integer) result[1]
+                ));
     }
 }

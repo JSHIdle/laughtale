@@ -3,6 +3,8 @@ package com.jshi.laughtale.manga.service;
 import com.jshi.laughtale.chapter.domain.Chapter;
 import com.jshi.laughtale.chapter.repository.ChapterRepository;
 import com.jshi.laughtale.common.dto.LevelCount;
+import com.jshi.laughtale.jako.domain.JaKo;
+import com.jshi.laughtale.manga.component.JdbcMangaSaver;
 import com.jshi.laughtale.manga.component.MangaAnalyzer;
 import com.jshi.laughtale.manga.component.MangaSaver;
 import com.jshi.laughtale.manga.domain.Manga;
@@ -70,7 +72,9 @@ public class MangaService {
         }
 
         MangaAnalyze.Request analyzeRequest = MangaMapper.toAnalyze(thumbnailPath, manga, last, names);
+        long start = System.currentTimeMillis();
         Map result = DataRequest.analyze(analyzeRequest);
+        log.info("데이터 분석 요청 걸린 시간... {}", ((System.currentTimeMillis() - start) / 1000.0));
 
         log.info("파싱...");
         MangaContext mangaContext = parseService.parse(result);
