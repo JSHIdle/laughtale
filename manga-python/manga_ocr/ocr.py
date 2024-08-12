@@ -1,3 +1,4 @@
+import asyncio
 import re
 from pathlib import Path
 
@@ -27,7 +28,11 @@ class MangaOcr:
 
         logger.info('OCR ready')
 
-    def __call__(self, img):
+    async def __call__(self, img):
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, self._process_image, img)
+
+    def _process_image(self, img):
         if isinstance(img, str) or isinstance(img, Path):
             img = Image.open(img)
         elif isinstance(img, numpy.ndarray):

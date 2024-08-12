@@ -1,3 +1,5 @@
+import asyncio
+
 import MeCab
 import numpy as np
 from PIL import Image
@@ -45,13 +47,23 @@ async def extract(manga: Manga):
         }
     }
     last = result[manga.title]
-    last['chapter'] = []
-    last['chapter'].append([])
-    for page, file in enumerate(manga.filenames):
-        log.info("file {}", file)
-        last['chapter'][-1].append(extract_file(file, page))
+    # 비동기 함수 호출을 위한 작업 준비
+    tasks = [extract_file(file, page) for page, file in enumerate(manga.filenames)]
+
+    # 비동기적으로 파일 추출
+    chapters = await asyncio.gather(*tasks)
+
+    # 각 파일의 결과를 'chapter'에 추가
+    last['chapter'] = [chapters]
+
     log.info(json.dumps(result, indent=4))
     return result
+    # last['chapter'] = [[]]
+    # for page, file in enumerate(manga.filenames):
+    #     log.info("file {}", file)
+    #     last['chapter'][-1].append(extract_file(file, page))
+    # log.info(json.dumps(result, indent=4))
+    # return result
 
 
 def extract_japanese(sentence):
@@ -73,7 +85,7 @@ def extract_japanese(sentence):
     return result
 
 
-def extract_file(path, page_no):
+async def extract_file(path, page_no):
     cut = {}
     cut['page'] = page_no
     cut['speech'] = []
@@ -83,9 +95,10 @@ def extract_file(path, page_no):
         cut['size'] = image.size  # width, height
         blk_list = mtd(image)
         crop_images = crop_image(image, blk_list)
-        blk_sentence = []
-        for img in crop_images:
-            blk_sentence.append(ocr(img))
+        blk_sentence = await asyncio.gather(*(ocr(img) for img in crop_images))
+        # blk_sentence = []
+        # for img in crop_images:
+        #     blk_sentence.append(ocr(img))
         for ii, blk in enumerate(blk_list):
             cut['speech'].append(
                 {
